@@ -1,0 +1,22 @@
+.navBackground {
+    background-color: deepskyblue!important;
+}
+
+.navbarMenu {
+    width: 100%;
+    text-align: center;
+}
+    .navbarMenu > li {
+        float: none;
+        display: inline-block;
+    }
+
+.nav-item {
+    padding: 15px;
+    padding-right: 30px;
+}
+
+.nav-item a {
+    color: #ffffff;
+    background-color: slateblue;
+}
