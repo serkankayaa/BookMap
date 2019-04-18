@@ -8,6 +8,6 @@ namespace BookStore.Business.Services
     {
         DtoPublisher GetPublisher(Guid id);
         List<DtoPublisher> GetPublishers();
-        void PublisherAdd(DtoPublisher model);
+        object PublisherAdd(DtoPublisher model);
     }
 }

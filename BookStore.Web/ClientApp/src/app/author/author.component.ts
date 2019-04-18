@@ -26,7 +26,7 @@ export class AuthorComponent implements OnInit {
         this.toasterService.success("Author saved successfully");
         this.getAuthor();
         this.author = new Author();
-
+        
         return;
       }
 

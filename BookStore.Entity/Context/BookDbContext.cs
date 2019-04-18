@@ -18,6 +18,7 @@ namespace BookStore.Entity.Context
         public DbSet<Account> Account { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<User_Password> User_Password { get; set; }
+        public DbSet<Shop> Shop { get; set; } 
 
         #endregion
     }

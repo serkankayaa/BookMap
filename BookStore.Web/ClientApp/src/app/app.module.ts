@@ -15,6 +15,7 @@ import { BookComponent } from './book/book.component';
 import { PublisherComponent } from './publisher/publisher.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthorService } from './services/author.service';
+import { PublisherService } from './services/publisher.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { AuthorService } from './services/author.service';
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [HttpClientModule, AuthorService],
+  providers: [HttpClientModule, AuthorService, PublisherService],
   bootstrap: [AppComponent]
 })
 export class AppModule {  

@@ -71,7 +71,7 @@ namespace BookStore.Business.Services
         /// Publisher Add
         /// </summary>
         /// <param name="model"></param>
-        public void PublisherAdd(DtoPublisher model)
+        public object PublisherAdd(DtoPublisher model)
         {
             Publisher publisher = new Publisher();
             publisher.PUBLISHER_ID = model.PUBLISHER_ID;
@@ -80,6 +80,10 @@ namespace BookStore.Business.Services
 
             this.Add(publisher);
             this.Save();
+
+            model.PUBLISHER_ID = publisher.PUBLISHER_ID;
+
+            return model;
         }
 
         #endregion

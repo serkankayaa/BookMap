@@ -28,8 +28,13 @@ namespace BookStore.Entity.Models
         [ForeignKey("Account")]
         public Guid ACCOUNT_ID_FK { get; set; }
 
+        [Required]
+        [ForeignKey("Shop")]
+        public Guid SHOP_ID_FK { get; set; }
+        
         public Author Author = new Author();
         public Publisher Publisher = new Publisher();
         public Account Account = new Account();
+        public Shop Shop = new Shop();
     }
 }
