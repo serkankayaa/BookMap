@@ -28,16 +28,6 @@ namespace BookStoreMap
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
-                // services.AddCors(c =>  
-                // {  
-                //     c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
-
-                //     c.AddPolicy("PostPolicy",
-                //         builder => builder.AllowAnyOrigin()
-                //         .WithMethods("POST")
-                //         .WithHeaders("x-chmura-cors", "Content-Type"));  
-                // });  
-
                 services.AddCors(options =>
                     {
                         options.AddPolicy("AllowLocalhost",
@@ -79,7 +69,6 @@ namespace BookStoreMap
                 app.UseHsts();
             }
 
-            // app.UseCors(options => options.AllowAnyOrigin() );
             app.UseCors("AllowLocalhost");
 
             app.UseHttpsRedirection();

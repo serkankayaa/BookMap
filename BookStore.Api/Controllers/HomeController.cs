@@ -93,9 +93,9 @@ namespace BookStoreMap.Controllers
 
         [Route("api/PostPublisher")]
         [HttpPost]
-        public void PostPublisherr(DtoPublisher model)
+        public object PostPublisher(DtoPublisher model)
         {
-            _publisherService.PublisherAdd(model);
+           return _publisherService.PublisherAdd(model);
         }
     }
 }
