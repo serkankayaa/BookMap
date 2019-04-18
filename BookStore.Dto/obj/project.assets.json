@@ -516,10 +516,11 @@
       ]
     },
     "Microsoft.NETCore.Platforms/2.1.0": {
-      "sha512": "TT+QCi9LcxGTjBssH7S7n5+8DVcwfG4DYgXX7Dk7+BfZ4oVHj8Q0CbYk9glzAlHLsSt3bYzol+fOdra2iu6GOw==",
+      "sha512": "aSTPL94NloSiQVL5Len8wbjFKOnoAX/vOh3s3DF6g3c7GUUMLCDvnBhmA72M2iN2AedyA8hpr7m89kzSAKUnJQ==",
       "type": "package",
       "path": "microsoft.netcore.platforms/2.1.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
@@ -681,23 +682,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Exedra\\.nuget\\packages\\": {},
+    "C:\\Users\\Tahsin\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\BookStoreMap\\BookStore.Dto\\BookStore.Dto.csproj",
+      "projectUniqueName": "C:\\Users\\Tahsin\\Desktop\\Projects\\BookProject\\BookMap\\BookStore.Dto\\BookStore.Dto.csproj",
       "projectName": "BookStore.Dto",
-      "projectPath": "D:\\BookStoreMap\\BookStore.Dto\\BookStore.Dto.csproj",
-      "packagesPath": "C:\\Users\\Exedra\\.nuget\\packages\\",
-      "outputPath": "D:\\BookStoreMap\\BookStore.Dto\\obj\\",
+      "projectPath": "C:\\Users\\Tahsin\\Desktop\\Projects\\BookProject\\BookMap\\BookStore.Dto\\BookStore.Dto.csproj",
+      "packagesPath": "C:\\Users\\Tahsin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Tahsin\\Desktop\\Projects\\BookProject\\BookMap\\BookStore.Dto\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Exedra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Tahsin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -705,7 +706,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "F:\\THY\\DEV\\CommonBin\\Internal": {},
+        "G:\\THY\\DEV\\CommonBin\\Internal": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

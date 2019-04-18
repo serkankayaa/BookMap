@@ -20,3 +20,14 @@ D:\BookStoreMap\BookStore.Entity\obj\Debug\netcoreapp2.1\BookStore.Entity.Assemb
 D:\BookStoreMap\BookStore.Entity\obj\Debug\netcoreapp2.1\BookStore.Entity.AssemblyInfo.cs
 D:\BookStoreMap\BookStore.Entity\obj\Debug\netcoreapp2.1\BookStore.Entity.dll
 D:\BookStoreMap\BookStore.Entity\obj\Debug\netcoreapp2.1\BookStore.Entity.pdb
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Entity\bin\Debug\netcoreapp2.1\BookStore.Entity.deps.json
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Entity\bin\Debug\netcoreapp2.1\BookStore.Entity.runtimeconfig.json
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Entity\bin\Debug\netcoreapp2.1\BookStore.Entity.runtimeconfig.dev.json
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Entity\bin\Debug\netcoreapp2.1\BookStore.Entity.dll
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Entity\bin\Debug\netcoreapp2.1\BookStore.Entity.pdb
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Entity\obj\Debug\netcoreapp2.1\BookStore.Entity.csprojAssemblyReference.cache
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Entity\obj\Debug\netcoreapp2.1\BookStore.Entity.csproj.CoreCompileInputs.cache
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Entity\obj\Debug\netcoreapp2.1\BookStore.Entity.AssemblyInfoInputs.cache
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Entity\obj\Debug\netcoreapp2.1\BookStore.Entity.AssemblyInfo.cs
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Entity\obj\Debug\netcoreapp2.1\BookStore.Entity.dll
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Entity\obj\Debug\netcoreapp2.1\BookStore.Entity.pdb

@@ -16,3 +16,12 @@ D:\BookStoreMap\BookStore.Dto\obj\Debug\netcoreapp2.1\BookStore.Dto.AssemblyInfo
 D:\BookStoreMap\BookStore.Dto\obj\Debug\netcoreapp2.1\BookStore.Dto.AssemblyInfo.cs
 D:\BookStoreMap\BookStore.Dto\obj\Debug\netcoreapp2.1\BookStore.Dto.dll
 D:\BookStoreMap\BookStore.Dto\obj\Debug\netcoreapp2.1\BookStore.Dto.pdb
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Dto\bin\Debug\netcoreapp2.1\BookStore.Dto.deps.json
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Dto\bin\Debug\netcoreapp2.1\BookStore.Dto.dll
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Dto\bin\Debug\netcoreapp2.1\BookStore.Dto.pdb
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Dto\obj\Debug\netcoreapp2.1\BookStore.Dto.csprojAssemblyReference.cache
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Dto\obj\Debug\netcoreapp2.1\BookStore.Dto.csproj.CoreCompileInputs.cache
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Dto\obj\Debug\netcoreapp2.1\BookStore.Dto.AssemblyInfoInputs.cache
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Dto\obj\Debug\netcoreapp2.1\BookStore.Dto.AssemblyInfo.cs
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Dto\obj\Debug\netcoreapp2.1\BookStore.Dto.dll
+C:\Users\Tahsin\Desktop\Projects\BookProject\BookMap\BookStore.Dto\obj\Debug\netcoreapp2.1\BookStore.Dto.pdb
