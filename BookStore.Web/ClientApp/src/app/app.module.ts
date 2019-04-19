@@ -16,6 +16,7 @@ import { PublisherComponent } from './publisher/publisher.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthorService } from './services/author.service';
 import { PublisherService } from './services/publisher.service';
+import { ShopComponent } from './shop/shop.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PublisherService } from './services/publisher.service';
     AuthorComponent,
     NavbarComponent,
     BookComponent,
-    PublisherComponent
+    PublisherComponent,
+    ShopComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

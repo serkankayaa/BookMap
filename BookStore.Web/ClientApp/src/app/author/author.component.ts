@@ -24,11 +24,12 @@ export class AuthorComponent implements OnInit {
     const result = this.authorService.postAuthor(this.author).subscribe((response) => {
       if(response.body != null && response.ok && response.body != false){
         this.toasterService.success("Author saved successfully");
-        this.getAuthor();
         this.author = new Author();
+        this.getAuthor();
         
         return;
       }
+
 
       if(response.body == false){
         this.toasterService.error("This author saved already");
