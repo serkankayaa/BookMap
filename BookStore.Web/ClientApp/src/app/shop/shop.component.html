@@ -1,3 +1,46 @@
-<p>
-  shop works!
-</p>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h2><i class="fas fa-shopping-cart"></i></h2>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+          <div class="col-12">
+              <h5>Add New Shop</h5>
+          </div>
+      </div>
+      <div class="mt-4">
+          <form name="form" method="POST" (ngSubmit)="f.form.valid && postShop()" #f="ngForm" novalidate>
+              <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="shopName">Shop Name</label>
+                        <input type="text" class="form-control" id="shopName" name="shopName" [(ngModel)]="shop.SHOP_NAME" #shopName="ngModel" placeholder="Name" required>
+                    </div>
+                    <div *ngIf="shopName.invalid && (f.submitted || shopName.touched)" class="alert alert-danger">
+                        <div *ngIf="shopName.errors.required">
+                            Shop Name is required.
+                        </div>
+                      </div>
+                </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" name="location" [(ngModel)]="shop.LOCATION" #location="ngModel" placeholder="Location" required>
+                      </div>
+                      <div *ngIf="location.invalid && (f.submitted || location.touched)" class="alert alert-danger">
+                          <div *ngIf="location.errors.required">
+                            Location is required.
+                          </div>
+                        </div>
+                    </div>
+              </div>
+                <div class="row mt-4">
+                  <div class="col">
+                    <button type="submit" class="btn btn-primary float-right">Save</button>
+                  </div>
+                </div>
+          </form>
+        </div>
+</div>

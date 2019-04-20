@@ -11,7 +11,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PublisherComponent implements OnInit {
   publisher = new Publisher();
-  response : object;
 
   constructor(private publisherService : PublisherService, private toasterService : ToastrService) { }
 

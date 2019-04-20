@@ -1,3 +1,4 @@
+import { ShopService } from './services/shop.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -6,6 +7,7 @@ import { HttpModule } from '@angular/http';
 import { AgGridModule } from 'ag-grid-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -38,7 +40,7 @@ import { ShopComponent } from './shop/shop.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [HttpClientModule, AuthorService, PublisherService],
+  providers: [HttpClientModule, AuthorService, PublisherService,ShopService],
   bootstrap: [AppComponent]
 })
 export class AppModule {  
