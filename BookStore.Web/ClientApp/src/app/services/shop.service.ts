@@ -8,10 +8,18 @@ import {headerContent } from '../header';
 
 @Injectable()
 export class ShopService{
+    shopList;
+
     constructor(private http: HttpClient){}
 
     postShop(shop: Shop){
         const result = this.http.post(apiBaseUrl + '/PostShop', shop,{headers: headerContent, observe:'response'});
         return result;
+    }
+
+    getAllShops(): Observable<Shop[]>{
+        this.shopList = this.http.get(apiBaseUrl + "/GetAllShops");
+
+        return this.shopList;
     }
 }

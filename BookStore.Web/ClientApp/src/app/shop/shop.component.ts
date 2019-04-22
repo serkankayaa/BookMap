@@ -10,10 +10,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ShopComponent implements OnInit {
   shop = new Shop();
+  shopList;
 
   constructor(private shopService : ShopService, private toasterService : ToastrService) { }
 
   ngOnInit() {
+    this.getShops();
   }
 
   postShop() : object{
@@ -22,6 +24,7 @@ export class ShopComponent implements OnInit {
       if(response.body != null && response.ok && response.body != false){
         this.toasterService.success("Shop added successfully");
         this.shop = new Shop();
+        this.getShops();
 
         return;
       }
@@ -32,5 +35,9 @@ export class ShopComponent implements OnInit {
     });
 
     return result;
+  }
+
+  getShops() : void {
+    this.shopService.getAllShops().subscribe(data => this.shopList = data);
   }
 }
