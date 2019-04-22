@@ -73,6 +73,14 @@ namespace BookStore.Business.Services
         /// <param name="model"></param>
         public object PublisherAdd(DtoPublisher model)
         {
+
+            var checkPublisher = _context.Publisher.Where(c=> c.NAME == model.NAME).Any();
+
+            if(checkPublisher)
+            {
+                return false;
+            }
+
             Publisher publisher = new Publisher();
             publisher.PUBLISHER_ID = model.PUBLISHER_ID;
             publisher.NAME = model.NAME;

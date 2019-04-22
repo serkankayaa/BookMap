@@ -17,6 +17,8 @@ export class PublisherComponent implements OnInit {
   ngOnInit() {}
 
   postPublisher() : object {
+    console.log(this);
+    console.log(this.publisher);
     const result = this.publisherService.postPublisher(this.publisher).subscribe((response) => {
       console.log(response);
       if(response.body != null && response.ok && response.body != false){
