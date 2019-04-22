@@ -43,4 +43,27 @@
                 </div>
           </form>
         </div>
+        <div class="row mb-4 mt-4">
+          <div class="col-12">
+              <h5>Publisher List</h5>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+                <th class="text-center">Publisher Name</th>
+                <th class="text-center">Location</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let publisher of allPublisher">
+                <td class="text-center" style="width: 15px;">{{publisher.NAME}}</td>
+                <td class="text-center" style="width: 15px;">{{publisher.LOCATION}}</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+      </div>
 </div>

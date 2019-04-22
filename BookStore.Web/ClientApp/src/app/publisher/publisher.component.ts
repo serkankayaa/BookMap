@@ -11,14 +11,20 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PublisherComponent implements OnInit {
   publisher = new Publisher();
+  allPublisher : Publisher[];
 
   constructor(private publisherService : PublisherService, private toasterService : ToastrService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getPublisher();
+  }
+
+  getPublisher(): void {
+    this.publisherService.getAllPublisher()
+        .subscribe(data=> this.allPublisher = data);
+  }
 
   postPublisher() : object {
-    console.log(this);
-    console.log(this.publisher);
     const result = this.publisherService.postPublisher(this.publisher).subscribe((response) => {
       console.log(response);
       if(response.body != null && response.ok && response.body != false){
