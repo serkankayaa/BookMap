@@ -11,13 +11,19 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class PublisherService {
+  publisher$;
 
   constructor(private http : HttpClient) { }
+
+  getAllPublisher(): Observable<Publisher[]> {
+    this.publisher$ = this.http.get(apiBaseUrl + '/GetAllPublisher');
+
+    return this.publisher$;
+  }
   
   postPublisher(publisher : Publisher){
     const result = this.http.post(apiBaseUrl + "/PostPublisher" , publisher, { headers: headerContent, observe: 'response' });
 
     return result;
   }
-
 }
