@@ -28,15 +28,7 @@ namespace BookStoreMap
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
-                services.AddCors(options =>
-                    {
-                        options.AddPolicy("AllowLocalhost",
-                        builder => builder
-                        .AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowCredentials());
-                    });
+                services.AddCors();
 
             var connectionString = Configuration.GetConnectionString("DatabaseConnection");
             services.AddDbContext<BookDbContext>(options =>
@@ -70,7 +62,12 @@ namespace BookStoreMap
                 app.UseHsts();
             }
 
-            app.UseCors("AllowLocalhost");
+            app.UseCors(
+                options => options.WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+            );
 
             app.UseHttpsRedirection();
             app.UseMvc();
