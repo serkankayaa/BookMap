@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,5 +17,7 @@ namespace BookStore.Entity.Models
         public string LOCATION { get; set; }
 
         public int STAFF_COUNT { get; set; }
+
+        public ICollection<Book> books {get; set;}
     }
 }

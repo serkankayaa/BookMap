@@ -32,10 +32,10 @@ namespace BookStore.Entity.Models
         [Required]
         [ForeignKey("Shop")]
         public Guid SHOP_ID_FK { get; set; }
-        
         public Author Author {get; set;}
         public Publisher Publisher {get; set;}
         public Account Account {get; set;}
-        public ICollection<Shop> Shop {get; set;}
+
+        public Shop Shop {get; set;}
     }
 }

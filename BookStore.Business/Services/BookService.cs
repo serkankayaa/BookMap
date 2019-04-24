@@ -55,7 +55,7 @@ namespace BookStore.Business
         /// <returns></returns>
         public List<DtoBook> GetBooks()
         {
-            var books = this.GetAll();
+            var books = base.GetAll();
 
             var totalBooks = books.Select(c => new DtoBook()
             {
