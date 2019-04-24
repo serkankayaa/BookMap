@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -32,9 +33,9 @@ namespace BookStore.Entity.Models
         [ForeignKey("Shop")]
         public Guid SHOP_ID_FK { get; set; }
         
-        public Author Author = new Author();
-        public Publisher Publisher = new Publisher();
-        public Account Account = new Account();
-        public Shop Shop = new Shop();
+        public Author Author {get; set;}
+        public Publisher Publisher {get; set;}
+        public Account Account {get; set;}
+        public ICollection<Shop> Shop {get; set;}
     }
 }

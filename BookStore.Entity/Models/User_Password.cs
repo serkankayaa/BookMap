@@ -30,6 +30,6 @@ namespace BookStore.Entity.Models
 
         public DateTime? MODIFIED_DATE { get; set; }
 
-        User User = new User();
+        public User User {get; set;}
     }
 }

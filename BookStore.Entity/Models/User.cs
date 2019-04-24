@@ -42,7 +42,6 @@ namespace BookStore.Entity.Models
         public string MODIFIED_BY { get; set; }
 
         public DateTime? MODIFIED_DATE { get; set; }
-
-        User_Password User_Password = new User_Password();
+        public User_Password User_Password {get; set;}
     }
 }
