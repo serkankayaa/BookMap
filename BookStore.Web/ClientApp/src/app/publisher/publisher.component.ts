@@ -29,6 +29,7 @@ export class PublisherComponent implements OnInit {
       console.log(response);
       if(response.body != null && response.ok && response.body != false){
         this.toasterService.success("Publisher saved successfully");
+        this.getPublisher();
         this.publisher = new Publisher();
         
         return;
