@@ -11,13 +11,22 @@ namespace BookStoreMap.Controllers {
         private readonly IAuthorService _authorService;
         private readonly IPublisherService _publisherService;
 
+        private readonly IUserService _userService;
+
         private readonly IShopService _shopService;
 
-        public HomeController (IBookService bookService, IAuthorService authorService, IPublisherService publisherService, IShopService shopService) {
+        public HomeController (IBookService bookService,
+                               IAuthorService authorService, 
+                               IPublisherService publisherService, 
+                               IShopService shopService,
+                               IUserService userService
+                               ) 
+        {
             _bookService = bookService;
             _authorService = authorService;
             _publisherService = publisherService;
             _shopService = shopService;
+            _userService = userService;
         }
 
         #region Book Method
@@ -109,6 +118,16 @@ namespace BookStoreMap.Controllers {
         public List<DtoShop> GetAllShops () {
 
             return _shopService.GetShops ();
+        }
+
+        #endregion
+
+        #region User
+
+        [Route("api/UserAdd")]
+        [HttpPost]
+        public bool UserAdd(DtoUser model){
+            return _userService.UserAdd(model);
         }
 
         #endregion
