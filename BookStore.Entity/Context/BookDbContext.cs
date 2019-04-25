@@ -19,6 +19,7 @@ namespace BookStore.Entity.Context
         public DbSet<User> User { get; set; }
         public DbSet<User_Password> User_Password { get; set; }
         public DbSet<Shop> Shop { get; set; } 
+        public DbSet<Category> Category {get;set;}
 
         #endregion
     }

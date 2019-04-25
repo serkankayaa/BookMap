@@ -35,7 +35,7 @@ namespace BookStore.Entity.Models
         public Author Author {get; set;}
         public Publisher Publisher {get; set;}
         public Account Account {get; set;}
-
+        public Category Category {get;set;}
         public Shop Shop {get; set;}
     }
 }
