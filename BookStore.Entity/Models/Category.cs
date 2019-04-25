@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace BookStore.Entity.Models
 {
     public class Category
@@ -9,7 +13,8 @@ namespace BookStore.Entity.Models
         [MaxLength(250)]
         public string NAME { get; set; }
 
-        [Required(ErrorMessage = "Summary of category is required!")]
+        [Required(ErrorMessage = "Summary of  category is required!")]
+        [MaxLength(500)]
         public string SUMMARY { get; set; }
 
         public bool IS_MAIN_CATEGORY { get; set; }

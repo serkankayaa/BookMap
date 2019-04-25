@@ -73,7 +73,7 @@ namespace BookStore.Business.Services
                 user.FIRST_NAME = model.FIRST_NAME;
                 user.SECOND_NAME = model.SECOND_NAME;
                 user.EMAIL_ADDRESS = model.EMAIL_ADDRESS;
-                user.USER_PASS_ID_FK = model.USER_PASS_ID;
+                // user.USER_PASS_ID_FK = model.USER_PASS_ID;
                 user.LOCATION = model.LOCATION;
                 user.BIRTH_DATE = model.BIRTH_DATE;
                 user.CREATED_BY = model.CREATED_BY;
@@ -106,15 +106,15 @@ namespace BookStore.Business.Services
                 return false;
             }
 
-            if (userData.USER_PASS_ID_FK != null && userData.ACCOUNT_ID_FK != null)
-            {
-                userData.ACCOUNT_ID_FK = Guid.Empty;
-                userData.USER_PASS_ID_FK = Guid.Empty;
+            // if (userData.USER_PASS_ID_FK != null && userData.ACCOUNT_ID_FK != null)
+            // {
+            //     userData.ACCOUNT_ID_FK = Guid.Empty;
+            //     userData.USER_PASS_ID_FK = Guid.Empty;
 
-                _context.User.Update(userData);
-            }
+            //     _context.User.Update(userData);
+            // }
 
-            this.Delete(userData);
+            // this.Delete(userData);
             return true;
         }
 
@@ -155,12 +155,12 @@ namespace BookStore.Business.Services
         public object RecoverPassword(DtoUserPassword model)
         {
             //TODO: Email onaylama işlemi yapılacak.
-            var userData = _context.User.Where(c => c.USER_PASS_ID_FK == model.USER_PASS_ID).FirstOrDefault();
+            // var userData = _context.User.Where(c => c.USER_PASS_ID_FK == model.USER_PASS_ID).FirstOrDefault();
 
-            if (userData == null)
-            {
-                return new DtoUserPassword();
-            }
+            // if (userData == null)
+            // {
+            //     return new DtoUserPassword();
+            // }
 
             var userPasswords = _context.User_Password.Where(c => c.USER_ID_FK == model.USER_ID).ToList();
             var lastUserPassword = userPasswords.OrderByDescending(c => c.MODIFIED_DATE).FirstOrDefault();
@@ -197,7 +197,7 @@ namespace BookStore.Business.Services
 
             var user = _context.User.Where(c => c.USER_ID == model.USER_ID).FirstOrDefault();
 
-            user.USER_PASS_ID_FK = model.USER_PASS_ID;
+            // user.USER_PASS_ID_FK = model.USER_PASS_ID;
             user.MODIFIED_BY = "Test:Serkan";
             user.MODIFIED_DATE = DateTime.Now;
 

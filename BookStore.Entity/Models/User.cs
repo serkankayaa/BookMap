@@ -23,9 +23,9 @@ namespace BookStore.Entity.Models
 
         public bool EMAIL_CONFIRMED { get; set; }
 
-        [Required]
-        [ForeignKey("User_Password")]
-        public Guid USER_PASS_ID_FK { get; set; }
+        // [Required]
+        // [ForeignKey("User_Password")]
+        // public Guid USER_PASS_ID_FK { get; set; }
 
         public DateTime? BIRTH_DATE { get; set; }
 
@@ -42,6 +42,6 @@ namespace BookStore.Entity.Models
         public string MODIFIED_BY { get; set; }
 
         public DateTime? MODIFIED_DATE { get; set; }
-        public User_Password User_Password {get; set;}
+        // public User_Password User_Password {get; set;}
     }
 }

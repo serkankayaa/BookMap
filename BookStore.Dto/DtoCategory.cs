@@ -1,3 +1,5 @@
+using System;
+
 namespace BookStore.Dto
 {
     public class DtoCategory

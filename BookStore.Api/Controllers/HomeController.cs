@@ -10,16 +10,17 @@ namespace BookStoreMap.Controllers {
         private readonly IBookService _bookService;
         private readonly IAuthorService _authorService;
         private readonly IPublisherService _publisherService;
-
         private readonly IUserService _userService;
-
         private readonly IShopService _shopService;
+
+        private readonly ICategoryService _categoryService;
 
         public HomeController (IBookService bookService,
                                IAuthorService authorService, 
                                IPublisherService publisherService, 
                                IShopService shopService,
-                               IUserService userService
+                               IUserService userService,
+                               ICategoryService categoryService
                                ) 
         {
             _bookService = bookService;
@@ -27,6 +28,7 @@ namespace BookStoreMap.Controllers {
             _publisherService = publisherService;
             _shopService = shopService;
             _userService = userService;
+            _categoryService = categoryService;
         }
 
         #region Book Method
@@ -124,10 +126,20 @@ namespace BookStoreMap.Controllers {
 
         #region User
 
-        [Route("api/UserAdd")]
+        [Route("api/PostUser")]
         [HttpPost]
         public bool UserAdd(DtoUser model){
             return _userService.UserAdd(model);
+        }
+
+        #endregion
+
+        #region Category
+        
+        [Route("api/PostCategory")]
+        [HttpPost]
+        public object CategoryAdd(DtoCategory model){
+            return _categoryService.CategoryAdd(model);
         }
 
         #endregion

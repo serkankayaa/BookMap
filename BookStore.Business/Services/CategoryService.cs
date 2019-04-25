@@ -1,6 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using BookStore.Business.Generic;
+using BookStore.Dto;
+using BookStore.Entity.Context;
+using BookStore.Entity.Models;
+
 namespace BookStore.Business.Services
 {
-    public class CategoryServiceEFRepository<Category>,ICategoryService
+    public class CategoryService : EFRepository<Category>, ICategoryService
     {
         #region Field
 
@@ -32,8 +40,8 @@ namespace BookStore.Business.Services
             DtoCategory category = new DtoCategory();
 
             category.CATEGORY_ID = categoryItem.CATEGORY_ID;
-            category.CATEGORY_NAME = categoryItem.CATEGORY_NAME;
-            category.CATEGORY_SUMMARY = categoryItem.CATEGORY_SUMMARY;
+            category.CATEGORY_NAME = categoryItem.NAME;
+            category.CATEGORY_SUMMARY = categoryItem.SUMMARY;
             category.IS_MAIN_CATEGORY = categoryItem.IS_MAIN_CATEGORY;
             
             return category;
@@ -49,10 +57,10 @@ namespace BookStore.Business.Services
 
             var totalCategories = categories.Select(c => new DtoCategory()
             {
-                CATEGORY_ID = c.CATEGORY_ID;
-                CATEGORY_NAME = c.CATEGORY_NAME;
-                CATEGORY_SUMMARY = c.CATEGORY_SUMMARY;
-                IS_MAIN_CATEGORY = c.IS_MAIN_CATEGORY;
+                CATEGORY_ID = c.CATEGORY_ID,
+                CATEGORY_NAME = c.NAME,
+                CATEGORY_SUMMARY = c.SUMMARY,
+                IS_MAIN_CATEGORY = c.IS_MAIN_CATEGORY,
             }).ToList();
 
             return totalCategories;
@@ -62,15 +70,17 @@ namespace BookStore.Business.Services
         /// Add category
         /// </summary>
         /// <param name="model"></param>
-        public void CategoryAdd(DtoCategory model){
+        public object CategoryAdd(DtoCategory model){
 
             Category category = new Category();
-            category.NAME = model.NAME;
-            category.SUMMARY = model.SUMMARY;
+            category.NAME = model.CATEGORY_NAME;
+            category.SUMMARY = model.CATEGORY_SUMMARY;
             category.IS_MAIN_CATEGORY = model.IS_MAIN_CATEGORY;
 
             this.Add(category);
             this.Save();
+
+            return model;
         }
 
         public DtoCategory UpdateCategory(DtoCategory model){
