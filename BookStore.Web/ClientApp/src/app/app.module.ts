@@ -33,17 +33,17 @@ import { CategoryComponent } from './category/category.component';
       CategoryComponent
    ],
    imports: [
-      BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
-    HttpClientModule,
-    FormsModule,
-    AppRoutingModule,
-    HttpModule,
-    [AgGridModule.withComponents(AuthorComponent)],
-    BrowserAnimationsModule,
-    ToastrModule.forRoot()
-  ],
-  providers: [HttpClientModule, AuthorService, PublisherService,ShopService],
-  bootstrap: [AppComponent]
+   BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+   HttpClientModule,
+   FormsModule,
+   AppRoutingModule,
+   HttpModule,
+   [AgGridModule.withComponents(AuthorComponent)],
+   BrowserAnimationsModule,
+   ToastrModule.forRoot()
+],
+providers: [HttpClientModule, AuthorService, PublisherService,ShopService],
+bootstrap: [AppComponent]
 })
 export class AppModule {
 }

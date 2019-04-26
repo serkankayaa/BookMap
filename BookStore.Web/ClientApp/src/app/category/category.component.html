@@ -1,3 +1,71 @@
-<p>
-  category works!
-</p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h2>Category</h2>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-12">
+      <h5>Create Category</h5>
+    </div>
+  </div>
+  <div class="mt-4">
+    <form name="form" method="POST" (ngSubmit)="f.form.valid && postCategory()" #f="ngForm" novalidate>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="categoryName">Category Name</label>
+            <input type="text" class="form-control" id="categoryName" name="categoryName" [(ngModel)]="category.NAME"
+              #categoryName="ngModel" placeholder="Name" required>
+          </div>
+          <div *ngIf="categoryName.invalid && (f.submitted || categoryName.touched)" class="alert alert-danger">
+            <div *ngIf="categoryName.errors.required">
+              Category Name is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="summary">Summary</label>
+            <input type="text" class="form-control" id="summary" name="summary" [(ngModel)]="category.SUMMARY"
+              #summary="ngModel" placeholder="Summary" required>
+          </div>
+          <div *ngIf="summary.invalid && (f.submitted || summary.touched)" class="alert alert-danger">
+            <div *ngIf="summary.errors.required">
+              Summary is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col">
+          <button type="submit" class="btn btn-primary float-right">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row mb-4 mt-4">
+    <div class="col-12">
+      <h5>Category List</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead class="thead-inverse">
+          <tr>
+            <th class="text-center">Category Name</th>
+            <th class="text-center">Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of allCategories">
+            <td class="text-center" style="width: 15px;">{{category.NAME}}</td>
+            <td class="text-center" style="width: 15px;">{{category.SUMMARY}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
