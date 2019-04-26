@@ -154,14 +154,14 @@ namespace BookStoreMap.Controllers
 
         [Route("api/GetCategories")]
         [HttpGet]
-        public object GetCategories()
+        public List<DtoCategory> GetCategories()
         {
             return _categoryService.GetCategories();
         }
 
         [Route("api/PostCategory")]
         [HttpPost]
-        public List<DtoCategory> CategoryAdd(DtoCategory model)
+        public object CategoryAdd(DtoCategory model)
         {
             return _categoryService.CategoryAdd(model);
         }
