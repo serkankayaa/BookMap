@@ -7,6 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BookComponent } from './book/book.component';
 import { ShopComponent } from './shop/shop.component';
 import { PublisherComponent } from './publisher/publisher.component';
+import { CategoryComponent } from './category/category.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
     { path: 'book', component: BookComponent },
     { path: 'publisher', component: PublisherComponent },
     { path: 'author', component: AuthorComponent},
-    { path: 'shop', component: ShopComponent}
+    { path: 'shop', component: ShopComponent},
+    { path: 'category', component: CategoryComponent}
 ];
 
 @NgModule({

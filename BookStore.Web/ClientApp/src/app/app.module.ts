@@ -19,19 +19,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthorService } from './services/author.service';
 import { PublisherService } from './services/publisher.service';
 import { ShopComponent } from './shop/shop.component';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    AuthorComponent,
-    NavbarComponent,
-    BookComponent,
-    PublisherComponent,
-    ShopComponent
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+   declarations: [
+      AppComponent,
+      HomeComponent,
+      AuthorComponent,
+      NavbarComponent,
+      BookComponent,
+      PublisherComponent,
+      ShopComponent,
+      CategoryComponent
+   ],
+   imports: [
+      BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
@@ -43,5 +45,5 @@ import { ShopComponent } from './shop/shop.component';
   providers: [HttpClientModule, AuthorService, PublisherService,ShopService],
   bootstrap: [AppComponent]
 })
-export class AppModule {  
+export class AppModule {
 }
