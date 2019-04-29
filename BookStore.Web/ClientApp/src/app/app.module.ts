@@ -20,6 +20,7 @@ import { AuthorService } from './services/author.service';
 import { PublisherService } from './services/publisher.service';
 import { ShopComponent } from './shop/shop.component';
 import { CategoryComponent } from './category/category.component';
+import { CategoryService } from './services/category.service';
 
 @NgModule({
    declarations: [
@@ -33,17 +34,17 @@ import { CategoryComponent } from './category/category.component';
       CategoryComponent
    ],
    imports: [
-   BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
-   HttpClientModule,
-   FormsModule,
-   AppRoutingModule,
-   HttpModule,
-   [AgGridModule.withComponents(AuthorComponent)],
-   BrowserAnimationsModule,
-   ToastrModule.forRoot()
-],
-providers: [HttpClientModule, AuthorService, PublisherService,ShopService],
-bootstrap: [AppComponent]
+      BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+      HttpClientModule,
+      FormsModule,
+      AppRoutingModule,
+      HttpModule,
+      [AgGridModule.withComponents(AuthorComponent)],
+      BrowserAnimationsModule,
+      ToastrModule.forRoot()
+   ],
+   providers: [HttpClientModule, AuthorService, PublisherService, ShopService, CategoryService],
+   bootstrap: [AppComponent]
 })
 export class AppModule {
 }
