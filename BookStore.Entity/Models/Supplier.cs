@@ -9,11 +9,11 @@ namespace BookStore.Entity.Models
         [Key]
         public Guid SUPPLIER_ID { get; set; }
 
-        [Required(ErrorMessage = "Supplier Name is required!")]
+        [Required]
         [MaxLength(250)]
         public String SUPPLIER_NAME { get; set; }
 
-        [Required(ErrorMessage = "Supplier Region is required!")]
+        [Required]
         [MaxLength(100)]
         public String SUPPLIER_REGION { get; set; }
 

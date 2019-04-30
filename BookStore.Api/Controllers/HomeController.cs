@@ -180,7 +180,7 @@ namespace BookStoreMap.Controllers
         }
 
         [Route("api/PostSupplier")]
-        [HttpGet]
+        [HttpPost]
         public object PostSupplier(DtoSupplier model)
         {
             return _supplierService.SupplierAdd(model);

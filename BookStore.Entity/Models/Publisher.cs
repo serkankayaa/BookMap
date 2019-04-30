@@ -15,10 +15,9 @@ namespace BookStore.Entity.Models
 
         public string LOCATION { get; set; }
 
-        [Required]
-        [ForeignKey("Supplier")]
         public Guid SUPPLIER_ID_FK { get; set; }
 
+        [ForeignKey("SUPPLIER_ID_FK")]
         public Supplier Supplier { get; set; }
     }
 }

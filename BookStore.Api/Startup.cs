@@ -28,7 +28,7 @@ namespace BookStoreMap
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
-                services.AddCors();
+            services.AddCors();
 
             var connectionString = Configuration.GetConnectionString("DatabaseConnection");
             services.AddDbContext<BookDbContext>(options =>
