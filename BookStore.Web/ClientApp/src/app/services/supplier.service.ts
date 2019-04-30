@@ -14,13 +14,13 @@ export class SupplierService {
 
     constructor(private http: HttpClient) { }
 
-    getAllSupplier(): Observable<Supplier[]> {
-        this.supplier$ = this.http.get(apiBaseUrl + '/GetAllSupplier');
+    getSuppliers(): Observable<Supplier[]> {
+        this.supplier$ = this.http.get(apiBaseUrl + '/GetSuppliers');
         return this.supplier$;
     }
 
     postSupplier(supplier: Supplier) {
-        const result = this.http.post(apiBaseUrl + '/postSupplier', supplier, { headers: headerContent, observe: 'response' });
+        const result = this.http.post(apiBaseUrl + '/PostSupplier', supplier, { headers: headerContent, observe: 'response' });
         return result;
     }
 

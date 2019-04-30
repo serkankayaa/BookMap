@@ -18,6 +18,6 @@ export class SupplierComponent implements OnInit {
     this.getSuppliers();
   }
   getSuppliers(): void {
-    this.supplierService.getAllSupplier().subscribe(data => this.allSuppliers = data);
+    this.supplierService.getSuppliers().subscribe(data => this.allSuppliers = data);
   }
 }
