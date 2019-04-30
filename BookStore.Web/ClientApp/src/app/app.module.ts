@@ -21,7 +21,8 @@ import { PublisherService } from './services/publisher.service';
 import { ShopComponent } from './shop/shop.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryService } from './services/category.service';
-
+import { SupplierComponent } from './supplier/supplier.component';
+import { SupplierService } from './services/supplier.service';
 @NgModule({
    declarations: [
       AppComponent,
@@ -31,7 +32,8 @@ import { CategoryService } from './services/category.service';
       BookComponent,
       PublisherComponent,
       ShopComponent,
-      CategoryComponent
+      CategoryComponent,
+      SupplierComponent
    ],
    imports: [
       BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -43,7 +45,7 @@ import { CategoryService } from './services/category.service';
       BrowserAnimationsModule,
       ToastrModule.forRoot()
    ],
-   providers: [HttpClientModule, AuthorService, PublisherService, ShopService, CategoryService],
+   providers: [HttpClientModule, AuthorService, PublisherService, ShopService, CategoryService, SupplierService],
    bootstrap: [AppComponent]
 })
 export class AppModule {

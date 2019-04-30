@@ -174,10 +174,16 @@ namespace BookStoreMap.Controllers
 
         [Route("api/GetSuppliers")]
         [HttpGet]
-
         public List<DtoSupplier> GetSuppliers()
         {
             return _supplierService.GetSuppliers();
+        }
+
+        [Route("api/PostSupplier")]
+        [HttpGet]
+        public object PostSupplier(DtoSupplier model)
+        {
+            return _supplierService.SupplierAdd(model);
         }
 
         #endregion

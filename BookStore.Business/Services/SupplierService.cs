@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BookStore.Business.Generic;
 using BookStore.Dto;
 using BookStore.Entity.Context;
@@ -36,14 +37,39 @@ namespace BookStore.Business.Services
             throw new NotImplementedException();
         }
 
+
+        /// <summary>
+        /// Get All Suppliers
+        /// </summary>
+        /// <returns></returns>
         public List<DtoSupplier> GetSuppliers()
         {
-            throw new NotImplementedException();
+            var suppliers = base.GetAll();
+
+            var totalSuppliers = suppliers.Select(c => new DtoSupplier()
+            {
+                SUPPLIER_ID = c.SUPPLIER_ID,
+                SUPPLIER_NAME = c.SUPPLIER_NAME,
+                SUPPLIER_REGION = c.SUPPLIER_REGION,
+            }).ToList();
+
+            return totalSuppliers;
         }
 
+        /// <summary>
+        /// Add Supplier
+        /// </summary>
+        /// <returns></returns>
         public object SupplierAdd(DtoSupplier model)
         {
-            throw new NotImplementedException();
+            Supplier supplier = new Supplier();
+            supplier.SUPPLIER_ID = model.SUPPLIER_ID;
+            supplier.SUPPLIER_NAME = model.SUPPLIER_NAME;
+            supplier.SUPPLIER_REGION = model.SUPPLIER_REGION;
+            this.Add(supplier);
+            this.Save();
+
+            return model;
         }
 
         public DtoSupplier UpdateSupplier(DtoSupplier model)
