@@ -18,4 +18,10 @@ export class SupplierService {
         this.supplier$ = this.http.get(apiBaseUrl + '/GetAllSupplier');
         return this.supplier$;
     }
+
+    postSupplier(supplier: Supplier) {
+        const result = this.http.post(apiBaseUrl + '/postSupplier', supplier, { headers: headerContent, observe: 'response' });
+        return result;
+    }
+
 }
