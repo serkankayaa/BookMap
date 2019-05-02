@@ -70,7 +70,13 @@ namespace BookStore.Business.Services
         /// Add category
         /// </summary>
         /// <param name="model"></param>
-        public object CategoryAdd(DtoCategory model){
+        public object CategoryAdd(DtoCategory model)
+        {
+            var isExistCategory = _context.Category.Where(c=> c.NAME == model.CATEGORY_NAME).Any();
+
+            if(isExistCategory){
+                return false;
+            }
 
             Category category = new Category();
             category.NAME = model.CATEGORY_NAME;

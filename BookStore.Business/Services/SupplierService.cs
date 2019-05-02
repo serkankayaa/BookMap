@@ -60,6 +60,13 @@ namespace BookStore.Business.Services
         /// <returns></returns>
         public object SupplierAdd(DtoSupplier model)
         {
+            var isExistSupplier = _context.Supplier.Where(c=> c.SUPPLIER_NAME == model.SUPPLIER_NAME).Any();
+
+            if(isExistSupplier)
+            {
+                return false;
+            }
+
             Supplier supplier = new Supplier();
             supplier.SUPPLIER_ID = model.SUPPLIER_ID;
             supplier.SUPPLIER_NAME = model.SUPPLIER_NAME;
