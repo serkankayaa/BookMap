@@ -20,4 +20,20 @@ export class SupplierComponent implements OnInit {
   getSuppliers(): void {
     this.supplierService.getSuppliers().subscribe(data => this.allSuppliers = data);
   }
+  postSupplier(): object {
+    const result = this.supplierService.postSupplier(this.supplier).subscribe((response) => {
+      if (response.body != null && response.ok && response.body !== false) {
+        this.toastrService.success('Supplier saved successfully.');
+        this.getSuppliers();
+        this.supplier = new Supplier();
+        return;
+      }
+
+      if (response.body === false) {
+        this.toastrService.error('This supplier saved already!');
+        return;
+      }
+    });
+    return result;
+  }
 }
