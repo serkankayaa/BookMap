@@ -11,13 +11,11 @@ namespace BookStore.Business.Services
     public class SupplierService : EFRepository<Supplier>, ISupplierService
     {
         private BookDbContext _context;
-        private ISupplierService _supplierService;
 
         #region Ctor
-        public SupplierService(BookDbContext context, ISupplierService supplierService) : base(context)
+        public SupplierService(BookDbContext context) : base(context)
         {
             this._context = context;
-            this._supplierService = supplierService;
         }
         #endregion
 
@@ -44,7 +42,7 @@ namespace BookStore.Business.Services
         /// <returns></returns>
         public List<DtoSupplier> GetSuppliers()
         {
-            var suppliers = base.GetAll();
+            var suppliers = this.GetAll();
 
             var totalSuppliers = suppliers.Select(c => new DtoSupplier()
             {
