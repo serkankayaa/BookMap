@@ -33,7 +33,7 @@ export class PublisherComponent implements OnInit {
   postPublisher(): object {
     const result = this.publisherService.postPublisher(this.publisher).subscribe((response) => {
       console.log(response);
-      if (response.body != null && response.ok && response.body != false) {
+      if (response.body != null && response.ok && response.body !== false) {
         this.toasterService.success('Publisher saved successfully');
         this.getPublisher();
         this.refreshForm();

@@ -29,6 +29,7 @@ export class SupplierComponent implements OnInit {
   postSupplier(): object {
     const result = this.supplierService.postSupplier(this.supplier).subscribe((response) => {
       if (response.body != null && response.ok && response.body !== false) {
+        this.toastrService.toastrConfig.progressBar = true;
         this.toastrService.success('Supplier saved successfully.');
         this.getSuppliers();
         this.refreshForm();
