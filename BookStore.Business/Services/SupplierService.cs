@@ -68,11 +68,12 @@ namespace BookStore.Business.Services
             }
 
             Supplier supplier = new Supplier();
-            supplier.SUPPLIER_ID = model.SUPPLIER_ID;
             supplier.SUPPLIER_NAME = model.SUPPLIER_NAME;
             supplier.SUPPLIER_REGION = model.SUPPLIER_REGION;
             this.Add(supplier);
             this.Save();
+
+            model.SUPPLIER_ID = supplier.SUPPLIER_ID;
 
             return model;
         }
