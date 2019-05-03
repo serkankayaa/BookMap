@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Supplier } from '../models/supplier';
 import { SupplierService } from '../services/supplier.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-supplier',
@@ -17,6 +18,11 @@ export class SupplierComponent implements OnInit {
   ngOnInit() {
     this.getSuppliers();
   }
+  refreshForm(): void {
+    const dirtyFormID = 'supplierForm';
+    const resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+    resetForm.reset();
+  }
   getSuppliers(): void {
     this.supplierService.getSuppliers().subscribe(data => this.allSuppliers = data);
   }
@@ -25,7 +31,9 @@ export class SupplierComponent implements OnInit {
       if (response.body != null && response.ok && response.body !== false) {
         this.toastrService.success('Supplier saved successfully.');
         this.getSuppliers();
+        this.refreshForm();
         this.supplier = new Supplier();
+
         return;
       }
 

@@ -19,6 +19,13 @@ export class CategoryComponent implements OnInit {
   ngOnInit() {
     this.GetCategories();
   }
+
+  refreshForm(): void {
+    const dirtyFormID = 'categoryForm';
+    const resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+    resetForm.reset();
+  }
+
   GetCategories(): void {
     this.categoryService.getCategories().subscribe(data => this.allCategories = data);
   }
@@ -28,6 +35,7 @@ export class CategoryComponent implements OnInit {
       if (response.body != null && response.ok && response.body !== false) {
         this.toastrService.success('Category saved successfully.');
         this.GetCategories();
+        this.refreshForm();
         this.category = new Category();
         return;
       }

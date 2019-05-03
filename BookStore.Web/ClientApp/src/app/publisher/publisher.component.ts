@@ -19,6 +19,12 @@ export class PublisherComponent implements OnInit {
     this.getPublisher();
   }
 
+  refreshForm(): void {
+    const dirtyFormID = 'publisherForm';
+    const resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+    resetForm.reset();
+  }
+
   getPublisher(): void {
     this.publisherService.getAllPublisher()
       .subscribe(data => this.allPublisher = data);
@@ -30,6 +36,7 @@ export class PublisherComponent implements OnInit {
       if (response.body != null && response.ok && response.body != false) {
         this.toasterService.success('Publisher saved successfully');
         this.getPublisher();
+        this.refreshForm();
         this.publisher = new Publisher();
 
         return;

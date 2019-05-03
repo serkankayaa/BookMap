@@ -11,14 +11,14 @@
       </div>
   </div>
   <div class="mt-4">
-    <form name="form" method="POST" (ngSubmit)="f.form.valid && postAuthor()" #f="ngForm" novalidate>
+    <form id="authorForm" name="form" method="POST" (ngSubmit)="f.form.valid && postAuthor()" #f="ngForm" novalidate>
         <div class="row">
           <div class="col-6">
               <div class="form-group">
                   <label for="authorName">Author Name</label>
                   <input type="text" class="form-control" id="authorName" name="authorName" [(ngModel)]="author.AUTHOR_NAME" #authorName="ngModel"  placeholder="Name" required>
               </div>
-                <div *ngIf="authorName.invalid && (f.submitted || authorName.touched)" class="alert alert-danger">
+                <div *ngIf="authorName.invalid && (f.dirty || authorName.touched)" class="alert alert-danger">
                   <div *ngIf="authorName.errors.required">
                     Name is required.
                   </div>
@@ -29,7 +29,7 @@
                   <label for="birthDate">Birthdate</label>
                   <input class="form-control" type="date" value="" [(ngModel)]="author.BIRTH_DATE" #birthDate="ngModel" name="birthDate" id="birthDate" required>
                 </div>
-                <div *ngIf="birthDate.invalid && (f.submitted || birthDate.touched)" class="alert alert-danger">
+                <div *ngIf="birthDate.invalid && (f.dirty || birthDate.touched)" class="alert alert-danger">
                     <div *ngIf="birthDate.errors.required">
                       Birthdate is required.
                     </div>
