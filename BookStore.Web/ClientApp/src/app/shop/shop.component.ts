@@ -37,11 +37,18 @@ export class ShopComponent implements OnInit {
       }
       if (response.body === false) {
         this.toasterService.error('This shop added already');
+        this.focusErrorInput();
         return;
       }
     });
 
     return result;
+  }
+
+  focusErrorInput() {
+    const dirtyFormID = 'shopName';
+    const focusForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+    focusForm.focus();
   }
 
   getShops(): void {

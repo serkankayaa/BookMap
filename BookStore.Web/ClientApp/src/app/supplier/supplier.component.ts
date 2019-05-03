@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Supplier } from '../models/supplier';
 import { SupplierService } from '../services/supplier.service';
 import { ToastrService } from 'ngx-toastr';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-supplier',
@@ -40,9 +39,15 @@ export class SupplierComponent implements OnInit {
 
       if (response.body === false) {
         this.toastrService.error('This supplier saved already!');
+        this.focusErrorInput();
         return;
       }
     });
     return result;
+  }
+  focusErrorInput() {
+    const dirtyFormID = 'supplierName';
+    const focusForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+    focusForm.focus();
   }
 }

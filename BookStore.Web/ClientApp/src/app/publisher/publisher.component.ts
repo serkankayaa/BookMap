@@ -44,10 +44,18 @@ export class PublisherComponent implements OnInit {
 
       if (response.body === false) {
         this.toasterService.error('This publisher saved already');
+        this.focusErrorInput();
         return;
       }
     });
 
     return result;
   }
+
+  focusErrorInput() {
+    const dirtyFormID = 'publisherName';
+    const focusForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+    focusForm.focus();
+  }
+
 }
