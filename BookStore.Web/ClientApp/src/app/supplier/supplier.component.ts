@@ -16,6 +16,7 @@ export class SupplierComponent implements OnInit {
 
   ngOnInit() {
     this.getSuppliers();
+    this.toastrService.toastrConfig.progressBar = true;
   }
   refreshForm(): void {
     const dirtyFormID = 'supplierForm';
@@ -25,10 +26,10 @@ export class SupplierComponent implements OnInit {
   getSuppliers(): void {
     this.supplierService.getSuppliers().subscribe(data => this.allSuppliers = data);
   }
+
   postSupplier(): object {
     const result = this.supplierService.postSupplier(this.supplier).subscribe((response) => {
       if (response.body != null && response.ok && response.body !== false) {
-        this.toastrService.toastrConfig.progressBar = true;
         this.toastrService.success('Supplier saved successfully.');
         this.getSuppliers();
         this.refreshForm();
@@ -45,9 +46,11 @@ export class SupplierComponent implements OnInit {
     });
     return result;
   }
+
   focusErrorInput() {
     const dirtyFormID = 'supplierName';
     const focusForm = <HTMLFormElement>document.getElementById(dirtyFormID);
     focusForm.focus();
   }
+
 }
