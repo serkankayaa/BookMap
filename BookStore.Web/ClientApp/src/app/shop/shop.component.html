@@ -49,7 +49,8 @@
               </div>
                 <div class="row mt-4">
                   <div class="col">
-                    <button type="submit" class="btn btn-primary float-right">Save</button>
+                    <button type="submit" class="btn btn-primary float-right"
+                      [disabled]="f.form.pristine || f.form.invalid">Save</button>
                   </div>
                 </div>
           </form>
