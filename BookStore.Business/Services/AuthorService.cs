@@ -70,9 +70,9 @@ namespace BookStore.Business.Services
         /// <param name="model"></param>
         public object AuthorAdd(DtoAuthor model)
         {
-            var isNameExisted = _context.Author.Where(c=> c.AUTHOR_NAME == model.AUTHOR_NAME).Any();
+            var IsAuthorNameExists = _context.Author.Where(c=> c.AUTHOR_NAME == model.AUTHOR_NAME).Any();
 
-            if(isNameExisted == true)
+            if(IsAuthorNameExists)
             {
                 return false;
             }
