@@ -55,7 +55,7 @@ namespace BookStore.Business.Services {
         {
            var shops = this.GetAll();
 
-           var totalShops = shops.Select(c => new DtoShop()
+           var shopCount = shops.Select(c => new DtoShop()
            {
                SHOP_ID = c.SHOP_ID,
                SHOP_NAME = c.SHOP_NAME,
@@ -63,7 +63,7 @@ namespace BookStore.Business.Services {
                STAFF_COUNT = c.STAFF_COUNT
            }).ToList();
 
-           return totalShops;
+           return shopCount;
 
         }
     }
