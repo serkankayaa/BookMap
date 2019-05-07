@@ -27,7 +27,13 @@ namespace BookStore.Business.Services
 
         public DtoSupplier GetSupplier(Guid id)
         {
-            throw new NotImplementedException();
+            var supplier = _context.Supplier.FirstOrDefault(x => x.SUPPLIER_ID == id);
+               return new DtoSupplier()
+                {
+                    SUPPLIER_ID = supplier.SUPPLIER_ID,
+                    SUPPLIER_NAME = supplier.SUPPLIER_NAME,
+                    SUPPLIER_REGION = supplier.SUPPLIER_REGION
+                };
         }
 
         public object GetSupplierPublishers(Guid id)
