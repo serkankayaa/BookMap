@@ -11,7 +11,8 @@
     </div>
   </div>
   <div class="mt-4">
-    <form id="supplierForm" name="form" method="POST" (ngSubmit)="f.form.valid && postSupplier()" #f="ngForm" novalidate>
+    <form id="supplierForm" name="form" method="POST" (ngSubmit)="f.form.valid && postSupplier()" #f="ngForm"
+      novalidate>
       <div class="row">
         <div class="col-6">
           <div class="form-group">
@@ -58,12 +59,15 @@
           <tr>
             <th class="text-center">Supplier Name</th>
             <th class="text-center">Region</th>
+            <th class="text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let supplier of allSuppliers">
             <td class="text-center" style="width: 15px;">{{supplier.SUPPLIER_NAME}}</td>
             <td class="text-center" style="width: 15px;">{{supplier.SUPPLIER_REGION}}</td>
+            <td class="text-center" style="width: 15px;"><button class="btn btn-primary"
+                (click)="editSupplier()">Edit</button></td>
           </tr>
         </tbody>
       </table>
