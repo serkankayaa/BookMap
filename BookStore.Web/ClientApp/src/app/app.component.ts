@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AuthorService } from './services/author.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { AuthorService } from './services/author.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  constructor(private authorService : AuthorService) { }
-
+  constructor(private toastrService: ToastrService) {
+    this.toastrService.toastrConfig.progressBar = true;
+  }
 }

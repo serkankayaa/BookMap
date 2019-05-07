@@ -16,7 +16,6 @@ export class SupplierComponent implements OnInit {
 
   ngOnInit() {
     this.getSuppliers();
-    this.toastrService.toastrConfig.progressBar = true;
   }
   refreshForm(): void {
     const dirtyFormID = 'supplierForm';
