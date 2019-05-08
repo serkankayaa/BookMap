@@ -83,12 +83,10 @@ namespace BookStore.Business.Services
 
             return model;
         }
-
-        public object UpdateSupplier(DtoSupplier model)
+        public DtoSupplier UpdateSupplier(DtoSupplier model)
         {
-            return new NotImplementedException();
+            throw new NotImplementedException();
         }
         #endregion
-
     }
 }
