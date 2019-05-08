@@ -84,9 +84,9 @@ namespace BookStore.Business.Services
             return model;
         }
 
-        public DtoSupplier UpdateSupplier(DtoSupplier model)
+        public object UpdateSupplier(DtoSupplier model)
         {
-            throw new NotImplementedException();
+            return new NotImplementedException();
         }
         #endregion
 

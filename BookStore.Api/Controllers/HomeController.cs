@@ -194,6 +194,13 @@ namespace BookStoreMap.Controllers
             return _supplierService.GetSupplier(id);
         }
 
+        [Route("api/UpdateSupplier/")]
+        [HttpPost]
+        public DtoSupplier UpdateSupplier(DtoSupplier model)
+        {
+            return _supplierService.UpdateSupplier(model);
+        }
+
         #endregion
 
     }
