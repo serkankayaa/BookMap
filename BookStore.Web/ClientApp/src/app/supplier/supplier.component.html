@@ -1,0 +1,76 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h2>Supplier</h2>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-12">
+      <h5>Create Supplier</h5>
+    </div>
+  </div>
+  <div class="mt-4">
+    <form id="supplierForm" name="form" method="POST" (ngSubmit)="f.form.valid && postSupplier()" #f="ngForm"
+      novalidate>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="supplierName">Supplier Name</label>
+            <input type="text" class="form-control" id="supplierName" name="supplierName"
+              [(ngModel)]="supplier.SUPPLIER_NAME" #supplierName="ngModel" placeholder="Name" required>
+          </div>
+          <div *ngIf="supplierName.invalid && (f.dirty || supplierName.touched)" class="alert alert-danger">
+            <div *ngIf="supplierName.errors.required">
+              Supplier Name is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="region">Region</label>
+            <input type="text" class="form-control" id="region" name="region" [(ngModel)]="supplier.SUPPLIER_REGION"
+              #region="ngModel" placeholder="Region" required>
+          </div>
+          <div *ngIf="region.invalid && (f.dirty || region.touched)" class="alert alert-danger">
+            <div *ngIf="region.errors.required">
+              Region is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col">
+          <button type="submit" class="btn btn-primary float-right"
+            [disabled]="f.form.pristine || f.form.invalid">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row mb-4 mt-4">
+    <div class="col-12">
+      <h5>Supplier List</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead class="thead-inverse">
+          <tr>
+            <th class="text-center">Supplier Name</th>
+            <th class="text-center">Region</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let supplier of allSuppliers">
+            <td class="text-center" style="width: 15px;">{{supplier.SUPPLIER_NAME}}</td>
+            <td class="text-center" style="width: 15px;">{{supplier.SUPPLIER_REGION}}</td>
+            <td class="text-center" style="width: 15px;"><button class="btn btn-primary"
+                (click)="editSupplier()">Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

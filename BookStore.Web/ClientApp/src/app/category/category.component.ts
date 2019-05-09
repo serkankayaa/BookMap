@@ -14,11 +14,18 @@ export class CategoryComponent implements OnInit {
   category = new Category();
   allCategories: Category[];
 
-  constructor(private categoryService: CategoryService, private toasterService: ToastrService) { }
+  constructor(private categoryService: CategoryService, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.GetCategories();
   }
+
+  refreshForm(): void {
+    const dirtyFormID = 'categoryForm';
+    const resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+    resetForm.reset();
+  }
+
   GetCategories(): void {
     this.categoryService.getCategories().subscribe(data => this.allCategories = data);
   }
@@ -26,14 +33,15 @@ export class CategoryComponent implements OnInit {
   postCategory(): object {
     const result = this.categoryService.postCategory(this.category).subscribe((response) => {
       if (response.body != null && response.ok && response.body !== false) {
-        this.toasterService.success('Category saved successfully.');
+        this.toastrService.success('Category saved successfully.');
         this.GetCategories();
+        this.refreshForm();
         this.category = new Category();
         return;
       }
 
       if (response.body === false) {
-        this.toasterService.error('This category saved already!');
+        this.toastrService.error('This category saved already!');
         return;
       }
     });

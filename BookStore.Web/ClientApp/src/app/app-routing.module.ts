@@ -8,6 +8,7 @@ import { BookComponent } from './book/book.component';
 import { ShopComponent } from './shop/shop.component';
 import { PublisherComponent } from './publisher/publisher.component';
 import { CategoryComponent } from './category/category.component';
+import { SupplierComponent } from './supplier/supplier.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
     { path: 'publisher', component: PublisherComponent },
     { path: 'author', component: AuthorComponent},
     { path: 'shop', component: ShopComponent},
-    { path: 'category', component: CategoryComponent}
+    { path: 'category', component: CategoryComponent},
+    { path: 'supplier', component: SupplierComponent}
 ];
 
 @NgModule({

@@ -16,13 +16,15 @@ namespace BookStoreMap.Controllers
         private readonly IShopService _shopService;
 
         private readonly ICategoryService _categoryService;
+        private readonly ISupplierService _supplierService;
 
         public HomeController(IBookService bookService,
                                IAuthorService authorService,
                                IPublisherService publisherService,
                                IShopService shopService,
                                IUserService userService,
-                               ICategoryService categoryService
+                               ICategoryService categoryService,
+                               ISupplierService supplierService
                                )
         {
             _bookService = bookService;
@@ -31,6 +33,7 @@ namespace BookStoreMap.Controllers
             _shopService = shopService;
             _userService = userService;
             _categoryService = categoryService;
+            _supplierService = supplierService;
         }
 
         #region Book Method
@@ -167,5 +170,38 @@ namespace BookStoreMap.Controllers
         }
 
         #endregion
+
+        #region Supplier
+
+        [Route("api/GetSuppliers")]
+        [HttpGet]
+        public List<DtoSupplier> GetSuppliers()
+        {
+            return _supplierService.GetSuppliers();
+        }
+
+        [Route("api/PostSupplier")]
+        [HttpPost]
+        public object PostSupplier(DtoSupplier model)
+        {
+            return _supplierService.SupplierAdd(model);
+        }
+
+        [Route("api/Supplier/id:Guid")]
+        [HttpGet]
+        public DtoSupplier GetSupplier(Guid id)
+        {
+            return _supplierService.GetSupplier(id);
+        }
+
+        [Route("api/UpdateSupplier/")]
+        [HttpPost]
+        public DtoSupplier UpdateSupplier(DtoSupplier model)
+        {
+            return _supplierService.UpdateSupplier(model);
+        }
+
+        #endregion
+
     }
 }

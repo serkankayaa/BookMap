@@ -11,36 +11,51 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PublisherComponent implements OnInit {
   publisher = new Publisher();
-  allPublisher : Publisher[];
+  allPublisher: Publisher[];
 
-  constructor(private publisherService : PublisherService, private toasterService : ToastrService) { }
+  constructor(private publisherService: PublisherService, private toasterService: ToastrService) { }
 
   ngOnInit() {
     this.getPublisher();
   }
 
-  getPublisher(): void {
-    this.publisherService.getAllPublisher()
-        .subscribe(data=> this.allPublisher = data);
+  refreshForm(): void {
+    const dirtyFormID = 'publisherForm';
+    const resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+    resetForm.reset();
   }
 
-  postPublisher() : object {
+  getPublisher(): void {
+    this.publisherService.getAllPublisher()
+      .subscribe(data => this.allPublisher = data);
+  }
+
+  postPublisher(): object {
     const result = this.publisherService.postPublisher(this.publisher).subscribe((response) => {
       console.log(response);
-      if(response.body != null && response.ok && response.body != false){
-        this.toasterService.success("Publisher saved successfully");
+      if (response.body != null && response.ok && response.body !== false) {
+        this.toasterService.success('Publisher saved successfully');
         this.getPublisher();
+        this.refreshForm();
         this.publisher = new Publisher();
-        
+
         return;
       }
 
-      if(response.body == false){
-        this.toasterService.error("This publisher saved already");
+      if (response.body === false) {
+        this.toasterService.error('This publisher saved already');
+        this.focusErrorInput();
         return;
       }
     });
 
     return result;
   }
+
+  focusErrorInput() {
+    const dirtyFormID = 'publisherName';
+    const focusForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+    focusForm.focus();
+  }
+
 }

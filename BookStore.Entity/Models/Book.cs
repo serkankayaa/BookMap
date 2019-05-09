@@ -29,6 +29,11 @@ namespace BookStore.Entity.Models
         [ForeignKey("Account")]
         public Guid ACCOUNT_ID_FK { get; set; }
 
+
+        [Required]
+        [ForeignKey("Category")]
+        public Guid CATEGORY_ID_FK { get; set; }
+
         [Required]
         [ForeignKey("Shop")]
         public Guid SHOP_ID_FK { get; set; }

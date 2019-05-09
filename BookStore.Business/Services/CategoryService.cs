@@ -43,7 +43,7 @@ namespace BookStore.Business.Services
             category.CATEGORY_NAME = categoryItem.NAME;
             category.CATEGORY_SUMMARY = categoryItem.SUMMARY;
             category.IS_MAIN_CATEGORY = categoryItem.IS_MAIN_CATEGORY;
-            
+
             return category;
         }
 
@@ -70,7 +70,13 @@ namespace BookStore.Business.Services
         /// Add category
         /// </summary>
         /// <param name="model"></param>
-        public object CategoryAdd(DtoCategory model){
+        public object CategoryAdd(DtoCategory model)
+        {
+            var isCategoryExists = _context.Category.Where(c=> c.NAME == model.CATEGORY_NAME).Any();
+
+            if(isCategoryExists){
+                return false;
+            }
 
             Category category = new Category();
             category.NAME = model.CATEGORY_NAME;
@@ -79,6 +85,8 @@ namespace BookStore.Business.Services
 
             this.Add(category);
             this.Save();
+
+            model.CATEGORY_ID = category.CATEGORY_ID;
 
             return model;
         }

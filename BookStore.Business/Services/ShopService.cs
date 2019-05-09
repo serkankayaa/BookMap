@@ -11,13 +11,20 @@ namespace BookStore.Business.Services {
     public class ShopService : EFRepository<Shop>, IShopService
     {
         private BookDbContext _context;
-        
+
         public ShopService(BookDbContext context) :base(context) {
             _context = context;
         }
 
         public object AddShop(DtoShop model)
         {
+            var isShopExists = _context.Shop.Where(c=> c.SHOP_NAME == model.SHOP_NAME).Any();
+
+            if(isShopExists)
+            {
+                return false;
+            }
+
             Shop shop = new Shop();
             shop.SHOP_NAME = model.SHOP_NAME;
             shop.LOCATION = model.LOCATION;
@@ -27,7 +34,7 @@ namespace BookStore.Business.Services {
             this.Save();
 
             model.SHOP_ID = shop.SHOP_ID;
-            
+
             return model;
         }
 
@@ -48,7 +55,7 @@ namespace BookStore.Business.Services {
         {
            var shops = this.GetAll();
 
-           var totalShops = shops.Select(c => new DtoShop()
+           var shopCount = shops.Select(c => new DtoShop()
            {
                SHOP_ID = c.SHOP_ID,
                SHOP_NAME = c.SHOP_NAME,
@@ -56,8 +63,8 @@ namespace BookStore.Business.Services {
                STAFF_COUNT = c.STAFF_COUNT
            }).ToList();
 
-           return totalShops;
-           
+           return shopCount;
+
         }
     }
 }

@@ -11,38 +11,44 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AuthorComponent implements OnInit {
   author = new Author();
-  allAuthor : Author[];
-  response : object;
-   
-  constructor(private authorService : AuthorService, private toasterService : ToastrService) { }
+  allAuthor: Author[];
+  response: object;
+
+  constructor(private authorService: AuthorService, private toasterService: ToastrService) { }
 
   ngOnInit() {
     this.getAuthor();
   }
 
+  refreshForm(): void {
+    const dirtyFormID = 'authorForm';
+    const resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+    resetForm.reset();
+  }
+
   postAuthor(): object {
     const result = this.authorService.postAuthor(this.author).subscribe((response) => {
-      if(response.body != null && response.ok && response.body != false){
-        this.toasterService.success("Author saved successfully");
+      if (response.body != null && response.ok && response.body !== false) {
+        this.toasterService.success('Author saved successfully');
         this.author = new Author();
         this.getAuthor();
-        
+        this.refreshForm();
+
         return;
       }
 
-
-      if(response.body == false){
-        this.toasterService.error("This author saved already");
+      if (response.body === false) {
+        this.toasterService.error('This author saved already');
         return;
       }
     });
-    
+
     return result;
-  };
+  }
 
   getAuthor(): void {
     this.authorService.getAllAuthor()
-        .subscribe(data=> this.allAuthor = data);
+      .subscribe(data => this.allAuthor = data);
   }
 
 }

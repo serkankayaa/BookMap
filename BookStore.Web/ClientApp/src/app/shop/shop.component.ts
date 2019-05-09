@@ -12,24 +12,32 @@ export class ShopComponent implements OnInit {
   shop = new Shop();
   shopList;
 
-  constructor(private shopService : ShopService, private toasterService : ToastrService) { }
+  constructor(private shopService: ShopService, private toasterService: ToastrService) { }
 
   ngOnInit() {
     this.getShops();
   }
 
-  postShop() : object{
-    const result = this.shopService.postShop(this.shop).subscribe((response) => { 
+  refreshForm(): void {
+    const dirtyFormID = 'shopForm';
+    const resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+    resetForm.reset();
+  }
+
+  postShop(): object {
+    const result = this.shopService.postShop(this.shop).subscribe((response) => {
       console.log(response);
-      if(response.body != null && response.ok && response.body != false){
-        this.toasterService.success("Shop added successfully");
+      if (response.body != null && response.ok && response.body !== false) {
+        this.toasterService.success('Shop added successfully');
         this.shop = new Shop();
         this.getShops();
+        this.refreshForm();
 
         return;
       }
-      if(response.body ==false) {
-        this.toasterService.error("This shop added already");
+      if (response.body === false) {
+        this.toasterService.error('This shop added already');
+        this.focusErrorInput();
         return;
       }
     });
@@ -37,7 +45,13 @@ export class ShopComponent implements OnInit {
     return result;
   }
 
-  getShops() : void {
+  focusErrorInput() {
+    const dirtyFormID = 'shopName';
+    const focusForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+    focusForm.focus();
+  }
+
+  getShops(): void {
     this.shopService.getAllShops().subscribe(data => this.shopList = data);
   }
 }

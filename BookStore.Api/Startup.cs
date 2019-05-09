@@ -28,7 +28,7 @@ namespace BookStoreMap
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
-                services.AddCors();
+            services.AddCors();
 
             var connectionString = Configuration.GetConnectionString("DatabaseConnection");
             services.AddDbContext<BookDbContext>(options =>
@@ -41,6 +41,7 @@ namespace BookStoreMap
             services.AddScoped<IShopService, ShopService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ISupplierService, SupplierService>();
 
             services.AddSwaggerGen(c =>
             {

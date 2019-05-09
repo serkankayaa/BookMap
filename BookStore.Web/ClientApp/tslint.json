@@ -16,9 +16,7 @@
     },
     "eofline": true,
     "forin": true,
-    "import-blacklist": [
-      true,
-      "rxjs",
+    "import-blacklist": [false, "rxjs",
       "rxjs/Rx"
     ],
     "import-spacing": true,
