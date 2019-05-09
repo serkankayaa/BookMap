@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Supplier } from '../models/supplier';
 import { SupplierService } from '../services/supplier.service';
 import { ToastrService } from 'ngx-toastr';
-
 @Component({
   selector: 'app-supplier',
   templateUrl: './supplier.component.html',
