@@ -87,16 +87,14 @@ namespace BookStore.Business.Generic
             return await _context.SaveChangesAsync();
         }
 
-        public virtual void Update(T t, object key)
+        public virtual void Update(T entity)
         {
-            if (t == null)
-                return;
-
-            T existObject = _context.Set<T>().Find(key);
-            if (existObject != null)
-            {
-                _context.Entry(existObject).CurrentValues.SetValues(t);
+            
+            if (entity == null) {  
+                throw new ArgumentNullException("entity");  
             }
+              
+            _context.SaveChanges();  
         }
     }
 }
