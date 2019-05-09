@@ -91,6 +91,13 @@ namespace BookStoreMap.Controllers
             return _authorService.AuthorAdd(model);
         }
 
+        [Route("api/UpdateAuthor")]
+        [HttpPut]
+        public object UpdateAuthor(DtoAuthor model)
+        {
+            return _authorService.UpdateAuthor(model);
+        }
+
         #endregion
 
         #region Publisher
