@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 export class SupplierComponent implements OnInit {
   supplier = new Supplier;
   allSuppliers: Supplier[];
+  isEdit = false;
 
   constructor(private supplierService: SupplierService, private toastrService: ToastrService) { }
 
@@ -51,7 +52,18 @@ export class SupplierComponent implements OnInit {
     focusForm.focus();
   }
   editSupplier(selectedSupplier: Supplier): void {
-    console.log(selectedSupplier.SUPPLIER_NAME);
-    console.log(selectedSupplier.SUPPLIER_REGION);
+    this.supplier = selectedSupplier;
+    this.isEdit = true;
+  }
+  updateSupplier(): void {
+    const result = this.supplierService.updateSupplier(this.supplier).subscribe((res) => {
+      if (res.body != null && res.ok && res.body !== false) {
+        this.toastrService.success('Supplier edited successfully.');
+        this.getSuppliers();
+        this.refreshForm();
+        this.supplier = new Supplier();
+        this.isEdit = false;
+      }
+    });
   }
 }

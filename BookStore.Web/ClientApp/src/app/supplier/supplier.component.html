@@ -7,7 +7,8 @@
   <hr />
   <div class="row">
     <div class="col-12">
-      <h5>Create Supplier</h5>
+      <h5 *ngIf="!isEdit">Create Supplier</h5>
+      <h5 *ngIf="isEdit">Edit Supplier</h5>
     </div>
   </div>
   <div class="mt-4">
@@ -30,8 +31,7 @@
           <div class="form-group">
             <label for="region">Region</label>
             <input type="text" class="form-control" id="supplierRegion" name="supplierRegion"
-              [(ngModel)]="supplier.SUPPLIER_REGION"
-              #region="ngModel" placeholder="Region" required>
+              [(ngModel)]="supplier.SUPPLIER_REGION" #region="ngModel" placeholder="Region" required>
           </div>
           <div *ngIf="region.invalid && (f.dirty || region.touched)" class="alert alert-danger">
             <div *ngIf="region.errors.required">
@@ -42,8 +42,10 @@
       </div>
       <div class="row mt-4">
         <div class="col">
-          <button type="submit" class="btn btn-primary float-right"
+          <button *ngIf="!isEdit" type="submit" class="btn btn-primary float-right"
             [disabled]="f.form.pristine || f.form.invalid">Save</button>
+          <button *ngIf="isEdit" type="button" class="btn btn-primary float-right"
+            [disabled]="f.form.pristine || f.form.invalid" (click)="updateSupplier()">Save</button>
         </div>
       </div>
     </form>
