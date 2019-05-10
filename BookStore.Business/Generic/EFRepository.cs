@@ -39,7 +39,7 @@ namespace BookStore.Business.Generic
 
         public virtual T Find(Expression<Func<T, bool>> match)
         {
-            return _context.Set<T>().FirstOrDefault(match); 
+            return _context.Set<T>().FirstOrDefault(match);
         }
 
         public virtual async Task<T> FindAsync(Expression<Func<T, bool>> match)
@@ -87,16 +87,13 @@ namespace BookStore.Business.Generic
             return await _context.SaveChangesAsync();
         }
 
-        public virtual void Update(T t, object key)
+        public virtual void Update(T entity)
         {
-            if (t == null)
-                return;
-
-            T existObject = _context.Set<T>().Find(key);
-            if (existObject != null)
+            if (entity == null)
             {
-                _context.Entry(existObject).CurrentValues.SetValues(t);
+                throw new ArgumentNullException("entity");
             }
+            _context.SaveChanges();
         }
     }
 }

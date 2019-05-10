@@ -91,5 +91,18 @@ namespace BookStore.Business.Services
         }
 
         #endregion
+
+        public object UpdateAuthor(DtoAuthor model)
+        {
+            Author author = this.GetById(model.AUTHOR_ID);
+            author.AUTHOR_NAME = model.AUTHOR_NAME;
+            author.BIOGRAPHY = model.BIOGRAPHY;
+            author.BIRTH_DATE = model.BIRTH_DATE;
+
+            this.Update(author);
+            this.Save();
+
+            return model;
+        }
     }
 }

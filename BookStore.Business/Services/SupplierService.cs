@@ -28,12 +28,12 @@ namespace BookStore.Business.Services
         public DtoSupplier GetSupplier(Guid id)
         {
             var supplier = _context.Supplier.FirstOrDefault(x => x.SUPPLIER_ID == id);
-               return new DtoSupplier()
-                {
-                    SUPPLIER_ID = supplier.SUPPLIER_ID,
-                    SUPPLIER_NAME = supplier.SUPPLIER_NAME,
-                    SUPPLIER_REGION = supplier.SUPPLIER_REGION
-                };
+            return new DtoSupplier()
+            {
+                SUPPLIER_ID = supplier.SUPPLIER_ID,
+                SUPPLIER_NAME = supplier.SUPPLIER_NAME,
+                SUPPLIER_REGION = supplier.SUPPLIER_REGION
+            };
         }
 
         public object GetSupplierPublishers(Guid id)
@@ -66,9 +66,9 @@ namespace BookStore.Business.Services
         /// <returns></returns>
         public object SupplierAdd(DtoSupplier model)
         {
-            var isExistSupplier = _context.Supplier.Where(c=> c.SUPPLIER_NAME == model.SUPPLIER_NAME).Any();
+            var isExistSupplier = _context.Supplier.Where(c => c.SUPPLIER_NAME == model.SUPPLIER_NAME).Any();
 
-            if(isExistSupplier)
+            if (isExistSupplier)
             {
                 return false;
             }
@@ -85,7 +85,15 @@ namespace BookStore.Business.Services
         }
         public DtoSupplier UpdateSupplier(DtoSupplier model)
         {
-            throw new NotImplementedException();
+            Supplier supplier = this.GetById(model.SUPPLIER_ID);
+            supplier.SUPPLIER_ID = model.SUPPLIER_ID;
+            supplier.SUPPLIER_NAME = model.SUPPLIER_NAME;
+            supplier.SUPPLIER_REGION = model.SUPPLIER_REGION;
+
+            this.Update(supplier);
+            this.Save();
+
+            return model;
         }
         #endregion
     }

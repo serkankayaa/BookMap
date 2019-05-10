@@ -20,7 +20,7 @@ namespace BookStore.Business.Generic
         int Count();
         Task<int> CountAsync();
         void Add(T t);
-        void Update(T t, object key);
+        void Update(T entity);
         void Delete(T entity);
         void Save();
         Task<int> SaveAsync();

@@ -10,5 +10,6 @@ namespace BookStore.Business.Services
         DtoAuthor GetAuthor(Guid id);
         List<DtoAuthor> GetAuthors();
         object AuthorAdd(DtoAuthor model);
+        object UpdateAuthor(DtoAuthor model);
     }
 }
