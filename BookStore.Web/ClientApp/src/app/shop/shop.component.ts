@@ -2,6 +2,7 @@ import { Shop } from './../models/shop';
 import { ShopService } from './../services/shop.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+// import {  } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-shop',

@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhai');
+
+
+.parent-title-prop{
+  display: flex;
+  justify-content: center;
+  font-family: 'Baloo Bhai', cursive;
+}
+.flex-list {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.flex-item {
+  width: 350px;
+  height: 350px;
+  margin-left: 20px;
+}
+
+#locationLabelProp::after{
+  content: url("../../assets/img/location.gif");
+
+}
+
+#locationLabelProp{
+  padding-bottom:1px!important;
+}
+
+#shopLogo::after {
+  content: "🏘️";
+}
+#shopLogo::before {
+  content: "🏘️";
+}
+
+hr {
+  background-color: white;
+}
+
+
+.box-title-prop {
+  margin-top: 10px;
+  border: 2px solid;
+  font-family: 'Baloo Bhai', cursive;
+  font-size: 24px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 0.3em;
+  padding-top: 0.3em;
+}

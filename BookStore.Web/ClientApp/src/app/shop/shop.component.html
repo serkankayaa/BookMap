@@ -1,21 +1,21 @@
-<div class="container mt-5">
+<div class="container">
     <div class="row">
-        <div class="col-12">
-            <h2>Shop</h2>
+        <div class="col-12 parent-title-prop">
+            <h2 id="shopLogo">Shop</h2>
         </div>
       </div>
       <hr/>
       <div class="row">
-          <div class="col-12">
-              <h5>Add New Shop</h5>
+          <div class="col-12 parent-title-prop">
+              <h2>Add New Shop</h2>
           </div>
       </div>
-      <div class="mt-4">
+      <div class="flex-list mt-4">
           <form id="shopForm" name="form" method="POST" (ngSubmit)="f.form.valid && postShop()" #f="ngForm" novalidate>
               <div class="row">
-                <div class="col-4">
+                <div id="shopBox" class="flex-item">
                     <div class="form-group">
-                        <label for="shopName">Shop Name</label>
+                        <label class="box-title-prop" for="shopName">Shop Name</label>
                         <input type="text" class="form-control" id="shopName" name="shopName" [(ngModel)]="shop.SHOP_NAME" #shopName="ngModel" placeholder="Name" required>
                     </div>
                     <div *ngIf="shopName.invalid && (f.submitted || shopName.touched)" class="alert alert-danger">
@@ -24,9 +24,9 @@
                         </div>
                       </div>
                 </div>
-                    <div class="col-4">
+                    <div class="flex-item">
                       <div class="form-group">
-                        <label for="location">Location</label>
+                        <label class="box-title-prop" id="locationLabelProp"  for="location">Location</label>
                         <input type="text" class="form-control" id="location" name="location" [(ngModel)]="shop.LOCATION" #location="ngModel" placeholder="Location" required>
                       </div>
                       <div *ngIf="location.invalid && (f.dirty || location.touched)" class="alert alert-danger">
@@ -35,9 +35,9 @@
                           </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="flex-item">
                       <div class="form-group">
-                        <label for="Staff">Num. Of Staff</label>
+                        <label class="box-title-prop" id="staffProp"  for="Staff">Num. Of Staff</label>
                         <input type="number" min="1" class="form-control" id="Staff" name="Staff" [(ngModel)]="shop.STAFF_COUNT" #Staff ="ngModel" placeholder="Num Of Staff" required>
                       </div>
                       <div *ngIf="Staff.invalid && (f.dirty || Staff.touched)" class="alert alert-danger">
@@ -54,8 +54,14 @@
                   </div>
                 </div>
           </form>
-
-          <table class="mt-5">
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-12 parent-title-prop">
+              <h2 id="shopLogo">Shop List</h2>
+          </div>
+        </div>
+          <table>
             <tr>
               <th>Shop Name</th>
               <th>Shop Location</th>
@@ -70,5 +76,4 @@
             </tbody>
             <tr></tr>
           </table>
-        </div>
 </div>

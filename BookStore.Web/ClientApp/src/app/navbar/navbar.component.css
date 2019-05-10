@@ -1,10 +1,11 @@
 .navBackground {
-    background-color: deepskyblue!important;
+    background-color: #08191f!important;
 }
 
 .navbarMenu {
     width: 100%;
     text-align: center;
+
 }
     .navbarMenu > li {
         float: none;
@@ -18,5 +19,26 @@
 
 .nav-item a {
     color: #ffffff;
-    background-color: slateblue;
+}
+
+#routerProp{
+    padding-top: 5em;
+    background-color: #282C34;
+    color: white;
+}
+
+#HomeProp::after{
+    content: "🏠"
+}
+
+#AuthorProp::after{
+    content: "👨‍🏭";
+}
+
+#BookProp::after{
+    content: "📚";
+}
+
+#ShopProp::after{
+    content: "🏘️";
 }

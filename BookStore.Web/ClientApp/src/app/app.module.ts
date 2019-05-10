@@ -43,7 +43,7 @@ import { SupplierService } from './services/supplier.service';
       HttpModule,
       [AgGridModule.withComponents(AuthorComponent)],
       BrowserAnimationsModule,
-      ToastrModule.forRoot()
+      ToastrModule.forRoot(),
    ],
    providers: [HttpClientModule, AuthorService, PublisherService, ShopService, CategoryService, SupplierService],
    bootstrap: [AppComponent]
