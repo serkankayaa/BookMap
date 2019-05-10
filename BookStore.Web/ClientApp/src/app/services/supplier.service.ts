@@ -36,7 +36,7 @@ export class SupplierService {
                 id: id
             },
         };
-        const result = this.http.delete(apiBaseUrl + '/DeleteSupplier/', options);
+        const result = this.http.delete(apiBaseUrl + '/DeleteSupplier/' + id, options);
         return result;
     }
 
