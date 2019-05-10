@@ -1,13 +1,7 @@
-<div class="container">
-    <div class="row">
-        <div class="col-12 parent-title-prop">
-            <h2 id="shopLogo">Shop</h2>
-        </div>
-      </div>
-      <hr/>
+<div class="container-fluid shop-comp-prop">
       <div class="row">
           <div class="col-12 parent-title-prop">
-              <h2>Add New Shop</h2>
+              <h2 id="shopLogo">Add New Shop</h2>
           </div>
       </div>
       <div class="flex-list mt-4">
@@ -47,15 +41,14 @@
                         </div>
                     </div>
               </div>
-                <div class="row mt-4">
+                <div class="row">
                   <div class="col">
-                    <button type="submit" class="btn btn-primary float-right"
+                    <button id="saveButtonProp" type="submit" class="btn btn-primary float-right"
                       [disabled]="f.form.pristine || f.form.invalid">Save</button>
                   </div>
                 </div>
           </form>
         </div>
-        <hr>
         <div class="row">
           <div class="col-12 parent-title-prop">
               <h2 id="shopLogo">Shop List</h2>
