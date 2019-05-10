@@ -208,7 +208,7 @@ namespace BookStoreMap.Controllers
             return _supplierService.UpdateSupplier(model);
         }
 
-        [Route("api/DeleteSupplier/id:Guid")]
+        [Route("api/DeleteSupplier/{id}")]
         [HttpDelete]
         public bool DeleteSupplier(Guid id)
         {
