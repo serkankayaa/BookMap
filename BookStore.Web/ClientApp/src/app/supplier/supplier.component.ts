@@ -56,15 +56,21 @@ export class SupplierComponent implements OnInit {
     this.isEdit = true;
   }
   updateSupplier(): void {
-    const result = this.supplierService.updateSupplier(this.supplier).subscribe((res) => {
-      if (res.body != null && res.ok && res.body !== false) {
-        this.toastrService.success('Supplier edited successfully.');
-        this.getSuppliers();
-        this.refreshForm();
-        this.supplier = new Supplier();
-        this.isEdit = false;
-      }
-    });
+    const result = this.supplierService.updateSupplier(this.supplier).subscribe(
+      (res) => {
+        if (res.body != null && res.ok && res.body !== false) {
+          this.toastrService.success('Supplier edited successfully.');
+          this.getSuppliers();
+          this.refreshForm();
+          this.supplier = new Supplier();
+          this.isEdit = false;
+        }
+        if (res.body === false) {
+          this.toastrService.error('Please make a change to edit.');
+          this.focusErrorInput();
+          return;
+        }
+      });
   }
   deleteSupplier(id: any): void {
     this.supplierService.deleteSupplier(id).subscribe((res) => {
