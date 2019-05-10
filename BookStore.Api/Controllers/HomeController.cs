@@ -201,8 +201,8 @@ namespace BookStoreMap.Controllers
             return _supplierService.GetSupplier(id);
         }
 
-        [Route("api/UpdateSupplier/")]
-        [HttpPost]
+        [Route("api/UpdateSupplier")]
+        [HttpPut]
         public DtoSupplier UpdateSupplier(DtoSupplier model)
         {
             return _supplierService.UpdateSupplier(model);
