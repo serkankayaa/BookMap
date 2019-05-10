@@ -66,4 +66,15 @@ export class SupplierComponent implements OnInit {
       }
     });
   }
+  deleteSupplier(id: any): void {
+    this.supplierService.deleteSupplier(id).subscribe((res) => {
+      {
+        this.toastrService.success('Supplier deleted successfully.');
+        this.getSuppliers();
+        this.refreshForm();
+        this.supplier = new Supplier();
+        this.isEdit = false;
+      }
+    });
+  }
 }

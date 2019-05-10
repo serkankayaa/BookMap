@@ -29,4 +29,15 @@ export class SupplierService {
         return result;
     }
 
+    deleteSupplier(id: any) {
+        const options = {
+            headers: headerContent,
+            body: {
+                id: id
+            },
+        };
+        const result = this.http.delete(apiBaseUrl + '/DeleteSupplier/', options);
+        return result;
+    }
+
 }

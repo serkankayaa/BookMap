@@ -203,9 +203,16 @@ namespace BookStoreMap.Controllers
 
         [Route("api/UpdateSupplier")]
         [HttpPut]
-        public DtoSupplier UpdateSupplier(DtoSupplier model)
+        public object UpdateSupplier(DtoSupplier model)
         {
             return _supplierService.UpdateSupplier(model);
+        }
+
+        [Route("api/DeleteSupplier/id:Guid")]
+        [HttpDelete]
+        public bool DeleteSupplier(Guid id)
+        {
+            return _supplierService.DeleteSupplier(id);
         }
 
         #endregion

@@ -22,7 +22,18 @@ namespace BookStore.Business.Services
         #region Method
         public bool DeleteSupplier(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Supplier supplier = this.GetById(id);
+                this.Delete(supplier);
+                this.Save();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
 
         public DtoSupplier GetSupplier(Guid id)
@@ -83,8 +94,15 @@ namespace BookStore.Business.Services
 
             return model;
         }
-        public DtoSupplier UpdateSupplier(DtoSupplier model)
+        public object UpdateSupplier(DtoSupplier model)
         {
+            var isExistSupplier = _context.Supplier.Where(c => c.SUPPLIER_NAME == model.SUPPLIER_NAME).Any();
+
+            if (isExistSupplier)
+            {
+                return false;
+            }
+
             Supplier supplier = this.GetById(model.SUPPLIER_ID);
             supplier.SUPPLIER_ID = model.SUPPLIER_ID;
             supplier.SUPPLIER_NAME = model.SUPPLIER_NAME;

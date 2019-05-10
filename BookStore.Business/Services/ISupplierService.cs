@@ -9,7 +9,7 @@ namespace BookStore.Business.Services
         DtoSupplier GetSupplier(Guid id);
         List<DtoSupplier> GetSuppliers();
         object SupplierAdd(DtoSupplier model);
-        DtoSupplier UpdateSupplier(DtoSupplier model);
+        object UpdateSupplier(DtoSupplier model);
         bool DeleteSupplier(Guid id);
         object GetSupplierPublishers(Guid id);
     }
