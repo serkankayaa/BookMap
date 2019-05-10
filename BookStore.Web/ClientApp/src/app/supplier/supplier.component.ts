@@ -50,8 +50,8 @@ export class SupplierComponent implements OnInit {
     const focusForm = <HTMLFormElement>document.getElementById(dirtyFormID);
     focusForm.focus();
   }
-  editSupplier(): void {
-    console.log('Hello World!');
+  editSupplier(selectedSupplier: Supplier): void {
+    console.log(selectedSupplier.SUPPLIER_NAME);
+    console.log(selectedSupplier.SUPPLIER_REGION);
   }
-
 }

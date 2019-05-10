@@ -24,4 +24,9 @@ export class SupplierService {
         return result;
     }
 
+    editSupplier(supplier: Supplier) {
+        const result = this.http.put(apiBaseUrl + '/EditSupplier', supplier, { headers: headerContent, observe: 'response' });
+        return result;
+    }
+
 }

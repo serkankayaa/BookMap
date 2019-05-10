@@ -29,7 +29,8 @@
         <div class="col-6">
           <div class="form-group">
             <label for="region">Region</label>
-            <input type="text" class="form-control" id="region" name="region" [(ngModel)]="supplier.SUPPLIER_REGION"
+            <input type="text" class="form-control" id="supplierRegion" name="supplierRegion"
+              [(ngModel)]="supplier.SUPPLIER_REGION"
               #region="ngModel" placeholder="Region" required>
           </div>
           <div *ngIf="region.invalid && (f.dirty || region.touched)" class="alert alert-danger">
@@ -67,7 +68,7 @@
             <td class="text-center" style="width: 15px;">{{supplier.SUPPLIER_NAME}}</td>
             <td class="text-center" style="width: 15px;">{{supplier.SUPPLIER_REGION}}</td>
             <td class="text-center" style="width: 15px;"><button class="btn btn-primary"
-                (click)="editSupplier()">Edit</button></td>
+                (click)="editSupplier(supplier)">Edit</button></td>
           </tr>
         </tbody>
       </table>

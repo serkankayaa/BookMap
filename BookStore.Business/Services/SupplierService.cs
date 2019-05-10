@@ -85,7 +85,12 @@ namespace BookStore.Business.Services
         }
         public DtoSupplier UpdateSupplier(DtoSupplier model)
         {
-            throw new NotImplementedException();
+            var supplier = _context.Supplier.Find(model.SUPPLIER_ID);
+            supplier.SUPPLIER_ID = model.SUPPLIER_ID;
+            supplier.SUPPLIER_NAME = model.SUPPLIER_NAME;
+            supplier.SUPPLIER_REGION = model.SUPPLIER_REGION;
+            _context.Update(supplier);
+            return model;
         }
         #endregion
     }

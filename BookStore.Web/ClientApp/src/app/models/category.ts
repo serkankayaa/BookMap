@@ -1,6 +1,6 @@
 export class Category {
-    CATEGORY_ID: String;
-    CATEGORY_NAME: String;
-    CATEGORY_SUMMARY: String;
-    IS_MAIN_CATEGORY: Boolean;
+    CATEGORY_ID: string;
+    CATEGORY_NAME: string;
+    CATEGORY_SUMMARY: string;
+    IS_MAIN_CATEGORY: boolean;
 }

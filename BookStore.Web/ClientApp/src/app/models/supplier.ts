@@ -1,6 +1,6 @@
 export class Supplier {
-    SUPPLIER_ID: String;
-    SUPPLIER_NAME: String;
-    SUPPLIER_REGION: String;
+    SUPPLIER_ID: string;
+    SUPPLIER_NAME: string;
+    SUPPLIER_REGION: string;
 }
 
