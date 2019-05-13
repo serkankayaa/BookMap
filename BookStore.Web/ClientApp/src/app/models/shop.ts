@@ -1,6 +1,6 @@
 export class Shop {
-    SHOP_ID: String;
-    SHOP_NAME: String;
-    LOCATION: String;
+    SHOP_ID: string;
+    SHOP_NAME: string;
+    LOCATION: string;
     STAFF_COUNT: number;
 }

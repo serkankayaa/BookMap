@@ -89,9 +89,9 @@ namespace BookStore.Business.Services
         }
         public object UpdateSupplier(DtoSupplier model)
         {
-            var isExistSupplier = _context.Supplier.Where(c => c.SUPPLIER_NAME == model.SUPPLIER_NAME).Any();
+            var isSupplierExists = _context.Supplier.Where(c => c.SUPPLIER_NAME == model.SUPPLIER_NAME).Any();
 
-            if (isExistSupplier)
+            if (isSupplierExists)
             {
                 return false;
             }
@@ -106,6 +106,7 @@ namespace BookStore.Business.Services
 
             return model;
         }
+
         #endregion
     }
 }

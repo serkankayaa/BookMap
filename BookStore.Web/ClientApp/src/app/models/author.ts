@@ -1,6 +1,6 @@
 export class Author {
-    AUTHOR_ID : String;
-    AUTHOR_NAME : String;
-    BIRTH_DATE : Date;
-    BIOGRAPHY : string;
+    AUTHOR_ID: string;
+    AUTHOR_NAME: string;
+    BIRTH_DATE: Date;
+    BIOGRAPHY: string;
 }

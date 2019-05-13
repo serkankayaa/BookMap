@@ -12,13 +12,30 @@ import 'rxjs/add/operator/catch';
 export class CategoryService {
     category$;
 
-constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
     getCategories(): Observable<Category[]> {
         this.category$ = this.http.get(apiBaseUrl + '/GetCategories');
         return this.category$;
     }
+
     postCategory(category: Category) {
         const result = this.http.post(apiBaseUrl + '/postCategory', category, { headers: headerContent, observe: 'response' });
         return result;
     }
+    updateCategory(category: Category) {
+        const result = this.http.put(apiBaseUrl + '/UpdateCategory', category, { headers: headerContent, observe: 'response' });
+        return result;
+    }
+
+    deleteCategory(id: any) {
+        const options = {
+            headers: headerContent,
+            body: {
+                id: id
+            },
+        };
+        const result = this.http.delete(apiBaseUrl + '/DeleteCategory/' + id, options);
+        return result;
+    }
+
 }

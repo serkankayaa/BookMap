@@ -183,6 +183,20 @@ namespace BookStoreMap.Controllers
             return _categoryService.CategoryAdd(model);
         }
 
+        [Route("api/UpdateCategory")]
+        [HttpPut]
+        public object UpdateCategory(DtoCategory model)
+        {
+            return _categoryService.UpdateCategory(model);
+        }
+
+        [Route("api/DeleteCategory/{id}")]
+        [HttpDelete]
+        public bool DeleteCategory(Guid id)
+        {
+            return _categoryService.DeleteCategory(id);
+        }
+
         #endregion
 
         #region Supplier

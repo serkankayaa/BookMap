@@ -9,7 +9,7 @@ namespace BookStore.Business.Services
         DtoCategory GetCategory(Guid id);
         List<DtoCategory> GetCategories();
         object CategoryAdd(DtoCategory model);
-        DtoCategory UpdateCategory(DtoCategory model);
+        object UpdateCategory(DtoCategory model);
         bool DeleteCategory(Guid id);
         object GetCategoryBooks(Guid id);
     }

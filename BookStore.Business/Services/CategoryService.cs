@@ -28,12 +28,13 @@ namespace BookStore.Business.Services
 
         #region Method
 
-         /// <summary>
+        /// <summary>
         /// Get Category with specific
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public DtoCategory GetCategory(Guid id){
+        public DtoCategory GetCategory(Guid id)
+        {
 
             var categoryItem = this.GetById(id);
 
@@ -47,11 +48,12 @@ namespace BookStore.Business.Services
             return category;
         }
 
-          /// <summary>
+        /// <summary>
         /// Get All Categories
         /// </summary>
         /// <returns></returns>
-        public List<DtoCategory> GetCategories(){
+        public List<DtoCategory> GetCategories()
+        {
 
             var categories = base.GetAll();
 
@@ -72,9 +74,10 @@ namespace BookStore.Business.Services
         /// <param name="model"></param>
         public object CategoryAdd(DtoCategory model)
         {
-            var isCategoryExists = _context.Category.Where(c=> c.NAME == model.CATEGORY_NAME).Any();
+            var isCategoryExists = _context.Category.Where(c => c.NAME == model.CATEGORY_NAME).Any();
 
-            if(isCategoryExists){
+            if (isCategoryExists)
+            {
                 return false;
             }
 
@@ -91,13 +94,42 @@ namespace BookStore.Business.Services
             return model;
         }
 
-        public DtoCategory UpdateCategory(DtoCategory model){
-            throw new NotImplementedException();
+        public object UpdateCategory(DtoCategory model)
+        {
+            var isCategoryExists = _context.Category.Where(c => c.NAME == model.CATEGORY_NAME).Any();
+
+            if (isCategoryExists)
+            {
+                return false;
+            }
+
+            Category category = this.GetById(model.CATEGORY_ID);
+            category.CATEGORY_ID = model.CATEGORY_ID;
+            category.NAME = model.CATEGORY_NAME;
+            category.SUMMARY = model.CATEGORY_SUMMARY;
+            category.IS_MAIN_CATEGORY = model.IS_MAIN_CATEGORY;
+
+            this.Update(category);
+            this.Save();
+
+            return model;
         }
-        public bool DeleteCategory(Guid id){
-            throw new NotImplementedException();
+        public bool DeleteCategory(Guid id)
+        {
+            try
+            {
+                Category category = this.GetById(id);
+                this.Delete(category);
+                this.Save();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
-        public object GetCategoryBooks(Guid id){
+        public object GetCategoryBooks(Guid id)
+        {
             throw new NotImplementedException();
         }
         #endregion
