@@ -28,13 +28,7 @@ export class CategoryService {
     }
 
     deleteCategory(id: any) {
-        const options = {
-            headers: headerContent,
-            body: {
-                id: id
-            },
-        };
-        const result = this.http.delete(apiBaseUrl + '/DeleteCategory/' + id, options);
+        const result = this.http.delete(apiBaseUrl + '/DeleteCategory/' + id, { headers: headerContent, observe: 'body' });
         return result;
     }
 

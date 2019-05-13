@@ -154,6 +154,20 @@ namespace BookStoreMap.Controllers
             return _shopService.GetShops();
         }
 
+        [Route("api/UpdateShop")]
+        [HttpPut]
+        public object UpdateShop(DtoShop model)
+        {
+            return _shopService.UpdateShop(model);
+        }
+
+        [Route("api/DeleteShop/{id}")]
+        [HttpDelete]
+        public bool DeleteShop(Guid id)
+        {
+            return _shopService.DeleteShop(id);
+        }
+
         #endregion
 
         #region User

@@ -11,9 +11,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ShopComponent implements OnInit {
   shop = new Shop();
-  shopList;
+  shopList: Shop[];
+  isEdit = false;
 
-  constructor(private shopService: ShopService, private toasterService: ToastrService) { }
+  constructor(private shopService: ShopService, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.getShops();
@@ -29,7 +30,7 @@ export class ShopComponent implements OnInit {
     const result = this.shopService.postShop(this.shop).subscribe((response) => {
       console.log(response);
       if (response.body != null && response.ok && response.body !== false) {
-        this.toasterService.success('Shop added successfully');
+        this.toastrService.success('Shop added successfully');
         this.shop = new Shop();
         this.getShops();
         this.refreshForm();
@@ -37,7 +38,7 @@ export class ShopComponent implements OnInit {
         return;
       }
       if (response.body === false) {
-        this.toasterService.error('This shop added already');
+        this.toastrService.error('This shop added already');
         this.focusErrorInput();
         return;
       }
@@ -55,4 +56,40 @@ export class ShopComponent implements OnInit {
   getShops(): void {
     this.shopService.getAllShops().subscribe(data => this.shopList = data);
   }
+
+  editShop(selectedShop: Shop): void {
+    this.shop = selectedShop;
+    this.isEdit = true;
+  }
+
+  updateShop(): void {
+    const result = this.shopService.updateShop(this.shop).subscribe(
+      (res) => {
+        if (res.body != null && res.ok && res.body !== false) {
+          this.toastrService.success('Shop edited successfully.');
+          this.getShops();
+          this.refreshForm();
+          this.shop = new Shop();
+          this.isEdit = false;
+        }
+        if (res.body === false) {
+          this.toastrService.error('Please make a change to edit.');
+          this.focusErrorInput();
+          return;
+        }
+      });
+  }
+
+  deleteShop(id: any): void {
+    this.shopService.deleteShop(id).subscribe((res) => {
+      {
+        this.toastrService.success('Shop deleted successfully.');
+        this.getShops();
+        this.refreshForm();
+        this.shop = new Shop();
+        this.isEdit = false;
+      }
+    });
+  }
+
 }

@@ -32,13 +32,7 @@ export class AuthorService {
   }
 
   deleteAuthor(id: any) {
-    const options = {
-      headers: headerContent,
-      body: {
-        id: id
-      },
-    };
-    const result = this.http.delete(apiBaseUrl + '/DeleteAuthor/' + id, options);
+    const result = this.http.delete(apiBaseUrl + '/DeleteAuthor/' + id, { headers: headerContent, observe: 'body' });
     return result;
   }
 

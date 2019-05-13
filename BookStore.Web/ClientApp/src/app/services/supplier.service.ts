@@ -30,13 +30,7 @@ export class SupplierService {
     }
 
     deleteSupplier(id: any) {
-        const options = {
-            headers: headerContent,
-            body: {
-                id: id
-            },
-        };
-        const result = this.http.delete(apiBaseUrl + '/DeleteSupplier/' + id, options);
+        const result = this.http.delete(apiBaseUrl + '/DeleteSupplier/' + id, { headers: headerContent, observe: 'body' });
         return result;
     }
 
