@@ -194,7 +194,7 @@ namespace BookStoreMap.Controllers
             return _supplierService.SupplierAdd(model);
         }
 
-        [Route("api/Supplier/id:Guid")]
+        [Route("api/GetSupplier/id:Guid")]
         [HttpGet]
         public DtoSupplier GetSupplier(Guid id)
         {

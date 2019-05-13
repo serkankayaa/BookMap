@@ -38,9 +38,6 @@ export class PublisherComponent implements OnInit {
       .subscribe(data => this.allPublisher = data);
   }
 
-  idYazdır(): void {
-    console.log(this.publisher.SUPPLIER_ID_FK);
-  }
   postPublisher(): object {
     const result = this.publisherService.postPublisher(this.publisher).subscribe((response) => {
       if (response.body != null && response.ok && response.body !== false) {
@@ -66,6 +63,10 @@ export class PublisherComponent implements OnInit {
     const dirtyFormID = 'publisherName';
     const focusForm = <HTMLFormElement>document.getElementById(dirtyFormID);
     focusForm.focus();
+  }
+
+  getSupplierFromId(id: string): object {
+    return this.supplierService.getSupplier(id);
   }
 
 }
