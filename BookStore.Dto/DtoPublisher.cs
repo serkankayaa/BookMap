@@ -7,5 +7,6 @@ namespace BookStore.Dto
         public Guid PUBLISHER_ID { get; set; }
         public string NAME { get; set; }
         public string LOCATION { get; set; }
+        public Guid SUPPLIER_ID_FK { get; set; }
     }
 }

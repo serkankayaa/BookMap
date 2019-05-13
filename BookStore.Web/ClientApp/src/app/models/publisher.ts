@@ -1,5 +1,6 @@
 export class Publisher {
-    PUBLISHER_ID : String;
-    NAME : String;
-    LOCATION : String;
+    PUBLISHER_ID: string;
+    NAME: string;
+    LOCATION: string;
+    SUPPLIER_ID_FK: string;
 }

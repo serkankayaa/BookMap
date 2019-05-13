@@ -11,6 +11,5 @@ namespace BookStore.Business.Services
         object SupplierAdd(DtoSupplier model);
         object UpdateSupplier(DtoSupplier model);
         bool DeleteSupplier(Guid id);
-        object GetSupplierPublishers(Guid id);
     }
 }

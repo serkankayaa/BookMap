@@ -22,7 +22,7 @@ export class PublisherService {
   }
 
   postPublisher(publisher: Publisher) {
-    const result = this.http.post(apiBaseUrl + "/PostPublisher", publisher, { headers: headerContent, observe: 'response' });
+    const result = this.http.post(apiBaseUrl + '/PostPublisher', publisher, { headers: headerContent, observe: 'response' });
 
     return result;
   }

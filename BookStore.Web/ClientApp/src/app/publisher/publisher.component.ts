@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Publisher } from '../models/publisher';
 import { PublisherService } from '../services/publisher.service';
 import { ToastrService } from 'ngx-toastr';
+import { Supplier } from '../models/supplier';
+import { SupplierService } from '../services/supplier.service';
 
 @Component({
   selector: 'app-publisher',
@@ -12,11 +14,17 @@ import { ToastrService } from 'ngx-toastr';
 export class PublisherComponent implements OnInit {
   publisher = new Publisher();
   allPublisher: Publisher[];
+  allSupplier: Supplier[];
 
-  constructor(private publisherService: PublisherService, private toasterService: ToastrService) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(private publisherService: PublisherService, private toasterService: ToastrService, private supplierService: SupplierService) { }
 
   ngOnInit() {
     this.getPublisher();
+    this.getSupplierList();
+  }
+  getSupplierList(): void {
+    this.supplierService.getSuppliers().subscribe(data => this.allSupplier = data);
   }
 
   refreshForm(): void {
@@ -30,9 +38,11 @@ export class PublisherComponent implements OnInit {
       .subscribe(data => this.allPublisher = data);
   }
 
+  idYazdır(): void {
+    console.log(this.publisher.SUPPLIER_ID_FK);
+  }
   postPublisher(): object {
     const result = this.publisherService.postPublisher(this.publisher).subscribe((response) => {
-      console.log(response);
       if (response.body != null && response.ok && response.body !== false) {
         this.toasterService.success('Publisher saved successfully');
         this.getPublisher();

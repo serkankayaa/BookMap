@@ -33,7 +33,6 @@ namespace BookStore.Business.Services
             {
                 return false;
             }
-
         }
 
         public DtoSupplier GetSupplier(Guid id)
@@ -46,12 +45,6 @@ namespace BookStore.Business.Services
                 SUPPLIER_REGION = supplier.SUPPLIER_REGION
             };
         }
-
-        public object GetSupplierPublishers(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
 
         /// <summary>
         /// Get All Suppliers
