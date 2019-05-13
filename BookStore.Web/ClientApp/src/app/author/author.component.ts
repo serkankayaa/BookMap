@@ -40,6 +40,7 @@ export class AuthorComponent implements OnInit {
 
       if (response.body === false) {
         this.toastrService.error('This author saved already');
+        this.focusErrorInput();
         return;
       }
     });
