@@ -7,7 +7,8 @@
   <hr />
   <div class="row">
     <div class="col-12">
-      <h5>Create Publisher</h5>
+      <h2 *ngIf="!isEdit">Add New Publisher</h2>
+      <h2 *ngIf="isEdit">Edit Publisher</h2>
     </div>
   </div>
   <div class="mt-4">
@@ -44,7 +45,7 @@
             <select class="form-control" [(ngModel)]="publisher.SUPPLIER_ID_FK" [ngModelOptions]="{standalone: true}">
               <option class="form-control" name="supplier_id_fk" *ngFor="let supplier of allSupplier"
                 [ngValue]="supplier.SUPPLIER_ID" placeholder="Select">
-                {{supplier.SUPPLIER_NAME}} - {{supplier.SUPPLIER_REGION}}
+                {{supplier.SUPPLIER_NAME}}
               </option>
             </select>
           </div>
@@ -52,8 +53,10 @@
       </div>
       <div class="row mt-4">
         <div class="col">
-          <button type="submit" class="btn btn-primary float-right"
+          <button *ngIf="!isEdit" type="submit" class="btn btn-primary float-right"
             [disabled]="f.form.pristine || f.form.invalid">Save</button>
+          <button *ngIf="isEdit" type="button" class="btn btn-primary float-right"
+            [disabled]="f.form.pristine || f.form.invalid" (click)="updatePublisher()">Save</button>
         </div>
       </div>
     </form>
@@ -70,12 +73,17 @@
           <tr>
             <th class="text-center">Publisher Name</th>
             <th class="text-center">Location</th>
+            <th class="text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let publisher of allPublisher">
             <td class="text-center" style="width: 15px;">{{publisher.NAME}}</td>
             <td class="text-center" style="width: 15px;">{{publisher.LOCATION}}</td>
+            <td class="text-center" style="width: 15px;">
+              <button class="btn btn-primary" (click)="editPublisher(publisher)">Edit</button>
+              <button class="btn btn-danger" (click)="deletePublisher(publisher.PUBLISHER_ID)">Delete</button>
+            </td>
         </tbody>
       </table>
     </div>

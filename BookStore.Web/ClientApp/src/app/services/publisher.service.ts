@@ -26,4 +26,15 @@ export class PublisherService {
 
     return result;
   }
+
+  updatePublisher(publisher: Publisher) {
+    const result = this.http.put(apiBaseUrl + '/UpdatePublisher', publisher, { headers: headerContent, observe: 'response' });
+    return result;
+  }
+
+  deletePublisher(id: any) {
+    const result = this.http.delete(apiBaseUrl + '/DeletePublisher/' + id, { headers: headerContent, observe: 'body' });
+    return result;
+  }
+
 }

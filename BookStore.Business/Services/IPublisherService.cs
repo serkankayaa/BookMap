@@ -9,5 +9,7 @@ namespace BookStore.Business.Services
         DtoPublisher GetPublisher(Guid id);
         List<DtoPublisher> GetPublishers();
         object PublisherAdd(DtoPublisher model);
+        object UpdatePublisher(DtoPublisher model);
+        bool DeletePublisher(Guid id);
     }
 }

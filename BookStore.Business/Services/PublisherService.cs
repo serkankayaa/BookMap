@@ -23,6 +23,21 @@ namespace BookStore.Business.Services
             _context = context;
         }
 
+        public bool DeletePublisher(Guid id)
+        {
+            try
+            {
+                Publisher publisher = this.GetById(id);
+                this.Delete(publisher);
+                this.Save();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         #endregion
 
         #region Method
@@ -90,6 +105,27 @@ namespace BookStore.Business.Services
             this.Save();
 
             model.PUBLISHER_ID = publisher.PUBLISHER_ID;
+
+            return model;
+        }
+
+        public object UpdatePublisher(DtoPublisher model)
+        {
+            var isPublisherExists = _context.Publisher.Where(c => c.NAME == model.NAME).Any();
+
+            if (isPublisherExists)
+            {
+                return false;
+            }
+
+            Publisher publisher = this.GetById(model.PUBLISHER_ID);
+            publisher.PUBLISHER_ID = model.PUBLISHER_ID;
+            publisher.NAME = model.NAME;
+            publisher.LOCATION = model.LOCATION;
+            publisher.SUPPLIER_ID_FK = model.SUPPLIER_ID_FK;
+
+            this.Update(publisher);
+            this.Save();
 
             return model;
         }

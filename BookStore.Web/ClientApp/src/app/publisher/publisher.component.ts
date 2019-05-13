@@ -15,9 +15,10 @@ export class PublisherComponent implements OnInit {
   publisher = new Publisher();
   allPublisher: Publisher[];
   allSupplier: Supplier[];
+  isEdit: boolean;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private publisherService: PublisherService, private toasterService: ToastrService, private supplierService: SupplierService) { }
+  constructor(private publisherService: PublisherService, private toastrService: ToastrService, private supplierService: SupplierService) { }
 
   ngOnInit() {
     this.getPublisher();
@@ -41,7 +42,7 @@ export class PublisherComponent implements OnInit {
   postPublisher(): object {
     const result = this.publisherService.postPublisher(this.publisher).subscribe((response) => {
       if (response.body != null && response.ok && response.body !== false) {
-        this.toasterService.success('Publisher saved successfully');
+        this.toastrService.success('Publisher saved successfully');
         this.getPublisher();
         this.refreshForm();
         this.publisher = new Publisher();
@@ -50,7 +51,7 @@ export class PublisherComponent implements OnInit {
       }
 
       if (response.body === false) {
-        this.toasterService.error('This publisher saved already');
+        this.toastrService.error('This publisher saved already');
         this.focusErrorInput();
         return;
       }
@@ -63,6 +64,41 @@ export class PublisherComponent implements OnInit {
     const dirtyFormID = 'publisherName';
     const focusForm = <HTMLFormElement>document.getElementById(dirtyFormID);
     focusForm.focus();
+  }
+
+  editPublisher(selectedPublisher: Publisher): void {
+    this.publisher = selectedPublisher;
+    this.isEdit = true;
+  }
+
+  updatePublisher(): void {
+    const result = this.publisherService.updatePublisher(this.publisher).subscribe(
+      (res) => {
+        if (res.body != null && res.ok && res.body !== false) {
+          this.toastrService.success('Publisher edited successfully.');
+          this.getPublisher();
+          this.refreshForm();
+          this.publisher = new Publisher();
+          this.isEdit = false;
+        }
+        if (res.body === false) {
+          this.toastrService.error('Please make a change to edit.');
+          this.focusErrorInput();
+          return;
+        }
+      });
+  }
+
+  deletePublisher(id: any): void {
+    this.publisherService.deletePublisher(id).subscribe((res) => {
+      {
+        this.toastrService.success('Publisher deleted successfully.');
+        this.getPublisher();
+        this.refreshForm();
+        this.publisher = new Publisher();
+        this.isEdit = false;
+      }
+    });
   }
 
 }

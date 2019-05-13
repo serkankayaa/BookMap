@@ -129,6 +129,21 @@ namespace BookStoreMap.Controllers
         {
             return _publisherService.PublisherAdd(model);
         }
+
+        [Route("api/UpdatePublisher")]
+        [HttpPut]
+        public object UpdatePublisher(DtoPublisher model)
+        {
+            return _publisherService.UpdatePublisher(model);
+        }
+
+        [Route("api/DeletePublisher/{id}")]
+        [HttpDelete]
+        public bool DeletePublisher(Guid id)
+        {
+            return _publisherService.DeletePublisher(id);
+        }
+
         #endregion
 
         #region Shop
