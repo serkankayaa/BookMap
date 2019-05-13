@@ -70,15 +70,12 @@
           <tr>
             <th class="text-center">Publisher Name</th>
             <th class="text-center">Location</th>
-            <th class="text-center">Supplier</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let publisher of allPublisher">
             <td class="text-center" style="width: 15px;">{{publisher.NAME}}</td>
             <td class="text-center" style="width: 15px;">{{publisher.LOCATION}}</td>
-            <td class="text-center" style="width: 15px;">{{publisher.SUPPLIER_ID_FK}}</td>
-          </tr>
         </tbody>
       </table>
     </div>

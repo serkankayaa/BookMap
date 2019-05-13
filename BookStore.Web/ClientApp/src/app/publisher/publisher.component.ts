@@ -65,8 +65,4 @@ export class PublisherComponent implements OnInit {
     focusForm.focus();
   }
 
-  getSupplierFromId(id: string): object {
-    return this.supplierService.getSupplier(id);
-  }
-
 }
