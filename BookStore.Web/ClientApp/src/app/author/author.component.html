@@ -7,7 +7,8 @@
   <hr />
   <div class="row">
     <div class="col-12">
-      <h5>Create Author</h5>
+      <h5 *ngIf="!isEdit">Create Author</h5>
+      <h5 *ngIf="isEdit">Edit Author</h5>
     </div>
   </div>
   <div class="mt-4">
@@ -28,9 +29,8 @@
         <div class="col-6">
           <div class="form-group">
             <label for="birthDate">Birthdate</label>
-            <input class="form-control" type="date" max="9999-12-31"
-              pattern=""
-              [(ngModel)]="author.BIRTH_DATE" #birthDate="ngModel" name="birthDate" id="birthDate" required>
+            <input class="form-control" type="date" max="9999-12-31" pattern="" [(ngModel)]="author.BIRTH_DATE"
+              #birthDate="ngModel" name="birthDate" id="birthDate" required>
           </div>
           <div *ngIf="birthDate.invalid && (f.dirty || birthDate.touched)" class="alert alert-danger">
             <div *ngIf="birthDate.errors.required">
@@ -55,9 +55,10 @@
       </div>
       <div class="row mt-4">
         <div class="col">
-          <button type="submit" class="btn btn-primary float-right"
+          <button *ngIf="!isEdit" type="submit" class="btn btn-primary float-right"
             [disabled]="f.form.pristine || f.form.invalid">Save</button>
-          <!-- <button type="button" (click)="getAuthor()">Fetch</button> -->
+          <button *ngIf="isEdit" type="button" class="btn btn-primary float-right"
+            [disabled]="f.form.pristine || f.form.invalid" (click)="updateAuthor()">Save</button>
         </div>
       </div>
     </form>
@@ -75,6 +76,7 @@
             <th class="text-center">Author Name</th>
             <th class="text-center">Birth Date</th>
             <th class="text-center">Biography</th>
+            <th class="text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -82,6 +84,10 @@
             <td class="text-center" style="width: 15px;">{{author.AUTHOR_NAME}}</td>
             <td class="text-center" style="width: 15px;">{{author.BIRTH_DATE | date: 'dd/MM/yyyy'}}</td>
             <td class="text-center" style="width: 200px;">{{author.BIOGRAPHY}}</td>
+            <td class="text-center" style="width: 15px;">
+              <button class="btn btn-primary" (click)="editAuthor(author)">Edit</button>
+              <button class="btn btn-danger" (click)="deleteAuthor(author.AUTHOR_ID)">Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>

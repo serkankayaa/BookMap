@@ -40,6 +40,7 @@ import { SupplierService } from './services/supplier.service';
       HttpClientModule,
       FormsModule,
       AppRoutingModule,
+// tslint:disable-next-line: deprecation
       HttpModule,
       [AgGridModule.withComponents(AuthorComponent)],
       BrowserAnimationsModule,

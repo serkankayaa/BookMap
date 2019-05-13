@@ -98,6 +98,13 @@ namespace BookStoreMap.Controllers
             return _authorService.UpdateAuthor(model);
         }
 
+        [Route("api/DeleteAuthor/{id}")]
+        [HttpDelete]
+        public bool DeleteAuthor(Guid id)
+        {
+            return _authorService.DeleteAuthor(id);
+        }
+
         #endregion
 
         #region Publisher

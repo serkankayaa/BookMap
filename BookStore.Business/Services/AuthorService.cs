@@ -70,9 +70,9 @@ namespace BookStore.Business.Services
         /// <param name="model"></param>
         public object AuthorAdd(DtoAuthor model)
         {
-            var isAuthorNameExists = _context.Author.Where(c=> c.AUTHOR_NAME == model.AUTHOR_NAME).Any();
+            var isAuthorNameExists = _context.Author.Where(c => c.AUTHOR_NAME == model.AUTHOR_NAME).Any();
 
-            if(isAuthorNameExists)
+            if (isAuthorNameExists)
             {
                 return false;
             }
@@ -103,6 +103,25 @@ namespace BookStore.Business.Services
             this.Save();
 
             return model;
+        }
+
+        /// <summary>
+        /// Delete Author
+        /// </summary>
+        /// <param name="id"></param>
+        public bool DeleteAuthor(Guid id)
+        {
+            try
+            {
+                Author author = this.GetById(id);
+                this.Delete(author);
+                this.Save();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

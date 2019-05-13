@@ -12,7 +12,7 @@ import 'rxjs/add/operator/catch';
 export class AuthorService {
   author$;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAllAuthor(): Observable<Author[]> {
     this.author$ = this.http.get(apiBaseUrl + '/getAllAuthor');
@@ -25,4 +25,21 @@ export class AuthorService {
 
     return result;
   }
+
+  updateAuthor(author: Author) {
+    const result = this.http.put(apiBaseUrl + '/UpdateAuthor', author, { headers: headerContent, observe: 'response' });
+    return result;
+  }
+
+  deleteAuthor(id: any) {
+    const options = {
+      headers: headerContent,
+      body: {
+        id: id
+      },
+    };
+    const result = this.http.delete(apiBaseUrl + '/DeleteAuthor/' + id, options);
+    return result;
+  }
+
 }

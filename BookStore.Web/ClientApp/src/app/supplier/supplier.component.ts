@@ -51,10 +51,12 @@ export class SupplierComponent implements OnInit {
     const focusForm = <HTMLFormElement>document.getElementById(dirtyFormID);
     focusForm.focus();
   }
+
   editSupplier(selectedSupplier: Supplier): void {
     this.supplier = selectedSupplier;
     this.isEdit = true;
   }
+
   updateSupplier(): void {
     const result = this.supplierService.updateSupplier(this.supplier).subscribe(
       (res) => {
@@ -72,6 +74,7 @@ export class SupplierComponent implements OnInit {
         }
       });
   }
+
   deleteSupplier(id: any): void {
     this.supplierService.deleteSupplier(id).subscribe((res) => {
       {
