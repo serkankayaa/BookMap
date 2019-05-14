@@ -55,6 +55,7 @@ export class AuthorComponent implements OnInit {
 
   editAuthor(selectedAuthor: Author): void {
     this.author = selectedAuthor;
+    console.log(this.author);
     this.isEdit = true;
   }
 
@@ -68,6 +69,7 @@ export class AuthorComponent implements OnInit {
           this.author = new Author();
           this.isEdit = false;
         }
+
         if (res.body === false) {
           this.toastrService.error('Please make a change to edit.');
           this.focusErrorInput();
@@ -75,6 +77,7 @@ export class AuthorComponent implements OnInit {
         }
       });
   }
+  
   focusErrorInput() {
     const dirtyFormID = 'authorName';
     const focusForm = <HTMLFormElement>document.getElementById(dirtyFormID);
