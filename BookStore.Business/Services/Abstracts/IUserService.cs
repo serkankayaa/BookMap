@@ -7,7 +7,7 @@ namespace BookStore.Business.Services
     public interface IUserService
     {
         List<DtoUser> GetUsers();
-        bool UserAdd(DtoUser model);
+        object UserAdd(DtoUser model);
         bool DeleteUser(Guid id);
         DtoUser UpdateUser(DtoUser model);
         object RecoverPassword(DtoUserPassword model);

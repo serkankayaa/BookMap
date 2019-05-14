@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStore.Api.Migrations
 {
     [DbContext(typeof(BookDbContext))]
-    [Migration("20190425093433_First Migration")]
+    [Migration("20190514101316_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,7 +64,7 @@ namespace BookStore.Api.Migrations
 
                     b.Property<Guid>("AUTHOR_ID_FK");
 
-                    b.Property<Guid?>("CATEGORY_ID");
+                    b.Property<Guid>("CATEGORY_ID_FK");
 
                     b.Property<string>("NAME")
                         .IsRequired()
@@ -83,7 +83,7 @@ namespace BookStore.Api.Migrations
 
                     b.HasIndex("AUTHOR_ID_FK");
 
-                    b.HasIndex("CATEGORY_ID");
+                    b.HasIndex("CATEGORY_ID_FK");
 
                     b.HasIndex("PUBLISHER_ID_FK");
 
@@ -123,7 +123,11 @@ namespace BookStore.Api.Migrations
                         .IsRequired()
                         .HasMaxLength(250);
 
+                    b.Property<Guid>("SUPPLIER_ID_FK");
+
                     b.HasKey("PUBLISHER_ID");
+
+                    b.HasIndex("SUPPLIER_ID_FK");
 
                     b.ToTable("Publisher");
                 });
@@ -144,6 +148,24 @@ namespace BookStore.Api.Migrations
                     b.HasKey("SHOP_ID");
 
                     b.ToTable("Shop");
+                });
+
+            modelBuilder.Entity("BookStore.Entity.Models.Supplier", b =>
+                {
+                    b.Property<Guid>("SUPPLIER_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("SUPPLIER_NAME")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.Property<string>("SUPPLIER_REGION")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.HasKey("SUPPLIER_ID");
+
+                    b.ToTable("Supplier");
                 });
 
             modelBuilder.Entity("BookStore.Entity.Models.User", b =>
@@ -227,7 +249,8 @@ namespace BookStore.Api.Migrations
 
                     b.HasOne("BookStore.Entity.Models.Category", "Category")
                         .WithMany("books")
-                        .HasForeignKey("CATEGORY_ID");
+                        .HasForeignKey("CATEGORY_ID_FK")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BookStore.Entity.Models.Publisher", "Publisher")
                         .WithMany()
@@ -237,6 +260,14 @@ namespace BookStore.Api.Migrations
                     b.HasOne("BookStore.Entity.Models.Shop", "Shop")
                         .WithMany("books")
                         .HasForeignKey("SHOP_ID_FK")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BookStore.Entity.Models.Publisher", b =>
+                {
+                    b.HasOne("BookStore.Entity.Models.Supplier", "Supplier")
+                        .WithMany("Publishers")
+                        .HasForeignKey("SUPPLIER_ID_FK")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

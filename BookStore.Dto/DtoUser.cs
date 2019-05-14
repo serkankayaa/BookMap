@@ -8,8 +8,10 @@ namespace BookStore.Dto
         public string FIRST_NAME { get; set; }
         public string SECOND_NAME { get; set; }
         public string FULL_NAME { get; set; }
+        public string USER_NAME { get; set; }
         public string EMAIL_ADDRESS { get; set; }
         public bool EMAIL_CONFIRMED { get; set; }
+        public bool IS_ADMIN { get; set; }
         public DateTime? BIRTH_DATE { get; set; }
         public Guid USER_PASS_ID { get; set; }
         public bool IS_ACTIVE { get; set; }

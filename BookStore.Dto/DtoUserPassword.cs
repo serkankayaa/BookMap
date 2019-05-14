@@ -9,6 +9,7 @@ namespace BookStore.Dto
         public string PASSWORD_HASH { get; set; }
         public bool IS_ACTIVE { get; set; }
         public string CREATED_BY { get; set; }
+        public string USER_NAME { get; set; }
         public DateTime CREATED_DATE { get; set; }
         public string MODIFIED_BY { get; set; }
         public DateTime MODIFIED_DATE { get; set; }

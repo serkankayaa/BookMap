@@ -16,9 +16,9 @@ namespace BookStoreMap.Controllers
             _userService = userService;
         }
 
-        [Route("api/PostUser")]
+        [Route("api/Author/Add")]
         [HttpPost]
-        public bool UserAdd(DtoUser model)
+        public object UserAdd(DtoUser model)
         {
             return _userService.UserAdd(model);
         }

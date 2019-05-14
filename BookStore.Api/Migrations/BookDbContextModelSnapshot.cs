@@ -15,7 +15,7 @@ namespace BookStore.Api.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -62,7 +62,7 @@ namespace BookStore.Api.Migrations
 
                     b.Property<Guid>("AUTHOR_ID_FK");
 
-                    b.Property<Guid?>("CATEGORY_ID");
+                    b.Property<Guid>("CATEGORY_ID_FK");
 
                     b.Property<string>("NAME")
                         .IsRequired()
@@ -81,7 +81,7 @@ namespace BookStore.Api.Migrations
 
                     b.HasIndex("AUTHOR_ID_FK");
 
-                    b.HasIndex("CATEGORY_ID");
+                    b.HasIndex("CATEGORY_ID_FK");
 
                     b.HasIndex("PUBLISHER_ID_FK");
 
@@ -247,7 +247,8 @@ namespace BookStore.Api.Migrations
 
                     b.HasOne("BookStore.Entity.Models.Category", "Category")
                         .WithMany("books")
-                        .HasForeignKey("CATEGORY_ID");
+                        .HasForeignKey("CATEGORY_ID_FK")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BookStore.Entity.Models.Publisher", "Publisher")
                         .WithMany()
