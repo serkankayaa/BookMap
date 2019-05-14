@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Author } from '../models/author';
 import { AuthorService } from '../services/author.service';
@@ -14,6 +14,7 @@ export class AuthorComponent implements OnInit {
   allAuthor: Author[];
   response: object;
   isEdit = false;
+
 
   constructor(private authorService: AuthorService, private toastrService: ToastrService) { }
 

@@ -32,6 +32,7 @@
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "^4.3.1",
     "core-js": "^2.4.1",
+    "igniteui-angular": "^7.3.0",
     "ng6-toastr-notifications": "^1.0.4",
     "ngx-toastr": "^6.4.1-beta.0",
     "rxjs": "^5.5.6",

@@ -114,7 +114,7 @@ namespace BookStore.Business.Services
             //     _context.User.Update(userData);
             // }
 
-            // this.Delete(userData);
+            this.Delete(userData);
             return true;
         }
 

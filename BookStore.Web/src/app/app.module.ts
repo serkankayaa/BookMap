@@ -1,4 +1,3 @@
-import { ShopService } from './services/shop.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -23,6 +22,7 @@ import { CategoryComponent } from './category/category.component';
 import { CategoryService } from './services/category.service';
 import { SupplierComponent } from './supplier/supplier.component';
 import { SupplierService } from './services/supplier.service';
+import { ShopService } from './services/shop.service';
 @NgModule({
    declarations: [
       AppComponent,
