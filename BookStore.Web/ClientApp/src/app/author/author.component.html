@@ -31,11 +31,7 @@
             <label for="birthDate">Birthdate</label>
             <input class="form-control" type="date" max="9999-12-31" [(ngModel)]="author.BIRTH_DATE"
               #birthDate="ngModel" name="birthDate" id="birthDate" required>
-          </div>
-          <div *ngIf="birthDate.invalid && (f.dirty || birthDate.touched)" class="alert alert-danger">
-            <div *ngIf="birthDate.errors.required">
-              Birthdate is required.
-            </div>
+            <span class="validity"></span>
           </div>
         </div>
       </div>
@@ -86,7 +82,8 @@
             <td class="text-center" style="width: 200px;">{{author.BIOGRAPHY}}</td>
             <td class="text-center" style="width: 15px;">
               <button class="btn btn-success" (click)="editAuthor(author)"><i class="fa fa-edit"></i></button>
-              <button class="btn btn-danger" (click)="deleteAuthor(author.AUTHOR_ID)"><i class="fa fa-trash"></i></button>
+              <button class="btn btn-danger" (click)="deleteAuthor(author.AUTHOR_ID)"><i
+                  class="fa fa-trash"></i></button>
             </td>
           </tr>
         </tbody>
