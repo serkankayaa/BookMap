@@ -78,7 +78,7 @@ export class AuthorComponent implements OnInit {
         }
       });
   }
-  
+
   focusErrorInput() {
     const dirtyFormID = 'authorName';
     const focusForm = <HTMLFormElement>document.getElementById(dirtyFormID);
