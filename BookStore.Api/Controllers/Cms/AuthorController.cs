@@ -45,7 +45,7 @@ namespace BookStore.Api.Controllers.Cms
             return _authorService.UpdateAuthor(model);
         }
 
-        [Route("api/DeleteAuthor/{id}")]
+        [Route("api/DeleteAuthor/{id:Guid}")]
         [HttpDelete]
         public bool DeleteAuthor(Guid id)
         {

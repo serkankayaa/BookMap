@@ -17,6 +17,13 @@ namespace BookStore.Api.Controllers.Cms
 
         #region ApiMethods
 
+        [Route("api/GetCategory/{id:Guid}")]
+        [HttpGet]
+        public DtoCategory GetCategory(Guid id)
+        {
+            return _categoryService.GetCategory(id);
+        }
+
         [Route("api/GetCategories")]
         [HttpGet]
         public List<DtoCategory> GetCategories()

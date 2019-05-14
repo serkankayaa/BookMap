@@ -24,11 +24,11 @@ namespace BookStore.Api.Controllers.Cms
             return _shopService.AddShop(model);
         }
 
-        [Route("api/GetShop")]
+        [Route("api/GetShop/{id:Guid}")]
         [HttpGet]
-        public object GetShop(Guid ID)
+        public object GetShop(Guid id)
         {
-            return _shopService.GetShop(ID);
+            return _shopService.GetShop(id);
         }
 
         [Route("api/GetAllShops")]
@@ -46,7 +46,7 @@ namespace BookStore.Api.Controllers.Cms
             return _shopService.UpdateShop(model);
         }
 
-        [Route("api/DeleteShop/{id}")]
+        [Route("api/DeleteShop/{id:Guid}")]
         [HttpDelete]
         public bool DeleteShop(Guid id)
         {

@@ -18,7 +18,7 @@ namespace BookStore.Api.Controllers.Cms
 
         #region ApiMethods
 
-        [Route("api/Publisher/id:Guid")]
+        [Route("api/Publisher/{id:Guid}")]
         [HttpGet]
         public DtoPublisher GetPublisher(Guid id)
         {
@@ -46,7 +46,7 @@ namespace BookStore.Api.Controllers.Cms
             return _publisherService.UpdatePublisher(model);
         }
 
-        [Route("api/DeletePublisher/{id}")]
+        [Route("api/DeletePublisher/{id:Guid}")]
         [HttpDelete]
         public bool DeletePublisher(Guid id)
         {

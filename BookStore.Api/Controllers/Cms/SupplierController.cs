@@ -31,7 +31,7 @@ namespace BookStore.Api.Controllers.Cms
             return _supplierService.SupplierAdd(model);
         }
 
-        [Route("api/GetSupplier/id:Guid")]
+        [Route("api/GetSupplier/{id:Guid}")]
         [HttpGet]
         public DtoSupplier GetSupplier(Guid id)
         {
@@ -45,7 +45,7 @@ namespace BookStore.Api.Controllers.Cms
             return _supplierService.UpdateSupplier(model);
         }
 
-        [Route("api/DeleteSupplier/{id}")]
+        [Route("api/DeleteSupplier/{id:Guid}")]
         [HttpDelete]
         public bool DeleteSupplier(Guid id)
         {
