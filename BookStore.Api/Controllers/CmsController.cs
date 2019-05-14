@@ -7,22 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookStoreMap.Controllers
 {
     [ApiController]
-    public class HomeController : ControllerBase
+    public class CmsController : ControllerBase
     {
         private readonly IBookService _bookService;
         private readonly IAuthorService _authorService;
         private readonly IPublisherService _publisherService;
-        private readonly IUserService _userService;
         private readonly IShopService _shopService;
-
         private readonly ICategoryService _categoryService;
         private readonly ISupplierService _supplierService;
 
-        public HomeController(IBookService bookService,
+        public CmsController(IBookService bookService,
                                IAuthorService authorService,
                                IPublisherService publisherService,
                                IShopService shopService,
-                               IUserService userService,
                                ICategoryService categoryService,
                                ISupplierService supplierService
                                )
@@ -31,7 +28,6 @@ namespace BookStoreMap.Controllers
             _authorService = authorService;
             _publisherService = publisherService;
             _shopService = shopService;
-            _userService = userService;
             _categoryService = categoryService;
             _supplierService = supplierService;
         }
@@ -181,17 +177,6 @@ namespace BookStoreMap.Controllers
         public bool DeleteShop(Guid id)
         {
             return _shopService.DeleteShop(id);
-        }
-
-        #endregion
-
-        #region User
-
-        [Route("api/PostUser")]
-        [HttpPost]
-        public bool UserAdd(DtoUser model)
-        {
-            return _userService.UserAdd(model);
         }
 
         #endregion
