@@ -3,22 +3,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BookStore.Api.Migrations
 {
-    public partial class ProjectMig : Migration
+    public partial class BookMapMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            // migrationBuilder.CreateTable(
-            //     name: "Account",
-            //     columns: table => new
-            //     {
-            //         ACCOUNT_ID = table.Column<Guid>(nullable: false),
-            //         NAME = table.Column<string>(maxLength: 500, nullable: false),
-            //         TYPE = table.Column<byte>(nullable: false)
-            //     },
-            //     constraints: table =>
-            //     {
-            //         table.PrimaryKey("PK_Account", x => x.ACCOUNT_ID);
-            //     });
+            migrationBuilder.CreateTable(
+                name: "Account",
+                columns: table => new
+                {
+                    ACCOUNT_ID = table.Column<Guid>(nullable: false),
+                    NAME = table.Column<string>(maxLength: 500, nullable: false),
+                    TYPE = table.Column<byte>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Account", x => x.ACCOUNT_ID);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Author",
