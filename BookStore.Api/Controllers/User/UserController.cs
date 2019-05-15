@@ -16,18 +16,18 @@ namespace BookStoreMap.Controllers
             _userService = userService;
         }
 
-        [Route("api/Author/Add")]
+        [Route("api/PostUser")]
         [HttpPost]
-        public object UserAdd(DtoUser model)
+        public object PostUser(DtoUser model)
         {
             return _userService.UserAdd(model);
         }
 
-        [Route("api/GetAllUser")]
-        [HttpPost]
-        public List<DtoUser> GetAllUser()
+        [Route("api/GetUser/{id:Guid}")]
+        [HttpGet]
+        public object GetUser(Guid id)
         {
-            return _userService.GetUsers();
+            return _userService.GetUser(id);
         }
 
         [Route("api/DeleteUser")]
