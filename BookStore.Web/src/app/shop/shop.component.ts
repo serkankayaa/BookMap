@@ -2,6 +2,7 @@ import { Shop } from './../models/shop';
 import { ShopService } from './../services/shop.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+declare var $: any;
 // import {  } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -13,6 +14,8 @@ export class ShopComponent implements OnInit {
   shop = new Shop();
   shopList: Shop[];
   isEdit = false;
+  shopId: any;
+  hasData: true;
 
   constructor(private shopService: ShopService, private toastrService: ToastrService) { }
 
@@ -80,16 +83,22 @@ export class ShopComponent implements OnInit {
       });
   }
 
-  deleteShop(id: any): void {
-    this.shopService.deleteShop(id).subscribe((res) => {
+  deleteShop(): void {
+    this.shopService.deleteShop(this.shopId).subscribe((res) => {
       {
         this.toastrService.success('Shop deleted successfully.');
         this.getShops();
         this.refreshForm();
         this.shop = new Shop();
         this.isEdit = false;
+        $('#deleteShop').modal('hide');
       }
     });
+  }
+
+  onDelete(id: any): void {
+    $('#deleteShop').modal('show');
+    this.shopId = id;
   }
 
   cancelUpdate() {

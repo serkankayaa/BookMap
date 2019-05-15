@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Supplier } from '../models/supplier';
 import { SupplierService } from '../services/supplier.service';
 import { ToastrService } from 'ngx-toastr';
+declare var $: any;
+
 @Component({
   selector: 'app-supplier',
   templateUrl: './supplier.component.html',
@@ -11,6 +13,8 @@ export class SupplierComponent implements OnInit {
   supplier = new Supplier;
   allSuppliers: Supplier[];
   isEdit = false;
+  supplierId: any;
+  hasData = true;
 
   constructor(private supplierService: SupplierService, private toastrService: ToastrService) { }
 
@@ -75,16 +79,22 @@ export class SupplierComponent implements OnInit {
       });
   }
 
-  deleteSupplier(id: any): void {
-    this.supplierService.deleteSupplier(id).subscribe((res) => {
+  deleteSupplier(): void {
+    this.supplierService.deleteSupplier(this.supplierId).subscribe((res) => {
       {
         this.toastrService.success('Supplier deleted successfully.');
         this.getSuppliers();
         this.refreshForm();
         this.supplier = new Supplier();
         this.isEdit = false;
+        $('#deleteSupplier').modal('hide');
       }
     });
+  }
+
+  onDelete(id: any): void {
+    $('#deleteSupplier').modal('show');
+    this.supplierId = id;
   }
 
   cancelUpdate() {

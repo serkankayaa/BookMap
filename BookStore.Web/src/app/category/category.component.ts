@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from '../models/category';
 import { CategoryService } from '../services/category.service';
 import { ToastrService } from 'ngx-toastr';
+declare var $: any;
 
 @Component({
   selector: 'app-category',
@@ -14,6 +15,8 @@ export class CategoryComponent implements OnInit {
   category = new Category();
   allCategories: Category[];
   isEdit: boolean;
+  categoryId: any;
+  hasData = true;
 
   constructor(private categoryService: CategoryService, private toastrService: ToastrService) { }
 
@@ -79,16 +82,22 @@ export class CategoryComponent implements OnInit {
     focusForm.focus();
   }
 
-  deleteCategory(id: any): void {
-    this.categoryService.deleteCategory(id).subscribe((res) => {
+  deleteCategory(): void {
+    this.categoryService.deleteCategory(this.categoryId).subscribe((res) => {
       {
         this.toastrService.success('Category deleted successfully.');
         this.GetCategories();
         this.refreshForm();
         this.category = new Category();
         this.isEdit = false;
+        $('#deleteCategory').modal('hide');
       }
     });
+  }
+
+  onDelete(id: any): void {
+    $('#deleteCategory').modal('show');
+    this.categoryId = id;
   }
 
   cancelUpdate() {

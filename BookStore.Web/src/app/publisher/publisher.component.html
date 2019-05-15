@@ -84,10 +84,32 @@
             <td class="text-center" style="width: 15px;">{{publisher.LOCATION}}</td>
             <td class="text-center" style="width: 15px;">
               <button class="btn btn-success" (click)="editPublisher(publisher)"><i class="fa fa-edit"></i></button>
-              <button class="btn btn-danger" (click)="deletePublisher(publisher.PUBLISHER_ID)"><i class="fa fa-trash"></i></button>
+              <button class="btn btn-danger" (click)="onDelete(publisher.PUBLISHER_ID)"><i class="fa fa-trash"></i></button>
             </td>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deletePublisher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-exclamation-triangle"
+            style="color:orange;"></i>&nbsp;Warning</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this publisher ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" (click)="deletePublisher()">Delete</button>
+      </div>
     </div>
   </div>
 </div>

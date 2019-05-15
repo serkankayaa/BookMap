@@ -5,6 +5,7 @@ import { PublisherService } from '../services/publisher.service';
 import { ToastrService } from 'ngx-toastr';
 import { Supplier } from '../models/supplier';
 import { SupplierService } from '../services/supplier.service';
+declare var $: any;
 
 @Component({
   selector: 'app-publisher',
@@ -16,6 +17,8 @@ export class PublisherComponent implements OnInit {
   allPublisher: Publisher[];
   allSupplier: Supplier[];
   isEdit: boolean;
+  publisherId: any;
+  hasData = true;
 
   // tslint:disable-next-line: max-line-length
   constructor(private publisherService: PublisherService, private toastrService: ToastrService, private supplierService: SupplierService) { }
@@ -89,16 +92,22 @@ export class PublisherComponent implements OnInit {
       });
   }
 
-  deletePublisher(id: any): void {
-    this.publisherService.deletePublisher(id).subscribe((res) => {
+  deletePublisher(): void {
+    this.publisherService.deletePublisher(this.publisherId).subscribe((res) => {
       {
         this.toastrService.success('Publisher deleted successfully.');
         this.getPublishers();
         this.refreshForm();
         this.publisher = new Publisher();
         this.isEdit = false;
+        $('#deletePublisher').modal('hide');
       }
     });
+  }
+
+  onDelete(id: any): void {
+    $('#deletePublisher').modal('show');
+    this.publisherId = id;
   }
 
   cancelUpdate() {
