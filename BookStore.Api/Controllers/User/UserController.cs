@@ -51,5 +51,11 @@ namespace BookStoreMap.Controllers
             return _userService.RecoverPassword(model);
         }
 
+        [Route("api/UserLogin")]
+        [HttpPost]
+        public bool UserLogin(DtoUserLogin model)
+        {
+            return _userService.UserLogin(model);
+        } 
     }
 }

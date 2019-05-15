@@ -6,10 +6,8 @@ using BookStore.Dto;
 using BookStore.Entity.Context;
 using BookStore.Entity.Models;
 
-namespace BookStore.Business.Services
-{
-    public class UserService : EFRepository<User>, IUserService
-    {
+namespace BookStore.Business.Services {
+    public class UserService : EFRepository<User>, IUserService {
         #region Field
 
         private BookDbContext _context;
@@ -18,8 +16,7 @@ namespace BookStore.Business.Services
 
         #region Ctor
 
-        public UserService(BookDbContext context) : base(context)
-        {
+        public UserService (BookDbContext context) : base (context) {
             _context = context;
         }
 
@@ -31,20 +28,18 @@ namespace BookStore.Business.Services
         /// Get All Users
         /// </summary>
         /// <returns></returns>
-        public List<DtoUser> GetUsers()
-        {
-            var users = this.GetAll();
+        public List<DtoUser> GetUsers () {
+            var users = this.GetAll ();
 
-            var totalUsers = users.Select(c => new DtoUser
-            {
+            var totalUsers = users.Select (c => new DtoUser {
                 USER_ID = c.USER_ID,
-                FIRST_NAME = c.FIRST_NAME,
-                SECOND_NAME = c.SECOND_NAME,
-                FULL_NAME = c.FIRST_NAME + " " + c.SECOND_NAME,
-                EMAIL_ADDRESS = c.EMAIL_ADDRESS,
-                BIRTH_DATE = c.BIRTH_DATE,
-                LOCATION = c.LOCATION
-            }).ToList();
+                    FIRST_NAME = c.FIRST_NAME,
+                    SECOND_NAME = c.SECOND_NAME,
+                    FULL_NAME = c.FIRST_NAME + " " + c.SECOND_NAME,
+                    EMAIL_ADDRESS = c.EMAIL_ADDRESS,
+                    BIRTH_DATE = c.BIRTH_DATE,
+                    LOCATION = c.LOCATION
+            }).ToList ();
 
             return totalUsers;
         }
@@ -53,29 +48,22 @@ namespace BookStore.Business.Services
         /// Get Specific User
         /// </summary>
         /// <returns></returns>
-        public object GetUser(Guid id)
-        {
-            var user = this.GetById(id);
-            DtoUser model = new DtoUser();
-            
-            var userInfo = (from u in _context.User
-                           join up in _context.User_Password on u.USER_ID equals up.USER_ID_FK into upTemp
-                           from userPassword in upTemp.DefaultIfEmpty()
-                           join ac in _context.Account on u.ACCOUNT_ID_FK equals ac.ACCOUNT_ID into acTemp
-                           from account in acTemp.DefaultIfEmpty()
-                           where userPassword.IS_ACTIVE == true
-                           select new DtoUser{
-                               FIRST_NAME = u.FIRST_NAME,
-                               SECOND_NAME = u.SECOND_NAME,
-                               EMAIL_ADDRESS = u.EMAIL_ADDRESS,
-                               USER_NAME = account.NAME,
-                               LOCATION = u.LOCATION,
-                               PASSWORD_HASH = userPassword.PASSWORD_HASH,
-                               BIRTH_DATE = u.BIRTH_DATE,
-                               FULL_NAME = u.FIRST_NAME + " " + u.SECOND_NAME,
-                               IS_ADMIN = (account.TYPE == 1 ? true : false),
-                               IS_ACTIVE = true                       
-                           }).FirstOrDefault();
+        public object GetUser (Guid id) {
+            var user = this.GetById (id);
+            DtoUser model = new DtoUser ();
+
+            var userInfo = (from u in _context.User join up in _context.User_Password on u.USER_ID equals up.USER_ID_FK into upTemp from userPassword in upTemp.DefaultIfEmpty () join ac in _context.Account on u.ACCOUNT_ID_FK equals ac.ACCOUNT_ID into acTemp from account in acTemp.DefaultIfEmpty () where userPassword.IS_ACTIVE == true select new DtoUser {
+                FIRST_NAME = u.FIRST_NAME,
+                    SECOND_NAME = u.SECOND_NAME,
+                    EMAIL_ADDRESS = u.EMAIL_ADDRESS,
+                    USER_NAME = account.NAME,
+                    LOCATION = u.LOCATION,
+                    PASSWORD_HASH = userPassword.PASSWORD_HASH,
+                    BIRTH_DATE = u.BIRTH_DATE,
+                    FULL_NAME = u.FIRST_NAME + " " + u.SECOND_NAME,
+                    IS_ADMIN = (account.TYPE == 1 ? true : false),
+                    IS_ACTIVE = true
+            }).FirstOrDefault ();
 
             return userInfo;
         }
@@ -85,34 +73,28 @@ namespace BookStore.Business.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public object UserAdd(DtoUser model)
-        {
-            using (var transaction = _context.Database.BeginTransaction())
-            {
-                Account account = new Account();
+        public object UserAdd (DtoUser model) {
+            using (var transaction = _context.Database.BeginTransaction ()) {
+                Account account = new Account ();
 
-                var isExistedName = _context.Account.Where(c=> c.NAME == model.USER_NAME).Any();
-                if(isExistedName)
-                {
+                var isExistedName = _context.Account.Where (c => c.NAME == model.USER_NAME).Any ();
+                if (isExistedName) {
                     //eğer gelen username zaten kayıtlı ise false döndür.
                     return false;
                 }
 
                 account.NAME = model.USER_NAME;
 
-                if(model.IS_ADMIN)
-                {
-                    account.TYPE = (byte)UserType.Admin;
-                }
-                else
-                {
-                    account.TYPE = (byte)UserType.User;
+                if (model.IS_ADMIN) {
+                    account.TYPE = (byte) UserType.Admin;
+                } else {
+                    account.TYPE = (byte) UserType.User;
                 }
 
-                _context.Account.Add(account);
-                this.Save();
+                _context.Account.Add (account);
+                this.Save ();
 
-                User user = new User();
+                User user = new User ();
                 user.FIRST_NAME = model.FIRST_NAME;
                 user.SECOND_NAME = model.SECOND_NAME;
                 user.EMAIL_ADDRESS = model.EMAIL_ADDRESS;
@@ -123,20 +105,20 @@ namespace BookStore.Business.Services
                 user.CREATED_DATE = DateTime.Now;
                 user.ACCOUNT_ID_FK = account.ACCOUNT_ID;
 
-                _context.User.Add(user);
-                this.Save();
+                _context.User.Add (user);
+                this.Save ();
 
-                User_Password user_password = new User_Password();
+                User_Password user_password = new User_Password ();
                 user_password.PASSWORD_HASH = model.PASSWORD_HASH;
                 user_password.CREATED_BY = model.CREATED_BY;
                 user_password.USER_ID_FK = user.USER_ID;
                 user_password.IS_ACTIVE = true;
                 user_password.CREATED_DATE = DateTime.Now;
 
-                _context.User_Password.Add(user_password);
-                this.Save();
+                _context.User_Password.Add (user_password);
+                this.Save ();
 
-                transaction.Commit();
+                transaction.Commit ();
                 return model;
             }
         }
@@ -146,41 +128,32 @@ namespace BookStore.Business.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool DeleteUser(Guid id)
-        {
-            using (var transaction = _context.Database.BeginTransaction())
-            {
-                var user = this.GetById(id);
-                var accountInfo = _context.Account.Where(c=> c.ACCOUNT_ID == user.ACCOUNT_ID_FK).FirstOrDefault();
-                var userPasswords = _context.User_Password.Where(c=> c.USER_ID_FK == id);
+        public bool DeleteUser (Guid id) {
+            using (var transaction = _context.Database.BeginTransaction ()) {
+                var user = this.GetById (id);
+                var accountInfo = _context.Account.Where (c => c.ACCOUNT_ID == user.ACCOUNT_ID_FK).FirstOrDefault ();
+                var userPasswords = _context.User_Password.Where (c => c.USER_ID_FK == id);
 
-                if(accountInfo.TYPE == (byte)UserType.Admin)
-                {
-                    accountInfo.TYPE = (byte)UserType.User;
-                    _context.Account.Update(accountInfo);
-                    this.Save();
-                }
-                else
-                {
-                    if(userPasswords.Count() == 1)
-                    {
-                        _context.Remove(userPasswords);
-                    }
-                    else
-                    {
-                        foreach (var password in userPasswords)
-                        {
-                            _context.Remove(password);
-                            this.Save();
+                if (accountInfo.TYPE == (byte) UserType.Admin) {
+                    accountInfo.TYPE = (byte) UserType.User;
+                    _context.Account.Update (accountInfo);
+                    this.Save ();
+                } else {
+                    if (userPasswords.Count () == 1) {
+                        _context.Remove (userPasswords);
+                    } else {
+                        foreach (var password in userPasswords) {
+                            _context.Remove (password);
+                            this.Save ();
                         }
                     }
 
-                    this.Delete(user);
-                    _context.Remove(accountInfo);
-                    this.Save();
+                    this.Delete (user);
+                    _context.Remove (accountInfo);
+                    this.Save ();
                 }
 
-                transaction.Commit();
+                transaction.Commit ();
                 return true;
             }
         }
@@ -190,9 +163,8 @@ namespace BookStore.Business.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public DtoUser UpdateUser(DtoUser model)
-        {
-            var userData = this.GetById(model.USER_ID);
+        public DtoUser UpdateUser (DtoUser model) {
+            var userData = this.GetById (model.USER_ID);
 
             userData.FIRST_NAME = model.FIRST_NAME;
             userData.SECOND_NAME = model.SECOND_NAME;
@@ -202,8 +174,8 @@ namespace BookStore.Business.Services
             userData.MODIFIED_BY = model.MODIFIED_BY;
             userData.MODIFIED_DATE = DateTime.Now;
 
-            _context.User.Update(userData);
-            this.Save();
+            _context.User.Update (userData);
+            this.Save ();
 
             return model;
         }
@@ -213,41 +185,30 @@ namespace BookStore.Business.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public object RecoverPassword(DtoUserPassword model)
-        {
+        public object RecoverPassword (DtoUserPassword model) {
             //TODO: Email onaylama işlemi yapılacak.
-            var isUserExist = (from u in _context.User
-                                    join up in _context.User_Password on u.USER_ID equals up.USER_ID_FK into upTemp
-                                    from userPassword in upTemp.DefaultIfEmpty()
-                                    join ac in _context.Account on u.ACCOUNT_ID_FK equals ac.ACCOUNT_ID into acTemp
-                                    from account in acTemp.DefaultIfEmpty()
-                                    where userPassword.IS_ACTIVE == true && account.NAME == model.USER_NAME || u.EMAIL_ADDRESS == model.USER_EMAIL
-                                    select u).Any();
+            var isUserExist = (from u in _context.User join up in _context.User_Password on u.USER_ID equals up.USER_ID_FK into upTemp from userPassword in upTemp.DefaultIfEmpty () join ac in _context.Account on u.ACCOUNT_ID_FK equals ac.ACCOUNT_ID into acTemp from account in acTemp.DefaultIfEmpty () where userPassword.IS_ACTIVE == true && account.NAME == model.USER_NAME || u.EMAIL_ADDRESS == model.USER_EMAIL select u).Any ();
 
+            if (isUserExist == false) {
+                return new DtoUserPassword ();
+            }
 
-            if(isUserExist == false) {
-                return new DtoUserPassword();
-            }  
+            var userPasswords = _context.User_Password.Where (c => c.USER_ID_FK == model.USER_ID).ToList ();
+            var lastUserPassword = userPasswords.OrderByDescending (c => c.CREATED_DATE).FirstOrDefault ();
 
-            var userPasswords = _context.User_Password.Where(c => c.USER_ID_FK == model.USER_ID).ToList();
-            var lastUserPassword = userPasswords.OrderByDescending(c => c.CREATED_DATE).FirstOrDefault();
-
-            foreach (var userPassword in userPasswords)
-            {
-                if (model.PASSWORD_HASH == userPassword.PASSWORD_HASH)
-                {
+            foreach (var userPassword in userPasswords) {
+                if (model.PASSWORD_HASH == userPassword.PASSWORD_HASH) {
                     //Eğer şifreyi daha önce oluşturmuşsa ilgili tarihi döndür.
-                    if (userPasswords.Count > 1)
-                    {
+                    if (userPasswords.Count > 1) {
                         return userPassword.CREATED_DATE;
                     }
                 }
             }
 
             lastUserPassword.IS_ACTIVE = false;
-            _context.User_Password.Update(lastUserPassword);
+            _context.User_Password.Update (lastUserPassword);
 
-            User_Password newPassword = new User_Password();
+            User_Password newPassword = new User_Password ();
 
             newPassword.PASSWORD_HASH = model.PASSWORD_HASH;
             newPassword.IS_ACTIVE = true;
@@ -255,10 +216,20 @@ namespace BookStore.Business.Services
             newPassword.CREATED_BY = model.CREATED_BY;
             newPassword.CREATED_DATE = model.CREATED_DATE;
 
-            _context.User_Password.Add(newPassword);
-            this.Save();
+            _context.User_Password.Add (newPassword);
+            this.Save ();
 
             return model;
+        }
+
+        public bool UserLogin (DtoUserLogin model) {
+            var isUserExist = (from u in _context.User join up in _context.User_Password on u.USER_ID equals up.USER_ID_FK into upTemp from userPassword in upTemp.DefaultIfEmpty () join ac in _context.Account on u.ACCOUNT_ID_FK equals ac.ACCOUNT_ID into acTemp from account in acTemp.DefaultIfEmpty () where account.NAME == model.USER_NAME || u.EMAIL_ADDRESS == model.USER_EMAIL && u.EMAIL_CONFIRMED && userPassword.IS_ACTIVE && userPassword.PASSWORD_HASH == model.USER_PASSWORD select u).Any ();
+
+            if (isUserExist) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
         #endregion

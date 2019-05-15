@@ -12,5 +12,7 @@ namespace BookStore.Business.Services
         bool DeleteUser(Guid id);
         DtoUser UpdateUser(DtoUser model);
         object RecoverPassword(DtoUserPassword model);
+
+        bool UserLogin(DtoUserLogin model);
     }
 }
