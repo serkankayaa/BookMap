@@ -10,8 +10,8 @@ namespace BookStore.Dto
         public bool IS_ACTIVE { get; set; }
         public string CREATED_BY { get; set; }
         public string USER_NAME { get; set; }
+        public string USER_EMAIL { get; set; }
         public DateTime CREATED_DATE { get; set; }
-        public string MODIFIED_BY { get; set; }
-        public DateTime MODIFIED_DATE { get; set; }
+
     }
 }

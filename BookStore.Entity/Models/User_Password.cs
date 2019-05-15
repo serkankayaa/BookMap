@@ -26,10 +26,6 @@ namespace BookStore.Entity.Models
         [Required]
         public DateTime CREATED_DATE { get; set; }
 
-        public string MODIFIED_BY { get; set; }
-
-        public DateTime? MODIFIED_DATE { get; set; }
-
         public User User {get; set;}
     }
 }

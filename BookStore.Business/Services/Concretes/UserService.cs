@@ -116,6 +116,7 @@ namespace BookStore.Business.Services
                 user.FIRST_NAME = model.FIRST_NAME;
                 user.SECOND_NAME = model.SECOND_NAME;
                 user.EMAIL_ADDRESS = model.EMAIL_ADDRESS;
+                user.EMAIL_CONFIRMED = true;
                 user.LOCATION = model.LOCATION;
                 user.BIRTH_DATE = model.BIRTH_DATE;
                 user.CREATED_BY = model.CREATED_BY;
@@ -215,31 +216,30 @@ namespace BookStore.Business.Services
         public object RecoverPassword(DtoUserPassword model)
         {
             //TODO: Email onaylama işlemi yapılacak.
-            var isSamePassword = _context.User_Password.Where(c => c.USER_PASS_ID == model.USER_PASS_ID && c.IS_ACTIVE == true).Any();
+            var isUserExist = (from u in _context.User
+                                    join up in _context.User_Password on u.USER_ID equals up.USER_ID_FK into upTemp
+                                    from userPassword in upTemp.DefaultIfEmpty()
+                                    join ac in _context.Account on u.ACCOUNT_ID_FK equals ac.ACCOUNT_ID into acTemp
+                                    from account in acTemp.DefaultIfEmpty()
+                                    where userPassword.IS_ACTIVE == true && account.NAME == model.USER_NAME || u.EMAIL_ADDRESS == model.USER_EMAIL
+                                    select u).Any();
 
-            //değiştireceği şifre aktif olan şifreyle aynı ise false döndür.
-            if (isSamePassword)
-            {
-                return false;
-            }
+
+            if(isUserExist == false) {
+                return new DtoUserPassword();
+            }  
 
             var userPasswords = _context.User_Password.Where(c => c.USER_ID_FK == model.USER_ID).ToList();
-            var lastUserPassword = userPasswords.OrderByDescending(c => c.MODIFIED_DATE).FirstOrDefault();
+            var lastUserPassword = userPasswords.OrderByDescending(c => c.CREATED_DATE).FirstOrDefault();
 
             foreach (var userPassword in userPasswords)
             {
                 if (model.PASSWORD_HASH == userPassword.PASSWORD_HASH)
                 {
                     //Eğer şifreyi daha önce oluşturmuşsa ilgili tarihi döndür.
-                    if (userPasswords.Count == 1)
+                    if (userPasswords.Count > 1)
                     {
                         return userPassword.CREATED_DATE;
-                    }
-                    
-                    //Eğer daha önce oluşturup değiştirdiyse, değiştirdiği tarihi döndürür.
-                    else
-                    {
-                        return userPassword.MODIFIED_DATE;
                     }
                 }
             }
@@ -250,12 +250,10 @@ namespace BookStore.Business.Services
             User_Password newPassword = new User_Password();
 
             newPassword.PASSWORD_HASH = model.PASSWORD_HASH;
-            newPassword.CREATED_BY = model.USER_NAME;
-            newPassword.CREATED_DATE = DateTime.Now;
             newPassword.IS_ACTIVE = true;
             newPassword.USER_ID_FK = model.USER_ID;
-            newPassword.MODIFIED_BY = model.USER_NAME;
-            newPassword.MODIFIED_DATE = DateTime.Now;
+            newPassword.CREATED_BY = model.CREATED_BY;
+            newPassword.CREATED_DATE = model.CREATED_DATE;
 
             _context.User_Password.Add(newPassword);
             this.Save();
