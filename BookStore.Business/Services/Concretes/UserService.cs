@@ -10,6 +10,7 @@ namespace BookStore.Business.Services {
     public class UserService : EFRepository<User>, IUserService {
         #region Field
 
+
         private BookDbContext _context;
 
         #endregion
