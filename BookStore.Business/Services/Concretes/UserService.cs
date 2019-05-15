@@ -50,6 +50,37 @@ namespace BookStore.Business.Services
         }
 
         /// <summary>
+        /// Get Specific User
+        /// </summary>
+        /// <returns></returns>
+        public object GetUser(Guid id)
+        {
+            var user = this.GetById(id);
+            DtoUser model = new DtoUser();
+            
+            var userInfo = (from u in _context.User
+                           join up in _context.User_Password on u.USER_ID equals up.USER_ID_FK into upTemp
+                           from userPassword in upTemp.DefaultIfEmpty()
+                           join ac in _context.Account on u.ACCOUNT_ID_FK equals ac.ACCOUNT_ID into acTemp
+                           from account in acTemp.DefaultIfEmpty()
+                           where userPassword.IS_ACTIVE == true
+                           select new DtoUser{
+                               FIRST_NAME = u.FIRST_NAME,
+                               SECOND_NAME = u.SECOND_NAME,
+                               EMAIL_ADDRESS = u.EMAIL_ADDRESS,
+                               USER_NAME = account.NAME,
+                               LOCATION = u.LOCATION,
+                               PASSWORD_HASH = userPassword.PASSWORD_HASH,
+                               BIRTH_DATE = u.BIRTH_DATE,
+                               FULL_NAME = u.FIRST_NAME + " " + u.SECOND_NAME,
+                               IS_ADMIN = (account.TYPE == 1 ? true : false),
+                               IS_ACTIVE = true                       
+                           }).FirstOrDefault();
+
+            return userInfo;
+        }
+
+        /// <summary>
         /// Add User
         /// </summary>
         /// <param name="model"></param>
@@ -116,10 +147,41 @@ namespace BookStore.Business.Services
         /// <returns></returns>
         public bool DeleteUser(Guid id)
         {
-            var userData = this.GetById(id);
-            this.Delete(userData);
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                var user = this.GetById(id);
+                var accountInfo = _context.Account.Where(c=> c.ACCOUNT_ID == user.ACCOUNT_ID_FK).FirstOrDefault();
+                var userPasswords = _context.User_Password.Where(c=> c.USER_ID_FK == id);
 
-            return true;
+                if(accountInfo.TYPE == (byte)UserType.Admin)
+                {
+                    accountInfo.TYPE = (byte)UserType.User;
+                    _context.Account.Update(accountInfo);
+                    this.Save();
+                }
+                else
+                {
+                    if(userPasswords.Count() == 1)
+                    {
+                        _context.Remove(userPasswords);
+                    }
+                    else
+                    {
+                        foreach (var password in userPasswords)
+                        {
+                            _context.Remove(password);
+                            this.Save();
+                        }
+                    }
+
+                    this.Delete(user);
+                    _context.Remove(accountInfo);
+                    this.Save();
+                }
+
+                transaction.Commit();
+                return true;
+            }
         }
 
         /// <summary>
@@ -192,6 +254,8 @@ namespace BookStore.Business.Services
             newPassword.CREATED_DATE = DateTime.Now;
             newPassword.IS_ACTIVE = true;
             newPassword.USER_ID_FK = model.USER_ID;
+            newPassword.MODIFIED_BY = model.USER_NAME;
+            newPassword.MODIFIED_DATE = DateTime.Now;
 
             _context.User_Password.Add(newPassword);
             this.Save();

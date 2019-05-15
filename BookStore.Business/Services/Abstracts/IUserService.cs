@@ -6,6 +6,7 @@ namespace BookStore.Business.Services
 {
     public interface IUserService
     {
+        object GetUser(Guid id);
         List<DtoUser> GetUsers();
         object UserAdd(DtoUser model);
         bool DeleteUser(Guid id);
