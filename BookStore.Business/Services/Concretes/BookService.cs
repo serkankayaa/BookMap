@@ -109,7 +109,7 @@ namespace BookStore.Business
                               join b in _context.Book on a.AUTHOR_ID equals b.AUTHOR_ID_FK into bookAuthor
                               from r in bookAuthor.DefaultIfEmpty()
                               where r.AUTHOR_ID_FK == author.AUTHOR_ID
-                              select new
+                              select new DtoBookAuthor
                               {
                                   AUTHOR_ID_FK = a.AUTHOR_ID,
                                   BOOK_ID = r.BOOK_ID,
@@ -118,20 +118,9 @@ namespace BookStore.Business
                                   BIOGRAPHY = a.BIOGRAPHY,
                                   AUTHOR_NAME = a.AUTHOR_NAME,
                                   BIRTH_DATE = a.BIRTH_DATE,
-                              });
-
-            var result = bookResult.Select(c => new DtoBookAuthor
-            {
-                AUTHOR_ID_FK = c.AUTHOR_ID_FK,
-                BOOK_ID = c.BOOK_ID,
-                BOOK_NAME = c.BOOK_NAME,
-                BOOK_SUMMARY = c.BOOK_SUMMARY,
-                BIOGRAPHY = c.BIOGRAPHY,
-                AUTHOR_NAME = c.AUTHOR_NAME,
-                BIRTH_DATE = c.BIRTH_DATE
-            }).ToList();
-
-            return result;
+                              }).ToList();
+                              
+            return bookResult;
         }
 
         public DtoBook UpdateBook(DtoBook model)
