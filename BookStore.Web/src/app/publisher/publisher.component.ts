@@ -21,7 +21,7 @@ export class PublisherComponent implements OnInit {
   constructor(private publisherService: PublisherService, private toastrService: ToastrService, private supplierService: SupplierService) { }
 
   ngOnInit() {
-    this.getPublisher();
+    this.getPublishers();
     this.getSupplierList();
   }
   getSupplierList(): void {
@@ -34,8 +34,8 @@ export class PublisherComponent implements OnInit {
     resetForm.reset();
   }
 
-  getPublisher(): void {
-    this.publisherService.getAllPublisher()
+  getPublishers(): void {
+    this.publisherService.getPublishers()
       .subscribe(data => this.allPublisher = data);
   }
 
@@ -43,7 +43,7 @@ export class PublisherComponent implements OnInit {
     const result = this.publisherService.postPublisher(this.publisher).subscribe((response) => {
       if (response.body != null && response.ok && response.body !== false) {
         this.toastrService.success('Publisher saved successfully');
-        this.getPublisher();
+        this.getPublishers();
         this.refreshForm();
         this.publisher = new Publisher();
 
@@ -76,7 +76,7 @@ export class PublisherComponent implements OnInit {
       (res) => {
         if (res.body != null && res.ok && res.body !== false) {
           this.toastrService.success('Publisher edited successfully.');
-          this.getPublisher();
+          this.getPublishers();
           this.refreshForm();
           this.publisher = new Publisher();
           this.isEdit = false;
@@ -93,7 +93,7 @@ export class PublisherComponent implements OnInit {
     this.publisherService.deletePublisher(id).subscribe((res) => {
       {
         this.toastrService.success('Publisher deleted successfully.');
-        this.getPublisher();
+        this.getPublishers();
         this.refreshForm();
         this.publisher = new Publisher();
         this.isEdit = false;

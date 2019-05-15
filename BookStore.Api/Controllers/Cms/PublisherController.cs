@@ -18,14 +18,14 @@ namespace BookStore.Api.Controllers.Cms
 
         #region ApiMethods
 
-        [Route("api/Publisher/{id:Guid}")]
+        [Route("api/GetPublisher/{id:Guid}")]
         [HttpGet]
         public DtoPublisher GetPublisher(Guid id)
         {
             return _publisherService.GetPublisher(id);
         }
 
-        [Route("api/GetAllPublisher")]
+        [Route("api/GetPublishers")]
         [HttpGet]
         public List<DtoPublisher> GetPublisher()
         {

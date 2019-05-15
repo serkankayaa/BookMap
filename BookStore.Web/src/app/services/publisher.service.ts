@@ -15,8 +15,8 @@ export class PublisherService {
 
   constructor(private http: HttpClient) { }
 
-  getAllPublisher(): Observable<Publisher[]> {
-    this.publisher$ = this.http.get(apiBaseUrl + '/GetAllPublisher');
+  getPublishers(): Observable<Publisher[]> {
+    this.publisher$ = this.http.get(apiBaseUrl + '/GetPublishers');
 
     return this.publisher$;
   }

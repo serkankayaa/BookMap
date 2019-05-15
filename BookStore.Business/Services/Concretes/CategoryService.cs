@@ -84,7 +84,7 @@ namespace BookStore.Business.Services
             Category category = new Category();
             category.NAME = model.CATEGORY_NAME;
             category.SUMMARY = model.CATEGORY_SUMMARY;
-            category.IS_MAIN_CATEGORY = model.IS_MAIN_CATEGORY;
+            category.IS_MAIN_CATEGORY = true;
 
             this.Add(category);
             this.Save();
