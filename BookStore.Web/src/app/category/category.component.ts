@@ -32,7 +32,6 @@ export class CategoryComponent implements OnInit {
     this.isEdit = true;
   }
 
-
   GetCategories(): void {
     this.categoryService.getCategories().subscribe(data => this.allCategories = data);
   }
@@ -90,5 +89,12 @@ export class CategoryComponent implements OnInit {
         this.isEdit = false;
       }
     });
+  }
+
+  cancelUpdate() {
+    this.category = new Category();
+    this.isEdit = false;
+    this.GetCategories();
+    this.refreshForm();
   }
 }

@@ -92,4 +92,11 @@ export class ShopComponent implements OnInit {
     });
   }
 
+  cancelUpdate() {
+    this.shop = new Shop();
+    this.isEdit = false;
+    this.getShops();
+    this.refreshForm();
+  }
+
 }

@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Baloo+Bhai');
 
 
-.shop-comp-prop{
+.shop-comp-prop {
   background-color: #282C34;
   color: white;
-  }
+}
 
-.parent-title-prop{
+.parent-title-prop {
   padding-top: 1em;
   display: flex;
   justify-content: center;
   font-family: 'Baloo Bhai', cursive;
 }
+
 .flex-list {
   display: flex;
   justify-content: space-evenly;
@@ -24,30 +25,36 @@
   margin-left: 20px;
 }
 
-#locationLabelProp::after{
+#locationLabelProp::after {
   content: url("../../assets/img/location.gif");
 
 }
 
-#locationLabelProp{
-  padding-bottom:1px!important;
+#locationLabelProp {
+  padding-bottom: 1px !important;
 }
 
 #shopLogo::after {
   content: "🏘️";
 }
+
 #shopLogo::before {
   content: "🏘️";
 }
 
-#shopForm{
+#shopForm {
   display: flex;
   justify-content: center;
 }
 
-#saveButtonProp{
+#saveButtonProp {
   position: absolute;
-  bottom: 0;
+  bottom: 0%
+}
+
+#cancelEditButtonProp {
+  position: absolute;
+  bottom: 15%
 }
 
 hr {
@@ -66,4 +73,3 @@ hr {
   padding-bottom: 0.3em;
   padding-top: 0.3em;
 }
-

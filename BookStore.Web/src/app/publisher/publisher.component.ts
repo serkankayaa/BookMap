@@ -101,4 +101,12 @@ export class PublisherComponent implements OnInit {
     });
   }
 
+  cancelUpdate() {
+    this.publisher = new Publisher();
+    this.isEdit = false;
+    this.getPublishers();
+    this.refreshForm();
+  }
+
+
 }

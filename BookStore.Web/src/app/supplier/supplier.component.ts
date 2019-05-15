@@ -86,4 +86,11 @@ export class SupplierComponent implements OnInit {
       }
     });
   }
+
+  cancelUpdate() {
+    this.supplier = new Supplier();
+    this.isEdit = false;
+    this.getSuppliers();
+    this.refreshForm();
+  }
 }

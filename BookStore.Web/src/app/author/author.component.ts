@@ -97,4 +97,11 @@ export class AuthorComponent implements OnInit {
     });
   }
 
+  cancelUpdate() {
+    this.author = new Author();
+    this.isEdit = false;
+    this.getAuthor();
+    this.refreshForm();
+  }
+
 }

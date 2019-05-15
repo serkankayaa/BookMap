@@ -46,6 +46,8 @@
             [disabled]="f.form.pristine || f.form.invalid">Save</button>
           <button *ngIf="isEdit" type="button" class="btn btn-primary float-right"
             [disabled]="f.form.pristine || f.form.invalid" (click)="updateSupplier()">Save</button>
+          <button *ngIf="isEdit" type="button" class="btn btn-danger float-right"
+            (click)="cancelUpdate()">Cancel</button>
         </div>
       </div>
     </form>
@@ -71,7 +73,8 @@
             <td class="text-center" style="width: 15px;">{{supplier.SUPPLIER_REGION}}</td>
             <td class="text-center" style="width: 15px;">
               <button class="btn btn-success" (click)="editSupplier(supplier)"><i class="fa fa-edit"></i></button>
-              <button class="btn btn-danger" (click)="deleteSupplier(supplier.SUPPLIER_ID)"><i class="fa fa-trash"></i></button>
+              <button class="btn btn-danger" (click)="deleteSupplier(supplier.SUPPLIER_ID)"><i
+                  class="fa fa-trash"></i></button>
             </td>
           </tr>
         </tbody>
