@@ -61,44 +61,47 @@
       </div>
     </form>
   </div>
-  <div class="row mb-4 mt-4">
-    <div class="col-12">
-      <h5>Author List</h5>
+  <div [hidden]="!hasData">
+    <div class="row mb-4 mt-4">
+      <div class="col-12">
+        <h5>Author List</h5>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <table class="table">
-        <thead class="thead-inverse">
-          <tr>
-            <th class="text-center">Author Name</th>
-            <th class="text-center">Birth Date</th>
-            <th class="text-center">Biography</th>
-            <th class="text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let author of allAuthor">
-            <td class="text-center" style="width: 15px;">{{author.AUTHOR_NAME}}</td>
-            <td class="text-center" style="width: 15px;">{{author.BIRTH_DATE | date: 'dd.MM.yyyy'}}</td>
-            <td class="text-center" style="width: 200px;">{{author.BIOGRAPHY}}</td>
-            <td class="text-center" style="width: 15px;">
-              <button class="btn btn-success" (click)="editAuthor(author)"><i class="fa fa-edit"></i></button>
-              <button class="btn btn-danger" (click)="onDelete(author.AUTHOR_ID)"><i
-                  class="fa fa-trash"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="row">
+      <div class="col">
+        <table class="table">
+          <thead class="thead-inverse">
+            <tr>
+              <th class="text-center">Author Name</th>
+              <th class="text-center">Birth Date</th>
+              <th class="text-center">Biography</th>
+              <th class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let author of allAuthor">
+              <td class="text-center" style="width: 15px;">{{author.AUTHOR_NAME}}</td>
+              <td class="text-center" style="width: 15px;">{{author.BIRTH_DATE | date: 'dd.MM.yyyy'}}</td>
+              <td class="text-center" style="width: 200px;">{{author.BIOGRAPHY}}</td>
+              <td class="text-center" style="width: 15px;">
+                <button class="btn btn-success" (click)="editAuthor(author)"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-danger" (click)="onDelete(author.AUTHOR_ID)"><i class="fa fa-trash"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="deleteAuthor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteAuthor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-exclamation-triangle" style="color:orange;"></i>&nbsp;Warning</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-exclamation-triangle"
+            style="color:orange;"></i>&nbsp;Warning</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

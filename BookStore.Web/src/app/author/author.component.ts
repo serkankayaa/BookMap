@@ -16,7 +16,7 @@ export class AuthorComponent implements OnInit {
   response: object;
   isEdit = false;
   authorId: any;
-
+  hasData: boolean = true;
 
   constructor(private authorService: AuthorService, private toastrService: ToastrService) { }
 
@@ -53,7 +53,16 @@ export class AuthorComponent implements OnInit {
 
   getAuthor(): void {
     this.authorService.getAllAuthor()
-      .subscribe(data => this.allAuthor = data);
+      .subscribe(data =>
+        {
+          if(data.length == 0){
+            this.hasData = false;
+          }
+          else{
+            this.hasData = true;
+            this.allAuthor = data;
+          }
+        });
   }
 
   editAuthor(selectedAuthor: Author): void {
