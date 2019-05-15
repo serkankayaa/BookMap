@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Author } from '../models/author';
 import { AuthorService } from '../services/author.service';
 import { ToastrService } from 'ngx-toastr';
+declare var $: any;
 
 @Component({
   selector: 'app-author',
@@ -14,6 +15,7 @@ export class AuthorComponent implements OnInit {
   allAuthor: Author[];
   response: object;
   isEdit = false;
+  authorId: any;
 
 
   constructor(private authorService: AuthorService, private toastrService: ToastrService) { }
@@ -85,14 +87,20 @@ export class AuthorComponent implements OnInit {
     focusForm.focus();
   }
 
-  deleteAuthor(id: any): void {
-    this.authorService.deleteAuthor(id).subscribe((res) => {
+  onDelete(id: any): void {
+    $('#deleteAuthor').modal('show');
+    this.authorId = id;
+  }
+
+  deleteAuthor(): void {
+    this.authorService.deleteAuthor(this.authorId).subscribe((res) => {
       {
         this.toastrService.success('Author deleted successfully.');
         this.getAuthor();
         this.refreshForm();
         this.author = new Author();
         this.isEdit = false;
+        $('#deleteAuthor').modal('hide');
       }
     });
   }
