@@ -37,16 +37,42 @@ namespace BookStore.Business
         /// <returns></returns>
         public DtoBook GetBook(Guid id)
         {
-            var bookItem = this.GetById(id);
+            try
+            {
+                var bookItem = this.GetById(id);
 
-            DtoBook book = new DtoBook();
-            book.BOOK_ID = bookItem.BOOK_ID;
-            book.NAME = bookItem.NAME;
-            book.SUMMARY = bookItem.SUMMARY;
-            book.AUTHOR_ID_FK = bookItem.AUTHOR_ID_FK;
-            book.PUBLISHER_ID_FK = bookItem.PUBLISHER_ID_FK;
+                var getBook = (from b in _context.Book
+                               join a in _context.Author on b.AUTHOR_ID_FK equals a.AUTHOR_ID into auTemp
+                               from bookAuthor in auTemp.DefaultIfEmpty()
+                               join p in _context.Publisher on b.PUBLISHER_ID_FK equals p.PUBLISHER_ID into pbTemp
+                               from bookPublisher in pbTemp.DefaultIfEmpty()
+                               join c in _context.Category on b.CATEGORY_ID_FK equals c.CATEGORY_ID into ctTemp
+                               from bookCategory in ctTemp.DefaultIfEmpty()
+                               join s in _context.Shop on b.SHOP_ID_FK equals s.SHOP_ID into spTemp
+                               from bookShop in spTemp.DefaultIfEmpty()
+                               select new DtoBook()
+                               {
+                                   BOOK_ID = bookItem.BOOK_ID,
+                                   NAME = bookItem.NAME,
+                                   SUMMARY = bookItem.SUMMARY,
+                                   AUTHOR_ID_FK = bookItem.AUTHOR_ID_FK,
+                                   PUBLISHER_ID_FK = bookItem.PUBLISHER_ID_FK,
+                                   CATEGORY_ID_FK = bookItem.CATEGORY_ID_FK,
+                                   ACCOUNT_ID_FK = bookItem.ACCOUNT_ID_FK,
+                                   SHOP_ID_FK = bookItem.SHOP_ID_FK,
+                                   AUTHOR_NAME = bookAuthor.AUTHOR_NAME,
+                                   CATEGORY_NAME = bookCategory.NAME,
+                                   PUBLISHER_NAME = bookPublisher.NAME,
+                                   SHOP_NAME = bookShop.SHOP_NAME
+                               }).FirstOrDefault();
 
-            return book;
+                return getBook;
+            }
+            catch (System.Exception ex)
+            {
+                return new DtoBook();
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -55,18 +81,28 @@ namespace BookStore.Business
         /// <returns></returns>
         public List<DtoBook> GetBooks()
         {
-            var books = base.GetAll();
-
-            var totalBooks = books.Select(c => new DtoBook()
+            try
             {
-                BOOK_ID = c.BOOK_ID,
-                NAME = c.NAME,
-                SUMMARY = c.SUMMARY,
-                AUTHOR_ID_FK = c.AUTHOR_ID_FK,
-                PUBLISHER_ID_FK = c.PUBLISHER_ID_FK
-            }).ToList();
+                var books = base.GetAll();
 
-            return totalBooks;
+                var totalBooks = books.Select(c => new DtoBook()
+                {
+                    BOOK_ID = c.BOOK_ID,
+                    NAME = c.NAME,
+                    SUMMARY = c.SUMMARY,
+                    AUTHOR_ID_FK = c.AUTHOR_ID_FK,
+                    PUBLISHER_ID_FK = c.PUBLISHER_ID_FK,
+                    CATEGORY_ID_FK = c.CATEGORY_ID_FK,
+                    SHOP_ID_FK = c.SHOP_ID_FK,
+                }).ToList();
+
+                return totalBooks;
+            }
+            catch (System.Exception ex)
+            {
+                return new List<DtoBook>();
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -75,26 +111,50 @@ namespace BookStore.Business
         /// <param name="model"></param>
         public void BookAdd(DtoBook model)
         {
-            Book book = new Book();
-            book.NAME = model.NAME;
-            book.SUMMARY = model.SUMMARY;
-            book.AUTHOR_ID_FK = model.AUTHOR_ID_FK;
-            book.PUBLISHER_ID_FK = model.PUBLISHER_ID_FK;
+            try
+            {
+                Book book = new Book();
+                book.BOOK_ID = model.BOOK_ID;
+                book.NAME = model.NAME;
+                book.SUMMARY = model.SUMMARY;
+                book.AUTHOR_ID_FK = model.AUTHOR_ID_FK;
+                book.PUBLISHER_ID_FK = model.PUBLISHER_ID_FK;
+                book.CATEGORY_ID_FK = model.CATEGORY_ID_FK;
+                book.ACCOUNT_ID_FK = model.ACCOUNT_ID_FK;
+                book.SHOP_ID_FK = model.SHOP_ID_FK;
 
-            this.Add(book);
-            this.Save();
+                this.Add(book);
+                this.Save();
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        //public DtoBook UpdateBook(DtoBook model)
-        //{
-        //    var bookData = this.GetById(model.BOOK_ID);
-        //    bookData.NAME = model.NAME;
-        //    bookData.
-        //}
-
+        /// <summary>
+        /// Delete book
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>List</returns>
         public bool DeleteBook(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var book = this.GetById(id);
+                if (book != null)
+                {
+                    this.Delete(book);
+                    this.Save();
+                    return true;
+                }
+                return false;
+            }
+            catch (System.Exception ex)
+            {
+                return false;
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -102,7 +162,7 @@ namespace BookStore.Business
         /// </summary>
         /// <param name="id"></param>
         /// <returns>List</returns>
-        public object GetBookAuthor(Guid id)
+        public object GetBooksByAuthor(Guid id)
         {
             var author = _authorService.GetAuthor(id);
             var bookResult = (from a in _context.Author
@@ -119,13 +179,35 @@ namespace BookStore.Business
                                   AUTHOR_NAME = a.AUTHOR_NAME,
                                   BIRTH_DATE = a.BIRTH_DATE,
                               }).ToList();
-                              
+
             return bookResult;
         }
 
         public DtoBook UpdateBook(DtoBook model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var book = this.GetById(model.BOOK_ID);
+                if (book != null)
+                {
+                    book.BOOK_ID = model.BOOK_ID;
+                    book.NAME = model.NAME;
+                    book.SUMMARY = model.SUMMARY;
+                    book.AUTHOR_ID_FK = model.AUTHOR_ID_FK;
+                    book.PUBLISHER_ID_FK = model.PUBLISHER_ID_FK;
+                    book.CATEGORY_ID_FK = model.CATEGORY_ID_FK;
+                    book.ACCOUNT_ID_FK = model.ACCOUNT_ID_FK;
+                    book.SHOP_ID_FK = model.SHOP_ID_FK;
+                }
+                this.Update(book);
+                this.Save();
+                return model;
+            }
+            catch (System.Exception ex)
+            {
+                return new DtoBook();
+                throw ex;
+            }
         }
 
         #endregion

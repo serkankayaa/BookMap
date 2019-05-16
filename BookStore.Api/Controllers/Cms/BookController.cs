@@ -18,14 +18,14 @@ namespace BookStore.Api.Controllers.Cms
 
         #region ApiMethods
 
-        [Route("api/Book/{id:Guid}")]
+        [Route("api/GetBook/{id:Guid}")]
         [HttpGet]
         public DtoBook GetBook(Guid id)
         {
             return _bookService.GetBook(id);
         }
 
-        [Route("api/GetAllBook")]
+        [Route("api/GetAllBooks")]
         [HttpGet]
         public List<DtoBook> GetBooks()
         {
@@ -39,11 +39,25 @@ namespace BookStore.Api.Controllers.Cms
             _bookService.BookAdd(model);
         }
 
-        [Route("api/GetBookAuthor/{id:Guid}")]
+        [Route("api/GetBooksByAuthor/{id:Guid}")]
         [HttpGet]
-        public object GetBookAuthor(Guid id)
+        public object GetBooksByAuthor(Guid id)
         {
-            return _bookService.GetBookAuthor(id);
+            return _bookService.GetBooksByAuthor(id);
+        }
+
+        [Route("api/DeleteBook/{id:Guid}")]
+        [HttpDelete]
+        public object DeleteBook(Guid id)
+        {
+            return _bookService.DeleteBook(id);
+        }
+
+        [Route("api/UpdateBook")]
+        [HttpPut]
+        public object UpdateBook(DtoBook model)
+        {
+            return _bookService.UpdateBook(model);
         }
 
         #endregion

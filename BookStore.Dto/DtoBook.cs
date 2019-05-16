@@ -9,7 +9,7 @@ namespace BookStore.Dto
         public string SUMMARY { get; set; }
         public Guid AUTHOR_ID_FK { get; set; }
         public string AUTHOR_NAME { get; set; }
-        public Guid PUBLISHER_ID_FK { get; set; }        
+        public Guid PUBLISHER_ID_FK { get; set; }
         public string PUBLISHER_NAME { get; set; }
         public Guid CATEGORY_ID_FK { get; set; }
         public string CATEGORY_NAME { get; set; }
