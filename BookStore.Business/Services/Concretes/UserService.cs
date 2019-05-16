@@ -290,7 +290,7 @@ namespace BookStore.Business.Services
         /// <returns></returns>
         public bool ChangeUserRole(Guid id, UserType userType)
         {
-            var user = _context.User.Find(id);
+            var user = this.GetById(id);
 
             if (user != null)
             {
@@ -304,6 +304,7 @@ namespace BookStore.Business.Services
                     return true;
                 }
             }
+            
             return false;
         }
 
