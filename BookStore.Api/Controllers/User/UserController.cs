@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using BookStore.Business;
 using BookStore.Business.Services;
 using BookStore.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -56,6 +57,14 @@ namespace BookStoreMap.Controllers
         public bool UserLogin(DtoUserLogin model)
         {
             return _userService.UserLogin(model);
-        } 
+        }
+
+        [Route("api/ChangeUserRole/{id:Guid}")]
+        [HttpPost]
+        public bool ChangeUserRole(Guid id, UserType userType)
+        {
+            return _userService.ChangeUserRole(id, userType);
+        }
+
     }
 }

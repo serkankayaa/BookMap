@@ -12,7 +12,6 @@ namespace BookStore.Business.Services
     {
         #region Field
 
-
         private BookDbContext _context;
 
         #endregion
@@ -219,11 +218,11 @@ namespace BookStore.Business.Services
         {
             //TODO: Email onaylama işlemi yapılacak.
             var isUserExist = (from u in _context.User
-                               join up in _context.User_Password on u.USER_ID equals up.USER_ID_FK into upTemp 
+                               join up in _context.User_Password on u.USER_ID equals up.USER_ID_FK into upTemp
                                from userPassword in upTemp.DefaultIfEmpty()
                                join ac in _context.Account on u.ACCOUNT_ID_FK equals ac.ACCOUNT_ID into acTemp
                                from account in acTemp.DefaultIfEmpty()
-                               where userPassword.IS_ACTIVE == true && account.NAME == model.USER_NAME || u.EMAIL_ADDRESS == model.USER_EMAIL 
+                               where userPassword.IS_ACTIVE == true && account.NAME == model.USER_NAME || u.EMAIL_ADDRESS == model.USER_EMAIL
                                select u).Any();
 
             if (isUserExist == false)
@@ -265,10 +264,10 @@ namespace BookStore.Business.Services
 
         public bool UserLogin(DtoUserLogin model)
         {
-            var isUserExist = (from u in _context.User 
-                               join up in _context.User_Password on u.USER_ID equals up.USER_ID_FK into upTemp 
+            var isUserExist = (from u in _context.User
+                               join up in _context.User_Password on u.USER_ID equals up.USER_ID_FK into upTemp
                                from userPassword in upTemp.DefaultIfEmpty()
-                               join ac in _context.Account on u.ACCOUNT_ID_FK equals ac.ACCOUNT_ID into acTemp 
+                               join ac in _context.Account on u.ACCOUNT_ID_FK equals ac.ACCOUNT_ID into acTemp
                                from account in acTemp.DefaultIfEmpty()
                                where account.NAME == model.USER_NAME || u.EMAIL_ADDRESS == model.USER_EMAIL && u.EMAIL_CONFIRMED && userPassword.IS_ACTIVE && userPassword.PASSWORD_HASH == model.USER_PASSWORD
                                select u).Any();
@@ -281,6 +280,31 @@ namespace BookStore.Business.Services
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Change User's current account type
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="userType"></param>
+        /// <returns></returns>
+        public bool ChangeUserRole(Guid id, UserType userType)
+        {
+            var user = _context.User.Find(id);
+
+            if (user != null)
+            {
+                var account = _context.Account.Find(user.ACCOUNT_ID_FK);
+
+                if (account.TYPE != (byte)userType)
+                {
+                    account.TYPE = (byte)userType;
+                    _context.Update(account);
+                    _context.SaveChanges();
+                    return true;
+                }
+            }
+            return false;
         }
 
         #endregion

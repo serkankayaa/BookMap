@@ -14,5 +14,6 @@ namespace BookStore.Business.Services
         object RecoverPassword(DtoUserPassword model);
 
         bool UserLogin(DtoUserLogin model);
+        bool ChangeUserRole(Guid id, UserType UserType);
     }
 }
