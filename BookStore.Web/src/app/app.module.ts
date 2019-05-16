@@ -25,6 +25,7 @@ import { SupplierService } from './services/supplier.service';
 import { ShopService } from './services/shop.service';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { RegisterComponent } from './register/register.component';
+import { BookService } from './services/book.service';
 @NgModule({
    declarations: [
       AppComponent,
@@ -44,13 +45,13 @@ import { RegisterComponent } from './register/register.component';
       HttpClientModule,
       FormsModule,
       AppRoutingModule,
-// tslint:disable-next-line: deprecation
+      // tslint:disable-next-line: deprecation
       HttpModule,
       [AgGridModule.withComponents(AuthorComponent)],
       BrowserAnimationsModule,
       ToastrModule.forRoot(),
    ],
-   providers: [HttpClientModule, AuthorService, PublisherService, ShopService, CategoryService, SupplierService],
+   providers: [HttpClientModule, AuthorService, PublisherService, ShopService, CategoryService, SupplierService, BookService],
    bootstrap: [AppComponent]
 })
 export class AppModule {

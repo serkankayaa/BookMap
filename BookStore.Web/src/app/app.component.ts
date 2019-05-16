@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-
-import { AuthorService } from './services/author.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

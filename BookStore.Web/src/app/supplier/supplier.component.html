@@ -60,23 +60,27 @@
     </div>
     <div class="row">
       <div class="col">
-        <table class="table">
-          <thead class="thead-inverse">
+        <table class="container">
+          <thead>
             <tr>
-              <th class="text-center">Supplier Name</th>
-              <th class="text-center">Region</th>
-              <th class="text-center">Actions</th>
+              <th>
+                <h1>Supplier Name</h1>
+              </th>
+              <th>
+                <h1>Supplier Region</h1>
+              </th>
+              <th>
+                <h1>Actions</h1>
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let supplier of allSuppliers">
-              <td class="text-center" style="width: 15px;">{{supplier.SUPPLIER_NAME}}</td>
-              <td class="text-center" style="width: 15px;">{{supplier.SUPPLIER_REGION}}</td>
-              <td class="text-center" style="width: 15px;">
-                <button class="btn btn-success" (click)="editSupplier(supplier)"><i class="fa fa-edit"></i></button>
+              <td>{{supplier.SUPPLIER_NAME}}</td>
+              <td>{{supplier.SUPPLIER_REGION}}</td>
+              <td><button class="btn btn-success" (click)="editSupplier(supplier)"><i class="fa fa-edit"></i></button>
                 <button class="btn btn-danger" (click)="onDelete(supplier.SUPPLIER_ID)"><i
-                    class="fa fa-trash"></i></button>
-              </td>
+                    class="fa fa-trash"></i></button></td>
             </tr>
           </tbody>
         </table>
