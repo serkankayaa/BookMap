@@ -1,49 +1,82 @@
-.navBackground {
-    background-color: #08191f!important;
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhai');
+
+.bg-light {
+  padding: 1em;
+  background-color: #172635 !important;
 }
 
-.routerBackground{
-    background-color: #ffffff;
-    color: white;
+.navbar-brand {
+  margin-left: 20%;
+  color: #ffffff;
+}
+
+.navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover{
+    color: white!important;
+}
+
+.routerBackground {
+  background-color: #ffffff;
+  color: white;
 }
 
 .navbarMenu {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 
 }
-    .navbarMenu > li {
-        float: none;
-        display: inline-block;
-    }
+
+.navbarMenu>li {
+  float: none;
+  display: inline-block;
+}
 
 .nav-item {
-    padding: 15px;
-    padding-right: 30px;
+  padding: 15px;
+  padding-right: 30px;
 }
 
 .nav-item a {
-    color: #ffffff;
+  color: #ffffff;
 }
 
-#routerProp{
-    padding-top: 5em;
-    background-color: #282C34;
+.userProp{
+    font-size: 18px;
+    font-family: 'Baloo Bhai', cursive;
     color: white;
 }
-
-#HomeProp::after{
-    content: "🏠"
+.userProp::hover{
+    text-decoration: none;
 }
 
-#AuthorProp::after{
-    content: "👨‍🏭";
+#horizontalLine {
+  border: 2px solid black;
+  width: 20em;
+  margin-top: 10%;
 }
 
-#BookProp::after{
-    content: "📚";
+#routerProp {
+  padding-top: 2em;
+  background-color: #303942;
+  color: white;
 }
 
-#ShopProp::after{
-    content: "🏘️";
+#HomeProp::after {
+  content: "🏠"
+}
+
+#AuthorProp::after {
+  content: "👨‍🏭";
+}
+
+#BookProp::after {
+  content: "📚";
+}
+
+#ShopProp::after {
+  content: "🏘️";
+}
+
+#UserSign{
+    margin-right: 10px;
+ 
 }

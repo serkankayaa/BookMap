@@ -77,7 +77,7 @@
           <td>{{shop.SHOP_NAME}}</td>
           <td>{{shop.LOCATION}}</td>
           <td>{{shop.STAFF_COUNT}}</td>
-          <td class="text-center" style="width: 15px;">
+          <td class="text-center">
             <button class="btn btn-success" (click)="editShop(shop)"><i class="fa fa-edit"></i></button>
             <button class="btn btn-danger" (click)="onDelete(shop.SHOP_ID)"><i class="fa fa-trash"></i></button>
           </td>
@@ -86,6 +86,10 @@
       <tr></tr>
     </table>
   </div>
+</div>
+
+<div class="row">
+
 </div>
 
 <div class="modal fade" id="deleteShop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

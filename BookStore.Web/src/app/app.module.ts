@@ -23,6 +23,8 @@ import { CategoryService } from './services/category.service';
 import { SupplierComponent } from './supplier/supplier.component';
 import { SupplierService } from './services/supplier.service';
 import { ShopService } from './services/shop.service';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { RegisterComponent } from './register/register.component';
 @NgModule({
    declarations: [
       AppComponent,
@@ -33,7 +35,9 @@ import { ShopService } from './services/shop.service';
       PublisherComponent,
       ShopComponent,
       CategoryComponent,
-      SupplierComponent
+      SupplierComponent,
+      SignInComponent,
+      RegisterComponent
    ],
    imports: [
       BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

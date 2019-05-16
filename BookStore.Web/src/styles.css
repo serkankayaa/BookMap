@@ -2,6 +2,7 @@
 @import 'ag-grid-community/dist/styles/ag-grid.css';
 @import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 @import '~ngx-toastr/toastr.css';
+
 /*  
 @import '~ngx-toastr/toastr-bs4-alert';
  
@@ -10,18 +11,31 @@
 @import '~bootstrap/scss/mixins';
 @import '~ngx-toastr/toastr-bs4-alert'; */
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  color: white;
+  text-align: left;
+  padding: 8px;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+/* html {
+  background: #8E2DE2;
+  background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);
+  background: linear-gradient(to right, #4A00E0, #8E2DE2);
+} */
+
+html{
+  background-color: #303942;
+}

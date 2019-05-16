@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhai');
+
+.home-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+h2 {
+  font-family: 'Baloo Bhai', cursive;
+}
+
+a {
+  text-decoration: none;
+  color: white !important;
+  font-family: 'Baloo Bhai', cursive;
+}
+
+.flex-item {
+    list-style: none;
+    padding: 40px;
+    margin-left: 15px;
+    width: 150px;
+    height: 150px;
+    background-color: #272C34;
+    border-radius: 50%;
+  }
