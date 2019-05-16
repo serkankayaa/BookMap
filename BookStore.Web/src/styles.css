@@ -39,3 +39,44 @@ tr:nth-child(even) {
 html{
   background-color: #303942;
 }
+
+.loading {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  padding: 0.5em;
+  vertical-align: middle;
+  text-align: center;
+  background-color: transparent;
+  border: 5px solid transparent;
+  border-top-color: #f60;
+  border-bottom-color: #f60;
+  border-radius: 50% 0;
+  box-shadow: 0 0 0.25em #f60 inset;
+}
+
+.outer {
+  animation: spin 0.95s infinite linear;
+}
+
+.inner {
+  animation: spin 0.35s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+#wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  box-sizing: border-box;
+  display: table-cell;
+  vertical-align: middle;
+}
