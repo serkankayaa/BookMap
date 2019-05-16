@@ -1,5 +1,14 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhai');
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+
+.parent-title-prop {
+  padding-top: 1em;
+  display: flex;
+  justify-content: center;
+  font-family: 'Baloo Bhai', cursive;
+}
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -17,16 +26,6 @@ h1 {
   color: #4DC3FA;
 }
 
-h2 {
-  font-size: 1em;
-  font-weight: 300;
-  text-align: center;
-  display: block;
-  line-height: 1em;
-  padding-bottom: 2em;
-  color: #FB667A;
-}
-
 h2 a {
   font-weight: 700;
   text-transform: uppercase;
@@ -38,15 +37,13 @@ h2 a {
   color: #185875;
 }
 
-.yellow {
-  color: #FFF842;
-}
 
 .container th h1 {
   font-weight: bold;
   font-size: 1em;
-  text-align: left;
-  color: #185875;
+  text-align: center;
+  color: white;
+  padding-top: 10px;
 }
 
 .container td {
@@ -64,7 +61,10 @@ h2 a {
   margin: 0 auto;
   display: table;
   padding: 0 0 8em 0;
+  border: 6px solid #303942;
+
 }
+
 
 .container td,
 .container th {
@@ -88,7 +88,7 @@ h2 a {
 }
 
 .container td:first-child {
-  color: #FB667A;
+  color: #00c2ff;
 }
 
 .container tr:hover {
@@ -96,20 +96,6 @@ h2 a {
   -webkit-box-shadow: 0 6px 6px -6px #0E1119;
   -moz-box-shadow: 0 6px 6px -6px #0E1119;
   box-shadow: 0 6px 6px -6px #0E1119;
-}
-
-.container td:hover {
-  background-color: #FFF842;
-  color: #403E10;
-  font-weight: bold;
-
-  box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
-  transform: translate3d(6px, -6px, 0);
-
-  transition-delay: 0s;
-  transition-duration: 0.4s;
-  transition-property: all;
-  transition-timing-function: line;
 }
 
 @media (max-width: 800px) {
