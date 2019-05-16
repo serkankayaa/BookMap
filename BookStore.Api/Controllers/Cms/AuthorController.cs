@@ -52,6 +52,13 @@ namespace BookStore.Api.Controllers.Cms
             return _authorService.DeleteAuthor(id);
         }
 
+        [Route("api/DeleteAllAuthors")]
+        [HttpDelete]
+        public bool DeleteAllAuthors()
+        {
+            return _authorService.DeleteAllAuthors();
+        }
+
         #endregion
     }
 }
