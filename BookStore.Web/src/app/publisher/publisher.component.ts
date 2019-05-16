@@ -39,7 +39,14 @@ export class PublisherComponent implements OnInit {
 
   getPublishers(): void {
     this.publisherService.getPublishers()
-      .subscribe(data => this.allPublisher = data);
+      .subscribe(data => {
+        if (data.length === 0) {
+          this.hasData = false;
+        } else {
+          this.hasData = true;
+          this.allPublisher = data;
+        }
+      });
   }
 
   postPublisher(): object {

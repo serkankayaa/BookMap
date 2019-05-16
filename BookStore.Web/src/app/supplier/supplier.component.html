@@ -52,33 +52,35 @@
       </div>
     </form>
   </div>
-  <div class="row mb-4 mt-4">
-    <div class="col-12">
-      <h5>Supplier List</h5>
+  <div [hidden]="!hasData">
+    <div class="row mb-4 mt-4">
+      <div class="col-12">
+        <h5>Supplier List</h5>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <table class="table">
-        <thead class="thead-inverse">
-          <tr>
-            <th class="text-center">Supplier Name</th>
-            <th class="text-center">Region</th>
-            <th class="text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let supplier of allSuppliers">
-            <td class="text-center" style="width: 15px;">{{supplier.SUPPLIER_NAME}}</td>
-            <td class="text-center" style="width: 15px;">{{supplier.SUPPLIER_REGION}}</td>
-            <td class="text-center" style="width: 15px;">
-              <button class="btn btn-success" (click)="editSupplier(supplier)"><i class="fa fa-edit"></i></button>
-              <button class="btn btn-danger" (click)="onDelete(supplier.SUPPLIER_ID)"><i
-                  class="fa fa-trash"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="row">
+      <div class="col">
+        <table class="table">
+          <thead class="thead-inverse">
+            <tr>
+              <th class="text-center">Supplier Name</th>
+              <th class="text-center">Region</th>
+              <th class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let supplier of allSuppliers">
+              <td class="text-center" style="width: 15px;">{{supplier.SUPPLIER_NAME}}</td>
+              <td class="text-center" style="width: 15px;">{{supplier.SUPPLIER_REGION}}</td>
+              <td class="text-center" style="width: 15px;">
+                <button class="btn btn-success" (click)="editSupplier(supplier)"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-danger" (click)="onDelete(supplier.SUPPLIER_ID)"><i
+                    class="fa fa-trash"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

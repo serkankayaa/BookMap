@@ -15,7 +15,7 @@ export class ShopComponent implements OnInit {
   shopList: Shop[];
   isEdit = false;
   shopId: any;
-  hasData: true;
+  hasData = true;
 
   constructor(private shopService: ShopService, private toastrService: ToastrService) { }
 
@@ -57,7 +57,14 @@ export class ShopComponent implements OnInit {
   }
 
   getShops(): void {
-    this.shopService.getAllShops().subscribe(data => this.shopList = data);
+    this.shopService.getAllShops().subscribe(data => {
+      if (data.length === 0) {
+        this.hasData = false;
+      } else {
+        this.hasData = true;
+        this.shopList = data;
+      }
+    });
   }
 
   editShop(selectedShop: Shop): void {

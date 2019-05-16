@@ -36,7 +36,14 @@ export class CategoryComponent implements OnInit {
   }
 
   GetCategories(): void {
-    this.categoryService.getCategories().subscribe(data => this.allCategories = data);
+    this.categoryService.getCategories().subscribe(data => {
+      if (data.length === 0) {
+        this.hasData = false;
+      } else {
+        this.hasData = true;
+        this.allCategories = data;
+      }
+    });
   }
 
   postCategory(): object {

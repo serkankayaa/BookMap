@@ -57,33 +57,35 @@
       </div>
     </form>
   </div>
-  <div class="row">
-    <div class="col-12 parent-title-prop">
-      <h2 id="shopLogo">Shop List</h2>
+  <div [hidden]="!hasData">
+    <div class="row">
+      <div class="col-12 parent-title-prop">
+        <h2 id="shopLogo">Shop List</h2>
+      </div>
     </div>
+    <table>
+      <thead class="thead-inverse">
+        <tr>
+          <th class="text-center">Shop Name</th>
+          <th class="text-center">Location</th>
+          <th class="text-center">Staff Count</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let shop of shopList">
+          <td>{{shop.SHOP_NAME}}</td>
+          <td>{{shop.LOCATION}}</td>
+          <td>{{shop.STAFF_COUNT}}</td>
+          <td class="text-center" style="width: 15px;">
+            <button class="btn btn-success" (click)="editShop(shop)"><i class="fa fa-edit"></i></button>
+            <button class="btn btn-danger" (click)="onDelete(shop.SHOP_ID)"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+      <tr></tr>
+    </table>
   </div>
-  <table>
-    <thead class="thead-inverse">
-      <tr>
-        <th class="text-center">Shop Name</th>
-        <th class="text-center">Location</th>
-        <th class="text-center">Staff Count</th>
-        <th class="text-center">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let shop of shopList">
-        <td>{{shop.SHOP_NAME}}</td>
-        <td>{{shop.LOCATION}}</td>
-        <td>{{shop.STAFF_COUNT}}</td>
-        <td class="text-center" style="width: 15px;">
-          <button class="btn btn-success" (click)="editShop(shop)"><i class="fa fa-edit"></i></button>
-          <button class="btn btn-danger" (click)="onDelete(shop.SHOP_ID)"><i class="fa fa-trash"></i></button>
-        </td>
-      </tr>
-    </tbody>
-    <tr></tr>
-  </table>
 </div>
 
 <div class="modal fade" id="deleteShop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

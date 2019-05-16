@@ -57,37 +57,40 @@
             [disabled]="f.form.pristine || f.form.invalid">Save</button>
           <button *ngIf="isEdit" type="button" class="btn btn-primary float-right"
             [disabled]="f.form.pristine || f.form.invalid" (click)="updatePublisher()">Save</button>
-            <button *ngIf="isEdit" type="button" class="btn btn-danger float-right mr-2"
-              (click)="cancelUpdate()">Cancel</button>
+          <button *ngIf="isEdit" type="button" class="btn btn-danger float-right mr-2"
+            (click)="cancelUpdate()">Cancel</button>
         </div>
       </div>
     </form>
   </div>
-  <div class="row mb-4 mt-4">
-    <div class="col-12">
-      <h5>Publisher List</h5>
+  <div [hidden]="!hasData">
+    <div class="row mb-4 mt-4">
+      <div class="col-12">
+        <h5>Publisher List</h5>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <table class="table">
-        <thead class="thead-inverse">
-          <tr>
-            <th class="text-center">Publisher Name</th>
-            <th class="text-center">Location</th>
-            <th class="text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let publisher of allPublisher">
-            <td class="text-center" style="width: 15px;">{{publisher.NAME}}</td>
-            <td class="text-center" style="width: 15px;">{{publisher.LOCATION}}</td>
-            <td class="text-center" style="width: 15px;">
-              <button class="btn btn-success" (click)="editPublisher(publisher)"><i class="fa fa-edit"></i></button>
-              <button class="btn btn-danger" (click)="onDelete(publisher.PUBLISHER_ID)"><i class="fa fa-trash"></i></button>
-            </td>
-        </tbody>
-      </table>
+    <div class="row">
+      <div class="col">
+        <table class="table">
+          <thead class="thead-inverse">
+            <tr>
+              <th class="text-center">Publisher Name</th>
+              <th class="text-center">Location</th>
+              <th class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let publisher of allPublisher">
+              <td class="text-center" style="width: 15px;">{{publisher.NAME}}</td>
+              <td class="text-center" style="width: 15px;">{{publisher.LOCATION}}</td>
+              <td class="text-center" style="width: 15px;">
+                <button class="btn btn-success" (click)="editPublisher(publisher)"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-danger" (click)="onDelete(publisher.PUBLISHER_ID)"><i
+                    class="fa fa-trash"></i></button>
+              </td>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

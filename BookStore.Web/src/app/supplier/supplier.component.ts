@@ -27,7 +27,14 @@ export class SupplierComponent implements OnInit {
     resetForm.reset();
   }
   getSuppliers(): void {
-    this.supplierService.getSuppliers().subscribe(data => this.allSuppliers = data);
+    this.supplierService.getSuppliers().subscribe(data => {
+      if (data.length === 0) {
+        this.hasData = false;
+      } else {
+        this.hasData = true;
+        this.allSuppliers = data;
+      }
+    });
   }
 
   postSupplier(): object {
