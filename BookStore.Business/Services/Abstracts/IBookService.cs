@@ -11,6 +11,6 @@ namespace BookStore.Business.Services
         void BookAdd(DtoBook model);
         DtoBook UpdateBook(DtoBook model);
         bool DeleteBook(Guid id);
-        object GetBookAuthor(Guid id);
+        object GetBooksByAuthor(Guid id);
     }
 }
