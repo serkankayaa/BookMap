@@ -24,8 +24,8 @@ import { SupplierComponent } from './supplier/supplier.component';
 import { SupplierService } from './services/supplier.service';
 import { ShopService } from './services/shop.service';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { JwtService } from './services/jwt.service';
 import { RegisterComponent } from './register/register.component';
-import { BookService } from './services/book.service';
 @NgModule({
    declarations: [
       AppComponent,
@@ -51,7 +51,7 @@ import { BookService } from './services/book.service';
       BrowserAnimationsModule,
       ToastrModule.forRoot(),
    ],
-   providers: [HttpClientModule, AuthorService, PublisherService, ShopService, CategoryService, SupplierService, BookService],
+   providers: [HttpClientModule, AuthorService, PublisherService, ShopService, CategoryService, SupplierService, JwtService],
    bootstrap: [AppComponent]
 })
 export class AppModule {
