@@ -16,6 +16,7 @@ import { BookComponent } from './book/book.component';
 import { PublisherComponent } from './publisher/publisher.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthorService } from './services/author.service';
+import { BookService } from './services/book.service';
 import { PublisherService } from './services/publisher.service';
 import { ShopComponent } from './shop/shop.component';
 import { CategoryComponent } from './category/category.component';
@@ -51,7 +52,7 @@ import { RegisterComponent } from './register/register.component';
       BrowserAnimationsModule,
       ToastrModule.forRoot(),
    ],
-   providers: [HttpClientModule, AuthorService, PublisherService, ShopService, CategoryService, SupplierService, JwtService],
+   providers: [HttpClientModule, AuthorService, PublisherService, ShopService, CategoryService, SupplierService, JwtService, BookService],
    bootstrap: [AppComponent]
 })
 export class AppModule {

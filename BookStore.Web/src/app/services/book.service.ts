@@ -10,8 +10,13 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class BookService {
-    book$;
 
-    constructor(private httpClient: HttpClient) { }
+    constructor(private http: HttpClient) { }
+
+    documentAdd(formData: FormData){
+        const result = this.http.post(apiBaseUrl + '/DocumentAdd', formData, {reportProgress: true, observe: 'events'});
+
+        return result;
+    }
 
 }

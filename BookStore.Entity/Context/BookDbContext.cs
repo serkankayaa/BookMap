@@ -21,6 +21,7 @@ namespace BookStore.Entity.Context
         public DbSet<Shop> Shop { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Supplier> Supplier { get; set; }
+        public DbSet<Document> Document { get; set; }
 
         #endregion
     }
