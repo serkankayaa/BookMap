@@ -10,6 +10,10 @@
   color: #ffffff;
 }
 
+.fontProp{
+  font-family: 'Josefin Slab', serif;
+}
+
 .navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover{
     color: white!important;
 }
@@ -59,6 +63,7 @@
   background-color: #303942;
   color: white;
 }
+
 
 #HomeProp::after {
   content: "🏠"

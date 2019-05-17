@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Baloo+Bhai');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Slab&display=swap');
 
 .home-flex {
   display: flex;
@@ -8,13 +8,13 @@
 }
 
 h2 {
-  font-family: 'Baloo Bhai', cursive;
+  font-family: 'Josefin Slab', serif;
 }
 
 a {
   text-decoration: none;
   color: white !important;
-  font-family: 'Baloo Bhai', cursive;
+  font-family: 'Josefin Slab', serif;
 }
 
 .flex-item {
