@@ -28,6 +28,10 @@ namespace BookStore.Api.Controllers
 
                 if (file.Length > 0)
                 {
+                    if (file.Length > 786432)
+                    {
+                        return Content("Max File size !");
+                    }
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var childPath = Path.Combine(folderName, fileName);
                     var fileCode = Guid.NewGuid();
