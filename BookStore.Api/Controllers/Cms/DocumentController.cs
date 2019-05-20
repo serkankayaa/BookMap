@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Net.Http.Headers;
 using BookStore.Entity;
 using BookStore.Entity.Context;
@@ -11,6 +12,8 @@ namespace BookStore.Api.Controllers
     public class DocumentController : ControllerBase
     {
         private BookDbContext _context;
+        private readonly string[] ACCEPTED_FILE_TYPES = new[] {".jpg", ".jpeg", ".png", ".JPG", ".JPEG", ".PNG"};
+
         public DocumentController(BookDbContext context)
         {
             this._context = context;
@@ -26,12 +29,19 @@ namespace BookStore.Api.Controllers
                 var folderName = Path.Combine("Resources", "images");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
+
                 if (file.Length > 0)
                 {
                     if (file.Length > 786432)
                     {
                         return Content("Max File size !");
                     }
+
+                    if(!ACCEPTED_FILE_TYPES.Any(s => s == Path.GetExtension(file.FileName).ToLower()))
+                    {
+                        return BadRequest("Invalid file type.");
+                    } 
+
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var childPath = Path.Combine(folderName, fileName);
                     var fileCode = Guid.NewGuid();
@@ -55,7 +65,7 @@ namespace BookStore.Api.Controllers
                 }
                 else
                 {
-                    return BadRequest();
+                    return BadRequest("Empty File !");
                 }
             }
             catch (Exception ex)
