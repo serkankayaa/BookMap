@@ -45,7 +45,7 @@ namespace BookStore.Api.Controllers
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var childPath = Path.Combine(folderName, fileName);
                     var fileCode = Guid.NewGuid();
-                    var dbFile = fileCode + fileName;
+                    var dbFile = fileCode + "-" + fileName;
                     var fullPath = Path.Combine(pathToSave, dbFile);
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
