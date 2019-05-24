@@ -17,6 +17,6 @@ namespace BookStore.Dto
         public Guid SHOP_ID_FK { get; set; }
         public string SHOP_NAME { get; set; }
         public Guid IMAGE_ID_FK { get; set; }
-        public string IMAGE_BASE { get; set; }
+        public string IMAGE_NAME { get; set; }
     }
 }
