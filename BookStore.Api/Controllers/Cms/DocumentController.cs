@@ -32,7 +32,7 @@ namespace BookStore.Api.Controllers
 
                 if (file.Length > 0)
                 {
-                    if (file.Length > 786432)
+                    if (file.Length > 2000000)
                     {
                         return Content("Max File size !");
                     }
