@@ -1,6 +1,6 @@
-﻿using BookStore.Dto;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using BookStore.Dto;
 
 namespace BookStore.Business.Services
 {
@@ -12,5 +12,6 @@ namespace BookStore.Business.Services
         DtoBook UpdateBook(DtoBook model);
         bool DeleteBook(Guid id);
         object GetBooksByAuthor(Guid id);
+        object UploadBook(string contentType, string dbFile, string childPath);
     }
 }

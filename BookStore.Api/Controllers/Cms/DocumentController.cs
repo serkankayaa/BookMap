@@ -2,6 +2,8 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
+using BookStore.Business;
+using BookStore.Business.Services;
 using BookStore.Entity;
 using BookStore.Entity.Context;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +13,12 @@ namespace BookStore.Api.Controllers
     [ApiController]
     public class DocumentController : ControllerBase
     {
-        private BookDbContext _context;
-        private readonly string[] ACCEPTED_FILE_TYPES = new[] {".jpg", ".jpeg", ".png", ".JPG", ".JPEG", ".PNG"};
+        private IBookService _bookservice;
+        private readonly string[] ACCEPTED_FILE_TYPES = new [] { ".jpg", ".jpeg", ".png", ".JPG", ".JPEG", ".PNG" };
 
-        public DocumentController(BookDbContext context)
+        public DocumentController(IBookService bookservice)
         {
-            this._context = context;
+            _bookservice = bookservice;
         }
 
         [Route("api/DocumentAdd")]
@@ -26,9 +28,10 @@ namespace BookStore.Api.Controllers
             try
             {
                 var file = Request.Form.Files[0];
+                var contentType = file.ContentType;
                 var folderName = Path.Combine("Resources", "images");
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-
+                var destinationPath = Directory.GetParent(Directory.GetCurrentDirectory()).FullName + @"\\BookStore.Web";
+                var pathToSave = Path.Combine(destinationPath, folderName);
 
                 if (file.Length > 0)
                 {
@@ -37,10 +40,10 @@ namespace BookStore.Api.Controllers
                         return Content("Max File size !");
                     }
 
-                    if(!ACCEPTED_FILE_TYPES.Any(s => s == Path.GetExtension(file.FileName).ToLower()))
+                    if (!ACCEPTED_FILE_TYPES.Any(s => s == Path.GetExtension(file.FileName).ToLower()))
                     {
                         return BadRequest("Invalid file type.");
-                    } 
+                    }
 
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var childPath = Path.Combine(folderName, fileName);
@@ -48,20 +51,13 @@ namespace BookStore.Api.Controllers
                     var dbFile = fileCode + "-" + fileName;
                     var fullPath = Path.Combine(pathToSave, dbFile);
 
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    using(var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(stream);
                     }
 
-                    Document document = new Document();
-                    document.CONTENT_TYPE = file.ContentType;
-                    document.FILE_NAME = dbFile;
-                    document.FULL_PATH = childPath;
+                    return _bookservice.UploadBook(contentType, dbFile, childPath);
 
-                    _context.Document.Add(document);
-                    _context.SaveChanges();
-
-                    return document;
                 }
                 else
                 {

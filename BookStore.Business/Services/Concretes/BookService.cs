@@ -1,11 +1,12 @@
-﻿using BookStore.Business.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using BookStore.Business.Generic;
 using BookStore.Business.Services;
 using BookStore.Dto;
+using BookStore.Entity;
 using BookStore.Entity.Context;
 using BookStore.Entity.Models;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace BookStore.Business
 {
@@ -41,30 +42,21 @@ namespace BookStore.Business
             {
                 var bookItem = this.GetById(id);
 
-                var getBook = (from b in _context.Book
-                               join a in _context.Author on b.AUTHOR_ID_FK equals a.AUTHOR_ID into auTemp
-                               from bookAuthor in auTemp.DefaultIfEmpty()
-                               join p in _context.Publisher on b.PUBLISHER_ID_FK equals p.PUBLISHER_ID into pbTemp
-                               from bookPublisher in pbTemp.DefaultIfEmpty()
-                               join c in _context.Category on b.CATEGORY_ID_FK equals c.CATEGORY_ID into ctTemp
-                               from bookCategory in ctTemp.DefaultIfEmpty()
-                               join s in _context.Shop on b.SHOP_ID_FK equals s.SHOP_ID into spTemp
-                               from bookShop in spTemp.DefaultIfEmpty()
-                               select new DtoBook()
-                               {
-                                   BOOK_ID = bookItem.BOOK_ID,
-                                   NAME = bookItem.NAME,
-                                   SUMMARY = bookItem.SUMMARY,
-                                   AUTHOR_ID_FK = bookItem.AUTHOR_ID_FK,
-                                   PUBLISHER_ID_FK = bookItem.PUBLISHER_ID_FK,
-                                   CATEGORY_ID_FK = bookItem.CATEGORY_ID_FK,
-                                   ACCOUNT_ID_FK = bookItem.ACCOUNT_ID_FK,
-                                   SHOP_ID_FK = bookItem.SHOP_ID_FK,
-                                   AUTHOR_NAME = bookAuthor.AUTHOR_NAME,
-                                   CATEGORY_NAME = bookCategory.NAME,
-                                   PUBLISHER_NAME = bookPublisher.NAME,
-                                   SHOP_NAME = bookShop.SHOP_NAME
-                               }).FirstOrDefault();
+                var getBook = (from b in _context.Book join a in _context.Author on b.AUTHOR_ID_FK equals a.AUTHOR_ID into auTemp from bookAuthor in auTemp.DefaultIfEmpty() join p in _context.Publisher on b.PUBLISHER_ID_FK equals p.PUBLISHER_ID into pbTemp from bookPublisher in pbTemp.DefaultIfEmpty() join c in _context.Category on b.CATEGORY_ID_FK equals c.CATEGORY_ID into ctTemp from bookCategory in ctTemp.DefaultIfEmpty() join s in _context.Shop on b.SHOP_ID_FK equals s.SHOP_ID into spTemp from bookShop in spTemp.DefaultIfEmpty() select new DtoBook()
+                {
+                    BOOK_ID = bookItem.BOOK_ID,
+                        NAME = bookItem.NAME,
+                        SUMMARY = bookItem.SUMMARY,
+                        AUTHOR_ID_FK = bookItem.AUTHOR_ID_FK,
+                        PUBLISHER_ID_FK = bookItem.PUBLISHER_ID_FK,
+                        CATEGORY_ID_FK = bookItem.CATEGORY_ID_FK,
+                        ACCOUNT_ID_FK = bookItem.ACCOUNT_ID_FK,
+                        SHOP_ID_FK = bookItem.SHOP_ID_FK,
+                        AUTHOR_NAME = bookAuthor.AUTHOR_NAME,
+                        CATEGORY_NAME = bookCategory.NAME,
+                        PUBLISHER_NAME = bookPublisher.NAME,
+                        SHOP_NAME = bookShop.SHOP_NAME
+                }).FirstOrDefault();
 
                 return getBook;
             }
@@ -88,12 +80,12 @@ namespace BookStore.Business
                 var totalBooks = books.Select(c => new DtoBook()
                 {
                     BOOK_ID = c.BOOK_ID,
-                    NAME = c.NAME,
-                    SUMMARY = c.SUMMARY,
-                    AUTHOR_ID_FK = c.AUTHOR_ID_FK,
-                    PUBLISHER_ID_FK = c.PUBLISHER_ID_FK,
-                    CATEGORY_ID_FK = c.CATEGORY_ID_FK,
-                    SHOP_ID_FK = c.SHOP_ID_FK,
+                        NAME = c.NAME,
+                        SUMMARY = c.SUMMARY,
+                        AUTHOR_ID_FK = c.AUTHOR_ID_FK,
+                        PUBLISHER_ID_FK = c.PUBLISHER_ID_FK,
+                        CATEGORY_ID_FK = c.CATEGORY_ID_FK,
+                        SHOP_ID_FK = c.SHOP_ID_FK,
                 }).ToList();
 
                 return totalBooks;
@@ -165,20 +157,16 @@ namespace BookStore.Business
         public object GetBooksByAuthor(Guid id)
         {
             var author = _authorService.GetAuthor(id);
-            var bookResult = (from a in _context.Author
-                              join b in _context.Book on a.AUTHOR_ID equals b.AUTHOR_ID_FK into bookAuthor
-                              from r in bookAuthor.DefaultIfEmpty()
-                              where r.AUTHOR_ID_FK == author.AUTHOR_ID
-                              select new DtoBookAuthor
-                              {
-                                  AUTHOR_ID_FK = a.AUTHOR_ID,
-                                  BOOK_ID = r.BOOK_ID,
-                                  BOOK_NAME = r.NAME,
-                                  BOOK_SUMMARY = r.SUMMARY,
-                                  BIOGRAPHY = a.BIOGRAPHY,
-                                  AUTHOR_NAME = a.AUTHOR_NAME,
-                                  BIRTH_DATE = a.BIRTH_DATE,
-                              }).ToList();
+            var bookResult = (from a in _context.Author join b in _context.Book on a.AUTHOR_ID equals b.AUTHOR_ID_FK into bookAuthor from r in bookAuthor.DefaultIfEmpty() where r.AUTHOR_ID_FK == author.AUTHOR_ID select new DtoBookAuthor
+            {
+                AUTHOR_ID_FK = a.AUTHOR_ID,
+                    BOOK_ID = r.BOOK_ID,
+                    BOOK_NAME = r.NAME,
+                    BOOK_SUMMARY = r.SUMMARY,
+                    BIOGRAPHY = a.BIOGRAPHY,
+                    AUTHOR_NAME = a.AUTHOR_NAME,
+                    BIRTH_DATE = a.BIRTH_DATE,
+            }).ToList();
 
             return bookResult;
         }
@@ -208,6 +196,21 @@ namespace BookStore.Business
                 return new DtoBook();
                 throw ex;
             }
+        }
+
+        public object UploadBook(string contentType, string dbFile, string childPath)
+        {
+
+            Document document = new Document();
+
+            document.CONTENT_TYPE = contentType;
+            document.FILE_NAME = dbFile;
+            document.FULL_PATH = childPath;
+
+            _context.Document.Add(document);
+            _context.SaveChanges();
+
+            return document;
         }
 
         #endregion

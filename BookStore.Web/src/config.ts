@@ -1,3 +1,4 @@
-const host = "https://localhost:5001/";
+const host = 'https://localhost:5001/';
+const webHost = 'https://localhost:4200/';
 export const apiBaseUrl = `${host}api`;
-export const apiImageUrl = `${host}Resources/images/`;
+export const apiImageUrl = `${webHost}Resources/images/`;
