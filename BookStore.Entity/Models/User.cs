@@ -1,33 +1,28 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Entity.Models
 {
     public class User
     {
         [Key]
-        public Guid USER_ID { get; set; }
-
+        public Guid ID { get; set; }
+        
         [Required]
-        [MaxLength(250, ErrorMessage = "First name is invalid")]
-        public string FIRST_NAME { get; set; }
-
-        [Required]
-        [MaxLength(250, ErrorMessage = "Second name is invalid")]
-        public string SECOND_NAME { get; set; }
-
-        [Required]
-        [MaxLength(300)]
         public string EMAIL_ADDRESS { get; set; }
 
+        [DefaultValue(true)]
         public bool EMAIL_CONFIRMED { get; set; }
 
-        public DateTime? BIRTH_DATE { get; set; }
+        public string VERIFICATION_CODE { get; set; }
 
-        public string LOCATION { get; set; }
+        [Required]
+        public string USER_NAME { get; set; }
 
-        public Guid ACCOUNT_ID_FK { get; set; }
+        [Required]
+        public byte ROLE { get; set; }
 
         [Required]
         public string CREATED_BY { get; set; }
@@ -35,8 +30,12 @@ namespace BookStore.Entity.Models
         [Required]
         public DateTime CREATED_DATE { get; set; }
 
-        public string MODIFIED_BY { get; set; }
+        public string UPDATED_BY { get; set; }
 
-        public DateTime? MODIFIED_DATE { get; set; }
+        public DateTime UPDATED_DATE { get; set; }
+
+        public ICollection<User_Password> User_Passwords { get; set; }
+        public ICollection<User_Log> User_Logs { get; set; }
+        public ICollection<User_Book> User_Books { get; set; }
     }
 }

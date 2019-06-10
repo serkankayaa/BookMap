@@ -33,9 +33,15 @@ namespace BookStore.Entity.Models
         [ForeignKey("Shop")]
         public Guid SHOP_ID_FK { get; set; }
 
+        [ForeignKey("Document")]
+        public Guid DOCUMENT_ID_FK { get; set; }
+
         public Author Author { get; set; }
         public Publisher Publisher { get; set; }
         public Category Category { get; set; }
         public Shop Shop { get; set; }
+        public Document Document { get; set; }
+
+        // public ICollection<User_Book> User_Books { get; set; }
     }
 }

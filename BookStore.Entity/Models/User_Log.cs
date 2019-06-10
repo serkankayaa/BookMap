@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Entity.Models
 {
-    public class User_Password
+    public class User_Log
     {
         [Key]
         public Guid ID { get; set; }
@@ -14,9 +14,11 @@ namespace BookStore.Entity.Models
         public Guid USER_ID_FK { get; set; }
 
         [Required]
-        public string PASSWORD_HASH { get; set; }
+        public DateTime LOGIN_DATE { get; set; }
 
-        public bool IS_ACTIVE { get; set; }
+        public DateTime LOGOUT_DATE { get; set; }
+
+        public string TOKEN { get; set; }
 
         [Required]
         public string CREATED_BY { get; set; }
