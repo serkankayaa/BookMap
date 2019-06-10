@@ -14,15 +14,15 @@ declare var $: any;
 export class BookComponent implements OnInit {
   public progress: number;
   public message: string;
-  imgFile ="166f3293-7613-488c-a331-8ec32a527849-landingdistance.jpg";
-  filePath = "/Resources/images/" + this.imgFile;
-// tslint:disable-next-line: no-output-on-prefix
+  filePath;
+  
   @Output() public onUploadFinished = new EventEmitter();
 
   constructor(private http: HttpClient, private bookService: BookService) { }
 
   ngOnInit() {
-    
+    //Bu resim deneme amacıyla eklenmiştir.
+    this.filePath = apiImageUrl + "8c79e466-b15c-4457-84ce-5faf4137e6ce-landing1.jpg";
   }
 
   uploadFile(files): object {

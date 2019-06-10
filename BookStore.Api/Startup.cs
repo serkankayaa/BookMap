@@ -44,6 +44,7 @@ namespace BookStoreMap
             services.AddScoped<IShopService, ShopService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ISupplierService, SupplierService>();
+            services.AddScoped<IDocumentService, DocumentService>();
 
             services.AddSwaggerGen(c =>
             {

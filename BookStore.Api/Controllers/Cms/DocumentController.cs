@@ -7,6 +7,7 @@ using BookStore.Business.Services;
 using BookStore.Entity;
 using BookStore.Entity.Context;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace BookStore.Api.Controllers
 {
@@ -14,11 +15,14 @@ namespace BookStore.Api.Controllers
     public class DocumentController : ControllerBase
     {
         private IDocumentService _documentService;
+        public IConfiguration _configuration { get; }
+
         private readonly string[] ACCEPTED_FILE_TYPES = new [] { ".jpg", ".jpeg", ".png", ".JPG", ".JPEG", ".PNG" };
 
-        public DocumentController(IDocumentService documentService)
+        public DocumentController(IDocumentService documentService, IConfiguration configuration)
         {
             _documentService = documentService;
+            _configuration = configuration;
         }
 
         [Route("api/DocumentAdd")]
@@ -29,8 +33,9 @@ namespace BookStore.Api.Controllers
             {
                 var file = Request.Form.Files[0];
                 var contentType = file.ContentType;
-                var folderName = Path.Combine("Resources", "images");
-                var destinationPath = Directory.GetParent(Directory.GetCurrentDirectory()).FullName + @"\\BookStore.Web";
+                var folderName = Path.Combine("assets", "documents");
+                string webUrlforImage = _configuration.GetValue<string>("WebUrlForImage");
+                var destinationPath = Directory.GetParent(Directory.GetCurrentDirectory()).FullName + webUrlforImage;
                 var pathToSave = Path.Combine(destinationPath, folderName);
 
                 if (file.Length > 0)
