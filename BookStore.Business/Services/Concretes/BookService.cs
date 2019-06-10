@@ -50,7 +50,6 @@ namespace BookStore.Business
                         AUTHOR_ID_FK = bookItem.AUTHOR_ID_FK,
                         PUBLISHER_ID_FK = bookItem.PUBLISHER_ID_FK,
                         CATEGORY_ID_FK = bookItem.CATEGORY_ID_FK,
-                        ACCOUNT_ID_FK = bookItem.ACCOUNT_ID_FK,
                         SHOP_ID_FK = bookItem.SHOP_ID_FK,
                         AUTHOR_NAME = bookAuthor.AUTHOR_NAME,
                         CATEGORY_NAME = bookCategory.NAME,
@@ -112,7 +111,6 @@ namespace BookStore.Business
                 book.AUTHOR_ID_FK = model.AUTHOR_ID_FK;
                 book.PUBLISHER_ID_FK = model.PUBLISHER_ID_FK;
                 book.CATEGORY_ID_FK = model.CATEGORY_ID_FK;
-                book.ACCOUNT_ID_FK = model.ACCOUNT_ID_FK;
                 book.SHOP_ID_FK = model.SHOP_ID_FK;
 
                 this.Add(book);
@@ -184,7 +182,6 @@ namespace BookStore.Business
                     book.AUTHOR_ID_FK = model.AUTHOR_ID_FK;
                     book.PUBLISHER_ID_FK = model.PUBLISHER_ID_FK;
                     book.CATEGORY_ID_FK = model.CATEGORY_ID_FK;
-                    book.ACCOUNT_ID_FK = model.ACCOUNT_ID_FK;
                     book.SHOP_ID_FK = model.SHOP_ID_FK;
                 }
                 this.Update(book);

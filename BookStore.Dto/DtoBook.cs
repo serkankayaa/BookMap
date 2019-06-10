@@ -13,7 +13,6 @@ namespace BookStore.Dto
         public string PUBLISHER_NAME { get; set; }
         public Guid CATEGORY_ID_FK { get; set; }
         public string CATEGORY_NAME { get; set; }
-        public Guid ACCOUNT_ID_FK { get; set; }
         public Guid SHOP_ID_FK { get; set; }
         public string SHOP_NAME { get; set; }
         public Guid IMAGE_ID_FK { get; set; }

@@ -26,11 +26,6 @@ namespace BookStore.Entity.Models
         public Guid PUBLISHER_ID_FK { get; set; }
 
         [Required]
-        [ForeignKey("Account")]
-        public Guid ACCOUNT_ID_FK { get; set; }
-
-
-        [Required]
         [ForeignKey("Category")]
         public Guid CATEGORY_ID_FK { get; set; }
 
@@ -40,7 +35,6 @@ namespace BookStore.Entity.Models
 
         public Author Author { get; set; }
         public Publisher Publisher { get; set; }
-        public Account Account { get; set; }
         public Category Category { get; set; }
         public Shop Shop { get; set; }
     }
