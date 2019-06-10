@@ -12,6 +12,5 @@ namespace BookStore.Business.Services
         DtoBook UpdateBook(DtoBook model);
         bool DeleteBook(Guid id);
         object GetBooksByAuthor(Guid id);
-        object UploadBook(string contentType, string dbFile, string childPath);
     }
 }

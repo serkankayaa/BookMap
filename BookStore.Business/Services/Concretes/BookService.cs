@@ -197,22 +197,7 @@ namespace BookStore.Business
                 throw ex;
             }
         }
-
-        public object UploadBook(string contentType, string dbFile, string childPath)
-        {
-
-            Document document = new Document();
-
-            document.CONTENT_TYPE = contentType;
-            document.FILE_NAME = dbFile;
-            document.FULL_PATH = childPath;
-
-            _context.Document.Add(document);
-            _context.SaveChanges();
-
-            return document;
-        }
-
+        
         #endregion
     }
 }

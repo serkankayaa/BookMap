@@ -14,8 +14,8 @@ declare var $: any;
 export class BookComponent implements OnInit {
   public progress: number;
   public message: string;
-  imgFile ="8a3a4c08-f877-4882-80b0-55c1082a10aa-incoming.png";
-  filePath = apiImageUrl + this.imgFile;
+  imgFile ="166f3293-7613-488c-a331-8ec32a527849-landingdistance.jpg";
+  filePath = "/Resources/images/" + this.imgFile;
 // tslint:disable-next-line: no-output-on-prefix
   @Output() public onUploadFinished = new EventEmitter();
 

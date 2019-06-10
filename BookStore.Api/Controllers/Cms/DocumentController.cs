@@ -13,12 +13,12 @@ namespace BookStore.Api.Controllers
     [ApiController]
     public class DocumentController : ControllerBase
     {
-        private IBookService _bookservice;
+        private IDocumentService _documentService;
         private readonly string[] ACCEPTED_FILE_TYPES = new [] { ".jpg", ".jpeg", ".png", ".JPG", ".JPEG", ".PNG" };
 
-        public DocumentController(IBookService bookservice)
+        public DocumentController(IDocumentService documentService)
         {
-            _bookservice = bookservice;
+            _documentService = documentService;
         }
 
         [Route("api/DocumentAdd")]
@@ -56,7 +56,7 @@ namespace BookStore.Api.Controllers
                         file.CopyTo(stream);
                     }
 
-                    return _bookservice.UploadBook(contentType, dbFile, childPath);
+                    return _documentService.UploadDocument(contentType, dbFile, childPath);
 
                 }
                 else

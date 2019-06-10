@@ -8,7 +8,8 @@ using BookStore.Entity.Context;
 using BookStore.Entity.Models;
 
 namespace BookStore.Business.Services {
-    public class AuthorService : EFRepository<Author>, IAuthorService {
+    public class AuthorService : EFRepository<Author>, IAuthorService 
+    {
         #region Field
 
         private BookDbContext _context;
@@ -17,7 +18,8 @@ namespace BookStore.Business.Services {
 
         #region Ctor
 
-        public AuthorService(BookDbContext context) : base(context) {
+        public AuthorService(BookDbContext context) : base(context) 
+        {
             _context = context;
         }
 

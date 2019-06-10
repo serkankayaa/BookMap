@@ -68,7 +68,7 @@ namespace BookStoreMap
             }
 
             app.UseCors(
-                options => options.WithOrigins("http://localhost:4200")
+                options => options.WithOrigins(Configuration.GetValue<string>("WebUrl"))
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
