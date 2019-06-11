@@ -10,6 +10,11 @@ namespace BookStore.Entity.Context
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User_Book>().HasKey(table => new { table.BOOK_ID_FK, table.USER_ID_FK });      
+        }
+
         #region Models Definition
 
         public DbSet<Book> Book { get; set; }
