@@ -18,7 +18,7 @@
         <label for="author">Author of the book</label>
         <select class="form-control" id="author" required [(ngModel)]="bookModel.AUTHOR" name="author"
           #author="ngModel">
-          <option *ngFor="let author of Authors" [value]="author">{{author}}</option>
+          <option *ngFor="let author of Authors" [value]="author">{{author.AUTHOR_NAME}}</option>
         </select>
         <div [hidden]="author.valid || author.pristine" class="alert alert-danger">
           Author is required
@@ -28,7 +28,7 @@
         <label for="publisher">Publisher of the book</label>
         <select class="form-control" id="publisher" required [(ngModel)]="bookModel.PUBLISHER" name="publisher"
           #publisher="ngModel">
-          <option *ngFor="let publisher of Publishers" [value]="publisher">{{publisher}}</option>
+          <option *ngFor="let publisher of Publishers" [value]="publisher">{{publisher.NAME}}</option>
         </select>
         <div [hidden]="publisher.valid || publisher.pristine" class="alert alert-danger">
           Publisher is required
@@ -38,7 +38,7 @@
         <label for="category">Category of the book</label>
         <select class="form-control" id="category" required [(ngModel)]="bookModel.CATEGORY" name="category"
           #category="ngModel">
-          <option *ngFor="let category of Categories" [value]="category">{{category}}</option>
+          <option *ngFor="let category of Categories" [value]="category">{{category.CATEGORY_NAME}}</option>
         </select>
         <div [hidden]="category.valid || category.pristine" class="alert alert-danger">
           Category is required
@@ -63,7 +63,7 @@
           </div>
         </div>
       </div>
-  <!-- 
+  <!--
       <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
       <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">New Hero</button> -->
   </form>
