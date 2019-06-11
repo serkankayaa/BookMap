@@ -76,6 +76,7 @@
             <tr>
               <th class="text-center">Publisher Name</th>
               <th class="text-center">Location</th>
+              <th class="text-center">Supplier</th>
               <th class="text-center">Actions</th>
             </tr>
           </thead>
@@ -83,6 +84,7 @@
             <tr *ngFor="let publisher of allPublisher">
               <td class="text-center" style="width: 15px;">{{publisher.NAME}}</td>
               <td class="text-center" style="width: 15px;">{{publisher.LOCATION}}</td>
+              <td class="text-center" style="width: 15px;">{{publisher.SUPPLIER_NAME}}</td>
               <td class="text-center" style="width: 15px;">
                 <button class="btn btn-success" (click)="editPublisher(publisher)"><i class="fa fa-edit"></i></button>
                 <button class="btn btn-danger" (click)="onDelete(publisher.PUBLISHER_ID)"><i

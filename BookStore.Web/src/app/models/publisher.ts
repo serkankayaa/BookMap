@@ -3,4 +3,5 @@ export class Publisher {
     NAME: string;
     LOCATION: string;
     SUPPLIER_ID_FK: string;
+    SUPPLIER_NAME: string;
 }

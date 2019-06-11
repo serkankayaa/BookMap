@@ -60,6 +60,8 @@ namespace BookStore.Business.Services
             author.PUBLISHER_ID = publisherItem.PUBLISHER_ID;
             author.NAME = publisherItem.NAME;
             author.LOCATION = publisherItem.LOCATION;
+            author.SUPPLIER_ID_FK = publisherItem.SUPPLIER_ID_FK;
+            author.SUPPLIER_NAME = publisherItem.Supplier.SUPPLIER_NAME;
 
             return author;
         }
@@ -76,6 +78,8 @@ namespace BookStore.Business.Services
             {
                 PUBLISHER_ID = c.PUBLISHER_ID,
                 NAME = c.NAME,
+                SUPPLIER_ID_FK = c.SUPPLIER_ID_FK,
+                SUPPLIER_NAME = c.Supplier.SUPPLIER_NAME,
                 LOCATION = c.LOCATION
             }).ToList();
 
