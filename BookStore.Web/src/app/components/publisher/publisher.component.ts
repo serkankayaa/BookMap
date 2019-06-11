@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Publisher } from '../models/publisher';
-import { PublisherService } from '../services/publisher.service';
+import { PublisherService } from '../../services/publisher.service';
 import { ToastrService } from 'ngx-toastr';
-import { Supplier } from '../models/supplier';
-import { SupplierService } from '../services/supplier.service';
+import { SupplierService } from '../../services/supplier.service';
+
+import { Publisher } from '../../models/publisher';
+import { Supplier } from '../../models/supplier';
 declare var $: any;
 
 @Component({
@@ -12,23 +13,26 @@ declare var $: any;
   templateUrl: './publisher.component.html',
   styleUrls: ['./publisher.component.css']
 })
+
 export class PublisherComponent implements OnInit {
   publisher = new Publisher();
-  allPublisher: Publisher[];
-  allSupplier: Supplier[];
+  allPublishers: Publisher[];
+  allSuppliers: Supplier[];
   isEdit: boolean;
   publisherId: any;
   hasData = true;
 
-  // tslint:disable-next-line: max-line-length
-  constructor(private publisherService: PublisherService, private toastrService: ToastrService, private supplierService: SupplierService) { }
+  constructor(private publisherService: PublisherService,
+    private toastrService: ToastrService,
+    private supplierService: SupplierService) { }
 
   ngOnInit() {
-    this.getPublishers();
-    this.getSupplierList();
+    this.getAllPublishers();
+    this.getAllSuppliers();
   }
-  getSupplierList(): void {
-    this.supplierService.getSuppliers().subscribe(data => this.allSupplier = data);
+
+  getAllSuppliers(): void {
+    this.supplierService.getAllSuppliers().subscribe(data => this.allSuppliers = data);
   }
 
   refreshForm(): void {
@@ -37,23 +41,23 @@ export class PublisherComponent implements OnInit {
     resetForm.reset();
   }
 
-  getPublishers(): void {
-    this.publisherService.getPublishers()
+  getAllPublishers(): void {
+    this.publisherService.getAllPublishers()
       .subscribe(data => {
         if (data.length === 0) {
           this.hasData = false;
         } else {
           this.hasData = true;
-          this.allPublisher = data;
+          this.allPublishers = data;
         }
       });
   }
 
   postPublisher(): object {
-    const result = this.publisherService.postPublisher(this.publisher).subscribe((response) => {
+    const postedPublisher = this.publisherService.postPublisher(this.publisher).subscribe((response) => {
       if (response.body != null && response.ok && response.body !== false) {
         this.toastrService.success('Publisher saved successfully');
-        this.getPublishers();
+        this.getAllPublishers();
         this.refreshForm();
         this.publisher = new Publisher();
 
@@ -67,7 +71,7 @@ export class PublisherComponent implements OnInit {
       }
     });
 
-    return result;
+    return postedPublisher;
   }
 
   focusErrorInput() {
@@ -86,7 +90,7 @@ export class PublisherComponent implements OnInit {
       (res) => {
         if (res.body != null && res.ok && res.body !== false) {
           this.toastrService.success('Publisher edited successfully.');
-          this.getPublishers();
+          this.getAllPublishers();
           this.refreshForm();
           this.publisher = new Publisher();
           this.isEdit = false;
@@ -103,7 +107,7 @@ export class PublisherComponent implements OnInit {
     this.publisherService.deletePublisher(this.publisherId).subscribe((res) => {
       {
         this.toastrService.success('Publisher deleted successfully.');
-        this.getPublishers();
+        this.getAllPublishers();
         this.refreshForm();
         this.publisher = new Publisher();
         this.isEdit = false;
@@ -120,9 +124,7 @@ export class PublisherComponent implements OnInit {
   cancelUpdate() {
     this.publisher = new Publisher();
     this.isEdit = false;
-    this.getPublishers();
+    this.getAllPublishers();
     this.refreshForm();
   }
-
-
 }

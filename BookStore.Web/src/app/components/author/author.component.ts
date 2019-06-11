@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { Author } from '../models/author';
-import { AuthorService } from '../services/author.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthorService } from '../../services/author.service';
+
+import { Author } from '../../models/author';
 declare var $: any;
 
 @Component({
@@ -10,9 +11,10 @@ declare var $: any;
   templateUrl: './author.component.html',
   styleUrls: ['./author.component.css']
 })
+
 export class AuthorComponent implements OnInit {
   author = new Author();
-  allAuthor: Author[];
+  allAuthors: Author[];
   response: object;
   isEdit = false;
   authorId: any;
@@ -52,13 +54,13 @@ export class AuthorComponent implements OnInit {
   }
 
   getAuthor(): void {
-    this.authorService.getAllAuthor()
+    this.authorService.getAllAuthors()
       .subscribe(data => {
         if (data.length === 0) {
           this.hasData = false;
         } else {
           this.hasData = true;
-          this.allAuthor = data;
+          this.allAuthors = data;
         }
       });
   }

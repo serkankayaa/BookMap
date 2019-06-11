@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Supplier } from '../models/supplier';
-import { SupplierService } from '../services/supplier.service';
+
 import { ToastrService } from 'ngx-toastr';
+import { SupplierService } from '../../services/supplier.service';
+
+import { Supplier } from '../../models/supplier';
 declare var $: any;
 
 @Component({
@@ -9,6 +11,7 @@ declare var $: any;
   templateUrl: './supplier.component.html',
   styleUrls: ['./supplier.component.css']
 })
+
 export class SupplierComponent implements OnInit {
   supplier = new Supplier;
   allSuppliers: Supplier[];
@@ -19,15 +22,17 @@ export class SupplierComponent implements OnInit {
   constructor(private supplierService: SupplierService, private toastrService: ToastrService) { }
 
   ngOnInit() {
-    this.getSuppliers();
+    this.getAllSuppliers();
   }
+
   refreshForm(): void {
     const dirtyFormID = 'supplierForm';
     const resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
     resetForm.reset();
   }
-  getSuppliers(): void {
-    this.supplierService.getSuppliers().subscribe(data => {
+
+  getAllSuppliers(): void {
+    this.supplierService.getAllSuppliers().subscribe(data => {
       if (data.length === 0) {
         this.hasData = false;
       } else {
@@ -38,10 +43,10 @@ export class SupplierComponent implements OnInit {
   }
 
   postSupplier(): object {
-    const result = this.supplierService.postSupplier(this.supplier).subscribe((response) => {
+    const postedSupplier = this.supplierService.postSupplier(this.supplier).subscribe((response) => {
       if (response.body != null && response.ok && response.body !== false) {
         this.toastrService.success('Supplier saved successfully.');
-        this.getSuppliers();
+        this.getAllSuppliers();
         this.refreshForm();
         this.supplier = new Supplier();
 
@@ -54,7 +59,8 @@ export class SupplierComponent implements OnInit {
         return;
       }
     });
-    return result;
+
+    return postedSupplier;
   }
 
   focusErrorInput() {
@@ -69,11 +75,11 @@ export class SupplierComponent implements OnInit {
   }
 
   updateSupplier(): void {
-    const result = this.supplierService.updateSupplier(this.supplier).subscribe(
+    this.supplierService.updateSupplier(this.supplier).subscribe(
       (res) => {
         if (res.body != null && res.ok && res.body !== false) {
           this.toastrService.success('Supplier edited successfully.');
-          this.getSuppliers();
+          this.getAllSuppliers();
           this.refreshForm();
           this.supplier = new Supplier();
           this.isEdit = false;
@@ -90,7 +96,7 @@ export class SupplierComponent implements OnInit {
     this.supplierService.deleteSupplier(this.supplierId).subscribe((res) => {
       {
         this.toastrService.success('Supplier deleted successfully.');
-        this.getSuppliers();
+        this.getAllSuppliers();
         this.refreshForm();
         this.supplier = new Supplier();
         this.isEdit = false;
@@ -107,7 +113,7 @@ export class SupplierComponent implements OnInit {
   cancelUpdate() {
     this.supplier = new Supplier();
     this.isEdit = false;
-    this.getSuppliers();
+    this.getAllSuppliers();
     this.refreshForm();
   }
 }

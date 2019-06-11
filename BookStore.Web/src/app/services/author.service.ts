@@ -1,39 +1,37 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import { Observable } from 'rxjs';
-import { Author } from '../models/author';
-import { apiBaseUrl } from '../../config';
-import { headerContent } from '../header';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+import { Author } from '../models/author';
+
+import { headerContent } from '../header';
+import { apiBaseUrl } from '../../config';
+
 @Injectable()
 export class AuthorService {
-  author$;
+  allAuthors;
 
   constructor(private http: HttpClient) { }
 
-  getAllAuthor(): Observable<Author[]> {
-    this.author$ = this.http.get(apiBaseUrl + '/getAllAuthor');
-
-    return this.author$;
+  getAllAuthors(): Observable<Author[]> {
+    this.allAuthors = this.http.get(apiBaseUrl + '/getAllAuthor');
+    return this.allAuthors;
   }
 
   postAuthor(author: Author) {
-    const result = this.http.post(apiBaseUrl + '/PostAuthor', author, { headers: headerContent, observe: 'response' });
-
-    return result;
+    const postedAuthor = this.http.post(apiBaseUrl + '/PostAuthor', author, { headers: headerContent, observe: 'response' });
+    return postedAuthor;
   }
 
   updateAuthor(author: Author) {
-    const result = this.http.put(apiBaseUrl + '/UpdateAuthor', author, { headers: headerContent, observe: 'response' });
-    return result;
+    const updatedAuthor = this.http.put(apiBaseUrl + '/UpdateAuthor', author, { headers: headerContent, observe: 'response' });
+    return updatedAuthor;
   }
 
   deleteAuthor(id: any) {
-    const result = this.http.delete(apiBaseUrl + '/DeleteAuthor/' + id, { headers: headerContent, observe: 'body' });
-    return result;
+    const deletedAuthor = this.http.delete(apiBaseUrl + '/DeleteAuthor/' + id, { headers: headerContent, observe: 'body' });
+    return deletedAuthor;
   }
-
 }

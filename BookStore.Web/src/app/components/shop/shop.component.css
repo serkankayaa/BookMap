@@ -21,7 +21,7 @@
 }
 
 #locationLabelProp::after {
-  content: url("../../assets/img/location.gif");
+  content: url("../../../assets/img/location.gif");
 
 }
 

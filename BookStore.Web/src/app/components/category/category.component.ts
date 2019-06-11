@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Category } from '../models/category';
-import { CategoryService } from '../services/category.service';
 import { ToastrService } from 'ngx-toastr';
+import { CategoryService } from '../../services/category.service';
+
+import { Category } from '../../models/category';
 declare var $: any;
 
 @Component({
@@ -10,6 +11,7 @@ declare var $: any;
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css']
 })
+
 export class CategoryComponent implements OnInit {
 
   category = new Category();
@@ -21,7 +23,7 @@ export class CategoryComponent implements OnInit {
   constructor(private categoryService: CategoryService, private toastrService: ToastrService) { }
 
   ngOnInit() {
-    this.GetCategories();
+    this.getAllCategories();
   }
 
   refreshForm(): void {
@@ -35,8 +37,8 @@ export class CategoryComponent implements OnInit {
     this.isEdit = true;
   }
 
-  GetCategories(): void {
-    this.categoryService.getCategories().subscribe(data => {
+  getAllCategories(): void {
+    this.categoryService.getAllCategories().subscribe(data => {
       if (data.length === 0) {
         this.hasData = false;
       } else {
@@ -47,10 +49,10 @@ export class CategoryComponent implements OnInit {
   }
 
   postCategory(): object {
-    const result = this.categoryService.postCategory(this.category).subscribe((response) => {
+    const postedCategory = this.categoryService.postCategory(this.category).subscribe((response) => {
       if (response.body != null && response.ok && response.body !== false) {
         this.toastrService.success('Category saved successfully.');
-        this.GetCategories();
+        this.getAllCategories();
         this.refreshForm();
         this.category = new Category();
         return;
@@ -62,15 +64,15 @@ export class CategoryComponent implements OnInit {
       }
     });
 
-    return result;
+    return postedCategory;
   }
 
   updateCategory(): void {
-    const result = this.categoryService.updateCategory(this.category).subscribe(
+    this.categoryService.updateCategory(this.category).subscribe(
       (res) => {
         if (res.body != null && res.ok && res.body !== false) {
           this.toastrService.success('Category edited successfully.');
-          this.GetCategories();
+          this.getAllCategories();
           this.refreshForm();
           this.category = new Category();
           this.isEdit = false;
@@ -93,7 +95,7 @@ export class CategoryComponent implements OnInit {
     this.categoryService.deleteCategory(this.categoryId).subscribe((res) => {
       {
         this.toastrService.success('Category deleted successfully.');
-        this.GetCategories();
+        this.getAllCategories();
         this.refreshForm();
         this.category = new Category();
         this.isEdit = false;
@@ -110,7 +112,7 @@ export class CategoryComponent implements OnInit {
   cancelUpdate() {
     this.category = new Category();
     this.isEdit = false;
-    this.GetCategories();
+    this.getAllCategories();
     this.refreshForm();
   }
 }

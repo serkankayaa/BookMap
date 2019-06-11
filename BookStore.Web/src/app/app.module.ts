@@ -9,23 +9,28 @@ import { ToastrModule } from 'ngx-toastr';
 
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { AuthorComponent } from './author/author.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { BookComponent } from './book/book.component';
-import { PublisherComponent } from './publisher/publisher.component';
+import { HomeComponent } from './components/home/home.component';
+import { AuthorComponent } from './components/author/author.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { BookComponent } from './components/book/book.component';
+import { PublisherComponent } from './components/publisher/publisher.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ShopComponent } from './components/shop/shop.component';
+import { CategoryComponent } from './components/category/category.component';
+import { SupplierComponent } from './components/supplier/supplier.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { RegisterComponent } from './components/register/register.component';
+
 import { AuthorService } from './services/author.service';
-import { BookService } from './services/book.service';
-import { PublisherService } from './services/publisher.service';
-import { ShopComponent } from './shop/shop.component';
-import { CategoryComponent } from './category/category.component';
 import { CategoryService } from './services/category.service';
-import { SupplierComponent } from './supplier/supplier.component';
-import { SupplierService } from './services/supplier.service';
+import { PublisherService } from './services/publisher.service';
 import { ShopService } from './services/shop.service';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { RegisterComponent } from './register/register.component';
+import { SupplierService } from './services/supplier.service';
+import { BookService } from './services/book.service';
+import { DocumentService } from './services/document.service';
+
+
+
 @NgModule({
    declarations: [
       AppComponent,
@@ -45,13 +50,12 @@ import { RegisterComponent } from './register/register.component';
       HttpClientModule,
       FormsModule,
       AppRoutingModule,
-      // tslint:disable-next-line: deprecation
       HttpModule,
       [AgGridModule.withComponents(AuthorComponent)],
       BrowserAnimationsModule,
       ToastrModule.forRoot(),
    ],
-   providers: [HttpClientModule, AuthorService, PublisherService, ShopService, CategoryService, SupplierService, BookService],
+   providers: [HttpClientModule, AuthorService, PublisherService, ShopService, CategoryService, SupplierService, BookService,DocumentService],
    bootstrap: [AppComponent]
 })
 export class AppModule {

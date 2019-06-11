@@ -1,40 +1,38 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import { Observable } from 'rxjs';
-import { Publisher } from '../models/publisher';
-import { apiBaseUrl } from '../../config';
-import { headerContent } from '../header';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+
+import { Publisher } from '../models/publisher';
+
+import { apiBaseUrl } from '../../config';
+import { headerContent } from '../header';
 
 
 @Injectable()
 export class PublisherService {
-  publisher$;
+  allPublishers;
 
   constructor(private http: HttpClient) { }
 
-  getPublishers(): Observable<Publisher[]> {
-    this.publisher$ = this.http.get(apiBaseUrl + '/GetPublishers');
-
-    return this.publisher$;
+  getAllPublishers(): Observable<Publisher[]> {
+    this.allPublishers = this.http.get(apiBaseUrl + '/GetPublishers');
+    return this.allPublishers;
   }
 
   postPublisher(publisher: Publisher) {
-    const result = this.http.post(apiBaseUrl + '/PostPublisher', publisher, { headers: headerContent, observe: 'response' });
-
-    return result;
+    const postedPublisher = this.http.post(apiBaseUrl + '/PostPublisher', publisher, { headers: headerContent, observe: 'response' });
+    return postedPublisher;
   }
 
   updatePublisher(publisher: Publisher) {
-    const result = this.http.put(apiBaseUrl + '/UpdatePublisher', publisher, { headers: headerContent, observe: 'response' });
-    return result;
+    const updatedPublisher = this.http.put(apiBaseUrl + '/UpdatePublisher', publisher, { headers: headerContent, observe: 'response' });
+    return updatedPublisher;
   }
 
   deletePublisher(id: any) {
-    const result = this.http.delete(apiBaseUrl + '/DeletePublisher/' + id, { headers: headerContent, observe: 'body' });
-    return result;
+    const deletedPublisher = this.http.delete(apiBaseUrl + '/DeletePublisher/' + id, { headers: headerContent, observe: 'body' });
+    return deletedPublisher;
   }
-
 }
