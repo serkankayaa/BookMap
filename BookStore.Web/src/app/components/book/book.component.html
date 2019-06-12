@@ -18,7 +18,11 @@
         <label for="author">Author of the book</label>
         <select class="form-control" id="author" required [(ngModel)]="bookModel.AUTHOR_ID_FK" name="author"
           #author="ngModel">
+<<<<<<< HEAD
           <option name="author" *ngFor="let author of allAuthors" [ngValue]="author.AUTHOR_ID">{{author.AUTHOR_NAME}}</option>
+=======
+          <option *ngFor="let author of Authors" [value]="author">{{author.AUTHOR_NAME}}</option>
+>>>>>>> e4091efa708316fca33f02be9be88a3e6f3c9afd
         </select>
         <div [hidden]="author.valid || author.pristine" class="alert alert-danger">
           Author is required
@@ -28,7 +32,11 @@
         <label for="publisher">Publisher of the book</label>
         <select class="form-control" id="publisher" required [(ngModel)]="bookModel.PUBLISHER_ID_FK" name="publisher"
           #publisher="ngModel">
+<<<<<<< HEAD
           <option *ngFor="let publisher of allPublishers" [ngValue]="publisher.PUBLISHER_ID">{{publisher.NAME}}</option>
+=======
+          <option *ngFor="let publisher of Publishers" [value]="publisher">{{publisher.NAME}}</option>
+>>>>>>> e4091efa708316fca33f02be9be88a3e6f3c9afd
         </select>
         <div [hidden]="publisher.valid || publisher.pristine" class="alert alert-danger">
           Publisher is required
@@ -38,7 +46,11 @@
         <label for="category">Category of the book</label>
         <select class="form-control" id="category" required [(ngModel)]="bookModel.CATEGORY_ID_FK" name="category"
           #category="ngModel">
+<<<<<<< HEAD
           <option *ngFor="let category of allCategories" [ngValue]="category.CATEGORY_ID">{{category.CATEGORY_NAME}}</option>
+=======
+          <option *ngFor="let category of Categories" [value]="category">{{category.CATEGORY_NAME}}</option>
+>>>>>>> e4091efa708316fca33f02be9be88a3e6f3c9afd
         </select>
         <div [hidden]="category.valid || category.pristine" class="alert alert-danger">
           Category is required
@@ -68,8 +80,26 @@
           </div>
         </div>
       </div>
+<<<<<<< HEAD
       <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid" (click)="postBook()">Submit</button>
     </form>
+=======
+  <!--
+      <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+      <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">New Hero</button> -->
+  </form>
+</div>
+
+<div [hidden]="!submitted">
+  <h2>You submitted the following:</h2>
+  <div class="row">
+    <div class="col-xs-3">Name</div>
+    <div class="col-xs-9">{{ bookModel.NAME }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Alter Ego</div>
+    <div class="col-xs-9">{{ bookModel.SUMMARY }}</div>
+>>>>>>> e4091efa708316fca33f02be9be88a3e6f3c9afd
   </div>
 
   <hr />

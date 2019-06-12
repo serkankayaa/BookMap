@@ -23,21 +23,6 @@ namespace BookStore.Business.Services
             _context = context;
         }
 
-        public bool DeletePublisher(Guid id)
-        {
-            try
-            {
-                Publisher publisher = this.GetById(id);
-                this.Delete(publisher);
-                this.Save();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
         #endregion
 
         #region Method
@@ -132,6 +117,21 @@ namespace BookStore.Business.Services
             this.Save();
 
             return model;
+        }
+        
+        public bool DeletePublisher(Guid id)
+        {
+            try
+            {
+                Publisher publisher = this.GetById(id);
+                this.Delete(publisher);
+                this.Save();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         #endregion
