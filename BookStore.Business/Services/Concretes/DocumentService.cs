@@ -23,7 +23,7 @@ namespace BookStore.Business.Services
             _context.Document.Add(document);
             _context.SaveChanges();
 
-            return document;
+            return document.DOCUMENT_ID;
         }
     }
 }

@@ -1,15 +1,20 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { HttpEventType } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 import { AuthorService } from '../../services/author.service';
 import { PublisherService } from '../../services/publisher.service';
 import { CategoryService } from '../../services/category.service';
 import { DocumentService } from '../../services/document.service';
+import { BookService } from '../../services/book.service';
 
 import { Author } from '../../models/author';
 import { Book } from '../../models/book';
 import { Category } from '../../models/category';
 import { Publisher } from '../../models/publisher';
+import { Shop } from '../../models/shop';
 import { UIImagePath } from '../../../config';
+import { ShopService } from '../../services/shop.service';
 declare var $: any;
 
 @Component({
@@ -23,27 +28,34 @@ export class BookComponent implements OnInit {
   bookModel = new Book();
   public progress: number;
   public message: string;
+  public allBooks: Book[];
   public book: Book[];
-  public Authors: Author[];
-  public Publishers: Publisher[];
-  public Categories: Category[];
+  public allAuthors: Author[];
+  public allPublishers: Publisher[];
+  public allCategories: Category[];
+  public allShops: Shop[];
   public formData = new FormData();
+  public fileToUpload;
 
   filePath;
 
   @Output() public onUploadFinished = new EventEmitter();
 
   constructor(
-    private authorService: AuthorService,
-    private publisherService: PublisherService,
-    private categoryService: CategoryService) { }
+    public authorService: AuthorService,
+    public shopService: ShopService,
+    public publisherService: PublisherService,
+    public documentService: DocumentService,
+    public categoryService: CategoryService,
+    private toastrService: ToastrService,
+    public bookService: BookService) { }
 
   ngOnInit() {
-    //Bu resim deneme amacıyla eklenmiştir.
-    this.filePath = UIImagePath + "2ec7dc24-d7e2-4cea-b62b-daac5875d835-2.PNG";
     this.getAllAuthors();
     this.getAllCategories();
     this.getAllPublishers();
+    this.getAllBooks();
+    this.getAllShops();
   }
 
 
@@ -55,40 +67,60 @@ export class BookComponent implements OnInit {
       return;
     }
 
-    const fileToUpload = <File>files[0];
-    this.formData.set('file', fileToUpload, fileToUpload.name);
-
-    // const result = this.documentService.documentAdd(formData).subscribe(event => {
-    //   if (event.type === HttpEventType.UploadProgress) {
-    //   } else if (event.type === HttpEventType.Response) {
-    //     this.message = fileToUpload.name;
-    //     this.onUploadFinished.emit(event.body);
-    //   }
-    // });
-    console.log(this.formData.get("file"));
-
+    this.fileToUpload = <File>files[0];
+    this.formData.append('file', this.fileToUpload, this.fileToUpload.name);
+    this.postDocument();
   }
 
   getAllAuthors() {
-    this.authorService.getAllAuthors().subscribe(data => {
-      this.Authors = data
-      console.log(data);
+    this.authorService.getAllAuthors().subscribe(authorData => {
+      this.allAuthors = authorData;
     }
     );
   }
 
   getAllCategories() {
-    this.categoryService.getAllCategories().subscribe(data => {
-      this.Categories = data
-      console.log(data);
+    this.categoryService.getAllCategories().subscribe(categoryData => {
+      this.allCategories = categoryData;
     }
     );
   }
 
   getAllPublishers() {
-    this.publisherService.getAllPublishers().subscribe(data => {
-      this.Publishers = data
-      console.log(data);
+    this.publisherService.getAllPublishers().subscribe(publisherData => {
+      this.allPublishers = publisherData;
+    });
+  }
+
+  getAllBooks() {
+    this.bookService.getAllBooks().subscribe(bookData => {
+      this.allBooks = bookData;
+    });
+  }
+
+  getAllShops() {
+    this.shopService.getAllShops().subscribe(shopData => {
+      this.allShops = shopData;
+    });
+  }
+
+  postDocument(): void {
+    this.documentService.postDocument(this.formData).subscribe(event => {
+      if (event.type === HttpEventType.UploadProgress) {
+      } else if (event.type === HttpEventType.Response) {
+        this.message = this.fileToUpload.name;
+        this.onUploadFinished.emit(event.body);
+        this.bookModel.IMAGE_ID_FK = event.body.toString();
+      }
+    });
+  }
+
+  postBook(): void {
+    this.bookService.postBook(this.bookModel).subscribe(response => {
+      if (response.body != null && response.ok) {
+        this.toastrService.success('Publisher edited successfully.');
+        this.getAllBooks();
+      }
     });
   }
 }

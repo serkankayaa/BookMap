@@ -23,8 +23,8 @@ export class PublisherComponent implements OnInit {
   hasData = true;
 
   constructor(private publisherService: PublisherService,
-    private toastrService: ToastrService,
-    private supplierService: SupplierService) { }
+              private toastrService: ToastrService,
+              private supplierService: SupplierService) { }
 
   ngOnInit() {
     this.getAllPublishers();
@@ -86,7 +86,7 @@ export class PublisherComponent implements OnInit {
   }
 
   updatePublisher(): void {
-    const result = this.publisherService.updatePublisher(this.publisher).subscribe(
+   this.publisherService.updatePublisher(this.publisher).subscribe(
       (res) => {
         if (res.body != null && res.ok && res.body !== false) {
           this.toastrService.success('Publisher edited successfully.');

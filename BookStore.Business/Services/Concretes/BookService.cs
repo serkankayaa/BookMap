@@ -111,7 +111,6 @@ namespace BookStore.Business
             try
             {
                 Book book = new Book();
-                book.BOOK_ID = model.BOOK_ID;
                 book.NAME = model.NAME;
                 book.SUMMARY = model.SUMMARY;
                 book.AUTHOR_ID_FK = model.AUTHOR_ID_FK;

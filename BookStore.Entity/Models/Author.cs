@@ -18,5 +18,7 @@ namespace BookStore.Entity.Models
         public DateTime BIRTH_DATE { get; set; }
 
         public string BIOGRAPHY { get; set; }
+
+        public ICollection<Book> Books { get; set; }
     }
 }

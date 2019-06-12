@@ -16,9 +16,9 @@
       </div>
       <div class="form-group">
         <label for="author">Author of the book</label>
-        <select class="form-control" id="author" required [(ngModel)]="bookModel.AUTHOR" name="author"
+        <select class="form-control" id="author" required [(ngModel)]="bookModel.AUTHOR_ID_FK" name="author"
           #author="ngModel">
-          <option *ngFor="let author of Authors" [value]="author">{{author}}</option>
+          <option name="author" *ngFor="let author of allAuthors" [ngValue]="author.AUTHOR_ID">{{author.AUTHOR_NAME}}</option>
         </select>
         <div [hidden]="author.valid || author.pristine" class="alert alert-danger">
           Author is required
@@ -26,9 +26,9 @@
       </div>
       <div class="form-group">
         <label for="publisher">Publisher of the book</label>
-        <select class="form-control" id="publisher" required [(ngModel)]="bookModel.PUBLISHER" name="publisher"
+        <select class="form-control" id="publisher" required [(ngModel)]="bookModel.PUBLISHER_ID_FK" name="publisher"
           #publisher="ngModel">
-          <option *ngFor="let publisher of Publishers" [value]="publisher">{{publisher}}</option>
+          <option *ngFor="let publisher of allPublishers" [ngValue]="publisher.PUBLISHER_ID">{{publisher.NAME}}</option>
         </select>
         <div [hidden]="publisher.valid || publisher.pristine" class="alert alert-danger">
           Publisher is required
@@ -36,15 +36,24 @@
       </div>
       <div class="form-group">
         <label for="category">Category of the book</label>
-        <select class="form-control" id="category" required [(ngModel)]="bookModel.CATEGORY" name="category"
+        <select class="form-control" id="category" required [(ngModel)]="bookModel.CATEGORY_ID_FK" name="category"
           #category="ngModel">
-          <option *ngFor="let category of Categories" [value]="category">{{category}}</option>
+          <option *ngFor="let category of allCategories" [ngValue]="category.CATEGORY_ID">{{category.CATEGORY_NAME}}</option>
         </select>
         <div [hidden]="category.valid || category.pristine" class="alert alert-danger">
           Category is required
         </div>
       </div>
-
+      <div class="form-group">
+        <label for="shop">Distributed Shop Name</label>
+        <select class="form-control" id="shop" required [(ngModel)]="bookModel.SHOP_ID_FK" name="shop"
+          #shop="ngModel">
+          <option *ngFor="let shop of allShops" [ngValue]="shop.SHOP_ID">{{shop.SHOP_NAME}}</option>
+        </select>
+        <div [hidden]="shop.valid || shop.pristine" class="alert alert-danger">
+          shop is required
+        </div>
+      </div>
       <div class="form-group">
         <label for="cover">Cover of the book</label>
         <div class="row" style="margin-bottom:15px;">
@@ -53,37 +62,21 @@
             <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
           </div>
           <div class="col-md-4">
-            <span class="upload" *ngIf="progress > 0">
-              {{progress}}%
-            </span>
             <span class="upload" *ngIf="message">
               {{message}}
             </span>
-            <img src={{filePath}}>
           </div>
         </div>
       </div>
-  <!-- 
-      <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
-      <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">New Hero</button> -->
-  </form>
-</div>
+      <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid" (click)="postBook()">Submit</button>
+    </form>
+  </div>
 
-<div [hidden]="!submitted">
-  <h2>You submitted the following:</h2>
-  <div class="row">
-    <div class="col-xs-3">Name</div>
-    <div class="col-xs-9">{{ bookModel.NAME }}</div>
+  <hr />
+  <h1>Book List</h1>
+  <div class="book-flex-list">
+    <div class="flex-item">
+      
+    </div>
   </div>
-  <div class="row">
-    <div class="col-xs-3">Alter Ego</div>
-    <div class="col-xs-9">{{ bookModel.SUMMARY }}</div>
-  </div>
-  <div class="row">
-    <div class="col-xs-3">Power</div>
-    <div class="col-xs-9">{{ bookModel.AUTHOR }}</div>
-  </div>
-  <br>
-  <button class="btn btn-primary" (click)="submitted=false">Edit</button>
-</div>
 </div>
