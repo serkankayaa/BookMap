@@ -9,27 +9,27 @@ import { headerContent } from '../header';
 
 @Injectable()
 export class ShopService {
-    allShops: any;
+  allShops: any;
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    postShop(shop: Shop) {
-        const postedShop = this.http.post(apiBaseUrl + '/PostShop', shop, { headers: headerContent, observe: 'response' });
-        return postedShop;
-    }
+  postShop(shop: Shop) {
+    const postedShop = this.http.post(apiBaseUrl + '/Shop', shop, { headers: headerContent, observe: 'response' });
+    return postedShop;
+  }
 
-    getAllShops(): Observable<Shop[]> {
-        this.allShops = this.http.get(apiBaseUrl + '/GetAllShops');
-        return this.allShops;
-    }
+  getAllShops(): Observable<Shop[]> {
+    this.allShops = this.http.get(apiBaseUrl + '/Shop');
+    return this.allShops;
+  }
 
-    updateShop(shop: Shop) {
-        const updatedShop = this.http.put(apiBaseUrl + '/UpdateShop', shop, { headers: headerContent, observe: 'response' });
-        return updatedShop;
-    }
+  updateShop(shop: Shop) {
+    const updatedShop = this.http.put(apiBaseUrl + '/Shop', shop, { headers: headerContent, observe: 'response' });
+    return updatedShop;
+  }
 
-    deleteShop(id: any) {
-        const deletedShop = this.http.delete(apiBaseUrl + '/DeleteShop/' + id, { headers: headerContent, observe: 'body' });
-        return deletedShop;
-    }
+  deleteShop(id: any) {
+    const deletedShop = this.http.delete(apiBaseUrl + '/Shop/' + id, { headers: headerContent, observe: 'body' });
+    return deletedShop;
+  }
 }

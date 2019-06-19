@@ -9,8 +9,10 @@ using BookStore.Entity.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
+#region DocumentController
 namespace BookStore.Api.Controllers
 {
+    [Route("[controller]")]
     [ApiController]
     public class DocumentController : ControllerBase
     {
@@ -18,6 +20,7 @@ namespace BookStore.Api.Controllers
         public IConfiguration _configuration { get; }
 
         private readonly string[] ACCEPTED_FILE_TYPES = new [] { ".jpg", ".jpeg", ".png", ".JPG", ".JPEG", ".PNG" };
+        #endregion
 
         public DocumentController(IDocumentService documentService, IConfiguration configuration)
         {
@@ -25,9 +28,10 @@ namespace BookStore.Api.Controllers
             _configuration = configuration;
         }
 
-        [Route("api/DocumentAdd")]
+        #region Document_Create
+        // POST: /Document/
         [HttpPost]
-        public object Upload()
+        public object PostDocument()
         {
             try
             {
@@ -61,7 +65,7 @@ namespace BookStore.Api.Controllers
                         file.CopyTo(stream);
                     }
 
-                    return _documentService.UploadDocument(contentType, dbFile, childPath);
+                    return _documentService.PostDocument(contentType, dbFile, childPath);
 
                 }
                 else
@@ -74,5 +78,6 @@ namespace BookStore.Api.Controllers
                 return ex;
             }
         }
+        #endregion
     }
 }

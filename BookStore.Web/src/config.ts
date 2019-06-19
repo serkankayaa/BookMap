@@ -1,3 +1,2 @@
-const host = 'https://localhost:5001/';
-export const apiBaseUrl = `${host}api`;
+export const apiBaseUrl = 'https://localhost:5001';
 export const UIImagePath = `/assets/documents/`;

@@ -8,10 +8,10 @@ import { apiBaseUrl } from '../../config';
 @Injectable()
 export class DocumentService {
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    postDocument(formData: FormData){
-        const postedDocument = this.http.post(apiBaseUrl + '/DocumentAdd', formData, {reportProgress: true, observe: 'events'});
-        return postedDocument;
-    }
+  postDocument(formData: FormData) {
+    const postedDocument = this.http.post(apiBaseUrl + '/Document', formData, { reportProgress: true, observe: 'events' });
+    return postedDocument;
+  }
 }

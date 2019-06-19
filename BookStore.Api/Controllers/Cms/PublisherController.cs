@@ -4,55 +4,66 @@ using BookStore.Business.Services;
 using BookStore.Dto;
 using Microsoft.AspNetCore.Mvc;
 
+#region PublisherController
 namespace BookStore.Api.Controllers.Cms
 {
+    [Route("[controller]")]
     [ApiController]
     public class PublisherController : ControllerBase
     {
         private readonly IPublisherService _publisherService;
+        #endregion
 
         public PublisherController(IPublisherService publisherService)
         {
             _publisherService = publisherService;
         }
 
-        #region ApiMethods
-
-        [Route("api/GetPublisher/{id:Guid}")]
-        [HttpGet]
-        public DtoPublisher GetPublisher(Guid id)
-        {
-            return _publisherService.GetPublisher(id);
-        }
-
-        [Route("api/GetPublishers")]
+        #region Category_GetAll
+        // GET: /Publisher
         [HttpGet]
         public List<DtoPublisher> GetPublisher()
         {
             return _publisherService.GetPublishers();
         }
 
-        [Route("api/PostPublisher")]
+        #region Publisher_GetById
+        // GET: /Publisher/5
+        [Route("{id:Guid}")]
+        [HttpGet]
+        public DtoPublisher GetPublisher(Guid id)
+        {
+            return _publisherService.GetPublisher(id);
+        }
+        #endregion
+        #endregion
+
+        #region Publisher_Create
+        // POST: /Publisher/
         [HttpPost]
         public object PostPublisher(DtoPublisher model)
         {
-            return _publisherService.PublisherAdd(model);
+            return _publisherService.PostPublisher(model);
         }
+        #endregion
 
-        [Route("api/UpdatePublisher")]
+        #region Publisher_Update
+        // PUT: /Publisher/
         [HttpPut]
         public object UpdatePublisher(DtoPublisher model)
         {
             return _publisherService.UpdatePublisher(model);
         }
+        #endregion
 
-        [Route("api/DeletePublisher/{id:Guid}")]
+        #region Publisher_Delete
+        // DELETE: /Publisher/5
+        [Route("{id:Guid}")]
         [HttpDelete]
         public bool DeletePublisher(Guid id)
         {
             return _publisherService.DeletePublisher(id);
         }
-
         #endregion
     }
 }

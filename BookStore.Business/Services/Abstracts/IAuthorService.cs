@@ -8,7 +8,7 @@ namespace BookStore.Business.Services {
     public interface IAuthorService {
         DtoAuthor GetAuthor(Guid id);
         List<DtoAuthor> GetAuthors();
-        object AuthorAdd(DtoAuthor model);
+        object PostAuthor(DtoAuthor model);
         object UpdateAuthor(DtoAuthor model);
         bool DeleteAuthor(Guid id);
         bool DeleteAllAuthors();

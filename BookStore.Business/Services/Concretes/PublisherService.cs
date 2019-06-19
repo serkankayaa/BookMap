@@ -75,7 +75,7 @@ namespace BookStore.Business.Services
         /// Publisher Add
         /// </summary>
         /// <param name="model"></param>
-        public object PublisherAdd(DtoPublisher model)
+        public object PostPublisher(DtoPublisher model)
         {
             var isPublisherExists = _context.Publisher.Where(c => c.NAME == model.NAME).Any();
 

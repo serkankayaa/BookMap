@@ -11,27 +11,27 @@ import { headerContent } from '../header';
 
 @Injectable()
 export class SupplierService {
-    allSuppliers: any;
+  allSuppliers: any;
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    getAllSuppliers(): Observable<Supplier[]> {
-        this.allSuppliers = this.http.get(apiBaseUrl + '/GetSuppliers');
-        return this.allSuppliers;
-    }
+  getAllSuppliers(): Observable<Supplier[]> {
+    this.allSuppliers = this.http.get(apiBaseUrl + '/Supplier');
+    return this.allSuppliers;
+  }
 
-    postSupplier(supplier: Supplier) {
-        const postedSupplier = this.http.post(apiBaseUrl + '/PostSupplier', supplier, { headers: headerContent, observe: 'response' });
-        return postedSupplier;
-    }
+  postSupplier(supplier: Supplier) {
+    const postedSupplier = this.http.post(apiBaseUrl + '/Supplier', supplier, { headers: headerContent, observe: 'response' });
+    return postedSupplier;
+  }
 
-    updateSupplier(supplier: Supplier) {
-        const updatedSupplier = this.http.put(apiBaseUrl + '/UpdateSupplier', supplier, { headers: headerContent, observe: 'response' });
-        return updatedSupplier;
-    }
+  updateSupplier(supplier: Supplier) {
+    const updatedSupplier = this.http.put(apiBaseUrl + '/Supplier', supplier, { headers: headerContent, observe: 'response' });
+    return updatedSupplier;
+  }
 
-    deleteSupplier(id: any) {
-        const deleteSupplier = this.http.delete(apiBaseUrl + '/DeleteSupplier/' + id, { headers: headerContent, observe: 'body' });
-        return deleteSupplier;
-    }
+  deleteSupplier(id: any) {
+    const deleteSupplier = this.http.delete(apiBaseUrl + '/Supplier/' + id, { headers: headerContent, observe: 'body' });
+    return deleteSupplier;
+  }
 }

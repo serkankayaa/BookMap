@@ -106,7 +106,7 @@ namespace BookStore.Business
         /// Add book
         /// </summary>
         /// <param name="model"></param>
-        public void BookAdd(DtoBook model)
+        public void PostBook(DtoBook model)
         {
             try
             {

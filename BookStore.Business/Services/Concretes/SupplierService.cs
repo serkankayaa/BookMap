@@ -41,8 +41,8 @@ namespace BookStore.Business.Services
             return new DtoSupplier()
             {
                 SUPPLIER_ID = supplier.SUPPLIER_ID,
-                SUPPLIER_NAME = supplier.SUPPLIER_NAME,
-                SUPPLIER_REGION = supplier.SUPPLIER_REGION
+                    SUPPLIER_NAME = supplier.SUPPLIER_NAME,
+                    SUPPLIER_REGION = supplier.SUPPLIER_REGION
             };
         }
 
@@ -57,8 +57,8 @@ namespace BookStore.Business.Services
             var totalSuppliers = suppliers.Select(c => new DtoSupplier()
             {
                 SUPPLIER_ID = c.SUPPLIER_ID,
-                SUPPLIER_NAME = c.SUPPLIER_NAME,
-                SUPPLIER_REGION = c.SUPPLIER_REGION,
+                    SUPPLIER_NAME = c.SUPPLIER_NAME,
+                    SUPPLIER_REGION = c.SUPPLIER_REGION,
             }).ToList();
 
             return totalSuppliers;
@@ -68,7 +68,7 @@ namespace BookStore.Business.Services
         /// Add Supplier
         /// </summary>
         /// <returns></returns>
-        public object SupplierAdd(DtoSupplier model)
+        public object PostSupplier(DtoSupplier model)
         {
             var isExistSupplier = _context.Supplier.Where(c => c.SUPPLIER_NAME == model.SUPPLIER_NAME).Any();
 

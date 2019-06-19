@@ -12,7 +12,7 @@ namespace BookStore.Business.Services
             _context = context;
         }
 
-        public object UploadDocument(string contentType, string dbFile, string childPath)
+        public object PostDocument(string contentType, string dbFile, string childPath)
         {
             Document document = new Document();
 

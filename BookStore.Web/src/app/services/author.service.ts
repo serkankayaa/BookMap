@@ -16,22 +16,24 @@ export class AuthorService {
   constructor(private http: HttpClient) { }
 
   getAllAuthors(): Observable<Author[]> {
-    this.allAuthors = this.http.get(apiBaseUrl + '/getAllAuthor');
+    this.allAuthors = this.http.get(apiBaseUrl + '/Author');
     return this.allAuthors;
   }
 
+  //TODO: GetById
+
   postAuthor(author: Author) {
-    const postedAuthor = this.http.post(apiBaseUrl + '/PostAuthor', author, { headers: headerContent, observe: 'response' });
+    const postedAuthor = this.http.post(apiBaseUrl + '/Author', author, { headers: headerContent, observe: 'response' });
     return postedAuthor;
   }
 
   updateAuthor(author: Author) {
-    const updatedAuthor = this.http.put(apiBaseUrl + '/UpdateAuthor', author, { headers: headerContent, observe: 'response' });
+    const updatedAuthor = this.http.put(apiBaseUrl + '/Author', author, { headers: headerContent, observe: 'response' });
     return updatedAuthor;
   }
 
   deleteAuthor(id: any) {
-    const deletedAuthor = this.http.delete(apiBaseUrl + '/DeleteAuthor/' + id, { headers: headerContent, observe: 'body' });
+    const deletedAuthor = this.http.delete(apiBaseUrl + '/Author/' + id, { headers: headerContent, observe: 'body' });
     return deletedAuthor;
   }
 }

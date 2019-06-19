@@ -17,22 +17,22 @@ export class PublisherService {
   constructor(private http: HttpClient) { }
 
   getAllPublishers(): Observable<Publisher[]> {
-    this.allPublishers = this.http.get(apiBaseUrl + '/GetPublishers');
+    this.allPublishers = this.http.get(apiBaseUrl + '/Publisher');
     return this.allPublishers;
   }
 
   postPublisher(publisher: Publisher) {
-    const postedPublisher = this.http.post(apiBaseUrl + '/PostPublisher', publisher, { headers: headerContent, observe: 'response' });
+    const postedPublisher = this.http.post(apiBaseUrl + '/Publisher', publisher, { headers: headerContent, observe: 'response' });
     return postedPublisher;
   }
 
   updatePublisher(publisher: Publisher) {
-    const updatedPublisher = this.http.put(apiBaseUrl + '/UpdatePublisher', publisher, { headers: headerContent, observe: 'response' });
+    const updatedPublisher = this.http.put(apiBaseUrl + '/Publisher', publisher, { headers: headerContent, observe: 'response' });
     return updatedPublisher;
   }
 
   deletePublisher(id: any) {
-    const deletedPublisher = this.http.delete(apiBaseUrl + '/DeletePublisher/' + id, { headers: headerContent, observe: 'body' });
+    const deletedPublisher = this.http.delete(apiBaseUrl + '/Publisher/' + id, { headers: headerContent, observe: 'body' });
     return deletedPublisher;
   }
 }

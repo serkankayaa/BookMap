@@ -10,16 +10,19 @@ import { Book } from '../models/book';
 
 @Injectable()
 export class BookService {
-    getAllBooksUrl = `${apiBaseUrl}/GetAllBooks`;
-    postBookUrl = `${apiBaseUrl}/PostBook`;
+  allBooks;
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    getAllBooks(): Observable<Book[]> {
-        return this.http.get<Book[]>(this.getAllBooksUrl);
-    }
+  getAllBooks(): Observable<Book[]> {
+    this.allBooks = this.http.get(apiBaseUrl + '/Book', { headers: headerContent, observe: 'response', });
+    return this.allBooks;
 
-    postBook(book: Book) {
-        return this.http.post<Book>(this.postBookUrl, book, { headers: headerContent, observe: 'response', reportProgress: true });
-    }
+  }
+
+  postBook(book: Book) {
+    return this.http.post<Book>(apiBaseUrl + '/Book', book, { headers: headerContent, observe: 'response', reportProgress: true });
+  }
+
+  //TODO: PUT,DELETE
 }

@@ -12,25 +12,25 @@ import { headerContent } from '../header';
 
 @Injectable()
 export class CategoryService {
-    allCategories;
+  allCategories;
 
-    constructor(private http: HttpClient) { }
-    getAllCategories(): Observable<Category[]> {
-        this.allCategories = this.http.get(apiBaseUrl + '/GetCategories');
-        return this.allCategories;
-    }
+  constructor(private http: HttpClient) { }
+  getAllCategories(): Observable<Category[]> {
+    this.allCategories = this.http.get(apiBaseUrl + '/Category');
+    return this.allCategories;
+  }
 
-    postCategory(category: Category) {
-        const postedCategory = this.http.post(apiBaseUrl + '/postCategory', category, { headers: headerContent, observe: 'response' });
-        return postedCategory;
-    }
-    updateCategory(category: Category) {
-        const updatedCategory = this.http.put(apiBaseUrl + '/UpdateCategory', category, { headers: headerContent, observe: 'response' });
-        return updatedCategory;
-    }
+  postCategory(category: Category) {
+    const postedCategory = this.http.post(apiBaseUrl + '/Category', category, { headers: headerContent, observe: 'response' });
+    return postedCategory;
+  }
+  updateCategory(category: Category) {
+    const updatedCategory = this.http.put(apiBaseUrl + '/Category', category, { headers: headerContent, observe: 'response' });
+    return updatedCategory;
+  }
 
-    deleteCategory(id: any) {
-        const deletedCategory = this.http.delete(apiBaseUrl + '/DeleteCategory/' + id, { headers: headerContent, observe: 'body' });
-        return deletedCategory;
-    }
+  deleteCategory(id: any) {
+    const deletedCategory = this.http.delete(apiBaseUrl + '/Category/' + id, { headers: headerContent, observe: 'body' });
+    return deletedCategory;
+  }
 }

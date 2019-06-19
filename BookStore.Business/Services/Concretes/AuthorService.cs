@@ -52,7 +52,7 @@ namespace BookStore.Business.Services {
             return totalAuthors;
         }
 
-        public object AuthorAdd(DtoAuthor model) {
+        public object PostAuthor(DtoAuthor model) {
             var isAuthorNameExists = _context.Author.Where(c => c.AUTHOR_NAME == model.AUTHOR_NAME).Any();
 
             if (isAuthorNameExists) {

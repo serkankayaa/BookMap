@@ -4,34 +4,23 @@ using BookStore.Business.Services;
 using BookStore.Dto;
 using Microsoft.AspNetCore.Mvc;
 
+#region ShopController
 namespace BookStore.Api.Controllers.Cms
 {
+    [Route("[controller]")]
     [ApiController]
     public class ShopController : ControllerBase
     {
         private readonly IShopService _shopService;
+        #endregion
+
         public ShopController(IShopService shopService)
         {
             _shopService = shopService;
         }
 
-        #region ApiMethods
-
-        [Route("api/PostShop")]
-        [HttpPost]
-        public object PostShop(DtoShop model)
-        {
-            return _shopService.AddShop(model);
-        }
-
-        [Route("api/GetShop/{id:Guid}")]
-        [HttpGet]
-        public object GetShop(Guid id)
-        {
-            return _shopService.GetShop(id);
-        }
-
-        [Route("api/GetAllShops")]
+        #region Shop_GetAll
+        // GET: /Shop
         [HttpGet]
         public List<DtoShop> GetAllShops()
         {
@@ -39,20 +28,43 @@ namespace BookStore.Api.Controllers.Cms
             return _shopService.GetShops();
         }
 
-        [Route("api/UpdateShop")]
+        #region Shop_GetById
+        // GET: /Shop/5
+        [Route("{id:Guid}")]
+        [HttpGet]
+        public object GetShop(Guid id)
+        {
+            return _shopService.GetShop(id);
+        }
+        #endregion
+        #endregion
+
+        #region Shop_Create
+        // POST: /Shop/
+        [HttpPost]
+        public object PostShop(DtoShop model)
+        {
+            return _shopService.PostShop(model);
+        }
+        #endregion
+
+        #region Shop_Update
+        // PUT: /Shop/
         [HttpPut]
         public object UpdateShop(DtoShop model)
         {
             return _shopService.UpdateShop(model);
         }
+        #endregion
 
-        [Route("api/DeleteShop/{id:Guid}")]
+        #region Shop_Delete
+        // DELETE: /Shop/5
+        [Route("{id:Guid}")]
         [HttpDelete]
         public bool DeleteShop(Guid id)
         {
             return _shopService.DeleteShop(id);
         }
-
         #endregion
 
     }

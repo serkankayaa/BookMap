@@ -12,7 +12,7 @@ namespace BookStore.Business.Services
 
         List<DtoShop> GetShops();
 
-        object AddShop(DtoShop model);
+        object PostShop(DtoShop model);
         object UpdateShop(DtoShop model);
         bool DeleteShop(Guid id);
     }

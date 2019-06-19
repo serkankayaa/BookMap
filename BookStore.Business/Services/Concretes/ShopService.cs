@@ -18,7 +18,7 @@ namespace BookStore.Business.Services
             _context = context;
         }
 
-        public object AddShop(DtoShop model)
+        public object PostShop(DtoShop model)
         {
             var isShopExists = _context.Shop.Where(c => c.SHOP_NAME == model.SHOP_NAME).Any();
 
