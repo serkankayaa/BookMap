@@ -28,16 +28,29 @@ namespace BookStoreMap
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
-            services.AddCors();
 
+            //CORS policty
+            services.AddCors(setupAction =>
+            {
+                setupAction.AddPolicy("BookStorePolicy", policy =>
+                {
+                    policy.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithOrigins(Configuration.GetValue<string>("WebUrl"))
+                        .AllowCredentials();
+                });
+            });
+
+            //PostgreSQL connection
             var connectionString = Configuration.GetConnectionString("DatabaseConnection");
             services.AddDbContext<BookDbContext>(options =>
-               options.UseSqlServer(connectionString,
-               b => b.MigrationsAssembly("BookStore.Api")));
+                options.UseNpgsql(connectionString,
+                    b => b.MigrationsAssembly("BookStore.Api")));
 
+            //Services with Dependency Injection
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IPublisherService, PublisherService>();
@@ -46,12 +59,13 @@ namespace BookStoreMap
             services.AddScoped<ISupplierService, SupplierService>();
             services.AddScoped<IDocumentService, DocumentService>();
 
+            //Swagger Connection
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("CoreSwagger", new Info
                 {
                     Title = "BookMap Store Api",
-                    Version = "1.0.0"
+                        Version = "1.0.0"
                 });
             });
         }
@@ -68,17 +82,10 @@ namespace BookStoreMap
                 app.UseHsts();
             }
 
-            app.UseCors(
-                options => options.WithOrigins(Configuration.GetValue<string>("WebUrl"))
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials()
-            );
-
+            app.UseCors("BookStorePolicy");
             app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseMvc();
-
             app.UseSwagger().UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/CoreSwagger/swagger.json", "BookStoreMap");
