@@ -29,8 +29,6 @@ import { SupplierService } from './services/supplier.service';
 import { BookService } from './services/book.service';
 import { DocumentService } from './services/document.service';
 
-
-
 @NgModule({
    declarations: [
       AppComponent,
@@ -43,7 +41,7 @@ import { DocumentService } from './services/document.service';
       CategoryComponent,
       SupplierComponent,
       SignInComponent,
-      RegisterComponent
+      RegisterComponent,
    ],
    imports: [
       BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
