@@ -1,3 +1,4 @@
 bin/
 obj/
 .vscode/
+Bookstore.Api/appsettings.json
