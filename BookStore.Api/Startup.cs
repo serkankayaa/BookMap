@@ -32,7 +32,7 @@ namespace BookStoreMap
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
 
-            //CORS policty
+            //CORS policy
             services.AddCors(setupAction =>
             {
                 setupAction.AddPolicy("BookStorePolicy", policy =>
