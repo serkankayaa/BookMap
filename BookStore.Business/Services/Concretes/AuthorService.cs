@@ -87,6 +87,7 @@ namespace BookStore.Business.Services {
         }
 
         public bool DeleteAuthor(Guid id) {
+            ///firstBranch
             try {
                 Author author = this.GetById(id);
                 this.Delete(author);
