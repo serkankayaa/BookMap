@@ -96,7 +96,7 @@ namespace BookStore.Business.Services {
             catch (Exception) {
                 return false;
             }
-        }
+        } 
         public bool DeleteAllAuthors() {
 
             var authors = this.GetAll();
