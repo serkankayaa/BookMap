@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
 
-import { User } from '../../models/user';
-
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -14,8 +12,6 @@ import { User } from '../../models/user';
 export class SignInComponent implements OnInit {
 
   constructor(private toastrService: ToastrService, private router: Router) { }
-
-  user = new User();
 
   ngOnInit() { }
 

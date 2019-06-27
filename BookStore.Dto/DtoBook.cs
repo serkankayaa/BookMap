@@ -4,18 +4,18 @@ namespace BookStore.Dto
 {
     public class DtoBook
     {
-        public Guid BOOK_ID { get; set; }
-        public string NAME { get; set; }
-        public string SUMMARY { get; set; }
-        public Guid AUTHOR_ID_FK { get; set; }
-        public string AUTHOR_NAME { get; set; }
-        public Guid PUBLISHER_ID_FK { get; set; }
-        public string PUBLISHER_NAME { get; set; }
-        public Guid CATEGORY_ID_FK { get; set; }
-        public string CATEGORY_NAME { get; set; }
-        public Guid SHOP_ID_FK { get; set; }
-        public string SHOP_NAME { get; set; }
-        public Guid IMAGE_ID_FK { get; set; }
-        public string IMAGE_NAME { get; set; }
+        public Guid BookId { get; set; }
+        public string BookName { get; set; }
+        public string Summary { get; set; }
+        public Guid AuthorIdFk { get; set; }
+        public string AuthorName { get; set; }
+        public Guid PublisherIdFk { get; set; }
+        public string PublisherName { get; set; }
+        public Guid CategoryIdFk { get; set; }
+        public string CategoryName { get; set; }
+        public Guid ShopIdFk { get; set; }
+        public string ShopName { get; set; }
+        public Guid ImageIdFk { get; set; }
+        public string ImageName { get; set; }
     }
 }

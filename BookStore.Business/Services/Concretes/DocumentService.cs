@@ -7,6 +7,7 @@ namespace BookStore.Business.Services
     public class DocumentService : EFRepository<Document>, IDocumentService
     {
         private BookDbContext _context;
+        
         public DocumentService(BookDbContext context) : base(context)
         {
             _context = context;
@@ -16,14 +17,14 @@ namespace BookStore.Business.Services
         {
             Document document = new Document();
 
-            document.CONTENT_TYPE = contentType;
-            document.FILE_NAME = dbFile;
-            document.FULL_PATH = childPath;
+            document.ContentType = contentType;
+            document.FileName = dbFile;
+            document.FullPath = childPath;
 
             _context.Document.Add(document);
             _context.SaveChanges();
 
-            return document.DOCUMENT_ID;
+            return document.Id;
         }
     }
 }

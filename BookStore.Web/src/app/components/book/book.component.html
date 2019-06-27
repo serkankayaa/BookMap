@@ -4,7 +4,7 @@
     <form (ngSubmit)="onSubmit()" #bookForm="ngForm">
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" required [(ngModel)]="bookModel.NAME" name="name"
+        <input type="text" class="form-control" id="name" required [(ngModel)]="bookModel.BookName" name="name"
           #name="ngModel">
         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
           Name is required
@@ -12,13 +12,13 @@
       </div>
       <div class="form-group">
         <label for="summary">Summary</label>
-        <input type="text" class="form-control" id="summary" [(ngModel)]="bookModel.SUMMARY" name="summary">
+        <input type="text" class="form-control" id="summary" [(ngModel)]="bookModel.Summary" name="summary">
       </div>
       <div class="form-group">
         <label for="author">Author of the book</label>
-        <select class="form-control" id="author" required [(ngModel)]="bookModel.AUTHOR_ID_FK" name="author"
+        <select class="form-control" id="author" required [(ngModel)]="bookModel.AuthorIdFk" name="author"
           #author="ngModel">
-          <option name="author" *ngFor="let author of allAuthors" [ngValue]="author.AUTHOR_ID">{{author.AUTHOR_NAME}}</option>
+          <option name="author" *ngFor="let author of allAuthors" [ngValue]="author.AuthorId">{{author.AuthorName}}</option>
         </select>
         <div [hidden]="author.valid || author.pristine" class="alert alert-danger">
           Author is required
@@ -26,9 +26,9 @@
       </div>
       <div class="form-group">
         <label for="publisher">Publisher of the book</label>
-        <select class="form-control" id="publisher" required [(ngModel)]="bookModel.PUBLISHER_ID_FK" name="publisher"
+        <select class="form-control" id="publisher" required [(ngModel)]="bookModel.PublisherIdFk" name="publisher"
           #publisher="ngModel">
-          <option *ngFor="let publisher of allPublishers" [ngValue]="publisher.PUBLISHER_ID">{{publisher.NAME}}</option>
+          <option *ngFor="let publisher of allPublishers" [ngValue]="publisher.PublisherId">{{publisher.PublisherName}}</option>
         </select>
         <div [hidden]="publisher.valid || publisher.pristine" class="alert alert-danger">
           Publisher is required
@@ -36,9 +36,9 @@
       </div>
       <div class="form-group">
         <label for="category">Category of the book</label>
-        <select class="form-control" id="category" required [(ngModel)]="bookModel.CATEGORY_ID_FK" name="category"
+        <select class="form-control" id="category" required [(ngModel)]="bookModel.CategoryIdFk" name="category"
           #category="ngModel">
-          <option *ngFor="let category of allCategories" [ngValue]="category.CATEGORY_ID">{{category.CATEGORY_NAME}}</option>
+          <option *ngFor="let category of allCategories" [ngValue]="category.CategoryId">{{category.CategoryName}}</option>
         </select>
         <div [hidden]="category.valid || category.pristine" class="alert alert-danger">
           Category is required
@@ -46,9 +46,9 @@
       </div>
       <div class="form-group">
         <label for="shop">Distributed Shop Name</label>
-        <select class="form-control" id="shop" required [(ngModel)]="bookModel.SHOP_ID_FK" name="shop"
+        <select class="form-control" id="shop" required [(ngModel)]="bookModel.ShopIdFk" name="shop"
           #shop="ngModel">
-          <option *ngFor="let shop of allShops" [ngValue]="shop.SHOP_ID">{{shop.SHOP_NAME}}</option>
+          <option *ngFor="let shop of allShops" [ngValue]="shop.ShopId">{{shop.ShopName}}</option>
         </select>
         <div [hidden]="shop.valid || shop.pristine" class="alert alert-danger">
           shop is required
@@ -68,7 +68,7 @@
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid" (click)="postBook()">Submit</button>
+      <button type="submit" class="btn btn-success" (click)="postBook()">Submit</button>
     </form>
   </div>
 

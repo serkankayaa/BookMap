@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
 import { ShopService } from '../../services/shop.service';
-
 import { Shop } from '../../models/shop';
+
 declare var $: any;
 
 @Component({
@@ -39,7 +39,6 @@ export class ShopComponent implements OnInit {
 
   postShop(): object {
     const postedShop = this.shopService.postShop(this.shop).subscribe((response) => {
-      console.log(response);
       if (response.body != null && response.ok && response.body !== false) {
         this.toastrService.success('Shop added successfully');
         this.shop = new Shop();
@@ -48,6 +47,7 @@ export class ShopComponent implements OnInit {
 
         return;
       }
+
       if (response.body === false) {
         this.toastrService.error('This shop added already');
         this.focusErrorInput();
@@ -64,8 +64,6 @@ export class ShopComponent implements OnInit {
     focusForm.focus();
   }
 
-
-
   editShop(selectedShop: Shop): void {
     this.shop = selectedShop;
     this.isEdit = true;
@@ -81,9 +79,11 @@ export class ShopComponent implements OnInit {
           this.shop = new Shop();
           this.isEdit = false;
         }
+
         if (res.body === false) {
           this.toastrService.error('Please make a change to edit.');
           this.focusErrorInput();
+          
           return;
         }
       });

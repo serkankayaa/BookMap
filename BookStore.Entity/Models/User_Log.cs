@@ -4,31 +4,41 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Entity.Models
 {
-    public class User_Log
+    [Table("USER_LOG")]
+    public class UserLog
     {
         [Key]
-        public Guid ID { get; set; }
+        [Column("ID")]
+        public Guid Id { get; set; }
 
+        [Column("USER_ID_FK")]
         [Required]
         [ForeignKey("User")]
-        public Guid USER_ID_FK { get; set; }
+        public Guid UserIdFk { get; set; }
 
+        [Column("LOGIN_DATE")]
         [Required]
-        public DateTime LOGIN_DATE { get; set; }
+        public DateTime LoginDate { get; set; }
 
-        public DateTime LOGOUT_DATE { get; set; }
+        [Column("LOGOUT_DATE")]
+        public DateTime LogoutDate { get; set; }
 
-        public string TOKEN { get; set; }
+        [Column("TOKEN")]        
+        public string Token { get; set; }
 
+        [Column("CREATED_BY")]                
         [Required]
-        public string CREATED_BY { get; set; }
+        public string CreatedBy { get; set; }
 
+        [Column("CREATED_DATE")]                
         [Required]
-        public DateTime CREATED_DATE { get; set; }
+        public DateTime CreatedDate { get; set; }
 
-        public string UPDATED_BY { get; set; }
+        [Column("UPDATED_BY")]                
+        public string UpdatedBy { get; set; }
 
-        public DateTime UPDATED_DATE { get; set; }
+        [Column("UPDATED_DATE")]                
+        public DateTime UpdatedDate { get; set; }
 
         public User User { get; set; }
     }

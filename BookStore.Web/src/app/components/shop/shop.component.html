@@ -11,7 +11,7 @@
         <div id="shopBox" class="flex-item">
           <div class="form-group">
             <label class="box-title-prop" for="shopName">Shop Name</label>
-            <input type="text" class="form-control" id="shopName" name="shopName" [(ngModel)]="shop.SHOP_NAME"
+            <input type="text" class="form-control" id="shopName" name="shopName" [(ngModel)]="shop.ShopName"
               #shopName="ngModel" placeholder="Name" required>
           </div>
           <div *ngIf="shopName.invalid && (f.submitted || shopName.touched)" class="alert alert-danger">
@@ -23,7 +23,7 @@
         <div class="flex-item">
           <div class="form-group">
             <label class="box-title-prop" id="locationLabelProp" for="location">Location</label>
-            <input type="text" class="form-control" id="location" name="location" [(ngModel)]="shop.LOCATION"
+            <input type="text" class="form-control" id="location" name="location" [(ngModel)]="shop.Location"
               #location="ngModel" placeholder="Location" required>
           </div>
           <div *ngIf="location.invalid && (f.dirty || location.touched)" class="alert alert-danger">
@@ -35,7 +35,7 @@
         <div class="flex-item">
           <div class="form-group">
             <label class="box-title-prop" id="staffProp" for="Staff">Num. Of Staff</label>
-            <input type="number" min="1" class="form-control" id="Staff" name="Staff" [(ngModel)]="shop.STAFF_COUNT"
+            <input type="number" min="1" class="form-control" id="Staff" name="Staff" [(ngModel)]="shop.StaffCount"
               #Staff="ngModel" placeholder="Num Of Staff" required>
           </div>
           <div *ngIf="Staff.invalid && (f.dirty || Staff.touched)" class="alert alert-danger">
@@ -74,12 +74,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let shop of allShops">
-          <td>{{shop.SHOP_NAME}}</td>
-          <td>{{shop.LOCATION}}</td>
-          <td>{{shop.STAFF_COUNT}}</td>
+          <td>{{shop.ShopName}}</td>
+          <td>{{shop.Location}}</td>
+          <td>{{shop.StaffCount}}</td>
           <td class="text-center">
             <button class="btn btn-success" (click)="editShop(shop)"><i class="fa fa-edit"></i></button>
-            <button class="btn btn-danger" (click)="onDelete(shop.SHOP_ID)"><i class="fa fa-trash"></i></button>
+            <button class="btn btn-danger" (click)="onDelete(shop.ShopId)"><i class="fa fa-trash"></i></button>
           </td>
         </tr>
       </tbody>

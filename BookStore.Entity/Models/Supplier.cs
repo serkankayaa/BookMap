@@ -1,21 +1,26 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Entity.Models
 {
+    [Table("SUPPLIER")]
     public class Supplier
     {
         [Key]
-        public Guid SUPPLIER_ID { get; set; }
+        [Column("ID")]
+        public Guid Id { get; set; }
 
+        [Column("NAME")]
         [Required]
         [MaxLength(250)]
-        public String SUPPLIER_NAME { get; set; }
+        public String Name { get; set; }
 
+        [Column("REGION")]
         [Required]
         [MaxLength(100)]
-        public String SUPPLIER_REGION { get; set; }
+        public String SupplierRegion { get; set; }
 
         public ICollection<Publisher> Publishers { get; set; }
     }

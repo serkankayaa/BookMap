@@ -4,17 +4,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Entity.Models
 {
-    public class User_Book
+    [Table("USER_BOOK")]
+    public class UserBook
     {
         [Key]
         [Column("USER_ID_FK", Order = 1)]
         [ForeignKey("User")]
-        public Guid USER_ID_FK { get; set; }
+        public Guid UserIdFk { get; set; }
 
         [Key]
         [Column("BOOK_ID_FK", Order = 2)]
         [ForeignKey("Book")]
-        public Guid BOOK_ID_FK { get; set; }
+        public Guid BookIdFk { get; set; }
 
         public User User { get; set; }
         public Book Book { get; set; }

@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { PublisherService } from '../../services/publisher.service';
 import { ToastrService } from 'ngx-toastr';
 import { SupplierService } from '../../services/supplier.service';
-
 import { Publisher } from '../../models/publisher';
 import { Supplier } from '../../models/supplier';
+
 declare var $: any;
 
 @Component({
@@ -54,6 +54,7 @@ export class PublisherComponent implements OnInit {
   }
 
   postPublisher(): object {
+    console.log(this.publisher);
     const postedPublisher = this.publisherService.postPublisher(this.publisher).subscribe((response) => {
       if (response.body != null && response.ok && response.body !== false) {
         this.toastrService.success('Publisher saved successfully');
@@ -95,6 +96,7 @@ export class PublisherComponent implements OnInit {
           this.publisher = new Publisher();
           this.isEdit = false;
         }
+        
         if (res.body === false) {
           this.toastrService.error('Please make a change to edit.');
           this.focusErrorInput();

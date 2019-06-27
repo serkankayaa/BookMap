@@ -2,40 +2,52 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Entity.Models
 {
+    [Table("USER")]
     public class User
     {
         [Key]
-        public Guid ID { get; set; }
-        
-        [Required]
-        public string EMAIL_ADDRESS { get; set; }
+        [Column("ID")]
+        public Guid Id { get; set; }
 
+        [Column("EMAIL_ADDRESS")]        
+        [Required]
+        public string EmailAddress { get; set; }
+
+        [Column("EMAIL_CONFIRMED")]
         [DefaultValue(true)]
-        public bool EMAIL_CONFIRMED { get; set; }
+        public bool EmailConfirmed { get; set; }
 
-        public string VERIFICATION_CODE { get; set; }
+        [Column("VERIFICATION_CODE")]
+        public string VerificationCode { get; set; }
 
+        [Column("USER_NAME")]
         [Required]
-        public string USER_NAME { get; set; }
+        public string UserName { get; set; }
 
+        [Column("ROLE")]
         [Required]
-        public byte ROLE { get; set; }
+        public byte Role { get; set; }
 
+        [Column("CREATED_BY")]
         [Required]
-        public string CREATED_BY { get; set; }
+        public string CreatedBy { get; set; }
 
+        [Column("CREATED_DATE")]
         [Required]
-        public DateTime CREATED_DATE { get; set; }
+        public DateTime CreatedDate { get; set; }
 
-        public string UPDATED_BY { get; set; }
+        [Column("UPDATED_BY")]        
+        public string UpdatedBy { get; set; }
 
-        public DateTime UPDATED_DATE { get; set; }
+        [Column("UPDATED_DATE")]        
+        public DateTime UpdatedDate { get; set; }
 
-        public ICollection<User_Password> User_Passwords { get; set; }
-        public ICollection<User_Log> User_Logs { get; set; }
-        public ICollection<User_Book> User_Books { get; set; }
+        public ICollection<UserPassword> UserPasswords { get; set; }
+        public ICollection<UserLog> UserLogs { get; set; }
+        public ICollection<UserBook> UserBooks { get; set; }
     }
 }

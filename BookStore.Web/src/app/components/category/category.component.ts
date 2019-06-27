@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from '../../services/category.service';
-
 import { Category } from '../../models/category';
+
 declare var $: any;
 
 @Component({
@@ -13,7 +13,6 @@ declare var $: any;
 })
 
 export class CategoryComponent implements OnInit {
-
   category = new Category();
   allCategories: Category[];
   isEdit: boolean;
@@ -55,11 +54,13 @@ export class CategoryComponent implements OnInit {
         this.getAllCategories();
         this.refreshForm();
         this.category = new Category();
+
         return;
       }
 
       if (response.body === false) {
         this.toastrService.error('This category saved already!');
+
         return;
       }
     });
@@ -77,6 +78,7 @@ export class CategoryComponent implements OnInit {
           this.category = new Category();
           this.isEdit = false;
         }
+        
         if (res.body === false) {
           this.toastrService.error('Please make a change to edit.');
           this.focusErrorInput();

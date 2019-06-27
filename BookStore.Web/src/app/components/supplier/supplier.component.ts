@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
 import { SupplierService } from '../../services/supplier.service';
-
 import { Supplier } from '../../models/supplier';
+
 declare var $: any;
 
 @Component({

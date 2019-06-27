@@ -1,84 +1,78 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using BookStore.Business.Generic;
 using BookStore.Dto;
 using BookStore.Entity.Context;
 using BookStore.Entity.Models;
 
-namespace BookStore.Business.Services {
+namespace BookStore.Business.Services 
+{
     public class AuthorService : EFRepository<Author>, IAuthorService 
     {
-        #region Field
-
         private BookDbContext _context;
-
-        #endregion
-
-        #region Ctor
 
         public AuthorService(BookDbContext context) : base(context) 
         {
             _context = context;
         }
 
-        #endregion
-
-        #region Method
-
-        public DtoAuthor GetAuthor(Guid id) {
+        public DtoAuthor GetAuthor(Guid id) 
+        {
             var author = this.GetById(id);
 
             DtoAuthor model = new DtoAuthor();
-            model.AUTHOR_ID = author.AUTHOR_ID;
-            model.AUTHOR_NAME = author.AUTHOR_NAME;
-            model.BIRTH_DATE = author.BIRTH_DATE;
-            model.BIOGRAPHY = author.BIOGRAPHY;
+            model.AuthorId = author.Id;
+            model.AuthorName = author.Name;
+            model.BirthDate = author.BirthDate;
+            model.Biography = author.Biography;
 
             return model;
         }
 
-        public List<DtoAuthor> GetAuthors() {
+        public List<DtoAuthor> GetAuthors() 
+        {
             var authors = this.GetAll();
 
-            var totalAuthors = authors.Select(c => new DtoAuthor() {
-                AUTHOR_ID = c.AUTHOR_ID,
-                    AUTHOR_NAME = c.AUTHOR_NAME,
-                    BIRTH_DATE = c.BIRTH_DATE,
-                    BIOGRAPHY = c.BIOGRAPHY
+            var allAuthors = authors.Select(c => new DtoAuthor() {
+                AuthorId = c.Id,
+                AuthorName = c.Name,
+                BirthDate = c.BirthDate,
+                Biography = c.Biography
             }).ToList();
 
-            return totalAuthors;
+            return allAuthors;
         }
 
-        public object PostAuthor(DtoAuthor model) {
-            var isAuthorNameExists = _context.Author.Where(c => c.AUTHOR_NAME == model.AUTHOR_NAME).Any();
+        public object PostAuthor(DtoAuthor model) 
+        {
+            var checkAuthorName = _context.Author.Where(c => c.Name == model.AuthorName).Any();
 
-            if (isAuthorNameExists) {
+            if (checkAuthorName) 
+            {
                 return false;
             }
 
             Author author = new Author();
-            author.AUTHOR_NAME = model.AUTHOR_NAME;
-            author.BIOGRAPHY = model.BIOGRAPHY;
-            author.BIRTH_DATE = model.BIRTH_DATE;
+            author.Name = model.AuthorName;
+            author.Biography = model.Biography;
+            author.BirthDate = model.BirthDate;
 
             this.Add(author);
             this.Save();
 
-            model.AUTHOR_ID = author.AUTHOR_ID;
+            model.AuthorId = author.Id;
 
             return model;
         }
 
-        #endregion
+        public object UpdateAuthor(DtoAuthor model) 
+        {
+            Author author = this.GetById(model.AuthorId);
 
-        public object UpdateAuthor(DtoAuthor model) {
-            Author author = this.GetById(model.AUTHOR_ID);
-            author.AUTHOR_NAME = model.AUTHOR_NAME;
-            author.BIOGRAPHY = model.BIOGRAPHY;
-            author.BIRTH_DATE = model.BIRTH_DATE;
+            author.Name = model.AuthorName;
+            author.Biography = model.Biography;
+            author.BirthDate = model.BirthDate;
 
             this.Update(author);
             this.Save();
@@ -86,36 +80,35 @@ namespace BookStore.Business.Services {
             return model;
         }
 
-        public bool DeleteAuthor(Guid id) {
-            try {
-                Author author = this.GetById(id);
-                this.Delete(author);
-                this.Save();
-                return true;
-            }
-            catch (Exception) {
+        public bool DeleteAuthor(Guid id) 
+        {
+            if(id == null)
+            {
                 return false;
             }
-        }
-        public bool DeleteAllAuthors() {
 
+            Author author = this.GetById(id);
+
+            this.Delete(author);
+            this.Save();
+
+            return true;
+        }
+        public bool DeleteAllAuthors() 
+        {
             var authors = this.GetAll();
 
-            if (authors.Count() == 0) {
+            if (authors.Count() == 0) 
+            {
                 return false;
             }
-            else {
-                try {
 
-                    foreach (var author in authors) {
-                        this.Delete(author);
-                    }
-                }
-                catch (Exception) {
-                    return false;
-                }
+            foreach (var author in authors) {
+                this.Delete(author);
             }
+                
             this.Save();
+
             return true;
         }
     }

@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
 import { AuthorService } from '../../services/author.service';
-
 import { Author } from '../../models/author';
+
 declare var $: any;
 
 @Component({
@@ -46,6 +46,7 @@ export class AuthorComponent implements OnInit {
       if (response.body === false) {
         this.toastrService.error('This author saved already');
         this.focusErrorInput();
+
         return;
       }
     });
@@ -58,7 +59,8 @@ export class AuthorComponent implements OnInit {
       .subscribe(data => {
         if (data.length === 0) {
           this.hasData = false;
-        } else {
+        }
+        else {
           this.hasData = true;
           this.allAuthors = data;
         }
@@ -67,7 +69,6 @@ export class AuthorComponent implements OnInit {
 
   editAuthor(selectedAuthor: Author): void {
     this.author = selectedAuthor;
-    console.log(this.author);
     this.isEdit = true;
   }
 
@@ -85,7 +86,6 @@ export class AuthorComponent implements OnInit {
         if (res.body === false) {
           this.toastrService.error('Please make a change to edit.');
           this.focusErrorInput();
-          return;
         }
       });
   }
@@ -120,5 +120,4 @@ export class AuthorComponent implements OnInit {
     this.getAuthor();
     this.refreshForm();
   }
-
 }

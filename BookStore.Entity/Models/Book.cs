@@ -1,40 +1,48 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Entity.Models
 {
+    [Table("BOOK")]
     public class Book
     {
         [Key]
-        public Guid BOOK_ID { get; set; }
+        [Column("ID")]
+        public Guid Id { get; set; }
 
+        [Column("NAME")]
         [Required(ErrorMessage = "Book name is required")]
         [MaxLength(250)]
-        public string NAME { get; set; }
+        public string Name { get; set; }
 
+        [Column("SUMMARY")]
         [Required(ErrorMessage = "Summary of book is required")]
-        public string SUMMARY { get; set; }
+        public string Summary { get; set; }
 
+        [Column("AUTHOR_ID_FK")]
         [Required]
         [ForeignKey("Author")]
-        public Guid AUTHOR_ID_FK { get; set; }
+        public Guid AuthorIdFk { get; set; }
 
+        [Column("PUBLISHER_ID_FK")]
         [Required]
         [ForeignKey("Publisher")]
-        public Guid PUBLISHER_ID_FK { get; set; }
+        public Guid PublisherIdFk { get; set; }
 
+        [Column("CATEGORY_ID_FK")]        
         [Required]
         [ForeignKey("Category")]
-        public Guid CATEGORY_ID_FK { get; set; }
+        public Guid CategoryIdFk { get; set; }
 
+        [Column("SHOP_ID_FK")]                
         [Required]
         [ForeignKey("Shop")]
-        public Guid SHOP_ID_FK { get; set; }
+        public Guid ShopIdFk { get; set; }
 
+        [Column("DOCUMENT_ID_FK")]                
         [ForeignKey("Document")]
-        public Guid DOCUMENT_ID_FK { get; set; }
+        public Guid DocumetIdFk { get; set; }
 
         public Author Author { get; set; }
         public Publisher Publisher { get; set; }

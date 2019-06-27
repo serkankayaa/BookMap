@@ -8,7 +8,6 @@ using BookStore.Entity.Models;
 
 namespace BookStore.Business.Services
 {
-
     public class ShopService : EFRepository<Shop>, IShopService
     {
         private BookDbContext _context;
@@ -20,50 +19,60 @@ namespace BookStore.Business.Services
 
         public object PostShop(DtoShop model)
         {
-            var isShopExists = _context.Shop.Where(c => c.SHOP_NAME == model.SHOP_NAME).Any();
+            if(model == null)
+            {
+                return new DtoShop();
+            }
 
-            if (isShopExists)
+            var checkShop = _context.Shop.Where(c => c.Name == model.ShopName).Any();
+
+            if (checkShop)
             {
                 return false;
             }
 
             Shop shop = new Shop();
-            shop.SHOP_NAME = model.SHOP_NAME;
-            shop.LOCATION = model.LOCATION;
-            shop.STAFF_COUNT = model.STAFF_COUNT;
+            shop.Name = model.ShopName;
+            shop.Location = model.Location;
+            shop.StaffCount = model.StaffCount;
 
             this.Add(shop);
             this.Save();
 
-            model.SHOP_ID = shop.SHOP_ID;
+            model.ShopId = shop.Id;
 
             return model;
         }
 
         public bool DeleteShop(Guid id)
         {
-            try
-            {
-                Shop shop = this.GetById(id);
-                this.Delete(shop);
-                this.Save();
-                return true;
-            }
-            catch (Exception)
+            if(id == null)
             {
                 return false;
             }
+
+            Shop shop = this.GetById(id);
+
+            this.Delete(shop);
+            this.Save();
+
+            return true;
         }
 
         public DtoShop GetShop(Guid id)
         {
+            if(id == null)
+            {
+                return new DtoShop();
+            }
+
             var shop = this.GetById(id);
 
             DtoShop model = new DtoShop();
-            model.SHOP_NAME = shop.SHOP_NAME;
-            model.LOCATION = shop.LOCATION;
-            model.STAFF_COUNT = shop.STAFF_COUNT;
-            model.SHOP_ID = shop.SHOP_ID;
+            model.ShopName = shop.Name;
+            model.Location = shop.Location;
+            model.StaffCount = shop.StaffCount;
+            model.ShopId = shop.Id;
 
             return model;
         }
@@ -72,32 +81,41 @@ namespace BookStore.Business.Services
         {
             var shops = this.GetAll();
 
-            var shopCount = shops.Select(c => new DtoShop()
+            if(shops == null || shops.Count() == 0)
             {
-                SHOP_ID = c.SHOP_ID,
-                SHOP_NAME = c.SHOP_NAME,
-                LOCATION = c.LOCATION,
-                STAFF_COUNT = c.STAFF_COUNT
+                return new List<DtoShop>();
+            }
+
+            var allShops = shops.Select(c => new DtoShop()
+            {
+                ShopId = c.Id,
+                ShopName = c.Name,
+                Location = c.Location,
+                StaffCount = c.StaffCount
             }).ToList();
 
-            return shopCount;
-
+            return allShops;
         }
 
         public object UpdateShop(DtoShop model)
         {
-            var isShopExists = _context.Shop.Where(c => c.SHOP_NAME == model.SHOP_NAME).Any();
+            if(model == null)
+            {
+                return new DtoShop();
+            }
 
-            if (isShopExists)
+            var checkShop = _context.Shop.Where(c => c.Name == model.ShopName).Any();
+
+            if (checkShop)
             {
                 return false;
             }
 
-            Shop shop = this.GetById(model.SHOP_ID);
-            shop.SHOP_ID = model.SHOP_ID;
-            shop.SHOP_NAME = model.SHOP_NAME;
-            shop.LOCATION = model.LOCATION;
-            shop.STAFF_COUNT = model.STAFF_COUNT;
+            Shop shop = this.GetById(model.ShopId);
+            shop.Id = model.ShopId;
+            shop.Name = model.ShopName;
+            shop.Location = model.Location;
+            shop.StaffCount = model.StaffCount;
 
             this.Update(shop);
             this.Save();

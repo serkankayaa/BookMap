@@ -4,20 +4,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Entity.Models
 {
+    [Table("PUBLISHER")]
     public class Publisher
     {
         [Key]
-        public Guid PUBLISHER_ID { get; set; }
+        [Column("ID")]
+        public Guid Id { get; set; }
 
+        [Column("NAME")]
         [Required]
         [MaxLength(250)]
-        public string NAME { get; set; }
+        public string Name { get; set; }
 
-        public string LOCATION { get; set; }
+        [Column("LOCATION")]
+        public string Location { get; set; }
 
+        [Column("SUPPLIER_ID_FK")]
         [Required]
         [ForeignKey("Supplier")]
-        public Guid SUPPLIER_ID_FK { get; set; }
+        public Guid SupplierIdIFk { get; set; }
+        
         public Supplier Supplier { get; set; }
     }
 }

@@ -1,13 +1,16 @@
 export class Book {
-    BOOK_ID: string;
-    NAME: string;
-    SUMMARY: string;
-    AUTHOR_ID_FK: string;
-    PUBLISHER_ID_FK: string;
-    CATEGORY_ID_FK: string;
-    SHOP_ID_FK: string;
-    IMAGE_ID_FK: string;
-    IMAGE_NAME: string;
-
+    BookId: string;
+    BookName: string;
+    Summary: string;
+    AuthorIdFk: string;
+    AuthorName: string;
+    PublisherIdFk: string;
+    PublisherName: string;
+    CategoryIdFk: string;
+    CategoryName: string;
+    ShopIdFk: string;
+    ShopName: string;
+    ImageIdFk: string;
+    ImageName: string;
 }
 

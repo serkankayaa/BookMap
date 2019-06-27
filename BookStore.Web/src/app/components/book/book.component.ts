@@ -7,6 +7,7 @@ import { PublisherService } from '../../services/publisher.service';
 import { CategoryService } from '../../services/category.service';
 import { DocumentService } from '../../services/document.service';
 import { BookService } from '../../services/book.service';
+import { ShopService } from '../../services/shop.service';
 
 import { Author } from '../../models/author';
 import { Book } from '../../models/book';
@@ -14,7 +15,7 @@ import { Category } from '../../models/category';
 import { Publisher } from '../../models/publisher';
 import { Shop } from '../../models/shop';
 import { UIImagePath } from '../../../config';
-import { ShopService } from '../../services/shop.service';
+
 declare var $: any;
 
 @Component({
@@ -58,7 +59,6 @@ export class BookComponent implements OnInit {
     this.getAllShops();
   }
 
-
   onSubmit() { this.submitted = true; }
 
   uploadFile(files): object {
@@ -75,15 +75,13 @@ export class BookComponent implements OnInit {
   getAllAuthors() {
     this.authorService.getAllAuthors().subscribe(authorData => {
       this.allAuthors = authorData;
-    }
-    );
+    });
   }
 
   getAllCategories() {
     this.categoryService.getAllCategories().subscribe(categoryData => {
       this.allCategories = categoryData;
-    }
-    );
+    });
   }
 
   getAllPublishers() {
@@ -110,7 +108,7 @@ export class BookComponent implements OnInit {
       } else if (event.type === HttpEventType.Response) {
         this.message = this.fileToUpload.name;
         this.onUploadFinished.emit(event.body);
-        this.bookModel.IMAGE_ID_FK = event.body.toString();
+        this.bookModel.ImageIdFk = event.body.toString();
       }
     });
   }

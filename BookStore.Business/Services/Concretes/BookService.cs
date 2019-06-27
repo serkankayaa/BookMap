@@ -4,7 +4,6 @@ using System.Linq;
 using BookStore.Business.Generic;
 using BookStore.Business.Services;
 using BookStore.Dto;
-using BookStore.Entity;
 using BookStore.Entity.Context;
 using BookStore.Entity.Models;
 
@@ -12,14 +11,8 @@ namespace BookStore.Business
 {
     public class BookService : EFRepository<Book>, IBookService
     {
-        #region Field
-
         private BookDbContext _context;
         public IAuthorService _authorService;
-
-        #endregion
-
-        #region Ctor
 
         public BookService(BookDbContext context, IAuthorService authorService) : base(context)
         {
@@ -27,134 +20,109 @@ namespace BookStore.Business
             _authorService = authorService;
         }
 
-        #endregion
-
-        #region Method
-
-        /// <summary>
-        /// Get Book with specific
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public DtoBook GetBook(Guid id)
         {
-            try
+            var bookItem = this.GetById(id);
+            
+            var book = (from b in _context.Book join a in _context.Author on b.AuthorIdFk equals a.Id into auTemp 
+                        from bookAuthor in auTemp.DefaultIfEmpty() 
+                        join p in _context.Publisher on b.PublisherIdFk equals p.Id into pbTemp 
+                        from bookPublisher in pbTemp.DefaultIfEmpty() 
+                        join c in _context.Category on b.CategoryIdFk equals c.Id into ctTemp 
+                        from bookCategory in ctTemp.DefaultIfEmpty() 
+                        join s in _context.Shop on b.ShopIdFk equals s.Id into spTemp 
+                        from bookShop in spTemp.DefaultIfEmpty()
+            select new DtoBook()
             {
-                var bookItem = this.GetById(id);
+                BookId = bookItem.Id,
+                BookName = bookItem.Name,
+                Summary = bookItem.Summary,
+                AuthorIdFk = bookItem.AuthorIdFk,
+                AuthorName = bookAuthor.Name,
+                PublisherIdFk = bookItem.PublisherIdFk,
+                PublisherName = bookPublisher.Name,
+                CategoryIdFk = bookItem.CategoryIdFk,
+                CategoryName = bookCategory.Name,
+                ShopIdFk = bookItem.ShopIdFk,
+                ShopName = bookShop.Name,
+                ImageIdFk = bookItem.DocumetIdFk,
+                ImageName = bookItem.Document.FileName
+            }).FirstOrDefault();
 
-                var getBook = (from b in _context.Book join a in _context.Author on b.AUTHOR_ID_FK equals a.AUTHOR_ID into auTemp from bookAuthor in auTemp.DefaultIfEmpty() join p in _context.Publisher on b.PUBLISHER_ID_FK equals p.PUBLISHER_ID into pbTemp from bookPublisher in pbTemp.DefaultIfEmpty() join c in _context.Category on b.CATEGORY_ID_FK equals c.CATEGORY_ID into ctTemp from bookCategory in ctTemp.DefaultIfEmpty() join s in _context.Shop on b.SHOP_ID_FK equals s.SHOP_ID into spTemp from bookShop in spTemp.DefaultIfEmpty() select new DtoBook()
-                {
-                    BOOK_ID = bookItem.BOOK_ID,
-                    NAME = bookItem.NAME,
-                    SUMMARY = bookItem.SUMMARY,
-                    AUTHOR_ID_FK = bookItem.AUTHOR_ID_FK,
-                    AUTHOR_NAME = bookAuthor.AUTHOR_NAME,
-                    PUBLISHER_ID_FK = bookItem.PUBLISHER_ID_FK,
-                    PUBLISHER_NAME = bookPublisher.NAME,
-                    CATEGORY_ID_FK = bookItem.CATEGORY_ID_FK,
-                    CATEGORY_NAME = bookCategory.NAME,
-                    SHOP_ID_FK = bookItem.SHOP_ID_FK,
-                    SHOP_NAME = bookShop.SHOP_NAME,
-                    IMAGE_ID_FK = bookItem.DOCUMENT_ID_FK,
-                    IMAGE_NAME = bookItem.Document.FILE_NAME
-                }).FirstOrDefault();
-
-                return getBook;
-            }
-            catch (System.Exception ex)
-            {
-                throw ex;
-            }
+            return book;
         }
 
-        /// <summary>
-        /// Get All Books
-        /// </summary>
-        /// <returns></returns>
         public List<DtoBook> GetBooks()
         {
-            try
-            {
-                var books = base.GetAll();
+            var books = base.GetAll();
 
-                var totalBooks = books.Select(c => new DtoBook()
-                {
-                    BOOK_ID = c.BOOK_ID,
-                    NAME = c.NAME,
-                    SUMMARY = c.SUMMARY,
-                    AUTHOR_ID_FK = c.AUTHOR_ID_FK,
-                    AUTHOR_NAME = c.Author.AUTHOR_NAME,
-                    PUBLISHER_ID_FK = c.PUBLISHER_ID_FK,
-                    PUBLISHER_NAME = c.Publisher.NAME,
-                    CATEGORY_ID_FK = c.CATEGORY_ID_FK,
-                    CATEGORY_NAME = c.Category.NAME,
-                    SHOP_ID_FK = c.SHOP_ID_FK,
-                    SHOP_NAME = c.Shop.SHOP_NAME,
-                    IMAGE_ID_FK = c.DOCUMENT_ID_FK,
-                    IMAGE_NAME = c.Document.FILE_NAME
-                }).ToList();
-
-                return totalBooks;
-            }
-            catch (System.Exception ex)
+            if(books == null || books.Count() == 0)
             {
-                throw ex;
+                return new List<DtoBook>();
             }
+
+            var allBooks = books.Select(c => new DtoBook()
+            {
+                BookId = c.Id,
+                BookName = c.Name,
+                Summary = c.Summary,
+                AuthorIdFk = c.AuthorIdFk,
+                AuthorName = c.Author.Name,
+                PublisherIdFk = c.PublisherIdFk,
+                PublisherName = c.Publisher.Name,
+                CategoryIdFk = c.CategoryIdFk,
+                CategoryName = c.Category.Name,
+                ShopIdFk = c.ShopIdFk,
+                ShopName = c.Shop.Name,
+                ImageIdFk = c.DocumetIdFk,
+                ImageName = c.Document.FileName
+            }).ToList();
+
+            return allBooks;
         }
 
-        /// <summary>
-        /// Add book
-        /// </summary>
-        /// <param name="model"></param>
-        public void PostBook(DtoBook model)
+        public object PostBook(DtoBook model)
         {
-            try
+            if(model == null)
             {
-                Book book = new Book();
-                book.NAME = model.NAME;
-                book.SUMMARY = model.SUMMARY;
-                book.AUTHOR_ID_FK = model.AUTHOR_ID_FK;
-                book.PUBLISHER_ID_FK = model.PUBLISHER_ID_FK;
-                book.CATEGORY_ID_FK = model.CATEGORY_ID_FK;
-                book.SHOP_ID_FK = model.SHOP_ID_FK;
-                book.DOCUMENT_ID_FK = model.IMAGE_ID_FK;
-
-                this.Add(book);
-                this.Save();
-
-                model.BOOK_ID = book.BOOK_ID;
+                return new DtoBook();
             }
-            catch (System.Exception ex)
-            {
-                throw ex;
-            }
+
+            Book book = new Book();
+            book.Name = model.BookName;
+            book.Summary = model.Summary;
+            book.AuthorIdFk = model.AuthorIdFk;
+            book.PublisherIdFk = model.PublisherIdFk;
+            book.CategoryIdFk = model.CategoryIdFk;
+            book.ShopIdFk = model.ShopIdFk;
+            book.DocumetIdFk = model.ImageIdFk;
+
+            this.Add(book);
+            this.Save();
+
+            model.BookId = book.Id;
+
+            return model;
         }
 
-        /// <summary>
-        /// Delete book
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>List</returns>
         public bool DeleteBook(Guid id)
         {
-            try
+            if(id == null)
             {
-                var book = this.GetById(id);
-
-                if (book != null)
-                {
-                    this.Delete(book);
-                    this.Save();
-
-                    return true;
-                }
-
                 return false;
             }
-            catch (System.Exception ex)
+
+            var book = this.GetById(id);
+
+            if (book != null)
             {
-                throw ex;
+                this.Delete(book);
+                this.Save();
+
+                return true;
             }
+
+            return false;
         }
 
         /// <summary>
@@ -165,49 +133,44 @@ namespace BookStore.Business
         public object GetBooksByAuthor(Guid id)
         {
             var author = _authorService.GetAuthor(id);
-            var bookResult = (from a in _context.Author join b in _context.Book on a.AUTHOR_ID equals b.AUTHOR_ID_FK into bookAuthor from r in bookAuthor.DefaultIfEmpty() where r.AUTHOR_ID_FK == author.AUTHOR_ID select new DtoBookAuthor
+            var authorBooks = (from a in _context.Author join b in _context.Book on a.Id equals b.AuthorIdFk into bookAuthor 
+                              from r in bookAuthor.DefaultIfEmpty() where r.AuthorIdFk == author.AuthorId 
+            select new DtoBookAuthor
             {
-                AUTHOR_ID_FK = a.AUTHOR_ID,
-                BOOK_ID = r.BOOK_ID,
-                BOOK_NAME = r.NAME,
-                BOOK_SUMMARY = r.SUMMARY,
-                BIOGRAPHY = a.BIOGRAPHY,
-                AUTHOR_NAME = a.AUTHOR_NAME,
-                BIRTH_DATE = a.BIRTH_DATE,
+                AuthorIdFk = a.Id,
+                BookId = r.Id,
+                BookName = r.Name,
+                BookSummary = r.Summary,
+                Biography = a.Biography,
+                AuthorName = a.Name,
+                BirthDate = a.BirthDate,
             }).ToList();
 
-            return bookResult;
+            return authorBooks;
         }
 
         public DtoBook UpdateBook(DtoBook model)
         {
-            try
-            {
-                var book = this.GetById(model.BOOK_ID);
-                if (book != null)
-                {
-                    book.BOOK_ID = model.BOOK_ID;
-                    book.NAME = model.NAME;
-                    book.SUMMARY = model.SUMMARY;
-                    book.AUTHOR_ID_FK = model.AUTHOR_ID_FK;
-                    book.PUBLISHER_ID_FK = model.PUBLISHER_ID_FK;
-                    book.CATEGORY_ID_FK = model.CATEGORY_ID_FK;
-                    book.SHOP_ID_FK = model.SHOP_ID_FK;
-                    book.DOCUMENT_ID_FK = model.IMAGE_ID_FK;
-                }
-
-                this.Update(book);
-                this.Save();
-
-                return model;
-            }
-            catch (System.Exception ex)
+            if(model == null)
             {
                 return new DtoBook();
-                throw ex;
             }
-        }
-        
-        #endregion
+
+            var book = this.GetById(model.BookId);
+
+            book.Id = model.BookId;
+            book.Name = model.BookName;
+            book.Summary = model.Summary;
+            book.AuthorIdFk = model.AuthorIdFk;
+            book.PublisherIdFk = model.PublisherIdFk;
+            book.CategoryIdFk = model.CategoryIdFk;
+            book.ShopIdFk = model.ShopIdFk;
+            book.DocumetIdFk = model.ImageIdFk;
+
+            this.Update(book);
+            this.Save();
+
+            return model;
+        }        
     }
 }

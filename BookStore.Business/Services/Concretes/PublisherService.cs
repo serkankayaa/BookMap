@@ -10,28 +10,13 @@ namespace BookStore.Business.Services
 {
     public class PublisherService : EFRepository<Publisher>, IPublisherService
     {
-        #region Field
-
         private BookDbContext _context;
-
-        #endregion
-
-        #region Ctor
 
         public PublisherService(BookDbContext context) : base(context)
         {
             _context = context;
         }
 
-        #endregion
-
-        #region Method
-
-        /// <summary>
-        /// Get Specific Publisher
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public DtoPublisher GetPublisher(Guid id)
         {
             var publisherItem = this.GetById(id);
@@ -42,76 +27,84 @@ namespace BookStore.Business.Services
             }
 
             DtoPublisher author = new DtoPublisher();
-            author.PUBLISHER_ID = publisherItem.PUBLISHER_ID;
-            author.NAME = publisherItem.NAME;
-            author.LOCATION = publisherItem.LOCATION;
-            author.SUPPLIER_ID_FK = publisherItem.SUPPLIER_ID_FK;
-            author.SUPPLIER_NAME = publisherItem.Supplier.SUPPLIER_NAME;
+
+            author.PublisherId = publisherItem.Id;
+            author.PublisherName = publisherItem.Name;
+            author.Location = publisherItem.Location;
+            author.SupplierIdFk = publisherItem.SupplierIdIFk;
+            author.SupplierName = publisherItem.Supplier.Name;
 
             return author;
         }
 
-        /// <summary>
-        /// Get All Publishers
-        /// </summary>
-        /// <returns></returns>
         public List<DtoPublisher> GetPublishers()
         {
             var publishers = this.GetAll();
 
-            var totalPublishers = publishers.Select(c => new DtoPublisher
+            if(publishers == null || publishers.Count() == 0)
             {
-                PUBLISHER_ID = c.PUBLISHER_ID,
-                NAME = c.NAME,
-                SUPPLIER_ID_FK = c.SUPPLIER_ID_FK,
-                SUPPLIER_NAME = c.Supplier.SUPPLIER_NAME,
-                LOCATION = c.LOCATION
+                return new List<DtoPublisher>();
+            }
+
+            var allPublishers = publishers.Select(c => new DtoPublisher
+            {
+                PublisherId = c.Id,
+                PublisherName = c.Name,
+                SupplierIdFk = c.SupplierIdIFk,
+                SupplierName = c.Supplier.Name,
+                Location = c.Location
             }).ToList();
 
-            return totalPublishers;
+            return allPublishers;
         }
 
-        /// <summary>
-        /// Publisher Add
-        /// </summary>
-        /// <param name="model"></param>
         public object PostPublisher(DtoPublisher model)
         {
-            var isPublisherExists = _context.Publisher.Where(c => c.NAME == model.NAME).Any();
+            if(model == null)
+            {
+                return new DtoPublisher();
+            }
 
-            if (isPublisherExists)
+            var checkPublisher = _context.Publisher.Where(c => c.Name == model.PublisherName).Any();
+
+            if (checkPublisher)
             {
                 return false;
             }
 
             Publisher publisher = new Publisher();
-            publisher.PUBLISHER_ID = model.PUBLISHER_ID;
-            publisher.NAME = model.NAME;
-            publisher.LOCATION = model.LOCATION;
-            publisher.SUPPLIER_ID_FK = model.SUPPLIER_ID_FK;
+            publisher.Id = model.PublisherId;
+            publisher.Name = model.PublisherName;
+            publisher.Location = model.Location;
+            publisher.SupplierIdIFk = model.SupplierIdFk;
 
             this.Add(publisher);
             this.Save();
 
-            model.PUBLISHER_ID = publisher.PUBLISHER_ID;
+            model.PublisherId = publisher.Id;
 
             return model;
         }
 
         public object UpdatePublisher(DtoPublisher model)
         {
-            var isPublisherExists = _context.Publisher.Where(c => c.NAME == model.NAME).Any();
+            if(model == null)
+            {
+                return new DtoPublisher();
+            }
 
-            if (isPublisherExists)
+            var checkPublisher = _context.Publisher.Where(c => c.Name == model.PublisherName).Any();
+
+            if (checkPublisher)
             {
                 return false;
             }
 
-            Publisher publisher = this.GetById(model.PUBLISHER_ID);
-            publisher.PUBLISHER_ID = model.PUBLISHER_ID;
-            publisher.NAME = model.NAME;
-            publisher.LOCATION = model.LOCATION;
-            publisher.SUPPLIER_ID_FK = model.SUPPLIER_ID_FK;
+            Publisher publisher = this.GetById(model.PublisherId);
+            publisher.Id = model.PublisherId;
+            publisher.Name = model.PublisherName;
+            publisher.Location = model.Location;
+            publisher.SupplierIdIFk = model.SupplierIdFk;
 
             this.Update(publisher);
             this.Save();
@@ -121,19 +114,17 @@ namespace BookStore.Business.Services
         
         public bool DeletePublisher(Guid id)
         {
-            try
-            {
-                Publisher publisher = this.GetById(id);
-                this.Delete(publisher);
-                this.Save();
-                return true;
-            }
-            catch (Exception)
+            if(id == null)
             {
                 return false;
             }
-        }
 
-        #endregion
+            Publisher publisher = this.GetById(id);
+
+            this.Delete(publisher);
+            this.Save();
+
+            return true;
+        }
     }
 }

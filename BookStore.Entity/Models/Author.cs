@@ -5,19 +5,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Entity.Models
 {
+    [Table("AUTHOR")]
     public class Author
     {
         [Key]
-        public Guid AUTHOR_ID { get; set; }
+        [Column("ID")]
+        public Guid Id { get; set; }
 
+        [Column("NAME")]
         [Required(ErrorMessage = "Author Name is required")]
         [MaxLength(250)]
-        public string AUTHOR_NAME { get; set; }
+        public string Name { get; set; }
 
+        [Column("BIRTH_DATE")]
         [Required(ErrorMessage = "Birth Date is required")]
-        public DateTime BIRTH_DATE { get; set; }
+        public DateTime BirthDate { get; set; }
 
-        public string BIOGRAPHY { get; set; }
+        [Column("BIOGRAPHY")]
+        public string Biography { get; set; }
 
         public ICollection<Book> Books { get; set; }
     }

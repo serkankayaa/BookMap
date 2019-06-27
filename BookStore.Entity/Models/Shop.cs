@@ -5,19 +5,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Entity.Models
 {
+    [Table("SHOP")]
     public class Shop {
 
         [Key]
-        public Guid SHOP_ID { get; set; }
+        [Column("ID")]
+        public Guid Id { get; set; }
 
+        [Column("NAME")]
         [Required(ErrorMessage = "Shop Name is required")]
         [MaxLength(250)]        
-        public string SHOP_NAME { get; set; }
+        public string Name { get; set; }
 
-        public string LOCATION { get; set; }
+        [Column("LOCATION")]
+        public string Location { get; set; }
 
-        public int STAFF_COUNT { get; set; }
-
+        [Column("STAFF_COUNT")]
+        public int StaffCount { get; set; }
+        
         public ICollection<Book> books {get; set;}
     }
 }

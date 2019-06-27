@@ -19,7 +19,7 @@
           <div class="form-group">
             <label for="categoryName">Category Name</label>
             <input type="text" class="form-control" id="categoryName" name="categoryName"
-              [(ngModel)]="category.CATEGORY_NAME" #categoryName="ngModel" placeholder="Name" required>
+              [(ngModel)]="category.CategoryName" #categoryName="ngModel" placeholder="Name" required>
           </div>
           <div *ngIf="categoryName.invalid && (f.dirty || categoryName.touched)" class="alert alert-danger">
             <div *ngIf="categoryName.errors.required">
@@ -30,7 +30,7 @@
         <div class="col-6">
           <div class="form-group">
             <label for="summary">Summary</label>
-            <input type="text" class="form-control" id="summary" name="summary" [(ngModel)]="category.CATEGORY_SUMMARY"
+            <input type="text" class="form-control" id="summary" name="summary" [(ngModel)]="category.CategorySummary"
               #summary="ngModel" placeholder="Summary" required>
           </div>
           <div *ngIf="summary.invalid && (f.dirty || summary.touched)" class="alert alert-danger">
@@ -70,11 +70,11 @@
           </thead>
           <tbody>
             <tr *ngFor="let category of allCategories">
-              <td class="text-center" style="width: 15px;">{{category.CATEGORY_NAME}}</td>
-              <td class="text-center" style="width: 15px;">{{category.CATEGORY_SUMMARY}}</td>
+              <td class="text-center" style="width: 15px;">{{category.CategoryName}}</td>
+              <td class="text-center" style="width: 15px;">{{category.CategorySummary}}</td>
               <td class="text-center" style="width: 15px;">
                 <button class="btn btn-success" (click)="editCategory(category)"><i class="fa fa-edit"></i></button>
-                <button class="btn btn-danger" (click)="onDelete(category.CATEGORY_ID)"><i
+                <button class="btn btn-danger" (click)="onDelete(category.CategoryId)"><i
                     class="fa fa-trash"></i></button>
               </td>
             </tr>

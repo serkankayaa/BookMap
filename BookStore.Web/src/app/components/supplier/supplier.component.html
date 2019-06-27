@@ -19,7 +19,7 @@
           <div class="form-group">
             <label for="supplierName">Supplier Name</label>
             <input type="text" class="form-control" id="supplierName" name="supplierName"
-              [(ngModel)]="supplier.SUPPLIER_NAME" #supplierName="ngModel" placeholder="Name" required>
+              [(ngModel)]="supplier.SupplierName" #supplierName="ngModel" placeholder="Name" required>
           </div>
           <div *ngIf="supplierName.invalid && (f.dirty || supplierName.touched)" class="alert alert-danger">
             <div *ngIf="supplierName.errors.required">
@@ -31,7 +31,7 @@
           <div class="form-group">
             <label for="region">Region</label>
             <input type="text" class="form-control" id="supplierRegion" name="supplierRegion"
-              [(ngModel)]="supplier.SUPPLIER_REGION" #region="ngModel" placeholder="Region" required>
+              [(ngModel)]="supplier.SupplierRegion" #region="ngModel" placeholder="Region" required>
           </div>
           <div *ngIf="region.invalid && (f.dirty || region.touched)" class="alert alert-danger">
             <div *ngIf="region.errors.required">
@@ -76,11 +76,11 @@
           </thead>
           <tbody>
             <tr *ngFor="let supplier of allSuppliers">
-              <td>{{supplier.SUPPLIER_NAME}}</td>
-              <td>{{supplier.SUPPLIER_REGION}}</td>
+              <td>{{supplier.SupplierName}}</td>
+              <td>{{supplier.SupplierRegion}}</td>
               <td><button class="btn btn-success ml-5" (click)="editSupplier(supplier)"><i
                     class="fa fa-edit"></i></button>
-                <button class="btn btn-danger" (click)="onDelete(supplier.SUPPLIER_ID)"><i
+                <button class="btn btn-danger" (click)="onDelete(supplier.SupplierId)"><i
                     class="fa fa-trash"></i></button></td>
             </tr>
           </tbody>

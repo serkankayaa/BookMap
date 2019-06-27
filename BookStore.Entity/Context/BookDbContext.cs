@@ -12,10 +12,8 @@ namespace BookStore.Entity.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User_Book>().HasKey(table => new { table.BOOK_ID_FK, table.USER_ID_FK });      
+            modelBuilder.Entity<UserBook>().HasKey(table => new { table.BookIdFk, table.UserIdFk });      
         }
-
-        #region Models Definition
 
         public DbSet<Book> Book { get; set; }
         public DbSet<Author> Author { get; set; }
@@ -25,12 +23,9 @@ namespace BookStore.Entity.Context
         public DbSet<Supplier> Supplier { get; set; }
         public DbSet<Document> Document { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<User_Password> User_Password { get; set; }
-        public DbSet<User_Profile> User_Profile { get; set; }
-        public DbSet<User_Log> User_Log { get; set; }
-        public DbSet<User_Book> User_Book { get; set; }
-
-
-        #endregion
+        public DbSet<UserPassword> UserPassword { get; set; }
+        public DbSet<UserProfile> UserProfile { get; set; }
+        public DbSet<UserLog> UserLog { get; set; }
+        public DbSet<UserBook> UserBook { get; set; }
     }
 }

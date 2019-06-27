@@ -8,7 +8,7 @@ namespace BookStore.Business.Services
     {
         DtoBook GetBook(Guid id);
         List<DtoBook> GetBooks();
-        void PostBook(DtoBook model);
+        object PostBook(DtoBook model);
         DtoBook UpdateBook(DtoBook model);
         bool DeleteBook(Guid id);
         object GetBooksByAuthor(Guid id);

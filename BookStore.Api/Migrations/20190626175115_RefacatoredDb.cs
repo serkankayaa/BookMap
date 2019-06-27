@@ -3,81 +3,81 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BookStore.Api.Migrations
 {
-    public partial class BookStoreFirstMid : Migration
+    public partial class RefacatoredDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Author",
+                name: "AUTHOR",
                 columns: table => new
                 {
-                    AUTHOR_ID = table.Column<Guid>(nullable: false),
-                    AUTHOR_NAME = table.Column<string>(maxLength: 250, nullable: false),
+                    ID = table.Column<Guid>(nullable: false),
+                    NAME = table.Column<string>(maxLength: 250, nullable: false),
                     BIRTH_DATE = table.Column<DateTime>(nullable: false),
                     BIOGRAPHY = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Author", x => x.AUTHOR_ID);
+                    table.PrimaryKey("PK_AUTHOR", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "CATEGORY",
                 columns: table => new
                 {
-                    CATEGORY_ID = table.Column<Guid>(nullable: false),
+                    ID = table.Column<Guid>(nullable: false),
                     NAME = table.Column<string>(maxLength: 250, nullable: false),
                     SUMMARY = table.Column<string>(maxLength: 500, nullable: false),
                     IS_MAIN_CATEGORY = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.CATEGORY_ID);
+                    table.PrimaryKey("PK_CATEGORY", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Document",
+                name: "DOCUMENT",
                 columns: table => new
                 {
-                    DOCUMENT_ID = table.Column<Guid>(nullable: false),
-                    CONTENT_TYPE = table.Column<string>(nullable: true),
-                    FULL_PATH = table.Column<string>(nullable: true),
-                    FILE_NAME = table.Column<string>(nullable: true)
+                    ID = table.Column<Guid>(nullable: false),
+                    CONTENT_TYPE = table.Column<string>(nullable: false),
+                    FULL_PATH = table.Column<string>(nullable: false),
+                    FILE_NAME = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Document", x => x.DOCUMENT_ID);
+                    table.PrimaryKey("PK_DOCUMENT", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Shop",
+                name: "SHOP",
                 columns: table => new
                 {
-                    SHOP_ID = table.Column<Guid>(nullable: false),
-                    SHOP_NAME = table.Column<string>(maxLength: 250, nullable: false),
+                    ID = table.Column<Guid>(nullable: false),
+                    NAME = table.Column<string>(maxLength: 250, nullable: false),
                     LOCATION = table.Column<string>(nullable: true),
                     STAFF_COUNT = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Shop", x => x.SHOP_ID);
+                    table.PrimaryKey("PK_SHOP", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Supplier",
+                name: "SUPPLIER",
                 columns: table => new
                 {
-                    SUPPLIER_ID = table.Column<Guid>(nullable: false),
-                    SUPPLIER_NAME = table.Column<string>(maxLength: 250, nullable: false),
-                    SUPPLIER_REGION = table.Column<string>(maxLength: 100, nullable: false)
+                    ID = table.Column<Guid>(nullable: false),
+                    NAME = table.Column<string>(maxLength: 250, nullable: false),
+                    REGION = table.Column<string>(maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Supplier", x => x.SUPPLIER_ID);
+                    table.PrimaryKey("PK_SUPPLIER", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "USER",
                 columns: table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
@@ -93,31 +93,31 @@ namespace BookStore.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.ID);
+                    table.PrimaryKey("PK_USER", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Publisher",
+                name: "PUBLISHER",
                 columns: table => new
                 {
-                    PUBLISHER_ID = table.Column<Guid>(nullable: false),
+                    ID = table.Column<Guid>(nullable: false),
                     NAME = table.Column<string>(maxLength: 250, nullable: false),
                     LOCATION = table.Column<string>(nullable: true),
                     SUPPLIER_ID_FK = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Publisher", x => x.PUBLISHER_ID);
+                    table.PrimaryKey("PK_PUBLISHER", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Publisher_Supplier_SUPPLIER_ID_FK",
+                        name: "FK_PUBLISHER_SUPPLIER_SUPPLIER_ID_FK",
                         column: x => x.SUPPLIER_ID_FK,
-                        principalTable: "Supplier",
-                        principalColumn: "SUPPLIER_ID",
+                        principalTable: "SUPPLIER",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User_Log",
+                name: "USER_LOG",
                 columns: table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
@@ -132,17 +132,17 @@ namespace BookStore.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User_Log", x => x.ID);
+                    table.PrimaryKey("PK_USER_LOG", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_User_Log_User_USER_ID_FK",
+                        name: "FK_USER_LOG_USER_USER_ID_FK",
                         column: x => x.USER_ID_FK,
-                        principalTable: "User",
+                        principalTable: "USER",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User_Password",
+                name: "USER_PASSWORD",
                 columns: table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
@@ -156,24 +156,24 @@ namespace BookStore.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User_Password", x => x.ID);
+                    table.PrimaryKey("PK_USER_PASSWORD", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_User_Password_User_USER_ID_FK",
+                        name: "FK_USER_PASSWORD_USER_USER_ID_FK",
                         column: x => x.USER_ID_FK,
-                        principalTable: "User",
+                        principalTable: "USER",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User_Profile",
+                name: "USER_PROFILE",
                 columns: table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
                     USER_ID_FK = table.Column<Guid>(nullable: false),
                     NAME = table.Column<string>(nullable: false),
                     SURNAME = table.Column<string>(nullable: false),
-                    ADDRESS = table.Column<string>(nullable: false),
+                    ADDRESS = table.Column<string>(nullable: true),
                     BIRTHDATE = table.Column<DateTime>(nullable: false),
                     CREATED_BY = table.Column<string>(nullable: false),
                     CREATED_DATE = table.Column<DateTime>(nullable: false),
@@ -182,20 +182,20 @@ namespace BookStore.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User_Profile", x => x.ID);
+                    table.PrimaryKey("PK_USER_PROFILE", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_User_Profile_User_USER_ID_FK",
+                        name: "FK_USER_PROFILE_USER_USER_ID_FK",
                         column: x => x.USER_ID_FK,
-                        principalTable: "User",
+                        principalTable: "USER",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Book",
+                name: "BOOK",
                 columns: table => new
                 {
-                    BOOK_ID = table.Column<Guid>(nullable: false),
+                    ID = table.Column<Guid>(nullable: false),
                     NAME = table.Column<string>(maxLength: 250, nullable: false),
                     SUMMARY = table.Column<string>(nullable: false),
                     AUTHOR_ID_FK = table.Column<Guid>(nullable: false),
@@ -206,41 +206,41 @@ namespace BookStore.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Book", x => x.BOOK_ID);
+                    table.PrimaryKey("PK_BOOK", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Book_Author_AUTHOR_ID_FK",
+                        name: "FK_BOOK_AUTHOR_AUTHOR_ID_FK",
                         column: x => x.AUTHOR_ID_FK,
-                        principalTable: "Author",
-                        principalColumn: "AUTHOR_ID",
+                        principalTable: "AUTHOR",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Book_Category_CATEGORY_ID_FK",
+                        name: "FK_BOOK_CATEGORY_CATEGORY_ID_FK",
                         column: x => x.CATEGORY_ID_FK,
-                        principalTable: "Category",
-                        principalColumn: "CATEGORY_ID",
+                        principalTable: "CATEGORY",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Book_Document_DOCUMENT_ID_FK",
+                        name: "FK_BOOK_DOCUMENT_DOCUMENT_ID_FK",
                         column: x => x.DOCUMENT_ID_FK,
-                        principalTable: "Document",
-                        principalColumn: "DOCUMENT_ID",
+                        principalTable: "DOCUMENT",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Book_Publisher_PUBLISHER_ID_FK",
+                        name: "FK_BOOK_PUBLISHER_PUBLISHER_ID_FK",
                         column: x => x.PUBLISHER_ID_FK,
-                        principalTable: "Publisher",
-                        principalColumn: "PUBLISHER_ID",
+                        principalTable: "PUBLISHER",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Book_Shop_SHOP_ID_FK",
+                        name: "FK_BOOK_SHOP_SHOP_ID_FK",
                         column: x => x.SHOP_ID_FK,
-                        principalTable: "Shop",
-                        principalColumn: "SHOP_ID",
+                        principalTable: "SHOP",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User_Book",
+                name: "USER_BOOK",
                 columns: table => new
                 {
                     USER_ID_FK = table.Column<Guid>(nullable: false),
@@ -248,109 +248,109 @@ namespace BookStore.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User_Book", x => new { x.BOOK_ID_FK, x.USER_ID_FK });
+                    table.PrimaryKey("PK_USER_BOOK", x => new { x.BOOK_ID_FK, x.USER_ID_FK });
                     table.ForeignKey(
-                        name: "FK_User_Book_Book_BOOK_ID_FK",
+                        name: "FK_USER_BOOK_BOOK_BOOK_ID_FK",
                         column: x => x.BOOK_ID_FK,
-                        principalTable: "Book",
-                        principalColumn: "BOOK_ID",
+                        principalTable: "BOOK",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_User_Book_User_USER_ID_FK",
+                        name: "FK_USER_BOOK_USER_USER_ID_FK",
                         column: x => x.USER_ID_FK,
-                        principalTable: "User",
+                        principalTable: "USER",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_AUTHOR_ID_FK",
-                table: "Book",
+                name: "IX_BOOK_AUTHOR_ID_FK",
+                table: "BOOK",
                 column: "AUTHOR_ID_FK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_CATEGORY_ID_FK",
-                table: "Book",
+                name: "IX_BOOK_CATEGORY_ID_FK",
+                table: "BOOK",
                 column: "CATEGORY_ID_FK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_DOCUMENT_ID_FK",
-                table: "Book",
+                name: "IX_BOOK_DOCUMENT_ID_FK",
+                table: "BOOK",
                 column: "DOCUMENT_ID_FK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_PUBLISHER_ID_FK",
-                table: "Book",
+                name: "IX_BOOK_PUBLISHER_ID_FK",
+                table: "BOOK",
                 column: "PUBLISHER_ID_FK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_SHOP_ID_FK",
-                table: "Book",
+                name: "IX_BOOK_SHOP_ID_FK",
+                table: "BOOK",
                 column: "SHOP_ID_FK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Publisher_SUPPLIER_ID_FK",
-                table: "Publisher",
+                name: "IX_PUBLISHER_SUPPLIER_ID_FK",
+                table: "PUBLISHER",
                 column: "SUPPLIER_ID_FK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_Book_USER_ID_FK",
-                table: "User_Book",
+                name: "IX_USER_BOOK_USER_ID_FK",
+                table: "USER_BOOK",
                 column: "USER_ID_FK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_Log_USER_ID_FK",
-                table: "User_Log",
+                name: "IX_USER_LOG_USER_ID_FK",
+                table: "USER_LOG",
                 column: "USER_ID_FK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_Password_USER_ID_FK",
-                table: "User_Password",
+                name: "IX_USER_PASSWORD_USER_ID_FK",
+                table: "USER_PASSWORD",
                 column: "USER_ID_FK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_Profile_USER_ID_FK",
-                table: "User_Profile",
+                name: "IX_USER_PROFILE_USER_ID_FK",
+                table: "USER_PROFILE",
                 column: "USER_ID_FK");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "User_Book");
+                name: "USER_BOOK");
 
             migrationBuilder.DropTable(
-                name: "User_Log");
+                name: "USER_LOG");
 
             migrationBuilder.DropTable(
-                name: "User_Password");
+                name: "USER_PASSWORD");
 
             migrationBuilder.DropTable(
-                name: "User_Profile");
+                name: "USER_PROFILE");
 
             migrationBuilder.DropTable(
-                name: "Book");
+                name: "BOOK");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "USER");
 
             migrationBuilder.DropTable(
-                name: "Author");
+                name: "AUTHOR");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "CATEGORY");
 
             migrationBuilder.DropTable(
-                name: "Document");
+                name: "DOCUMENT");
 
             migrationBuilder.DropTable(
-                name: "Publisher");
+                name: "PUBLISHER");
 
             migrationBuilder.DropTable(
-                name: "Shop");
+                name: "SHOP");
 
             migrationBuilder.DropTable(
-                name: "Supplier");
+                name: "SUPPLIER");
         }
     }
 }

@@ -4,35 +4,45 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Entity.Models
 {
-    public class User_Profile
+    [Table("USER_PROFILE")]
+    public class UserProfile
     {
         [Key]
-        public Guid ID { get; set; }
+        [Column("ID")]
+        public Guid Id { get; set; }
 
+        [Column("USER_ID_FK")]        
         [Required]
         [ForeignKey("User")]
-        public Guid USER_ID_FK { get; set; }
+        public Guid UserIdFk { get; set; }
 
+        [Column("NAME")]                
         [Required]
-        public string NAME { get; set; }
+        public string Name { get; set; }
 
+        [Column("SURNAME")]                        
         [Required]
-        public string SURNAME { get; set; }
+        public string Surname { get; set; }
 
+        [Column("ADDRESS")]                        
+        public string Address { get; set; }
+
+        [Column("BIRTHDATE")]                        
+        public DateTime BirthDate { get; set; }
+
+        [Column("CREATED_BY")]                
         [Required]
-        public string ADDRESS { get; set; }
+        public string CreatedBy { get; set; }
 
-        public DateTime BIRTHDATE { get; set; }
-
+        [Column("CREATED_DATE")]                
         [Required]
-        public string CREATED_BY { get; set; }
+        public DateTime CreatedDate { get; set; }
 
-        [Required]
-        public DateTime CREATED_DATE { get; set; }
+        [Column("UPDATED_BY")]                
+        public string UpdatedBy { get; set; }
 
-        public string UPDATED_BY { get; set; }
-
-        public DateTime UPDATED_DATE { get; set; }
+        [Column("UPDATED_DATE")]                
+        public DateTime UpdatedDate { get; set; }
 
         public User User { get; set; }
     }
