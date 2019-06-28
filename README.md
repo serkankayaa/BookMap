@@ -1,4 +1,4 @@
-# BookMap Online Kitap Alışveriş Projesi
+# BookMap
 
 **EN** - Online Book project built with .Net Core 2.1 and Angular 7.                                                                    
 **TR** - Angular 7 ve .Net Core 2.1 ile geliştirilen online kitap alışveriş projesi.
