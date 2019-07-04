@@ -96,7 +96,7 @@ export class PublisherComponent implements OnInit {
           this.publisher = new Publisher();
           this.isEdit = false;
         }
-        
+
         if (res.body === false) {
           this.toastrService.error('Please make a change to edit.');
           this.focusErrorInput();

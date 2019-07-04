@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css?family=EB+Garamond&display=swap");
+
+.book-summary {
+  font-family: "EB Garamond", serif;
+}
+
+.book-list {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 50px;
+  padding-left: 10%;
+}
+.book-image-props {
+  width: 200px;
+  height: 300px;
+}
+
+.book-item {
+  transition: all 1s;
+  margin: 20px;
+  width: 300px;
+  box-sizing: border-box;
+}
+
+.book-item:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.book-bookmark {
+  width: 80px;
+  position: relative;
+  margin-top: -200px;
+  margin-left: -51px;
+}
+
+.vertical-divider {
+  background-color: gray;
+  width: 2px;
+  height: auto;
+}
+
+.modal-flex-left {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.modal-flex-right {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}

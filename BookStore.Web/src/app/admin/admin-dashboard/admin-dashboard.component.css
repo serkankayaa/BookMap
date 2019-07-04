@@ -1,0 +1,87 @@
+.admin-dashboard-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.admin-dashboard-item {
+  background: #0f2027; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  filter: drop-shadow(4px 4px 6px gray);
+  margin: 30px;
+  border-radius: 15px 50px;
+  height: 200px;
+  width: 400px;
+  cursor: pointer;
+  align-self: center;
+}
+
+.item-left-prop {
+  float: left;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  padding: 10px;
+}
+
+.item-right-prop {
+  background-color: #1c84c7;
+  filter: drop-shadow(2px 4px 6px black) brightness(1.5);
+  width: 75px;
+  text-align: center;
+  float: right;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  padding: 1px;
+  margin: 10px 30px 0px 0px;
+  border-width: 2px 4px;
+  border-radius: 40px;
+}
+
+.record-detail {
+  color: #fff;
+  padding-top: 15px;
+  font-size: 50px;
+}
+
+.dasboard-recorded-list {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 30px;
+}
+
+.table-props {
+  width: 400px;
+  margin: 10px 10px 10px 30px;
+}
+
+caption {
+  caption-side: top;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  background: #8e9eab;
+  color: #fff;
+}
+
+tbody tr:nth-child(n) {
+  background-color: #2c5364;
+}
+
+tbody tr:nth-child(2n) {
+  background-color: tomato;
+}

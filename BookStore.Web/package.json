@@ -37,6 +37,7 @@
     "ng6-toastr-notifications": "^1.0.4",
     "ngx-toastr": "^6.4.1-beta.0",
     "rxjs": "^5.5.6",
+    "slick-carousel": "^1.8.1",
     "toastr": "^2.1.4",
     "zone.js": "^0.8.19"
   },
@@ -44,6 +45,7 @@
     "@angular/cli": "~1.7.0",
     "@angular/compiler-cli": "^5.2.0",
     "@angular/language-service": "^5.2.0",
+    "@types/bootstrap": "^4.3.0",
     "@types/jasmine": "~2.8.3",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
