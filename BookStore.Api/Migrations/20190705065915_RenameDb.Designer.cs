@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BookStore.Api.Migrations
 {
     [DbContext(typeof(BookDbContext))]
-    [Migration("20190705065517_FirstDb")]
-    partial class FirstDb
+    [Migration("20190705065915_RenameDb")]
+    partial class RenameDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
