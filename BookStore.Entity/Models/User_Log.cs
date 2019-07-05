@@ -28,13 +28,15 @@ namespace BookStore.Entity.Models
 
         [Column("CREATED_BY")]                
         [Required]
+        [MaxLength(100)]
         public string CreatedBy { get; set; }
 
         [Column("CREATED_DATE")]                
         [Required]
         public DateTime CreatedDate { get; set; }
 
-        [Column("UPDATED_BY")]                
+        [Column("UPDATED_BY")]
+        [MaxLength]                
         public string UpdatedBy { get; set; }
 
         [Column("UPDATED_DATE")]                

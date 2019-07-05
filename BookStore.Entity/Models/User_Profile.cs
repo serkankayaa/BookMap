@@ -18,10 +18,12 @@ namespace BookStore.Entity.Models
 
         [Column("NAME")]                
         [Required]
+        [MaxLength(100)]
         public string Name { get; set; }
 
         [Column("SURNAME")]                        
         [Required]
+        [MaxLength(100)]
         public string Surname { get; set; }
 
         [Column("ADDRESS")]                        
@@ -32,13 +34,15 @@ namespace BookStore.Entity.Models
 
         [Column("CREATED_BY")]                
         [Required]
+        [MaxLength(100)]
         public string CreatedBy { get; set; }
 
         [Column("CREATED_DATE")]                
         [Required]
         public DateTime CreatedDate { get; set; }
 
-        [Column("UPDATED_BY")]                
+        [Column("UPDATED_BY")]
+        [MaxLength(100)]                
         public string UpdatedBy { get; set; }
 
         [Column("UPDATED_DATE")]                

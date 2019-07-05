@@ -19,6 +19,8 @@ namespace BookStore.Business.Services
             _authorService = authorService;
         }
 
+        //TODO: User sistemi yazıldığında CreatedBy ve UpdatedBy field ları doldurulacak.
+
         public DtoCategory GetCategory(Guid id)
         {
             if(id == null)
@@ -34,6 +36,10 @@ namespace BookStore.Business.Services
             category.CategoryName = categoryItem.Name;
             category.CategorySummary = categoryItem.Summary;
             category.IsMainCategory = categoryItem.IsMainCategory;
+            category.CreatedBy = categoryItem.CreatedBy;
+            category.CreatedDate = categoryItem.CreatedDate;
+            category.UpdatedBy = categoryItem.UpdatedBy;
+            category.UpdatedDate = categoryItem.UpdatedDate;
 
             return category;
         }
@@ -53,6 +59,10 @@ namespace BookStore.Business.Services
                 CategoryName = c.Name,
                 CategorySummary = c.Summary,
                 IsMainCategory = c.IsMainCategory,
+                CreatedBy = c.CreatedBy,
+                CreatedDate = c.CreatedDate,
+                UpdatedBy = c.UpdatedBy,
+                UpdatedDate = c.UpdatedDate
             }).ToList();
 
             return allCategories;
@@ -76,6 +86,8 @@ namespace BookStore.Business.Services
             category.Name = model.CategoryName;
             category.Summary = model.CategorySummary;
             category.IsMainCategory = true;
+            category.CreatedBy = "Test: Serkan";
+            category.CreatedDate = DateTime.Now;
 
             this.Add(category);
             this.Save();
@@ -104,6 +116,8 @@ namespace BookStore.Business.Services
             category.Name = model.CategoryName;
             category.Summary = model.CategorySummary;
             category.IsMainCategory = model.IsMainCategory;
+            category.UpdatedBy = "Test: Serkan";
+            category.UpdatedDate = DateTime.Now;
 
             this.Update(category);
             this.Save();

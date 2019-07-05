@@ -19,6 +19,8 @@ namespace BookStore.Business
             _context = context;
             _authorService = authorService;
         }
+        
+        //TODO: User sistemi yazıldığında CreatedBy ve UpdatedBy field ları doldurulacak.
 
         public DtoBook GetBook(Guid id)
         {
@@ -46,7 +48,11 @@ namespace BookStore.Business
                 ShopIdFk = bookItem.ShopIdFk,
                 ShopName = bookShop.Name,
                 ImageIdFk = bookItem.DocumetIdFk,
-                ImageName = bookItem.Document.FileName
+                ImageName = bookItem.Document.FileName,
+                CreatedBy = bookItem.CreatedBy,
+                CreatedDate = bookItem.CreatedDate,
+                UpdatedBy = bookItem.UpdatedBy,
+                UpdatedDate = bookItem.UpdatedDate
             }).FirstOrDefault();
 
             return book;
@@ -75,7 +81,11 @@ namespace BookStore.Business
                 ShopIdFk = c.ShopIdFk,
                 ShopName = c.Shop.Name,
                 ImageIdFk = c.DocumetIdFk,
-                ImageName = c.Document.FileName
+                ImageName = c.Document.FileName,
+                CreatedBy = c.CreatedBy,
+                CreatedDate = c.CreatedDate,
+                UpdatedBy = c.UpdatedBy,
+                UpdatedDate = c.UpdatedDate
             }).ToList();
 
             return allBooks;
@@ -96,6 +106,8 @@ namespace BookStore.Business
             book.CategoryIdFk = model.CategoryIdFk;
             book.ShopIdFk = model.ShopIdFk;
             book.DocumetIdFk = model.ImageIdFk;
+            book.CreatedBy = "Test: Serkan";
+            book.CreatedDate = DateTime.Now;
 
             this.Add(book);
             this.Save();
@@ -166,6 +178,8 @@ namespace BookStore.Business
             book.CategoryIdFk = model.CategoryIdFk;
             book.ShopIdFk = model.ShopIdFk;
             book.DocumetIdFk = model.ImageIdFk;
+            book.UpdatedBy = "Test: Serkan";
+            book.UpdatedDate = DateTime.Now;
 
             this.Update(book);
             this.Save();

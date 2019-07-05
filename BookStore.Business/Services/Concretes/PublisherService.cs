@@ -17,6 +17,8 @@ namespace BookStore.Business.Services
             _context = context;
         }
 
+        //TODO: User sistemi yazıldığında CreatedBy ve UpdatedBy field ları doldurulacak.
+
         public DtoPublisher GetPublisher(Guid id)
         {
             var publisherItem = this.GetById(id);
@@ -33,6 +35,10 @@ namespace BookStore.Business.Services
             author.Location = publisherItem.Location;
             author.SupplierIdFk = publisherItem.SupplierIdIFk;
             author.SupplierName = publisherItem.Supplier.Name;
+            author.CreatedBy = publisherItem.CreatedBy;
+            author.CreatedDate = publisherItem.CreatedDate;
+            author.UpdatedBy = publisherItem.UpdatedBy;
+            author.UpdatedDate = publisherItem.UpdatedDate;
 
             return author;
         }
@@ -52,7 +58,11 @@ namespace BookStore.Business.Services
                 PublisherName = c.Name,
                 SupplierIdFk = c.SupplierIdIFk,
                 SupplierName = c.Supplier.Name,
-                Location = c.Location
+                Location = c.Location,
+                CreatedBy = c.CreatedBy,
+                CreatedDate = c.CreatedDate,
+                UpdatedBy = c.UpdatedBy,
+                UpdatedDate = c.UpdatedDate
             }).ToList();
 
             return allPublishers;
@@ -77,6 +87,8 @@ namespace BookStore.Business.Services
             publisher.Name = model.PublisherName;
             publisher.Location = model.Location;
             publisher.SupplierIdIFk = model.SupplierIdFk;
+            publisher.CreatedBy = "Test: Safa";
+            publisher.CreatedDate = DateTime.Now;
 
             this.Add(publisher);
             this.Save();
@@ -105,6 +117,8 @@ namespace BookStore.Business.Services
             publisher.Name = model.PublisherName;
             publisher.Location = model.Location;
             publisher.SupplierIdIFk = model.SupplierIdFk;
+            publisher.UpdatedBy = "Test: Safa";
+            publisher.UpdatedDate = DateTime.Now;
 
             this.Update(publisher);
             this.Save();

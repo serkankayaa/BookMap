@@ -29,6 +29,14 @@ namespace BookStore.Api.Migrations
                         .IsRequired()
                         .HasColumnName("CONTENT_TYPE");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnName("CREATED_BY")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CREATED_DATE");
+
                     b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnName("FILE_NAME");
@@ -36,6 +44,13 @@ namespace BookStore.Api.Migrations
                     b.Property<string>("FullPath")
                         .IsRequired()
                         .HasColumnName("FULL_PATH");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnName("UPDATED_BY")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnName("UPDATED_DATE");
 
                     b.HasKey("Id");
 
@@ -54,10 +69,25 @@ namespace BookStore.Api.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnName("BIRTH_DATE");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnName("CREATED_BY")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CREATED_DATE");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("NAME")
                         .HasMaxLength(250);
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnName("UPDATED_BY")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnName("UPDATED_DATE");
 
                     b.HasKey("Id");
 
@@ -76,6 +106,14 @@ namespace BookStore.Api.Migrations
                     b.Property<Guid>("CategoryIdFk")
                         .HasColumnName("CATEGORY_ID_FK");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnName("CREATED_BY")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CREATED_DATE");
+
                     b.Property<Guid>("DocumetIdFk")
                         .HasColumnName("DOCUMENT_ID_FK");
 
@@ -93,6 +131,13 @@ namespace BookStore.Api.Migrations
                     b.Property<string>("Summary")
                         .IsRequired()
                         .HasColumnName("SUMMARY");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnName("UPDATED_BY")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnName("UPDATED_DATE");
 
                     b.HasKey("Id");
 
@@ -115,6 +160,14 @@ namespace BookStore.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnName("CREATED_BY")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CREATED_DATE");
+
                     b.Property<bool>("IsMainCategory")
                         .HasColumnName("IS_MAIN_CATEGORY");
 
@@ -128,6 +181,13 @@ namespace BookStore.Api.Migrations
                         .HasColumnName("SUMMARY")
                         .HasMaxLength(500);
 
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnName("UPDATED_BY")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnName("UPDATED_DATE");
+
                     b.HasKey("Id");
 
                     b.ToTable("CATEGORY");
@@ -139,8 +199,17 @@ namespace BookStore.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnName("CREATED_BY")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CREATED_DATE");
+
                     b.Property<string>("Location")
-                        .HasColumnName("LOCATION");
+                        .HasColumnName("LOCATION")
+                        .HasMaxLength(200);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -149,6 +218,13 @@ namespace BookStore.Api.Migrations
 
                     b.Property<Guid>("SupplierIdIFk")
                         .HasColumnName("SUPPLIER_ID_FK");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnName("UPDATED_BY")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnName("UPDATED_DATE");
 
                     b.HasKey("Id");
 
@@ -163,8 +239,17 @@ namespace BookStore.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnName("CREATED_BY")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CREATED_DATE");
+
                     b.Property<string>("Location")
-                        .HasColumnName("LOCATION");
+                        .HasColumnName("LOCATION")
+                        .HasMaxLength(200);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -173,6 +258,13 @@ namespace BookStore.Api.Migrations
 
                     b.Property<int>("StaffCount")
                         .HasColumnName("STAFF_COUNT");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnName("UPDATED_BY")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnName("UPDATED_DATE");
 
                     b.HasKey("Id");
 
@@ -185,6 +277,14 @@ namespace BookStore.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnName("CREATED_BY")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CREATED_DATE");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("NAME")
@@ -193,7 +293,14 @@ namespace BookStore.Api.Migrations
                     b.Property<string>("SupplierRegion")
                         .IsRequired()
                         .HasColumnName("REGION")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnName("UPDATED_BY")
                         .HasMaxLength(100);
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnName("UPDATED_DATE");
 
                     b.HasKey("Id");
 
@@ -208,14 +315,16 @@ namespace BookStore.Api.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnName("CREATED_BY");
+                        .HasColumnName("CREATED_BY")
+                        .HasMaxLength(100);
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnName("CREATED_DATE");
 
                     b.Property<string>("EmailAddress")
                         .IsRequired()
-                        .HasColumnName("EMAIL_ADDRESS");
+                        .HasColumnName("EMAIL_ADDRESS")
+                        .HasMaxLength(250);
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnName("EMAIL_CONFIRMED");
@@ -224,14 +333,16 @@ namespace BookStore.Api.Migrations
                         .HasColumnName("ROLE");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnName("UPDATED_BY");
+                        .HasColumnName("UPDATED_BY")
+                        .HasMaxLength(100);
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnName("UPDATED_DATE");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnName("USER_NAME");
+                        .HasColumnName("USER_NAME")
+                        .HasMaxLength(150);
 
                     b.Property<string>("VerificationCode")
                         .HasColumnName("VERIFICATION_CODE");
@@ -264,7 +375,8 @@ namespace BookStore.Api.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnName("CREATED_BY");
+                        .HasColumnName("CREATED_BY")
+                        .HasMaxLength(100);
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnName("CREATED_DATE");
@@ -302,7 +414,8 @@ namespace BookStore.Api.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnName("CREATED_BY");
+                        .HasColumnName("CREATED_BY")
+                        .HasMaxLength(100);
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnName("CREATED_DATE");
@@ -315,7 +428,8 @@ namespace BookStore.Api.Migrations
                         .HasColumnName("PASSWORD_HASH");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnName("UPDATED_BY");
+                        .HasColumnName("UPDATED_BY")
+                        .HasMaxLength(100);
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnName("UPDATED_DATE");
@@ -344,21 +458,25 @@ namespace BookStore.Api.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnName("CREATED_BY");
+                        .HasColumnName("CREATED_BY")
+                        .HasMaxLength(100);
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnName("CREATED_DATE");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnName("NAME");
+                        .HasColumnName("NAME")
+                        .HasMaxLength(100);
 
                     b.Property<string>("Surname")
                         .IsRequired()
-                        .HasColumnName("SURNAME");
+                        .HasColumnName("SURNAME")
+                        .HasMaxLength(100);
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnName("UPDATED_BY");
+                        .HasColumnName("UPDATED_BY")
+                        .HasMaxLength(100);
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnName("UPDATED_DATE");

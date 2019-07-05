@@ -17,6 +17,8 @@ namespace BookStore.Business.Services
             this._context = context;
         }
 
+        //TODO: User sistemi yazıldığında CreatedBy ve UpdatedBy field ları doldurulacak.
+
         public bool DeleteSupplier(Guid id)
         {
             if(id == null)
@@ -40,7 +42,11 @@ namespace BookStore.Business.Services
             {
                 SupplierId = supplier.Id,
                 SupplierName = supplier.Name,
-                SupplierRegion = supplier.SupplierRegion
+                SupplierRegion = supplier.SupplierRegion,
+                CreatedBy = supplier.CreatedBy,
+                CreatedDate = supplier.CreatedDate,
+                UpdatedBy = supplier.UpdatedBy,
+                UpdatedDate = supplier.UpdatedDate
             };
         }
 
@@ -58,6 +64,10 @@ namespace BookStore.Business.Services
                 SupplierId = c.Id,
                 SupplierName = c.Name,
                 SupplierRegion = c.SupplierRegion,
+                CreatedBy = c.CreatedBy,
+                CreatedDate = c.CreatedDate,
+                UpdatedBy = c.UpdatedBy,
+                UpdatedDate = c.UpdatedDate
             }).ToList();
 
             return allSuppliers;
@@ -80,6 +90,9 @@ namespace BookStore.Business.Services
             Supplier supplier = new Supplier();
             supplier.Name = model.SupplierName;
             supplier.SupplierRegion = model.SupplierRegion;
+            supplier.CreatedBy = "Test: Safa";
+            supplier.CreatedDate = DateTime.Now;
+
             this.Add(supplier);
             this.Save();
 
@@ -106,6 +119,8 @@ namespace BookStore.Business.Services
             supplier.Id = model.SupplierId;
             supplier.Name = model.SupplierName;
             supplier.SupplierRegion = model.SupplierRegion;
+            supplier.UpdatedBy = "Test: Safa";
+            supplier.UpdatedDate = DateTime.Now;
 
             this.Update(supplier);
             this.Save();

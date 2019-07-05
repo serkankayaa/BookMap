@@ -9,5 +9,9 @@ namespace BookStore.Dto
         public string Location { get; set; }
         public Guid SupplierIdFk { get; set; }
         public string SupplierName { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string UpdatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
     }
 }

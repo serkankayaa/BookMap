@@ -17,6 +17,8 @@ namespace BookStore.Business.Services
             _context = context;
         }
 
+        //TODO: User sistemi yazıldığında CreatedBy ve UpdatedBy field ları doldurulacak.
+
         public object PostShop(DtoShop model)
         {
             if(model == null)
@@ -35,6 +37,8 @@ namespace BookStore.Business.Services
             shop.Name = model.ShopName;
             shop.Location = model.Location;
             shop.StaffCount = model.StaffCount;
+            shop.CreatedBy = "Test: Safa";
+            shop.CreatedDate = DateTime.Now;
 
             this.Add(shop);
             this.Save();
@@ -73,6 +77,10 @@ namespace BookStore.Business.Services
             model.Location = shop.Location;
             model.StaffCount = shop.StaffCount;
             model.ShopId = shop.Id;
+            model.CreatedBy = shop.CreatedBy;
+            model.CreatedDate = shop.CreatedDate;
+            model.UpdatedBy = shop.UpdatedBy;
+            model.UpdatedDate = shop.UpdatedDate;
 
             return model;
         }
@@ -91,7 +99,11 @@ namespace BookStore.Business.Services
                 ShopId = c.Id,
                 ShopName = c.Name,
                 Location = c.Location,
-                StaffCount = c.StaffCount
+                StaffCount = c.StaffCount,
+                CreatedBy = c.CreatedBy,
+                CreatedDate = c.CreatedDate,
+                UpdatedBy = c.UpdatedBy,
+                UpdatedDate = c.UpdatedDate
             }).ToList();
 
             return allShops;
@@ -116,6 +128,8 @@ namespace BookStore.Business.Services
             shop.Name = model.ShopName;
             shop.Location = model.Location;
             shop.StaffCount = model.StaffCount;
+            shop.UpdatedBy = "Test: Safa";
+            shop.UpdatedDate = DateTime.Now;
 
             this.Update(shop);
             this.Save();

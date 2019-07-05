@@ -17,6 +17,8 @@ namespace BookStore.Business.Services
             _context = context;
         }
 
+        //TODO: User sistemi yazıldığında CreatedBy ve UpdatedBy field ları doldurulacak.
+
         public DtoAuthor GetAuthor(Guid id) 
         {
             var author = this.GetById(id);
@@ -26,6 +28,10 @@ namespace BookStore.Business.Services
             model.AuthorName = author.Name;
             model.BirthDate = author.BirthDate;
             model.Biography = author.Biography;
+            model.CreatedBy = author.CreatedBy;
+            model.CreatedDate = author.CreatedDate;
+            model.UpdatedBy = author.UpdatedBy;
+            model.UpdatedDate = author.UpdatedDate;
 
             return model;
         }
@@ -38,7 +44,11 @@ namespace BookStore.Business.Services
                 AuthorId = c.Id,
                 AuthorName = c.Name,
                 BirthDate = c.BirthDate,
-                Biography = c.Biography
+                Biography = c.Biography,
+                CreatedBy = c.CreatedBy,
+                CreatedDate = c.CreatedDate,
+                UpdatedBy = c.UpdatedBy,
+                UpdatedDate = c.UpdatedDate
             }).ToList();
 
             return allAuthors;
@@ -57,6 +67,8 @@ namespace BookStore.Business.Services
             author.Name = model.AuthorName;
             author.Biography = model.Biography;
             author.BirthDate = model.BirthDate;
+            author.CreatedBy = "Test: Serkan";
+            author.CreatedDate = DateTime.Now;
 
             this.Add(author);
             this.Save();
@@ -73,6 +85,8 @@ namespace BookStore.Business.Services
             author.Name = model.AuthorName;
             author.Biography = model.Biography;
             author.BirthDate = model.BirthDate;
+            author.UpdatedBy = "Test: Serkan";
+            author.UpdatedDate = DateTime.Now;
 
             this.Update(author);
             this.Save();
@@ -94,6 +108,7 @@ namespace BookStore.Business.Services
 
             return true;
         }
+        
         public bool DeleteAllAuthors() 
         {
             var authors = this.GetAll();
