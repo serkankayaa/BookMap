@@ -22,12 +22,14 @@ namespace BookStore.Business.Services
         public DtoAuthor GetAuthor(Guid id) 
         {
             var author = this.GetById(id);
-
+            
             DtoAuthor model = new DtoAuthor();
             model.AuthorId = author.Id;
             model.AuthorName = author.Name;
             model.BirthDate = author.BirthDate;
             model.Biography = author.Biography;
+            model.ImageIdFk = author.DocumetIdFk;
+            model.ImageName = author.Document.FileName;
             model.CreatedBy = author.CreatedBy;
             model.CreatedDate = author.CreatedDate;
             model.UpdatedBy = author.UpdatedBy;
@@ -45,6 +47,8 @@ namespace BookStore.Business.Services
                 AuthorName = c.Name,
                 BirthDate = c.BirthDate,
                 Biography = c.Biography,
+                ImageIdFk = c.DocumetIdFk,
+                ImageName = c.Document.FileName,
                 CreatedBy = c.CreatedBy,
                 CreatedDate = c.CreatedDate,
                 UpdatedBy = c.UpdatedBy,
@@ -67,6 +71,7 @@ namespace BookStore.Business.Services
             author.Name = model.AuthorName;
             author.Biography = model.Biography;
             author.BirthDate = model.BirthDate;
+            author.DocumetIdFk = model.ImageIdFk;
             author.CreatedBy = "Test: Serkan";
             author.CreatedDate = DateTime.Now;
 
@@ -85,6 +90,7 @@ namespace BookStore.Business.Services
             author.Name = model.AuthorName;
             author.Biography = model.Biography;
             author.BirthDate = model.BirthDate;
+            author.DocumetIdFk = model.ImageIdFk;
             author.UpdatedBy = "Test: Serkan";
             author.UpdatedDate = DateTime.Now;
 
