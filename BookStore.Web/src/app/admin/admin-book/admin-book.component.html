@@ -1,99 +1,54 @@
-<h2 class="text-muted pt-2 col-12 text-center">Books</h2>
+<h2 class="text-muted pt-2 col-12 book-header-prop">Books</h2>
+<button class="float-right header-button-prop" data-target="#postBook" data-toggle="modal">
+  <i class="fas fa-book pr-2"></i>New Book
+</button>
 <hr />
 <div class="book-list">
   <div class="book-item" data-toggle="modal" data-target="#exampleModal">
-    <img
-      class="book-image-props"
-      src="https://images-na.ssl-images-amazon.com/images/I/51EstVXM1UL._SX331_BO1,204,203,200_.jpg"
-    />
-    <img
-      class="book-bookmark"
-      src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png"
-    />
+    <img class="book-image-props"
+      src="https://images-na.ssl-images-amazon.com/images/I/51EstVXM1UL._SX331_BO1,204,203,200_.jpg" />
+    <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
   </div>
   <div class="book-item">
-    <img
-      class="book-image-props"
-      src="https://damonza.com/wp-content/uploads/portfolio/nonfiction/Set%20For%20Life%202.jpg"
-    />
-    <img
-      class="book-bookmark"
-      src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png"
-    />
+    <img class="book-image-props"
+      src="https://damonza.com/wp-content/uploads/portfolio/nonfiction/Set%20For%20Life%202.jpg" />
+    <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
   </div>
   <div class="book-item">
-    <img
-      class="book-image-props"
-      src="http://www.bukovero.com/wp-content/uploads/2016/07/Harry_Potter_and_the_Cursed_Child_Special_Rehearsal_Edition_Book_Cover.jpg"
-    />
-    <img
-      class="book-bookmark"
-      src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png"
-    />
+    <img class="book-image-props"
+      src="http://www.bukovero.com/wp-content/uploads/2016/07/Harry_Potter_and_the_Cursed_Child_Special_Rehearsal_Edition_Book_Cover.jpg" />
+    <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
   </div>
   <div class="book-item">
-    <img
-      class="book-image-props"
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrJgArEzhvhEVrb4yiXQPzMtXjQYR_fyZOqTMzuwkNSO_oXpFG"
-    />
-    <img
-      class="book-bookmark"
-      src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png"
-    />
+    <img class="book-image-props"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrJgArEzhvhEVrb4yiXQPzMtXjQYR_fyZOqTMzuwkNSO_oXpFG" />
+    <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
   </div>
   <div class="book-item">
-    <img
-      class="book-image-props"
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrq2wOC6d8CmyL5si1OXe6C7r82E4jlDJj6TOQCwFkejPG1Q9M"
-    />
-    <img
-      class="book-bookmark"
-      src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png"
-    />
+    <img class="book-image-props"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrq2wOC6d8CmyL5si1OXe6C7r82E4jlDJj6TOQCwFkejPG1Q9M" />
+    <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
   </div>
   <div class="book-item">
-    <img
-      class="book-image-props"
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8yzaZjHtGHWCm6hPAT_hbqz-ifUoOt9uIXruqBwtQuW4-rCU8Uw
-      "
-    />
-    <img
-      class="book-bookmark"
-      src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png"
-    />
+    <img class="book-image-props" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8yzaZjHtGHWCm6hPAT_hbqz-ifUoOt9uIXruqBwtQuW4-rCU8Uw
+      " />
+    <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
   </div>
 </div>
 
 <!-- Button trigger modal -->
-<button
-  style="opacity: 0;"
-  type="button"
-  class="btn btn-primary"
-  data-toggle="modal"
-  data-target="#exampleModal"
->
+<button style="opacity: 0;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Launch demo modal
 </button>
 
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Book Details</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -101,10 +56,8 @@
         <div class="row">
           <div class="col-6 modal-flex-left">
             <figure>
-              <img
-                class="book-image-props"
-                src="https://images-na.ssl-images-amazon.com/images/I/51EstVXM1UL._SX331_BO1,204,203,200_.jpg"
-              />
+              <img class="book-image-props"
+                src="https://images-na.ssl-images-amazon.com/images/I/51EstVXM1UL._SX331_BO1,204,203,200_.jpg" />
               <figcaption>
                 <h5 class="mt-2"><i>The Lord Of The Rings</i></h5>
               </figcaption>
@@ -112,8 +65,7 @@
           </div>
           <div class="col-6">
             <div>
-              <b><i>Author:</i></b
-              ><span> J.R.R. Tolkien</span>
+              <b><i>Author:</i></b><span> J.R.R. Tolkien</span>
               <hr />
             </div>
             <div>
@@ -122,8 +74,7 @@
             <hr />
             <div>
               <b><i>Summary:</i></b>
-              <span class="book-summary"
-                >In ancient times the Rings of Power were crafted by the
+              <span class="book-summary">In ancient times the Rings of Power were crafted by the
                 Elven-smiths, and Sauron, the Dark Lord, forged the One Ring,
                 filling it with his own power so that he could rule all others.
                 But the One Ring was taken from him, and though he sought it
@@ -140,8 +91,7 @@
                 of the great quest undertaken by Frodo and the Fellowship of the
                 Ring: Gandalf the Wizard; the hobbits Merry, Pippin, and Sam;
                 Gimli the Dwarf; Legolas the Elf; Boromir of Gondor; and a tall,
-                mysterious stranger called Strider.</span
-              >
+                mysterious stranger called Strider.</span>
             </div>
             <hr />
             <div>
@@ -160,6 +110,36 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="postBook" tabindex="-1" role="dialog" aria-labelledby="postBook" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="postBook">Add New Book</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"></div>
+      <form [formGroup]="bookForm" class="form-group" (ngSubmit)="submitBook()">
+        <label for="bookName">Book Name</label>
+        <input type="text" class="form-control" id="bookName" formControlName="bookName" [(ngModel)]="bookModel.BookName" [ngClass]="{ 'is-invalid': bookForm.submitted && bookName.invalid }" />
+        <div *ngIf="bookForm.submitted && bookName.invalid" class="invalid-feedback">
+          <div *ngIf="bookName?.errors.required">Book Name is required</div>
+        </div>
+        <label for="summary">Summary</label>
+        <input type="text" class="form-control" id="summary" formControlName="summary" [(ngModel)]="bookModel.Summary">
+        <button type="submit" class="btn btn-success float-right">Save Book</button>
+      </form>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-secondary mt-3" data-dismiss="modal">
           Close
         </button>
       </div>

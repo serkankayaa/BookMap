@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { Book } from '../../models/book';
 declare var $: any;
 
 
@@ -8,16 +10,24 @@ declare var $: any;
   styleUrls: ['./admin-book.component.css']
 })
 export class AdminBookComponent implements OnInit {
+  public bookModel: object = new Book();
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit() {
+  bookForm = this.fb.group({
+    bookName: ['', Validators.required],
+    summary: ['', Validators.required],
+    authorName: ['', Validators.required],
+    publisherName: ['', Validators.required],
+    categoryName: ['', Validators.required],
+    shopName: ['', Validators.required],
+    imageName:['', Validators.required]
+  });
 
-  }
+  ngOnInit() {}
 
-  BookDetail(): any {
-    $(function() {
-      (<any>$('#exampleModal')).modal('show');
-    });
+  submitBook() {
+    console.log(this.bookForm.value);
+    console.log(this.bookModel);
   }
 }
