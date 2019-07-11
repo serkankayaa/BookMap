@@ -12,7 +12,7 @@ import { AdminSupplierComponent } from './admin-supplier/admin-supplier.componen
 import { AdminAuthorComponent } from './admin-author/admin-author.component';
 
 const routes: Routes = [
-  { path: 'admin', component: AdminComponent },
+  { path: '', component: AdminDashboardComponent },
   { path: 'author', component: AdminAuthorComponent },
   { path: 'shop', component: AdminShopComponent },
   { path: 'book', component: AdminBookComponent },
