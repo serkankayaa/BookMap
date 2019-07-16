@@ -32,7 +32,6 @@ export class ShopService {
 
   deleteShop(id: any) {
     const deletedShop = this.http.delete(apiBaseUrl + '/Shop/' + id, { headers: headerContent, observe: 'body' });
-    
     return deletedShop;
   }
 }

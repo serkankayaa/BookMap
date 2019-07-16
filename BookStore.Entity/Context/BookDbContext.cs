@@ -12,7 +12,7 @@ namespace BookStore.Entity.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserBook>().HasKey(table => new { table.BookIdFk, table.UserIdFk });      
+            modelBuilder.Entity<UserBook>().HasKey(table => new { table.BookIdFk, table.UserIdFk });
         }
 
         public DbSet<Book> Book { get; set; }

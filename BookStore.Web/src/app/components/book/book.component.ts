@@ -121,4 +121,12 @@ export class BookComponent implements OnInit {
       }
     });
   }
+
+  deleteBook(id: any): void {
+    this.bookService.deleteBook(id).subscribe((res) => {
+      this.toastrService.success('Publisher deleted successfully.');
+      this.getAllBooks();
+    });
+  }
+
 }

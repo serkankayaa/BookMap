@@ -12,6 +12,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class AuthorService {
   allAuthors;
+  author;
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +21,11 @@ export class AuthorService {
     return this.allAuthors;
   }
 
-  //TODO: GetById
+  getById(id: any) {
+    this.author = this.http.get(apiBaseUrl + '/Author/' + id, { headers: headerContent, observe: 'body' });
+
+    return this.author;
+  }
 
   postAuthor(author: Author) {
     const postedAuthor = this.http.post(apiBaseUrl + '/Author', author, { headers: headerContent, observe: 'response' });
@@ -36,7 +41,7 @@ export class AuthorService {
 
   deleteAuthor(id: any) {
     const deletedAuthor = this.http.delete(apiBaseUrl + '/Author/' + id, { headers: headerContent, observe: 'body' });
-    
+
     return deletedAuthor;
   }
 }

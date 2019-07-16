@@ -59,8 +59,7 @@ export class AuthorComponent implements OnInit {
       .subscribe(data => {
         if (data.length === 0) {
           this.hasData = false;
-        }
-        else {
+        } else {
           this.hasData = true;
           this.allAuthors = data;
         }
@@ -119,5 +118,11 @@ export class AuthorComponent implements OnInit {
     this.isEdit = false;
     this.getAuthor();
     this.refreshForm();
+  }
+
+  getById(id: any): void {
+    this.authorService.getById(id).subscribe((res: Author) => {
+      this.author = res;
+    });
   }
 }
