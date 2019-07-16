@@ -32,6 +32,7 @@ export class CategoryService {
 
   deleteCategory(id: any) {
     const deletedCategory = this.http.delete(apiBaseUrl + '/Category/' + id, { headers: headerContent, observe: 'body' });
+    
     return deletedCategory;
   }
 }

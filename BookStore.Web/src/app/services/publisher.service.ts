@@ -34,7 +34,7 @@ export class PublisherService {
 
   deletePublisher(id: any) {
     const deletedPublisher = this.http.delete(apiBaseUrl + '/Publisher/' + id, { headers: headerContent, observe: 'body' });
-
+    
     return deletedPublisher;
   }
 }

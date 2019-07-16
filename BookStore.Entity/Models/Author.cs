@@ -24,7 +24,7 @@ namespace BookStore.Entity.Models
         [Column("BIOGRAPHY")]
         public string Biography { get; set; }
 
-        [Column("DOCUMENT_ID_FK")]
+        [Column("DOCUMENT_ID_FK")]                
         [ForeignKey("Document")]
         public Guid DocumetIdFk { get; set; }
 
@@ -43,6 +43,7 @@ namespace BookStore.Entity.Models
 
         [Column("UPDATED_DATE")]
         public DateTime? UpdatedDate { get; set; }
+
         public Document Document { get; set; }
         public ICollection<Book> Books { get; set; }
     }

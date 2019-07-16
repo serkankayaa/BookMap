@@ -1,6 +1,6 @@
 # BookMap
 
-**EN** - Online Book project built with .Net Core 2.1 and Angular 7.
+**EN** - Online Book project built with .Net Core 2.1 and Angular 7.                                                                    
 **TR** - Angular 7 ve .Net Core 2.1 ile geliştirilen online kitap alışveriş projesi.
 
 ## Getting Started
@@ -15,8 +15,8 @@ Tedarikçiden okuyucuya kadar kitap dağıtım süreçlerini içeren program.
 
 ```
 
- 1. [Visual Studio Code]
- 2. [PostgreSQL]
+ 1. [Visual Studio Code] 
+ 2. [Sql Server 2014 Local Database]
  3. [.Net Core ^2.1]
 ```
 
@@ -52,21 +52,19 @@ No Tests.
 
 - Code First
 
-- PostgreSQL
-
 ## Contributing
 
 [CONTRIBUTING.md](https://gist.github.com)
 
 ## Versioning
 
-[tags on this repository](https://github.com/serkankayaa/BookMap/tags).
+[tags on this repository](https://github.com/serkankayaa/BookMap/tags). 
 
 ## Authors
 
-* **[T. Safa Elmalı](https://github.com/SafaElmali)**
-* **[Serkan Kaya](https://github.com/serkankayaa)**
-* **[Samet Alabey](https://github.com/nillabobillababolla)**
+* **[T. Safa Elmalı](https://github.com/SafaElmali)** 
+* **[Serkan Kaya](https://github.com/serkankayaa)** 
+* **[Samet Alabey](https://github.com/nillabobillababolla)** 
 
 [Geliştiriciler-Contributors](https://github.com/serkankayaa/BookMap/settings/collaboration)
 

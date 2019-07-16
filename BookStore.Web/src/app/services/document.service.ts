@@ -12,7 +12,7 @@ export class DocumentService {
 
   postDocument(formData: FormData) {
     const postedDocument = this.http.post(apiBaseUrl + '/Document', formData, { reportProgress: true, observe: 'events' });
-
+    
     return postedDocument;
   }
 }
