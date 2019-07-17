@@ -1,6 +1,5 @@
-hr {
-  background-color: #fff;
-}
+@import url('https://fonts.googleapis.com/css?family=Arbutus+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Amaranth&display=swap');
 
 html,
 body {
@@ -9,3 +8,28 @@ body {
   overflow-x: hidden;
   height: stretch;
 }
+
+.header-title {
+  font-size: 28px;
+  padding: 20px;
+  font-family: 'Arbutus Slab', serif;
+  color: #6f6868;
+}
+
+.header-button-prop {
+  width: 180px;
+  height: 30px;
+  background-color: orangered;
+  filter: drop-shadow(2px 4px 6px black);
+  border-radius: 200px;
+  font-family: 'Arbutus Slab', serif;
+  border: 1px;
+  color: #fff;
+  -webkit-filter: drop-shadow(2px 4px 6px black);
+  -webkit-border-radius: 200px;
+  -moz-border-radius: 200px;
+  -ms-border-radius: 200px;
+  -o-border-radius: 200px;
+}
+
+.modal-header {}

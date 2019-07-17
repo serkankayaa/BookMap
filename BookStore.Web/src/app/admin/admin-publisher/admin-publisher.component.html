@@ -1,3 +1,52 @@
-<p>
-  admin-publisher works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6 header-title">
+      Publishers
+    </div>
+    <div class="col-2 offset-4 mt-4">
+      <button id="categoryBtn" class="header-button-prop" data-toggle="modal" data-target="#categoryModal"><i
+        class="fas fa-list-ul"></i>&nbsp;&nbsp;New Publisher</button>
+    </div>
+  </div>
+  <hr />
+  <h2 class="text-center header-title">Publisher List</h2>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="publisherModal" tabindex="-1" role="dialog" aria-labelledby="publisherModal"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="publisherModal"><i class="fas fa-store pr-2"></i>Add New Publisher<i
+            class="fas fa-store pr-2"></i></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="publisherForm" (ngSubmit)="submitPublisher()">
+          <div class="form-group">
+            <label for="publisherName">Publisher</label>
+            <input type="text" id="publisherName" class="form-control" formControlName="publisher"
+              [(ngModel)]="publisher.PublisherName"
+              [ngClass]="{ 'is-invalid' : formSubmitted && form.publisher.invalid }" />
+            <div *ngIf="form.publisher.invalid" class="invalid-feedback">
+              <div *ngIf="form.publisher.errors.required">
+                Publisher name is required
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary mt-3" data-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-success mt-3">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,124 +1,134 @@
-<h2 class="text-muted pt-2 col-12 book-header-prop">Books</h2>
-<button class="float-right header-button-prop" data-target="#postBook" data-toggle="modal">
-  <i class="fas fa-book pr-2"></i>New Book
-</button>
-<hr />
-<div class="book-list">
-  <div class="book-item" data-toggle="modal" data-target="#exampleModal">
-    <img class="book-image-props"
-      src="https://images-na.ssl-images-amazon.com/images/I/51EstVXM1UL._SX331_BO1,204,203,200_.jpg" />
-    <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6 header-title">
+      Books
+    </div>
+    <div class="col-2 offset-4 mt-4">
+      <button class="header-button-prop" data-toggle="modal" data-target="#bookModal"><i
+          class="fas fa-book"></i>&nbsp;&nbsp;New Book</button>
+    </div>
   </div>
-  <div class="book-item">
-    <img class="book-image-props"
-      src="https://damonza.com/wp-content/uploads/portfolio/nonfiction/Set%20For%20Life%202.jpg" />
-    <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
-  </div>
-  <div class="book-item">
-    <img class="book-image-props"
-      src="http://www.bukovero.com/wp-content/uploads/2016/07/Harry_Potter_and_the_Cursed_Child_Special_Rehearsal_Edition_Book_Cover.jpg" />
-    <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
-  </div>
-  <div class="book-item">
-    <img class="book-image-props"
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrJgArEzhvhEVrb4yiXQPzMtXjQYR_fyZOqTMzuwkNSO_oXpFG" />
-    <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
-  </div>
-  <div class="book-item">
-    <img class="book-image-props"
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrq2wOC6d8CmyL5si1OXe6C7r82E4jlDJj6TOQCwFkejPG1Q9M" />
-    <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
-  </div>
-  <div class="book-item">
-    <img class="book-image-props" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8yzaZjHtGHWCm6hPAT_hbqz-ifUoOt9uIXruqBwtQuW4-rCU8Uw
+  <hr />
+  <h2 class="text-center header-title">Book List</h2>
+
+  <div class="book-list">
+    <div class="book-item" data-toggle="modal" data-target="#exampleModal">
+      <img class="book-image-props"
+        src="https://images-na.ssl-images-amazon.com/images/I/51EstVXM1UL._SX331_BO1,204,203,200_.jpg" />
+      <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
+    </div>
+    <div class="book-item">
+      <img class="book-image-props"
+        src="https://damonza.com/wp-content/uploads/portfolio/nonfiction/Set%20For%20Life%202.jpg" />
+      <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
+    </div>
+    <div class="book-item">
+      <img class="book-image-props"
+        src="http://www.bukovero.com/wp-content/uploads/2016/07/Harry_Potter_and_the_Cursed_Child_Special_Rehearsal_Edition_Book_Cover.jpg" />
+      <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
+    </div>
+    <div class="book-item">
+      <img class="book-image-props"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrJgArEzhvhEVrb4yiXQPzMtXjQYR_fyZOqTMzuwkNSO_oXpFG" />
+      <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
+    </div>
+    <div class="book-item">
+      <img class="book-image-props"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrq2wOC6d8CmyL5si1OXe6C7r82E4jlDJj6TOQCwFkejPG1Q9M" />
+      <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
+    </div>
+    <div class="book-item">
+      <img class="book-image-props" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8yzaZjHtGHWCm6hPAT_hbqz-ifUoOt9uIXruqBwtQuW4-rCU8Uw
       " />
-    <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
+      <img class="book-bookmark" src="http://www.pngmart.com/files/8/Bookmark-PNG-Background-Image.png" />
+    </div>
   </div>
-</div>
 
-<!-- Button trigger modal -->
-<button style="opacity: 0;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
+  <!-- Button trigger modal -->
+  <button style="opacity: 0;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Book Details</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-6 modal-flex-left">
-            <figure>
-              <img class="book-image-props"
-                src="https://images-na.ssl-images-amazon.com/images/I/51EstVXM1UL._SX331_BO1,204,203,200_.jpg" />
-              <figcaption>
-                <h5 class="mt-2"><i>The Lord Of The Rings</i></h5>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-6">
-            <div>
-              <b><i>Author:</i></b><span> J.R.R. Tolkien</span>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Book Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-6 modal-flex-left">
+              <figure>
+                <img class="book-image-props"
+                  src="https://images-na.ssl-images-amazon.com/images/I/51EstVXM1UL._SX331_BO1,204,203,200_.jpg" />
+                <figcaption>
+                  <h5 class="mt-2"><i>The Lord Of The Rings</i></h5>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="col-6">
+              <div>
+                <b><i>Author:</i></b><span> J.R.R. Tolkien</span>
+                <hr />
+              </div>
+              <div>
+                <b><i>Category:</i></b> Action & Adventure
+              </div>
               <hr />
-            </div>
-            <div>
-              <b><i>Category:</i></b> Action & Adventure
-            </div>
-            <hr />
-            <div>
-              <b><i>Summary:</i></b>
-              <span class="book-summary">In ancient times the Rings of Power were crafted by the
-                Elven-smiths, and Sauron, the Dark Lord, forged the One Ring,
-                filling it with his own power so that he could rule all others.
-                But the One Ring was taken from him, and though he sought it
-                throughout Middle-earth, it remained lost to him. After many
-                ages it fell by chance into the hands of the hobbit Bilbo
-                Baggins. From Sauron's fastness in the Dark Tower of Mordor, his
-                power spread far and wide. Sauron gathered all the Great Rings,
-                but always he searched for the One Ring that would complete his
-                dominion. When Bilbo reached his eleventy-first birthday he
-                disappeared, bequeathing to his young cousin Frodo the Ruling
-                Ring and a perilous quest: to journey across Middle-earth, deep
-                into the shadow of the Dark Lord, and destroy the Ring by
-                casting it into the Cracks of Doom. The Lord of the Rings tells
-                of the great quest undertaken by Frodo and the Fellowship of the
-                Ring: Gandalf the Wizard; the hobbits Merry, Pippin, and Sam;
-                Gimli the Dwarf; Legolas the Elf; Boromir of Gondor; and a tall,
-                mysterious stranger called Strider.</span>
-            </div>
-            <hr />
-            <div>
-              <b><i>Release Date:</i></b> 27 / 05 / 1954
-            </div>
-            <hr />
-            <div>
-              <b><i>Publisher:</i></b>
-            </div>
-            <hr />
-            <div>
-              <b><i>Supplier:</i></b>
+              <div>
+                <b><i>Summary:</i></b>
+                <span class="book-summary">In ancient times the Rings of Power were crafted by the
+                  Elven-smiths, and Sauron, the Dark Lord, forged the One Ring,
+                  filling it with his own power so that he could rule all others.
+                  But the One Ring was taken from him, and though he sought it
+                  throughout Middle-earth, it remained lost to him. After many
+                  ages it fell by chance into the hands of the hobbit Bilbo
+                  Baggins. From Sauron's fastness in the Dark Tower of Mordor, his
+                  power spread far and wide. Sauron gathered all the Great Rings,
+                  but always he searched for the One Ring that would complete his
+                  dominion. When Bilbo reached his eleventy-first birthday he
+                  disappeared, bequeathing to his young cousin Frodo the Ruling
+                  Ring and a perilous quest: to journey across Middle-earth, deep
+                  into the shadow of the Dark Lord, and destroy the Ring by
+                  casting it into the Cracks of Doom. The Lord of the Rings tells
+                  of the great quest undertaken by Frodo and the Fellowship of the
+                  Ring: Gandalf the Wizard; the hobbits Merry, Pippin, and Sam;
+                  Gimli the Dwarf; Legolas the Elf; Boromir of Gondor; and a tall,
+                  mysterious stranger called Strider.</span>
+              </div>
+              <hr />
+              <div>
+                <b><i>Release Date:</i></b> 27 / 05 / 1954
+              </div>
+              <hr />
+              <div>
+                <b><i>Publisher:</i></b>
+              </div>
+              <hr />
+              <div>
+                <b><i>Supplier:</i></b>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">
-          Close
-        </button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            Close
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+
 <!-- Modal -->
-<div class="modal fade" id="postBook" tabindex="-1" role="dialog" aria-labelledby="postBook" aria-hidden="true">
+<div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -127,21 +137,100 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body"></div>
-      <form [formGroup]="bookForm" class="form-group" (ngSubmit)="submitBook()">
-        <label for="bookName">Book Name</label>
-        <input type="text" class="form-control" id="bookName" formControlName="bookName" [(ngModel)]="bookModel.BookName" [ngClass]="{ 'is-invalid': bookForm.submitted && bookName.invalid }" />
-        <div *ngIf="bookForm.submitted && bookName.invalid" class="invalid-feedback">
-          <div *ngIf="bookName?.errors.required">Book Name is required</div>
-        </div>
-        <label for="summary">Summary</label>
-        <input type="text" class="form-control" id="summary" formControlName="summary" [(ngModel)]="bookModel.Summary">
-        <button type="submit" class="btn btn-success float-right">Save Book</button>
-      </form>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary mt-3" data-dismiss="modal">
-          Close
-        </button>
+      <div class="modal-body">
+        <form [formGroup]="bookForm" (ngSubmit)="submitBook()">
+          <div class="form-group">
+            <label for="bookName">Book</label>
+            <input type="text" id="bookName" class="form-control" formControlName="book" [(ngModel)]="book.BookName"
+              [ngClass]="{ 'is-invalid' : formSubmitted && form.book.invalid }" />
+            <div *ngIf="form.book.invalid" class="invalid-feedback">
+              <div *ngIf="form.book.errors.required">
+                Book name is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="summary">Summary</label>
+            <input type="text" id="summary" class="form-control" formControlName="summary" [(ngModel)]="book.Summary"
+              [ngClass]="{ 'is-invalid' : formSubmitted && form.summary.invalid }" />
+            <div *ngIf="form.summary.invalid" class="invalid-feedback">
+              <div *ngIf="form.summary.errors.required">
+                Book summary is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="author">Author</label>
+            <select class="form-control" id="author" formControlName="author" [(ngModel)]="book.AuthorIdFk"
+              [ngClass]="{ 'is-invalid' : formSubmitted && form.author.invalid }">
+              <option *ngFor="let author of allAuthors" [ngValue]="author.AuthorId">
+                {{author.AuthorName}}
+              </option>
+            </select>
+            <div *ngIf="form.author.invalid" class="invalid-feedback">
+              <div *ngIf="form.author.errors.required">
+                Author must be selected
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="publisher">Publisher</label>
+            <select class="form-control" id="publisher" formControlName="publisher" [(ngModel)]="book.PublisherIdFk"
+              [ngClass]="{ 'is-invalid' : formSubmitted && form.publisher.invalid }">
+              <option *ngFor="let publisher of allPublishers" [ngValue]="publisher.PublisherId">
+                {{publisjer.PublisherName}}
+              </option>
+            </select>
+            <div *ngIf="form.publisher.invalid" class="invalid-feedback">
+              <div *ngIf="form.publisher.errors.required">
+                Publisher must be selected
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select class="form-control" id="category" formControlName="category" [(ngModel)]="book.CategoryIdFk"
+              [ngClass]="{ 'is-invalid' : formSubmitted && form.category.invalid }">
+              <option *ngFor="let category of allCategories" [ngValue]="category.CategoryId">
+                {{category.CategoryName}}
+              </option>
+            </select>
+            <div *ngIf="form.category.invalid" class="invalid-feedback">
+              <div *ngIf="form.category.errors.required">
+                Category must be selected
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="shop">Shop</label>
+            <select class="form-control" id="shop" formControlName="shop" [(ngModel)]="book.ShopIdFk"
+              [ngClass]="{ 'is-invalid' : formSubmitted && form.shop.invalid }">
+              <option *ngFor="let shop of allShops" [ngValue]="shop.ShopId">
+                {{shop.ShopName}}
+              </option>
+            </select>
+            <div *ngIf="form.shop.invalid" class="invalid-feedback">
+              <div *ngIf="form.shop.errors.required">
+                Shop must be selected
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="file" class="form-control" formControlName="image" (change)="uploadCover($event)"
+              placeholder="Upload Cover" style="display: none" #file />
+            <button type="button" class="btn upload-btn" (click)="file.click()"><i
+                class="fas fa-cloud-upload-alt"></i>&nbsp;Upload Cover</button>
+            <div *ngIf="formSubmitted && form.image.invalid" class="invalid-feedback">You must upload book cover</div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary mt-3" data-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-success mt-3">
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

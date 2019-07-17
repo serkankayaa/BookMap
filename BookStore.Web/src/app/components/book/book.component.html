@@ -47,7 +47,7 @@
       <div class="form-group">
         <label for="shop">Distributed Shop Name</label>
         <select class="form-control" id="shop" required [(ngModel)]="bookModel.ShopIdFk" name="shop"
-          #shop="ngModel">
+          #shop="ngModel"></select>
           <option *ngFor="let shop of allShops" [ngValue]="shop.ShopId">{{shop.ShopName}}</option>
         </select>
         <div [hidden]="shop.valid || shop.pristine" class="alert alert-danger">
