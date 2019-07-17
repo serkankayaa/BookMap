@@ -4,22 +4,6 @@
 .book-summary {
   font-family: "EB Garamond", serif;
 }
-.book-header-prop {
-  display: inherit;
-}
-
-.header-button-prop {
-  margin: 10px 10% 0 0;
-  width: 150px;
-  background-color: orangered;
-  filter: drop-shadow(2px 4px 6px black);
-  border-radius: 200px;
-  border: 1px;
-  color: #fff;
-  font-weight: bold;
-  font-family: "Amethysta", serif;
-  font-style: italic;
-}
 
 .book-list {
   display: flex;
@@ -28,6 +12,7 @@
   margin: 50px;
   padding-left: 10%;
 }
+
 .book-image-props {
   width: 200px;
   height: 300px;
@@ -69,4 +54,9 @@
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
+}
+
+.upload-btn {
+  background-color: #0cbdf5;
+  color: #fff;
 }

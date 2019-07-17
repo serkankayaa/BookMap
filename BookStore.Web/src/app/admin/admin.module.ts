@@ -6,12 +6,11 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminBookComponent } from './admin-book/admin-book.component';
 import { AdminAuthorComponent } from './admin-author/admin-author.component';
 import { AdminPublisherComponent } from './admin-publisher/admin-publisher.component';
-import { AdminSupplierComponent } from './admin-supplier/admin-supplier.component';
 import { AdminCategoryComponent } from './admin-category/admin-category.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AdminShopComponent, AdminDashboardComponent, AdminBookComponent, AdminAuthorComponent, AdminPublisherComponent, AdminSupplierComponent, AdminCategoryComponent],
+  declarations: [AdminShopComponent, AdminDashboardComponent, AdminBookComponent, AdminAuthorComponent, AdminPublisherComponent, AdminCategoryComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

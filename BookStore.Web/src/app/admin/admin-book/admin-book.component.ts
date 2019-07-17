@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { Supplier } from './../../models/supplier';
+import { Category } from './../../models/category';
+import { Author } from './../../models/author';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Book } from '../../models/book';
+import { Publisher } from '../../models/publisher';
 declare var $: any;
-
 
 @Component({
   selector: 'app-admin-book',
@@ -10,24 +13,45 @@ declare var $: any;
   styleUrls: ['./admin-book.component.css']
 })
 export class AdminBookComponent implements OnInit {
-  public bookModel: object = new Book();
+  public formSubmitted = false;
+  public book: object = new Book();
+  public allAuthors: Author[];
+  public allCategories: Category[];
+  public allPublishers: Publisher[];
+  public allSuppliers: Supplier[];
+  public bookForm: FormGroup;
 
   constructor(private fb: FormBuilder) { }
 
-  bookForm = this.fb.group({
-    bookName: ['', Validators.required],
-    summary: ['', Validators.required],
-    authorName: ['', Validators.required],
-    publisherName: ['', Validators.required],
-    categoryName: ['', Validators.required],
-    shopName: ['', Validators.required],
-    imageName:['', Validators.required]
-  });
+  get form() {
+    return this.bookForm.controls;
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.bookForm = this.fb.group({
+      book: ['', Validators.required],
+      summary: ['', Validators.required],
+      author: ['', Validators.required],
+      publisher: ['', Validators.required],
+      category: ['', Validators.required],
+      shop: ['', Validators.required],
+      image: ['', Validators.required]
+    });
+  }
+
+
+  uploadCover(file) {
+    console.log(file);
+    const imageDetails = file.target.files[0];
+    console.log(imageDetails);
+  }
 
   submitBook() {
-    console.log(this.bookForm.value);
-    console.log(this.bookModel);
+    this.formSubmitted = true;
+    if (this.bookForm.invalid) {
+      return;
+    }
+    console.log(this.bookForm);
+    console.log(this.book);
   }
 }

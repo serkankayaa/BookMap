@@ -1,29 +1,68 @@
-<!-- <div class="container-fluid">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-12 author-header">
-      <h2 class="text-muted pt-2">Authors</h2>
-      <span class="btn btn-primary header-button-prop">Hello</span>
-      <hr />
+    <div class="col-6 header-title">
+      Authors
+    </div>
+    <div class="col-2 offset-4 mt-4">
+      <button class="header-button-prop" data-toggle="modal" data-target="#shopModal"><i
+          class="fas fa-users"></i>&nbsp;&nbsp;New Author</button>
     </div>
   </div>
+  <hr />
+  <h2 class="text-center header-title">Author List</h2>
 </div>
-
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-12">
-      <div class="carousel-flex-list">
-        <div class="author-flex-item">
-          <img
-            class="carousel-avatar-prop"
-            src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTE5NTU2MzE2Mzg4MzYxNzM5/jrr-tolkien-9508428-1-402.jpg"
-          /><br/>
-          <i class="author-detail-prop">
-            J.R.R. Tolkien is an internationally renowned fantasy writer. He is
-            best known for authoring 'The Hobbit' and 'The Lord of the Rings'
-            trilogy.
-          </i>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="authorModal" tabindex="-1" role="dialog" aria-labelledby="authorModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-store pr-2"></i>Add New Author<i class="fas fa-store pr-2"></i></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="authorForm" (ngSubmit)="submitAuthor()">
+          <div class="form-group">
+            <label for="authorName">Author</label>
+            <input type="text" id="authorName" class="form-control" formControlName="author"
+              [(ngModel)]="author.AuthorName" [ngClass]="{ 'is-invalid' : formSubmitted && form.author.invalid }" />
+            <div *ngIf="form.author.invalid" class="invalid-feedback">
+              <div *ngIf="form.author.errors.required">
+                Author name is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="birthDate">Birth Date</label>
+            <input type="text" id="birthDate" class="form-control" formControlName="birthDate"
+              [(ngModel)]="author.BirthDate" [ngClass]="{ 'is-invalid' : formSubmitted && form.birthDate.invalid }" />
+            <div *ngIf="form.birthDate.invalid" class="invalid-feedback">
+              <div *ngIf="form.birthDate.errors.required">
+                Author Birthdate is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="biography">Birth Date</label>
+            <input type="text" id="biography" class="form-control" formControlName="biography"
+              [(ngModel)]="author.Biography" [ngClass]="{ 'is-invalid' : formSubmitted && form.biography.invalid }" />
+            <div *ngIf="form.biography.invalid" class="invalid-feedback">
+              <div *ngIf="form.biography.errors.required">
+                Author Biography is required
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary mt-3" data-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-success mt-3">
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-</div> --> -->
+</div>

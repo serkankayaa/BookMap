@@ -1,15 +1,16 @@
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { AdminModule } from './admin/admin.module';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { AdminComponent } from './admin/admin.component';
 
 import { AuthorService } from './services/author.service';
 import { CategoryService } from './services/category.service';
@@ -18,8 +19,6 @@ import { ShopService } from './services/shop.service';
 import { SupplierService } from './services/supplier.service';
 import { BookService } from './services/book.service';
 import { DocumentService } from './services/document.service';
-import { AdminComponent } from './admin/admin.component';
-import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -28,15 +27,15 @@ import { AdminModule } from './admin/admin.module';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule,
     AppRoutingModule,
     AdminModule,
-    HttpModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [HttpClientModule, AuthorService, PublisherService, ShopService, CategoryService, SupplierService, BookService, DocumentService],
+  providers: [AuthorService, PublisherService, ShopService, CategoryService, SupplierService, BookService, DocumentService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
