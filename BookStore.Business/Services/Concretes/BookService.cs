@@ -19,8 +19,6 @@ namespace BookStore.Business
             _context = context;
             _authorService = authorService;
         }
-        
-        //TODO: User sistemi yazıldığında CreatedBy ve UpdatedBy field ları doldurulacak.
 
         public DtoBook GetBook(Guid id)
         {
@@ -106,7 +104,7 @@ namespace BookStore.Business
             book.CategoryIdFk = model.CategoryIdFk;
             book.ShopIdFk = model.ShopIdFk;
             book.DocumetIdFk = model.ImageIdFk;
-            book.CreatedBy = "Test: Serkan";
+            book.CreatedBy = model.CreatedBy;
             book.CreatedDate = DateTime.Now;
 
             this.Add(book);
@@ -178,7 +176,7 @@ namespace BookStore.Business
             book.CategoryIdFk = model.CategoryIdFk;
             book.ShopIdFk = model.ShopIdFk;
             book.DocumetIdFk = model.ImageIdFk;
-            book.UpdatedBy = "Test: Serkan";
+            book.UpdatedBy = model.UpdatedBy;
             book.UpdatedDate = DateTime.Now;
 
             this.Update(book);

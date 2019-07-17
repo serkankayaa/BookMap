@@ -17,8 +17,6 @@ namespace BookStore.Business.Services
             _context = context;
         }
 
-        //TODO: User sistemi yazıldığında CreatedBy ve UpdatedBy field ları doldurulacak.
-
         public DtoPublisher GetPublisher(Guid id)
         {
             var publisherItem = this.GetById(id);
@@ -87,7 +85,7 @@ namespace BookStore.Business.Services
             publisher.Name = model.PublisherName;
             publisher.Location = model.Location;
             publisher.SupplierIdIFk = model.SupplierIdFk;
-            publisher.CreatedBy = "Test: Safa";
+            publisher.CreatedBy = model.CreatedBy;
             publisher.CreatedDate = DateTime.Now;
 
             this.Add(publisher);
@@ -117,7 +115,7 @@ namespace BookStore.Business.Services
             publisher.Name = model.PublisherName;
             publisher.Location = model.Location;
             publisher.SupplierIdIFk = model.SupplierIdFk;
-            publisher.UpdatedBy = "Test: Safa";
+            publisher.UpdatedBy = model.UpdatedBy;
             publisher.UpdatedDate = DateTime.Now;
 
             this.Update(publisher);

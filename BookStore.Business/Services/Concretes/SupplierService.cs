@@ -17,8 +17,6 @@ namespace BookStore.Business.Services
             this._context = context;
         }
 
-        //TODO: User sistemi yazıldığında CreatedBy ve UpdatedBy field ları doldurulacak.
-
         public bool DeleteSupplier(Guid id)
         {
             if(id == null)
@@ -90,7 +88,7 @@ namespace BookStore.Business.Services
             Supplier supplier = new Supplier();
             supplier.Name = model.SupplierName;
             supplier.SupplierRegion = model.SupplierRegion;
-            supplier.CreatedBy = "Test: Safa";
+            supplier.CreatedBy = model.CreatedBy;
             supplier.CreatedDate = DateTime.Now;
 
             this.Add(supplier);
@@ -119,7 +117,7 @@ namespace BookStore.Business.Services
             supplier.Id = model.SupplierId;
             supplier.Name = model.SupplierName;
             supplier.SupplierRegion = model.SupplierRegion;
-            supplier.UpdatedBy = "Test: Safa";
+            supplier.UpdatedBy = model.UpdatedBy;
             supplier.UpdatedDate = DateTime.Now;
 
             this.Update(supplier);

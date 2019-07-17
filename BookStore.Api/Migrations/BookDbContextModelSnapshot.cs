@@ -77,6 +77,9 @@ namespace BookStore.Api.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnName("CREATED_DATE");
 
+                    b.Property<Guid>("DocumetIdFk")
+                        .HasColumnName("DOCUMENT_ID_FK");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("NAME")
@@ -90,6 +93,8 @@ namespace BookStore.Api.Migrations
                         .HasColumnName("UPDATED_DATE");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DocumetIdFk");
 
                     b.ToTable("AUTHOR");
                 });
@@ -464,6 +469,9 @@ namespace BookStore.Api.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnName("CREATED_DATE");
 
+                    b.Property<Guid?>("ImageIdFk")
+                        .HasColumnName("DOCUMENT_ID_FK");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("NAME")
@@ -486,9 +494,19 @@ namespace BookStore.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ImageIdFk");
+
                     b.HasIndex("UserIdFk");
 
                     b.ToTable("USER_PROFILE");
+                });
+
+            modelBuilder.Entity("BookStore.Entity.Models.Author", b =>
+                {
+                    b.HasOne("BookStore.Entity.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumetIdFk")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BookStore.Entity.Models.Book", b =>
@@ -558,6 +576,10 @@ namespace BookStore.Api.Migrations
 
             modelBuilder.Entity("BookStore.Entity.Models.UserProfile", b =>
                 {
+                    b.HasOne("BookStore.Entity.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("ImageIdFk");
+
                     b.HasOne("BookStore.Entity.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserIdFk")
