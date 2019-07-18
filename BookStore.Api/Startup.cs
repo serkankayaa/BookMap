@@ -1,15 +1,13 @@
-﻿using System.IO;
+﻿using System.Linq;
 using BookStore.Business;
 using BookStore.Business.Services;
 using BookStore.Entity.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -56,7 +54,6 @@ namespace BookStoreMap
             services.AddScoped<IPublisherService, PublisherService>();
             services.AddScoped<IShopService, ShopService>();
             services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<ISupplierService, SupplierService>();
             services.AddScoped<IDocumentService, DocumentService>();
             services.AddScoped<IUserService, UserService>();
 
