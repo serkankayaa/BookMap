@@ -20,7 +20,6 @@ namespace BookStore.Entity.Context
         public DbSet<Publisher> Publisher { get; set; }
         public DbSet<Shop> Shop { get; set; }
         public DbSet<Category> Category { get; set; }
-        public DbSet<Supplier> Supplier { get; set; }
         public DbSet<Document> Document { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<UserPassword> UserPassword { get; set; }

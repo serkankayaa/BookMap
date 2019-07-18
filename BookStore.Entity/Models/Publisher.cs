@@ -20,11 +20,6 @@ namespace BookStore.Entity.Models
         [MaxLength(200)]
         public string Location { get; set; }
 
-        [Column("SUPPLIER_ID_FK")]
-        [Required]
-        [ForeignKey("Supplier")]
-        public Guid SupplierIdIFk { get; set; }
-
         [Column("CREATED_BY")]
         [Required]
         [MaxLength(100)]
@@ -40,7 +35,5 @@ namespace BookStore.Entity.Models
 
         [Column("UPDATED_DATE")]
         public DateTime? UpdatedDate { get; set; }
-        
-        public Supplier Supplier { get; set; }
     }
 }

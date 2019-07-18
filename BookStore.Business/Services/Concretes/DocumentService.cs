@@ -14,8 +14,6 @@ namespace BookStore.Business.Services
             _context = context;
         }
 
-        //TODO: User sistemi yazıldığında CreatedBy ve UpdatedBy field ları doldurulacak.
-
         public object PostDocument(string contentType, string dbFile, string childPath)
         {
             Document document = new Document();
@@ -23,7 +21,7 @@ namespace BookStore.Business.Services
             document.ContentType = contentType;
             document.FileName = dbFile;
             document.FullPath = childPath;
-            document.CreatedBy = "Test: Safa";
+            document.CreatedBy = "Test: Safa"; //TODO: Kaydeden kişinin bilgisi gelecek.
             document.CreatedDate = DateTime.Now;
 
             _context.Document.Add(document);

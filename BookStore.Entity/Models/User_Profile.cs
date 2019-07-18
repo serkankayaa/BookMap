@@ -32,6 +32,10 @@ namespace BookStore.Entity.Models
         [Column("BIRTHDATE")]                        
         public DateTime BirthDate { get; set; }
 
+        [Column("DOCUMENT_ID_FK")]
+        [ForeignKey("Document")]
+        public Guid? ImageIdFk { get; set; }
+
         [Column("CREATED_BY")]                
         [Required]
         [MaxLength(100)]
@@ -49,5 +53,6 @@ namespace BookStore.Entity.Models
         public DateTime UpdatedDate { get; set; }
 
         public User User { get; set; }
+        public Document Document { get; set; }
     }
 }

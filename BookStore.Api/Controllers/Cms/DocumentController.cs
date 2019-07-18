@@ -2,14 +2,10 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
-using BookStore.Business;
 using BookStore.Business.Services;
-using BookStore.Entity;
-using BookStore.Entity.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
-#region DocumentController
 namespace BookStore.Api.Controllers
 {
     [Route("[controller]")]
@@ -18,9 +14,7 @@ namespace BookStore.Api.Controllers
     {
         private IDocumentService _documentService;
         public IConfiguration _configuration { get; }
-
         private readonly string[] ACCEPTED_FILE_TYPES = new [] { ".jpg", ".jpeg", ".png", ".JPG", ".JPEG", ".PNG" };
-        #endregion
 
         public DocumentController(IDocumentService documentService, IConfiguration configuration)
         {
@@ -28,7 +22,6 @@ namespace BookStore.Api.Controllers
             _configuration = configuration;
         }
 
-        #region Document_Create
         // POST: /Document/
         [HttpPost]
         public object PostDocument()
@@ -78,6 +71,5 @@ namespace BookStore.Api.Controllers
                 return ex;
             }
         }
-        #endregion
     }
 }
