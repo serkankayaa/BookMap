@@ -34,7 +34,7 @@ export class AdminPublisherComponent implements OnInit {
     });
   }
 
-  postPublisher() {
+  submitPublisher() {
     this.formSubmitted = true;
     if (this.publisherForm.invalid) {
       return;

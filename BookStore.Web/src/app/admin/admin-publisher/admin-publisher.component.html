@@ -5,7 +5,7 @@
     </div>
     <div class="col-2 offset-4 mt-4">
       <button id="categoryBtn" class="header-button-prop" data-toggle="modal" data-target="#publisherModal"><i
-        class="fas fa-list-ul"></i>&nbsp;&nbsp;New Publisher</button>
+          class="fas fa-list-ul"></i>&nbsp;&nbsp;New Publisher</button>
     </div>
   </div>
   <hr />
@@ -37,13 +37,12 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="publisherLocation">Publiher Location</label>
+            <label for="publisherLocation">Location</label>
             <input type="text" id="publisherLocation" class="form-control" formControlName="location"
-              [(ngModel)]="publisher.Location"
-              [ngClass]="{ 'is-invalid' : formSubmitted && form.location.invalid }" />
+              [(ngModel)]="publisher.Location" [ngClass]="{ 'is-invalid' : formSubmitted && form.location.invalid }" />
             <div *ngIf="form.location.invalid" class="invalid-feedback">
               <div *ngIf="form.location.errors.required">
-                Publisher location name is required
+                Publisher location is required
               </div>
             </div>
           </div>

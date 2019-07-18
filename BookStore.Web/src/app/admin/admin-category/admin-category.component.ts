@@ -18,6 +18,7 @@ export class AdminCategoryComponent implements OnInit {
   ngOnInit() {
     this.categoryForm = this.fb.group({
       category: ['', Validators.required],
+      categoryType: [''],
     });
   }
 
