@@ -38,7 +38,7 @@ namespace BookStore.Business.Services
                 user.EmailConfirmed = true; //TODO: Onaylama sistemi yazılacak.
                 user.VerificationCode = "Test: Code"; //TODO: Onaylama sistemi yazılacak.
                 user.UserName = model.UserName;
-                user.Role = model.Role;
+                user.Role = (byte)UserType.User;
                 user.CreatedBy = model.CreatedBy;
                 user.CreatedDate = DateTime.Now;
 
@@ -74,11 +74,10 @@ namespace BookStore.Business.Services
         //Method hem ilk şifreyi kaydetmeyi hem de sadece şifreyi değiştirmeyi sağlıyor.
         public object SavePassword(Guid userId, string passwordHash, string grantedUser)
         {
-            var passwordDate = _context.UserPassword.Where(c=> c.UserIdFk == userId && c.PasswordHash == passwordHash)
-                                                    .Select(k=> k.CreatedDate).FirstOrDefault();
+            bool checkUserPassword = _context.UserPassword.Where(c=> c.UserIdFk == userId).Any();
 
             //Kullanıcının şifresi ilk kez kaydedilirse çalışır.
-            if(passwordDate == DateTime.MinValue)
+            if(!checkUserPassword)
             {
                 UserPassword newUserPassword = new UserPassword();
                 newUserPassword.PasswordHash = passwordHash;
@@ -93,6 +92,9 @@ namespace BookStore.Business.Services
                 return true;
             }
             
+            var passwordDate = _context.UserPassword.Where(c=> c.UserIdFk == userId && c.PasswordHash == passwordHash)
+                                                    .Select(k=> k.CreatedDate).FirstOrDefault();
+
             //Eğer kullanıcı eski bir şifresini girdiyse, eski girdiği şifrenin kaydedilme tarihini döndürür.
             if(passwordDate == null && passwordDate != DateTime.MinValue)
             {
@@ -127,6 +129,7 @@ namespace BookStore.Business.Services
             return true;
         }
 
+        //Helper Method
         public object SaveProfile(DtoUser model)
         {
             UserProfile userProfile = new UserProfile();
@@ -141,6 +144,109 @@ namespace BookStore.Business.Services
 
             this._context.UserProfile.Add(userProfile);
             this._context.SaveChanges();
+
+            return true;
+        }
+
+        public object EditUserProfile(DtoUser model)
+        {
+            if(model == null)
+            {
+                return new DtoUser();
+            }
+
+            var userProfile = this._context.UserProfile.Where(c=> c.Id == model.UserProfileId).FirstOrDefault();
+
+            if(userProfile != null)
+            {
+                userProfile.Name = model.Name;
+                userProfile.Surname = model.Surname;
+                userProfile.Address = model.Address;
+                userProfile.BirthDate = model.BirthDate;
+                userProfile.ImageIdFk = model.ImageIdFk;
+                userProfile.UpdatedBy = model.UpdatedBy;
+                userProfile.UpdatedDate = DateTime.Now;
+
+                this._context.Update(userProfile);
+                this._context.SaveChanges();
+
+                return true;    
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public object EditAccountUser(DtoUser model)
+        {
+            if(model == null)
+            {
+                return new DtoUser();
+            }
+
+            var userAccount = this.GetById(model.UserId);
+
+            if(userAccount != null)
+            {
+                userAccount.UserName = model.UserName;
+                userAccount.EmailAddress = model.EmailAddress;
+                
+                this.Update(userAccount);
+                this.Save();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }    
+        }
+
+        public object Login(string userName, string email, string passwordHash)
+        {
+            if(!String.IsNullOrEmpty(userName) || !String.IsNullOrEmpty(email) && !String.IsNullOrEmpty(passwordHash))
+            {
+                return null;
+            }
+
+            var user = this._context.User.Where(c=> c.UserName == userName || c.EmailAddress == email).FirstOrDefault();
+            var userPassword = this._context.UserPassword.Where(c=> c.PasswordHash == passwordHash).FirstOrDefault();
+
+            if(user == null || userPassword == null)
+            {
+                return false;
+            }
+
+            return user;
+        }
+
+        public object ChangeRole(Guid userId)
+        {
+            if(userId == Guid.Empty)
+            {
+                return false;
+            }
+
+            var userToAdmin = this._context.User.Where(c=>c.Id == userId && c.Role == (byte)UserType.User).FirstOrDefault();
+
+            if(userToAdmin != null)
+            {
+                userToAdmin.Role = (byte)UserType.Admin;
+                
+                this._context.User.Update(userToAdmin);
+                this._context.SaveChanges();
+            }
+
+            var adminToUser = this._context.User.Where(c=>c.Id == userId && c.Role == (byte)UserType.Admin).FirstOrDefault();
+            
+            if(adminToUser != null)
+            {
+                adminToUser.Role = (byte)UserType.User;
+                
+                this._context.User.Update(adminToUser);
+                this._context.SaveChanges();
+            }
 
             return true;
         }

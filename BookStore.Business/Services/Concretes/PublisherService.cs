@@ -31,8 +31,6 @@ namespace BookStore.Business.Services
             author.PublisherId = publisherItem.Id;
             author.PublisherName = publisherItem.Name;
             author.Location = publisherItem.Location;
-            author.SupplierIdFk = publisherItem.SupplierIdIFk;
-            author.SupplierName = publisherItem.Supplier.Name;
             author.CreatedBy = publisherItem.CreatedBy;
             author.CreatedDate = publisherItem.CreatedDate;
             author.UpdatedBy = publisherItem.UpdatedBy;
@@ -54,8 +52,6 @@ namespace BookStore.Business.Services
             {
                 PublisherId = c.Id,
                 PublisherName = c.Name,
-                SupplierIdFk = c.SupplierIdIFk,
-                SupplierName = c.Supplier.Name,
                 Location = c.Location,
                 CreatedBy = c.CreatedBy,
                 CreatedDate = c.CreatedDate,
@@ -84,7 +80,6 @@ namespace BookStore.Business.Services
             publisher.Id = model.PublisherId;
             publisher.Name = model.PublisherName;
             publisher.Location = model.Location;
-            publisher.SupplierIdIFk = model.SupplierIdFk;
             publisher.CreatedBy = model.CreatedBy;
             publisher.CreatedDate = DateTime.Now;
 
@@ -114,7 +109,6 @@ namespace BookStore.Business.Services
             publisher.Id = model.PublisherId;
             publisher.Name = model.PublisherName;
             publisher.Location = model.Location;
-            publisher.SupplierIdIFk = model.SupplierIdFk;
             publisher.UpdatedBy = model.UpdatedBy;
             publisher.UpdatedDate = DateTime.Now;
 

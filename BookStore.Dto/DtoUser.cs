@@ -5,6 +5,7 @@ namespace BookStore.Dto
     public class DtoUser
     {
         public Guid UserId { get; set; }
+        public Guid UserProfileId { get; set; }
         public string EmailAddress { get; set; }
         public bool EmailConfirmed { get; set; }
         public string VerificationCode { get; set; }

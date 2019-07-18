@@ -7,6 +7,9 @@ namespace BookStore.Business.Services
     {
         object PostUser(DtoUser model);
         object SavePassword(Guid userId, string passwordHash, string grantedUser);
-        object SaveProfile(DtoUser model);
+        object EditUserProfile(DtoUser model);
+        object EditAccountUser(DtoUser model);
+        object Login(string userName, string email, string passwordHash);
+        object ChangeRole(Guid userId);
     }
 }
