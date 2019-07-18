@@ -20,7 +20,6 @@ export class AdminPublisherComponent implements OnInit {
     this.publisherForm = this.fb.group({
       publisher: ['', Validators.required],
       location: ['', Validators.required],
-      supplierName: ['', Validators.required]
     });
     this.getAllPublishers();
   }
@@ -35,7 +34,7 @@ export class AdminPublisherComponent implements OnInit {
     });
   }
 
-  postPublisher() {
+  submitPublisher() {
     this.formSubmitted = true;
     if (this.publisherForm.invalid) {
       return;

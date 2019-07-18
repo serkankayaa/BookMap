@@ -4,8 +4,8 @@
       Publishers
     </div>
     <div class="col-2 offset-4 mt-4">
-      <button id="categoryBtn" class="header-button-prop" data-toggle="modal" data-target="#categoryModal"><i
-        class="fas fa-list-ul"></i>&nbsp;&nbsp;New Publisher</button>
+      <button id="categoryBtn" class="header-button-prop" data-toggle="modal" data-target="#publisherModal"><i
+          class="fas fa-list-ul"></i>&nbsp;&nbsp;New Publisher</button>
     </div>
   </div>
   <hr />
@@ -18,8 +18,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="publisherModal"><i class="fas fa-store pr-2"></i>Add New Publisher<i
-            class="fas fa-store pr-2"></i></h5>
+        <h5 class="modal-title" id="publisherModal">Add New Publisher</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -34,6 +33,16 @@
             <div *ngIf="form.publisher.invalid" class="invalid-feedback">
               <div *ngIf="form.publisher.errors.required">
                 Publisher name is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="publisherLocation">Location</label>
+            <input type="text" id="publisherLocation" class="form-control" formControlName="location"
+              [(ngModel)]="publisher.Location" [ngClass]="{ 'is-invalid' : formSubmitted && form.location.invalid }" />
+            <div *ngIf="form.location.invalid" class="invalid-feedback">
+              <div *ngIf="form.location.errors.required">
+                Publisher location is required
               </div>
             </div>
           </div>

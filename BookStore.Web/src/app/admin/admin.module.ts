@@ -7,14 +7,15 @@ import { AdminBookComponent } from './admin-book/admin-book.component';
 import { AdminAuthorComponent } from './admin-author/admin-author.component';
 import { AdminPublisherComponent } from './admin-publisher/admin-publisher.component';
 import { AdminCategoryComponent } from './admin-category/admin-category.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AdminShopComponent, AdminDashboardComponent, AdminBookComponent, AdminAuthorComponent, AdminPublisherComponent, AdminCategoryComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
   ],
 })
 export class AdminModule { }
