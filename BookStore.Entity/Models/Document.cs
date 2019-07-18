@@ -22,5 +22,21 @@ namespace BookStore.Entity
         [Column("FILE_NAME")]
         [Required]
         public string FileName { get; set; }
+
+        [Column("CREATED_BY")]
+        [Required]
+        [MaxLength(100)]
+        public string CreatedBy { get; set; }
+
+        [Column("CREATED_DATE")]
+        [Required]
+        public DateTime CreatedDate { get; set; }
+
+        [Column("UPDATED_BY")]
+        [MaxLength(100)]
+        public string UpdatedBy { get; set; }
+
+        [Column("UPDATED_DATE")]
+        public DateTime? UpdatedDate { get; set; }
     }
 }

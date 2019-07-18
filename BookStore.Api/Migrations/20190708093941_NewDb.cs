@@ -3,24 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BookStore.Api.Migrations
 {
-    public partial class RefacatoredDb : Migration
+    public partial class NewDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "AUTHOR",
-                columns: table => new
-                {
-                    ID = table.Column<Guid>(nullable: false),
-                    NAME = table.Column<string>(maxLength: 250, nullable: false),
-                    BIRTH_DATE = table.Column<DateTime>(nullable: false),
-                    BIOGRAPHY = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AUTHOR", x => x.ID);
-                });
-
             migrationBuilder.CreateTable(
                 name: "CATEGORY",
                 columns: table => new
@@ -28,7 +14,11 @@ namespace BookStore.Api.Migrations
                     ID = table.Column<Guid>(nullable: false),
                     NAME = table.Column<string>(maxLength: 250, nullable: false),
                     SUMMARY = table.Column<string>(maxLength: 500, nullable: false),
-                    IS_MAIN_CATEGORY = table.Column<bool>(nullable: false)
+                    IS_MAIN_CATEGORY = table.Column<bool>(nullable: false),
+                    CREATED_BY = table.Column<string>(maxLength: 100, nullable: false),
+                    CREATED_DATE = table.Column<DateTime>(nullable: false),
+                    UPDATED_BY = table.Column<string>(maxLength: 100, nullable: true),
+                    UPDATED_DATE = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,7 +32,11 @@ namespace BookStore.Api.Migrations
                     ID = table.Column<Guid>(nullable: false),
                     CONTENT_TYPE = table.Column<string>(nullable: false),
                     FULL_PATH = table.Column<string>(nullable: false),
-                    FILE_NAME = table.Column<string>(nullable: false)
+                    FILE_NAME = table.Column<string>(nullable: false),
+                    CREATED_BY = table.Column<string>(maxLength: 100, nullable: false),
+                    CREATED_DATE = table.Column<DateTime>(nullable: false),
+                    UPDATED_BY = table.Column<string>(maxLength: 100, nullable: true),
+                    UPDATED_DATE = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -55,8 +49,12 @@ namespace BookStore.Api.Migrations
                 {
                     ID = table.Column<Guid>(nullable: false),
                     NAME = table.Column<string>(maxLength: 250, nullable: false),
-                    LOCATION = table.Column<string>(nullable: true),
-                    STAFF_COUNT = table.Column<int>(nullable: false)
+                    LOCATION = table.Column<string>(maxLength: 200, nullable: true),
+                    STAFF_COUNT = table.Column<int>(nullable: false),
+                    CREATED_BY = table.Column<string>(maxLength: 100, nullable: false),
+                    CREATED_DATE = table.Column<DateTime>(nullable: false),
+                    UPDATED_BY = table.Column<string>(maxLength: 100, nullable: true),
+                    UPDATED_DATE = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -69,7 +67,11 @@ namespace BookStore.Api.Migrations
                 {
                     ID = table.Column<Guid>(nullable: false),
                     NAME = table.Column<string>(maxLength: 250, nullable: false),
-                    REGION = table.Column<string>(maxLength: 100, nullable: false)
+                    REGION = table.Column<string>(maxLength: 200, nullable: false),
+                    CREATED_BY = table.Column<string>(maxLength: 100, nullable: false),
+                    CREATED_DATE = table.Column<DateTime>(nullable: false),
+                    UPDATED_BY = table.Column<string>(maxLength: 100, nullable: true),
+                    UPDATED_DATE = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -81,14 +83,14 @@ namespace BookStore.Api.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
-                    EMAIL_ADDRESS = table.Column<string>(nullable: false),
+                    EMAIL_ADDRESS = table.Column<string>(maxLength: 250, nullable: false),
                     EMAIL_CONFIRMED = table.Column<bool>(nullable: false),
                     VERIFICATION_CODE = table.Column<string>(nullable: true),
-                    USER_NAME = table.Column<string>(nullable: false),
+                    USER_NAME = table.Column<string>(maxLength: 150, nullable: false),
                     ROLE = table.Column<byte>(nullable: false),
-                    CREATED_BY = table.Column<string>(nullable: false),
+                    CREATED_BY = table.Column<string>(maxLength: 100, nullable: false),
                     CREATED_DATE = table.Column<DateTime>(nullable: false),
-                    UPDATED_BY = table.Column<string>(nullable: true),
+                    UPDATED_BY = table.Column<string>(maxLength: 100, nullable: true),
                     UPDATED_DATE = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -97,13 +99,42 @@ namespace BookStore.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AUTHOR",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(nullable: false),
+                    NAME = table.Column<string>(maxLength: 250, nullable: false),
+                    BIRTH_DATE = table.Column<DateTime>(nullable: false),
+                    BIOGRAPHY = table.Column<string>(nullable: true),
+                    DOCUMENT_ID_FK = table.Column<Guid>(nullable: false),
+                    CREATED_BY = table.Column<string>(maxLength: 100, nullable: false),
+                    CREATED_DATE = table.Column<DateTime>(nullable: false),
+                    UPDATED_BY = table.Column<string>(maxLength: 100, nullable: true),
+                    UPDATED_DATE = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AUTHOR", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_AUTHOR_DOCUMENT_DOCUMENT_ID_FK",
+                        column: x => x.DOCUMENT_ID_FK,
+                        principalTable: "DOCUMENT",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PUBLISHER",
                 columns: table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
                     NAME = table.Column<string>(maxLength: 250, nullable: false),
-                    LOCATION = table.Column<string>(nullable: true),
-                    SUPPLIER_ID_FK = table.Column<Guid>(nullable: false)
+                    LOCATION = table.Column<string>(maxLength: 200, nullable: true),
+                    SUPPLIER_ID_FK = table.Column<Guid>(nullable: false),
+                    CREATED_BY = table.Column<string>(maxLength: 100, nullable: false),
+                    CREATED_DATE = table.Column<DateTime>(nullable: false),
+                    UPDATED_BY = table.Column<string>(maxLength: 100, nullable: true),
+                    UPDATED_DATE = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -125,7 +156,7 @@ namespace BookStore.Api.Migrations
                     LOGIN_DATE = table.Column<DateTime>(nullable: false),
                     LOGOUT_DATE = table.Column<DateTime>(nullable: false),
                     TOKEN = table.Column<string>(nullable: true),
-                    CREATED_BY = table.Column<string>(nullable: false),
+                    CREATED_BY = table.Column<string>(maxLength: 100, nullable: false),
                     CREATED_DATE = table.Column<DateTime>(nullable: false),
                     UPDATED_BY = table.Column<string>(nullable: true),
                     UPDATED_DATE = table.Column<DateTime>(nullable: false)
@@ -149,9 +180,9 @@ namespace BookStore.Api.Migrations
                     USER_ID_FK = table.Column<Guid>(nullable: false),
                     PASSWORD_HASH = table.Column<string>(nullable: false),
                     IS_ACTIVE = table.Column<bool>(nullable: false),
-                    CREATED_BY = table.Column<string>(nullable: false),
+                    CREATED_BY = table.Column<string>(maxLength: 100, nullable: false),
                     CREATED_DATE = table.Column<DateTime>(nullable: false),
-                    UPDATED_BY = table.Column<string>(nullable: true),
+                    UPDATED_BY = table.Column<string>(maxLength: 100, nullable: true),
                     UPDATED_DATE = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -171,18 +202,25 @@ namespace BookStore.Api.Migrations
                 {
                     ID = table.Column<Guid>(nullable: false),
                     USER_ID_FK = table.Column<Guid>(nullable: false),
-                    NAME = table.Column<string>(nullable: false),
-                    SURNAME = table.Column<string>(nullable: false),
+                    NAME = table.Column<string>(maxLength: 100, nullable: false),
+                    SURNAME = table.Column<string>(maxLength: 100, nullable: false),
                     ADDRESS = table.Column<string>(nullable: true),
                     BIRTHDATE = table.Column<DateTime>(nullable: false),
-                    CREATED_BY = table.Column<string>(nullable: false),
+                    DOCUMENT_ID_FK = table.Column<Guid>(nullable: true),
+                    CREATED_BY = table.Column<string>(maxLength: 100, nullable: false),
                     CREATED_DATE = table.Column<DateTime>(nullable: false),
-                    UPDATED_BY = table.Column<string>(nullable: true),
+                    UPDATED_BY = table.Column<string>(maxLength: 100, nullable: true),
                     UPDATED_DATE = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_USER_PROFILE", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_USER_PROFILE_DOCUMENT_DOCUMENT_ID_FK",
+                        column: x => x.DOCUMENT_ID_FK,
+                        principalTable: "DOCUMENT",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_USER_PROFILE_USER_USER_ID_FK",
                         column: x => x.USER_ID_FK,
@@ -202,7 +240,11 @@ namespace BookStore.Api.Migrations
                     PUBLISHER_ID_FK = table.Column<Guid>(nullable: false),
                     CATEGORY_ID_FK = table.Column<Guid>(nullable: false),
                     SHOP_ID_FK = table.Column<Guid>(nullable: false),
-                    DOCUMENT_ID_FK = table.Column<Guid>(nullable: false)
+                    DOCUMENT_ID_FK = table.Column<Guid>(nullable: false),
+                    CREATED_BY = table.Column<string>(maxLength: 100, nullable: false),
+                    CREATED_DATE = table.Column<DateTime>(nullable: false),
+                    UPDATED_BY = table.Column<string>(maxLength: 100, nullable: true),
+                    UPDATED_DATE = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -264,6 +306,11 @@ namespace BookStore.Api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AUTHOR_DOCUMENT_ID_FK",
+                table: "AUTHOR",
+                column: "DOCUMENT_ID_FK");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BOOK_AUTHOR_ID_FK",
                 table: "BOOK",
                 column: "AUTHOR_ID_FK");
@@ -309,6 +356,11 @@ namespace BookStore.Api.Migrations
                 column: "USER_ID_FK");
 
             migrationBuilder.CreateIndex(
+                name: "IX_USER_PROFILE_DOCUMENT_ID_FK",
+                table: "USER_PROFILE",
+                column: "DOCUMENT_ID_FK");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_USER_PROFILE_USER_ID_FK",
                 table: "USER_PROFILE",
                 column: "USER_ID_FK");
@@ -341,13 +393,13 @@ namespace BookStore.Api.Migrations
                 name: "CATEGORY");
 
             migrationBuilder.DropTable(
-                name: "DOCUMENT");
-
-            migrationBuilder.DropTable(
                 name: "PUBLISHER");
 
             migrationBuilder.DropTable(
                 name: "SHOP");
+
+            migrationBuilder.DropTable(
+                name: "DOCUMENT");
 
             migrationBuilder.DropTable(
                 name: "SUPPLIER");

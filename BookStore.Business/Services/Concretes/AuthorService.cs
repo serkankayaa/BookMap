@@ -20,12 +20,18 @@ namespace BookStore.Business.Services
         public DtoAuthor GetAuthor(Guid id) 
         {
             var author = this.GetById(id);
-
+            
             DtoAuthor model = new DtoAuthor();
             model.AuthorId = author.Id;
             model.AuthorName = author.Name;
             model.BirthDate = author.BirthDate;
             model.Biography = author.Biography;
+            model.ImageIdFk = author.DocumetIdFk;
+            model.ImageName = author.Document.FileName;
+            model.CreatedBy = author.CreatedBy;
+            model.CreatedDate = author.CreatedDate;
+            model.UpdatedBy = author.UpdatedBy;
+            model.UpdatedDate = author.UpdatedDate;
 
             return model;
         }
@@ -38,7 +44,13 @@ namespace BookStore.Business.Services
                 AuthorId = c.Id,
                 AuthorName = c.Name,
                 BirthDate = c.BirthDate,
-                Biography = c.Biography
+                Biography = c.Biography,
+                ImageIdFk = c.DocumetIdFk,
+                ImageName = c.Document.FileName,
+                CreatedBy = c.CreatedBy,
+                CreatedDate = c.CreatedDate,
+                UpdatedBy = c.UpdatedBy,
+                UpdatedDate = c.UpdatedDate
             }).ToList();
 
             return allAuthors;
@@ -57,6 +69,9 @@ namespace BookStore.Business.Services
             author.Name = model.AuthorName;
             author.Biography = model.Biography;
             author.BirthDate = model.BirthDate;
+            author.DocumetIdFk = model.ImageIdFk;
+            author.CreatedBy = model.CreatedBy;
+            author.CreatedDate = DateTime.Now;
 
             this.Add(author);
             this.Save();
@@ -73,6 +88,9 @@ namespace BookStore.Business.Services
             author.Name = model.AuthorName;
             author.Biography = model.Biography;
             author.BirthDate = model.BirthDate;
+            author.DocumetIdFk = model.ImageIdFk;
+            author.UpdatedBy = model.UpdatedBy;
+            author.UpdatedDate = DateTime.Now;
 
             this.Update(author);
             this.Save();
@@ -94,6 +112,7 @@ namespace BookStore.Business.Services
 
             return true;
         }
+        
         public bool DeleteAllAuthors() 
         {
             var authors = this.GetAll();

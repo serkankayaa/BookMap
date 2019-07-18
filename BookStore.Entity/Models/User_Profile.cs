@@ -18,10 +18,12 @@ namespace BookStore.Entity.Models
 
         [Column("NAME")]                
         [Required]
+        [MaxLength(100)]
         public string Name { get; set; }
 
         [Column("SURNAME")]                        
         [Required]
+        [MaxLength(100)]
         public string Surname { get; set; }
 
         [Column("ADDRESS")]                        
@@ -30,20 +32,27 @@ namespace BookStore.Entity.Models
         [Column("BIRTHDATE")]                        
         public DateTime BirthDate { get; set; }
 
+        [Column("DOCUMENT_ID_FK")]
+        [ForeignKey("Document")]
+        public Guid? ImageIdFk { get; set; }
+
         [Column("CREATED_BY")]                
         [Required]
+        [MaxLength(100)]
         public string CreatedBy { get; set; }
 
         [Column("CREATED_DATE")]                
         [Required]
         public DateTime CreatedDate { get; set; }
 
-        [Column("UPDATED_BY")]                
+        [Column("UPDATED_BY")]
+        [MaxLength(100)]                
         public string UpdatedBy { get; set; }
 
         [Column("UPDATED_DATE")]                
         public DateTime UpdatedDate { get; set; }
 
         public User User { get; set; }
+        public Document Document { get; set; }
     }
 }

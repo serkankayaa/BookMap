@@ -46,7 +46,11 @@ namespace BookStore.Business
                 ShopIdFk = bookItem.ShopIdFk,
                 ShopName = bookShop.Name,
                 ImageIdFk = bookItem.DocumetIdFk,
-                ImageName = bookItem.Document.FileName
+                ImageName = bookItem.Document.FileName,
+                CreatedBy = bookItem.CreatedBy,
+                CreatedDate = bookItem.CreatedDate,
+                UpdatedBy = bookItem.UpdatedBy,
+                UpdatedDate = bookItem.UpdatedDate
             }).FirstOrDefault();
 
             return book;
@@ -75,7 +79,11 @@ namespace BookStore.Business
                 ShopIdFk = c.ShopIdFk,
                 ShopName = c.Shop.Name,
                 ImageIdFk = c.DocumetIdFk,
-                ImageName = c.Document.FileName
+                ImageName = c.Document.FileName,
+                CreatedBy = c.CreatedBy,
+                CreatedDate = c.CreatedDate,
+                UpdatedBy = c.UpdatedBy,
+                UpdatedDate = c.UpdatedDate
             }).ToList();
 
             return allBooks;
@@ -96,6 +104,8 @@ namespace BookStore.Business
             book.CategoryIdFk = model.CategoryIdFk;
             book.ShopIdFk = model.ShopIdFk;
             book.DocumetIdFk = model.ImageIdFk;
+            book.CreatedBy = model.CreatedBy;
+            book.CreatedDate = DateTime.Now;
 
             this.Add(book);
             this.Save();
@@ -166,6 +176,8 @@ namespace BookStore.Business
             book.CategoryIdFk = model.CategoryIdFk;
             book.ShopIdFk = model.ShopIdFk;
             book.DocumetIdFk = model.ImageIdFk;
+            book.UpdatedBy = model.UpdatedBy;
+            book.UpdatedDate = DateTime.Now;
 
             this.Update(book);
             this.Save();

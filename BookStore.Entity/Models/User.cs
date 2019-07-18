@@ -15,6 +15,7 @@ namespace BookStore.Entity.Models
 
         [Column("EMAIL_ADDRESS")]        
         [Required]
+        [MaxLength(250)]
         public string EmailAddress { get; set; }
 
         [Column("EMAIL_CONFIRMED")]
@@ -26,6 +27,7 @@ namespace BookStore.Entity.Models
 
         [Column("USER_NAME")]
         [Required]
+        [MaxLength(150)]
         public string UserName { get; set; }
 
         [Column("ROLE")]
@@ -34,13 +36,15 @@ namespace BookStore.Entity.Models
 
         [Column("CREATED_BY")]
         [Required]
+        [MaxLength(100)]
         public string CreatedBy { get; set; }
 
         [Column("CREATED_DATE")]
         [Required]
         public DateTime CreatedDate { get; set; }
 
-        [Column("UPDATED_BY")]        
+        [Column("UPDATED_BY")]
+        [MaxLength(100)]        
         public string UpdatedBy { get; set; }
 
         [Column("UPDATED_DATE")]        
