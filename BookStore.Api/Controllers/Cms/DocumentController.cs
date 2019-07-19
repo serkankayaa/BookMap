@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Runtime.InteropServices;
 using BookStore.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -31,7 +32,17 @@ namespace BookStore.Api.Controllers
                 var file = Request.Form.Files[0];
                 var contentType = file.ContentType;
                 var folderName = Path.Combine("assets", "documents");
-                string webUrlforImage = _configuration.GetValue<string>("WebUrlForImage");
+                string webUrlforImage; 
+
+                if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    webUrlforImage = _configuration.GetValue<string>("WebUrlImageForWin");
+                }
+                else
+                {
+                    webUrlforImage = _configuration.GetValue<string>("WebUrlImageForOrherOS");
+                }
+
                 var destinationPath = Directory.GetParent(Directory.GetCurrentDirectory()).FullName + webUrlforImage;
                 var pathToSave = Path.Combine(destinationPath, folderName);
 
