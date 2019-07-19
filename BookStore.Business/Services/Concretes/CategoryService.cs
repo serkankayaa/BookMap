@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using BookStore.Business.Generic;
 using BookStore.Dto;
 using BookStore.Entity.Context;
@@ -12,16 +13,18 @@ namespace BookStore.Business.Services
     {
         private BookDbContext _context;
         public IAuthorService _authorService;
+        private IMapper _mapper;
 
-        public CategoryService(BookDbContext context, IAuthorService authorService) : base(context)
+        public CategoryService(BookDbContext context, IAuthorService authorService, IMapper mapper) : base(context)
         {
             _context = context;
             _authorService = authorService;
+            _mapper = mapper;
         }
 
         public DtoCategory GetCategory(Guid id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new DtoCategory();
             }
@@ -30,14 +33,16 @@ namespace BookStore.Business.Services
 
             DtoCategory category = new DtoCategory();
 
-            category.CategoryId = categoryItem.Id;
-            category.CategoryName = categoryItem.Name;
-            category.CategorySummary = categoryItem.Summary;
-            category.IsMainCategory = categoryItem.IsMainCategory;
-            category.CreatedBy = categoryItem.CreatedBy;
-            category.CreatedDate = categoryItem.CreatedDate;
-            category.UpdatedBy = categoryItem.UpdatedBy;
-            category.UpdatedDate = categoryItem.UpdatedDate;
+            // category.CategoryId = categoryItem.Id;
+            // category.CategoryName = categoryItem.Name;
+            // category.CategorySummary = categoryItem.Summary;
+            // category.IsMainCategory = categoryItem.IsMainCategory;
+            // category.CreatedBy = categoryItem.CreatedBy;
+            // category.CreatedDate = categoryItem.CreatedDate;
+            // category.UpdatedBy = categoryItem.UpdatedBy;
+            // category.UpdatedDate = categoryItem.UpdatedDate;
+
+            category = _mapper.Map<Category, DtoCategory>(categoryItem);
 
             return category;
         }
@@ -46,9 +51,9 @@ namespace BookStore.Business.Services
         {
             var categories = base.GetAll();
 
-            if(categories == null || categories.Count() == 0)
+            if (categories == null || categories.Count() == 0)
             {
-                return new List<DtoCategory>(); 
+                return new List<DtoCategory>();
             }
 
             var allCategories = categories.Select(c => new DtoCategory()
@@ -68,7 +73,7 @@ namespace BookStore.Business.Services
 
         public object PostCategory(DtoCategory model)
         {
-            if(model == null)
+            if (model == null)
             {
                 return new DtoCategory();
             }
@@ -97,7 +102,7 @@ namespace BookStore.Business.Services
 
         public object UpdateCategory(DtoCategory model)
         {
-            if(model == null)
+            if (model == null)
             {
                 return new DtoCategory();
             }
@@ -125,7 +130,7 @@ namespace BookStore.Business.Services
 
         public bool DeleteCategory(Guid id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return false;
             }

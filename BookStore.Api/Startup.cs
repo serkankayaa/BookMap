@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using AutoMapper;
 using BookStore.Business;
 using BookStore.Business.Services;
 using BookStore.Entity.Context;
@@ -63,9 +65,12 @@ namespace BookStoreMap
                 c.SwaggerDoc("CoreSwagger", new Info
                 {
                     Title = "BookMap Store Api",
-                        Version = "1.0.0"
+                    Version = "1.0.0"
                 });
             });
+
+            //AutoMapper Integration
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
