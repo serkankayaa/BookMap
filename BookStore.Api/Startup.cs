@@ -1,13 +1,18 @@
-﻿using System.Linq;
+﻿using System;
+using System.Text;
+using System.Threading.Tasks;
+using BookStore.Api;
 using BookStore.Business;
 using BookStore.Business.Services;
 using BookStore.Entity.Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -29,6 +34,53 @@ namespace BookStoreMap
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
+            //Authentication
+            services.AddAuthentication(auth =>
+            {
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    //Token Validation Settings
+                    options.RequireHttpsMetadata = false;
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = ctx =>
+                        {
+                            return Task.CompletedTask;
+                        },
+                        OnTokenValidated = ctx =>
+                        {
+                            return Task.CompletedTask;
+                        },
+                        OnAuthenticationFailed = ctx =>
+                        {  
+                            Console.WriteLine($"Exception : {ctx.Exception.Message}");
+
+                            return Task.CompletedTask;
+                        },
+                        OnChallenge = ctx =>
+                        {
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
 
             //CORS policy
             services.AddCors(setupAction =>
@@ -80,6 +132,7 @@ namespace BookStoreMap
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseCors("BookStorePolicy");
             app.UseStaticFiles();
             app.UseHttpsRedirection();
