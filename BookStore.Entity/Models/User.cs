@@ -13,7 +13,7 @@ namespace BookStore.Entity.Models
         [Column("ID")]
         public Guid Id { get; set; }
 
-        [Column("EMAIL_ADDRESS")]        
+        [Column("EMAIL_ADDRESS")]
         [Required]
         [MaxLength(250)]
         public string EmailAddress { get; set; }
@@ -44,10 +44,10 @@ namespace BookStore.Entity.Models
         public DateTime CreatedDate { get; set; }
 
         [Column("UPDATED_BY")]
-        [MaxLength(100)]        
+        [MaxLength(100)]
         public string UpdatedBy { get; set; }
 
-        [Column("UPDATED_DATE")]        
+        [Column("UPDATED_DATE")]
         public DateTime UpdatedDate { get; set; }
 
         public ICollection<UserPassword> UserPasswords { get; set; }
