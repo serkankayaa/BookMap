@@ -80,7 +80,7 @@ namespace BookStore.Business.Services
             publisher.Id = model.PublisherId;
             publisher.Name = model.PublisherName;
             publisher.Location = model.Location;
-            publisher.CreatedBy = model.CreatedBy;
+            publisher.CreatedBy = "Test:Safa";
             publisher.CreatedDate = DateTime.Now;
 
             this.Add(publisher);

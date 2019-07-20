@@ -34,8 +34,7 @@ namespace BookStore.Business.Services
             Shop shop = new Shop();
             shop.Name = model.ShopName;
             shop.Location = model.Location;
-            shop.StaffCount = model.StaffCount;
-            shop.CreatedBy = model.CreatedBy;
+            shop.CreatedBy = "Test:Safa";
             shop.CreatedDate = DateTime.Now;
 
             this.Add(shop);
@@ -73,7 +72,6 @@ namespace BookStore.Business.Services
             DtoShop model = new DtoShop();
             model.ShopName = shop.Name;
             model.Location = shop.Location;
-            model.StaffCount = shop.StaffCount;
             model.ShopId = shop.Id;
             model.CreatedBy = shop.CreatedBy;
             model.CreatedDate = shop.CreatedDate;
@@ -97,7 +95,6 @@ namespace BookStore.Business.Services
                 ShopId = c.Id,
                 ShopName = c.Name,
                 Location = c.Location,
-                StaffCount = c.StaffCount,
                 CreatedBy = c.CreatedBy,
                 CreatedDate = c.CreatedDate,
                 UpdatedBy = c.UpdatedBy,
@@ -125,7 +122,6 @@ namespace BookStore.Business.Services
             shop.Id = model.ShopId;
             shop.Name = model.ShopName;
             shop.Location = model.Location;
-            shop.StaffCount = model.StaffCount;
             shop.UpdatedBy = model.UpdatedBy;
             shop.UpdatedDate = DateTime.Now;
 
