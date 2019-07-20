@@ -21,9 +21,6 @@ namespace BookStore.Entity.Models
         [MaxLength(200)]
         public string Location { get; set; }
 
-        [Column("STAFF_COUNT")]
-        public int StaffCount { get; set; }
-
         [Column("CREATED_BY")]
         [Required]
         [MaxLength(100)]
