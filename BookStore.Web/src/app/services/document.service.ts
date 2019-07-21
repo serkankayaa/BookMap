@@ -11,8 +11,8 @@ export class DocumentService {
   constructor(private http: HttpClient) { }
 
   postDocument(formData: FormData) {
-    const postedDocument = this.http.post(apiBaseUrl + '/Document', formData, { reportProgress: true, observe: 'events' });
-    
+    const postedDocument = this.http.post(apiBaseUrl + '/Document', formData, { reportProgress: true, observe: 'body' });
+
     return postedDocument;
   }
 }
