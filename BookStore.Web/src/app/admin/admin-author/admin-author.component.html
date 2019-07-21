@@ -10,8 +10,30 @@
   </div>
   <hr />
   <h2 class="text-center header-title">Author List</h2>
+  <table class="table table-striped table-dark table-props">
+    <thead>
+      <tr>
+        <th scope="col">Author Name</th>
+        <th scope="col">Author Birthdate</th>
+        <th scope="col">Author Biography</th>
+        <th scope="col">Author Image</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let author of authorList">
+      <td>{{author.AuthorName}}</td>
+      <td>{{author.BirthDate}}</td>
+      <td>{{author.Biography}}</td>
+      <td>{{author.ImageName}}</td>
+      <td class="button-cell-prop"><button class="btn btn-primary edit-button-prop" (click)="editModal(shop)"><i
+            class="fas fa-edit"></i></button>
+      </td>
+      <td class="button-cell-prop"><button class="btn btn-danger edit-button-prop" (click)="deleteModal(shop)"><i
+            class="fas fa-trash-alt"></i></button></td>
+    </tbody>
+  </table>
 </div>
-<!-- Modal -->
+
+<!--Add New Author Modal -->
 <div class="modal fade" id="authorModal" tabindex="-1" role="dialog" aria-labelledby="authorModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -35,11 +57,17 @@
           </div>
           <div class="form-group">
             <label for="birthDate">Birthdate</label>
-            <input type="text" id="birthDate" class="form-control" formControlName="birthDate"
-              [(ngModel)]="author.BirthDate" [ngClass]="{ 'is-invalid' : formSubmitted && form.birthDate.invalid }" />
+            <div class="input-group">
+              <input class="form-control" id="birthDate" formControlName="birthDate" placeholder="yyyy-mm-dd" name="dp"
+                [(ngModel)]="author.BirthDate" ngbDatepicker #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"><i
+                    class="far fa-calendar-alt"></i></button>
+              </div>
+            </div>
             <div *ngIf="form.birthDate.invalid" class="invalid-feedback">
               <div *ngIf="form.birthDate.errors.required">
-                Author Birthdate is required
+                Author Birthdate is not valid
               </div>
             </div>
           </div>
@@ -52,6 +80,13 @@
                 Author Biography is required
               </div>
             </div>
+          </div>
+          <div class="form-group">
+            <input type="file" class="form-control" formControlName="authorImage" placeholder="Choose file"
+              (change)="uploadFile(file.files)" style="display:none;" #file />
+            <button type="button" class="upload-btn" (click)="file.click()"><i
+                class="fas fa-cloud-upload-alt"></i>&nbsp;Upload Author Image</button>
+            <div *ngIf="uploadedImage !=null" class="image-name-prop">{{uploadedImage.name}}</div>
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary mt-3" data-dismiss="modal">
@@ -66,3 +101,5 @@
     </div>
   </div>
 </div>
+
+<!-- TODO: Author Detail Modal-->
