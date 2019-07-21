@@ -1,3 +1,4 @@
+ import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router } from '@angular/router';
 
@@ -16,6 +17,8 @@ const routes: Routes = [
   { path: 'category', component: AdminCategoryComponent },
   { path: 'dashboard', component: AdminDashboardComponent },
   { path: 'publisher', component: AdminPublisherComponent },
+  { path: 'settings', component: AdminSettingsComponent },
+
 ];
 
 @NgModule({
