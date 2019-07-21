@@ -19,7 +19,6 @@ export class AdminShopComponent implements OnInit {
   public deleteShop = {};
   public editShop = {};
 
-
   constructor(private fb: FormBuilder,
     private shopService: ShopService,
     private toastr: ToastrService) { }
