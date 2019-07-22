@@ -63,7 +63,6 @@ namespace BookStoreMap
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IDocumentService, DocumentService>();
             services.AddScoped<IUserService, UserService>();
-            // services.AddScoped<ILogService, LogService>();
 
             //Swagger Connection
             services.AddSwaggerGen(c =>

@@ -24,10 +24,13 @@ namespace BookStore.Business.Middleware
         {
             try
             {
-                _apiLogService = apiLogService;
-
                 var request = httpContext.Request;
-                if (request.Path.Value.StartsWith("/"))
+
+                if (!IsApiRequest(request.Path.Value))
+                {
+                    await _next(httpContext);
+                }
+                else
                 {
                     var stopWatch = Stopwatch.StartNew();
                     var requestTime = DateTime.UtcNow;
@@ -44,6 +47,8 @@ namespace BookStore.Business.Middleware
                         responseBodyContent = await ReadResponseBody(response);
                         await responseBody.CopyToAsync(originalBodyStream);
 
+                        _apiLogService = apiLogService;
+
                         await SafeLog(requestTime,
                             stopWatch.ElapsedMilliseconds,
                             response.StatusCode,
@@ -54,11 +59,8 @@ namespace BookStore.Business.Middleware
                             responseBodyContent);
                     }
                 }
-                else
-                {
-                    await _next(httpContext);
-                }
             }
+
             catch (Exception)
             {
                 await _next(httpContext);
@@ -122,6 +124,14 @@ namespace BookStore.Business.Middleware
                 RequestBody = requestBody,
                 ResponseBody = responseBody
             });
+        }
+        private bool IsApiRequest(string value)
+        {
+            if (value.StartsWith("/index.html") || value == "/" || value.StartsWith("/favicon.ico") || value.StartsWith("/swagger"))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
