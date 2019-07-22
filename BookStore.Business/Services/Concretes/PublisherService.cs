@@ -118,7 +118,7 @@ namespace BookStore.Business.Services
             return model;
         }
 
-        public object GetRecentPublisher()
+        public object GetRecentPublishers()
         {
             return this._context.Publisher.Take(5).OrderByDescending(c => c.CreatedDate).Select(c => new { c.Name, c.Location, c.CreatedDate });
         }

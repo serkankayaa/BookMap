@@ -40,11 +40,11 @@ namespace BookStore.Api.Controllers.Cms
             return _bookService.GetBooksByAuthor(id);
         }
 
-        [Route("/LastBooks")]
+        [Route("/RecentBooks")]
         [HttpGet]
-        public object GetRecentlyBook()
+        public object GetRecentBook()
         {
-            return _bookService.GetRecentlyBook();
+            return _bookService.GetRecentBook();
         }
 
         // POST: /Book

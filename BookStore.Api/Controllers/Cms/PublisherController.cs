@@ -34,9 +34,9 @@ namespace BookStore.Api.Controllers.Cms
 
         [Route("/RecentPublishers")]
         [HttpGet]
-        public object GetRecentPublisher()
+        public object GetRecentPublishers()
         {
-            return _publisherService.GetRecentPublisher();
+            return _publisherService.GetRecentPublishers();
         }
 
         // POST: /Publisher/

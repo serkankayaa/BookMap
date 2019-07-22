@@ -101,7 +101,7 @@ namespace BookStore.Business.Services
 
         public object GetRecentAuthor()
         {
-            return this._context.Author.Take(5).OrderByDescending(c => c.CreatedDate).Select(c => new { c.Name, c.DocumetIdFk, c.Document.FileName });
+            return this._context.Author.Take(5).OrderByDescending(c => c.CreatedDate).Select(c => new { c.Name, c.DocumetIdFk, c.Document.FileName, c.CreatedDate });
         }
 
         public bool DeleteAuthor(Guid id)

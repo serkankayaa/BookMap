@@ -32,7 +32,7 @@ namespace BookStore.Api.Controllers.Cms
             return _authorService.GetAuthor(id);
         }
 
-        [Route("/RecentAuthor")]
+        [Route("/RecentAuthors")]
         [HttpGet]
         public object GetRecentAuthor()
         {

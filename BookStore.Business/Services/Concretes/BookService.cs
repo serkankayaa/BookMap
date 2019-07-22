@@ -175,9 +175,9 @@ namespace BookStore.Business
             return model;
         }
 
-        public object GetRecentlyBook()
+        public object GetRecentBook()
         {
-            return this._context.Book.Take(5).OrderByDescending(c => c.CreatedDate).Select(c => new { bookName = c.Name, c.AuthorIdFk, authorName = c.Author.Name });
+            return this._context.Book.Take(5).OrderByDescending(c => c.CreatedDate).Select(c => new { BookName = c.Name, c.AuthorIdFk, AuthorName = c.Author.Name, c.CreatedDate });
         }
     }
 }
