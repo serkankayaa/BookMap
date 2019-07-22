@@ -32,8 +32,6 @@ namespace BookStore.Business.Services
 
             category.CategoryId = categoryItem.Id;
             category.CategoryName = categoryItem.Name;
-            category.CategorySummary = categoryItem.Summary;
-            category.IsMainCategory = categoryItem.IsMainCategory;
             category.CreatedBy = categoryItem.CreatedBy;
             category.CreatedDate = categoryItem.CreatedDate;
             category.UpdatedBy = categoryItem.UpdatedBy;
@@ -55,8 +53,6 @@ namespace BookStore.Business.Services
             {
                 CategoryId = c.Id,
                 CategoryName = c.Name,
-                CategorySummary = c.Summary,
-                IsMainCategory = c.IsMainCategory,
                 CreatedBy = c.CreatedBy,
                 CreatedDate = c.CreatedDate,
                 UpdatedBy = c.UpdatedBy,
@@ -82,9 +78,7 @@ namespace BookStore.Business.Services
 
             Category category = new Category();
             category.Name = model.CategoryName;
-            category.Summary = model.CategorySummary;
-            category.IsMainCategory = true;
-            category.CreatedBy = model.CreatedBy;
+            category.CreatedBy = "Test: Safa";
             category.CreatedDate = DateTime.Now;
 
             this.Add(category);
@@ -112,8 +106,6 @@ namespace BookStore.Business.Services
             Category category = this.GetById(model.CategoryId);
             category.Id = model.CategoryId;
             category.Name = model.CategoryName;
-            category.Summary = model.CategorySummary;
-            category.IsMainCategory = model.IsMainCategory;
             category.UpdatedBy = model.UpdatedBy;
             category.UpdatedDate = DateTime.Now;
 

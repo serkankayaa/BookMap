@@ -67,9 +67,8 @@ export class BookComponent implements OnInit {
       return;
     }
 
-    this.fileToUpload = <File>files[0];
+    this.fileToUpload = files[0];
     this.formData.append('file', this.fileToUpload, this.fileToUpload.name);
-    this.postDocument();
   }
 
   getAllAuthors() {
@@ -99,17 +98,6 @@ export class BookComponent implements OnInit {
   getAllShops() {
     this.shopService.getAllShops().subscribe(shopData => {
       this.allShops = shopData;
-    });
-  }
-
-  postDocument(): void {
-    this.documentService.postDocument(this.formData).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress) {
-      } else if (event.type === HttpEventType.Response) {
-        this.message = this.fileToUpload.name;
-        this.onUploadFinished.emit(event.body);
-        this.bookModel.ImageIdFk = event.body.toString();
-      }
     });
   }
 

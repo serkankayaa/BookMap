@@ -13,11 +13,11 @@ declare var $: any;
 export class AdminShopComponent implements OnInit {
   public formSubmitted = false;
   public shop = new Shop();
+  public deleteShop = {};
+  public editShop = {};
   public shopList: Shop[];
   public addShopForm: FormGroup;
   public editShopForm: FormGroup;
-  public deleteShop = {};
-  public editShop = {};
 
   constructor(private fb: FormBuilder,
     private shopService: ShopService,
@@ -34,7 +34,6 @@ export class AdminShopComponent implements OnInit {
     });
     this.getAllShops();
   }
-
 
   // Gets existed Shops
   getAllShops() {
@@ -88,6 +87,7 @@ export class AdminShopComponent implements OnInit {
       });
       return;
     }
+    
     this.shopService.updateShop(SelectedShop).subscribe(res => {
       if (res.status === 200 || res.statusText === 'OK') {
         this.toastr.success(`Shop '${SelectedShop.ShopName}' successfully updated!`, '', {

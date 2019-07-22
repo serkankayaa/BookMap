@@ -17,14 +17,6 @@ namespace BookStore.Entity.Models
         [MaxLength(250)]
         public string Name { get; set; }
 
-        [Column("SUMMARY")]
-        [Required]
-        [MaxLength(500)]
-        public string Summary { get; set; }
-
-        [Column("IS_MAIN_CATEGORY")]
-        public bool IsMainCategory { get; set; }
-
         [Column("CREATED_BY")]
         [Required]
         [MaxLength(100)]

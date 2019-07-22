@@ -173,18 +173,10 @@ namespace BookStore.Api.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnName("CREATED_DATE");
 
-                    b.Property<bool>("IsMainCategory")
-                        .HasColumnName("IS_MAIN_CATEGORY");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("NAME")
                         .HasMaxLength(250);
-
-                    b.Property<string>("Summary")
-                        .IsRequired()
-                        .HasColumnName("SUMMARY")
-                        .HasMaxLength(500);
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnName("UPDATED_BY")
