@@ -98,6 +98,11 @@ namespace BookStore.Business.Services
             return model;
         }
 
+        public object GetRecentlyAuthor()
+        {
+            return this._context.Author.Take(5).OrderByDescending(c=> c.CreatedDate);
+        }
+
         public bool DeleteAuthor(Guid id) 
         {
             if(id == null)

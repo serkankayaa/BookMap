@@ -117,7 +117,12 @@ namespace BookStore.Business.Services
 
             return model;
         }
-        
+
+        public object GetRecentlyPublisher()
+        {
+            return this._context.Publisher.Take(5).OrderByDescending(c=> c.CreatedDate);
+        }
+
         public bool DeletePublisher(Guid id)
         {
             if(id == null)

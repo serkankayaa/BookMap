@@ -123,6 +123,11 @@ namespace BookStore.Business.Services
             return model;
         }
 
+        public object GetRecentlyCategory()
+        {
+            return this._context.Category.Take(5).OrderByDescending(c=> c.CreatedDate);
+        }
+
         public bool DeleteCategory(Guid id)
         {
             if(id == null)

@@ -32,6 +32,13 @@ namespace BookStore.Api.Controllers.Cms
             return _publisherService.GetPublisher(id);
         }
 
+        [Route("/LastPublishers")]
+        [HttpGet]
+        public object GetRecentlyPublisher()
+        {
+            return _publisherService.GetRecentlyPublisher();
+        }
+
         // POST: /Publisher/
         [HttpPost]
         public object PostPublisher(DtoPublisher model)

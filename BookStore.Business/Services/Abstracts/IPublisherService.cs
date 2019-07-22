@@ -11,5 +11,6 @@ namespace BookStore.Business.Services
         object PostPublisher(DtoPublisher model);
         object UpdatePublisher(DtoPublisher model);
         bool DeletePublisher(Guid id);
+        object GetRecentlyPublisher();
     }
 }

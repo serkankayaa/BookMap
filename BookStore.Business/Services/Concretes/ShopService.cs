@@ -45,6 +45,11 @@ namespace BookStore.Business.Services
             return model;
         }
 
+        public object GetRecentlyShop()
+        {
+            return this._context.Shop.Take(5).OrderByDescending(c=> c.CreatedDate);
+        }
+
         public bool DeleteShop(Guid id)
         {
             if(id == null)
