@@ -32,11 +32,11 @@ namespace BookStore.Api.Controllers.Cms
             return _shopService.GetShop(id);
         }
 
-        [Route("/LastShops")]
+        [Route("/RecentShops")]
         [HttpGet]
-        public object GetRecentlyShop()
+        public object GetRecentShop()
         {
-            return _shopService.GetRecentlyShop();
+            return _shopService.GetRecentShop();
         }
 
         // POST: /Shop/
