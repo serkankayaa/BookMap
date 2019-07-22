@@ -24,7 +24,8 @@ namespace BookStore.Business.Services
         {
             var author = this.GetById(id);
 
-            DtoAuthor model = new DtoAuthor();
+            // DtoAuthor model = new DtoAuthor();
+
             // model.AuthorId = author.Id;
             // model.AuthorName = author.Name;
             // model.BirthDate = author.BirthDate;
@@ -36,7 +37,7 @@ namespace BookStore.Business.Services
             // model.UpdatedBy = author.UpdatedBy;
             // model.UpdatedDate = author.UpdatedDate;
 
-            model = _mapper.Map<Author, DtoAuthor>(author);
+            DtoAuthor model = _mapper.Map<Author, DtoAuthor>(author);
 
             return model;
         }

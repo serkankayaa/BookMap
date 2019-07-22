@@ -67,6 +67,7 @@ namespace BookStore.Api.node_modules.automapper
                 opt.MapFrom(src => src.Id);
             })
             .ReverseMap();
+
         }
     }
 }

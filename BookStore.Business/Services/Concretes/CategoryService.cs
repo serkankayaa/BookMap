@@ -31,7 +31,7 @@ namespace BookStore.Business.Services
 
             var categoryItem = this.GetById(id);
 
-            DtoCategory category = new DtoCategory();
+            // DtoCategory category = new DtoCategory();
 
             // category.CategoryId = categoryItem.Id;
             // category.CategoryName = categoryItem.Name;
@@ -42,7 +42,7 @@ namespace BookStore.Business.Services
             // category.UpdatedBy = categoryItem.UpdatedBy;
             // category.UpdatedDate = categoryItem.UpdatedDate;
 
-            category = _mapper.Map<Category, DtoCategory>(categoryItem);
+            DtoCategory category = _mapper.Map<Category, DtoCategory>(categoryItem);
 
             return category;
         }
