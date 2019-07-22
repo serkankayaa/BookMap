@@ -63,6 +63,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   margin: 30px;
+  padding-left: 40px;
 }
 
 .table-props {
