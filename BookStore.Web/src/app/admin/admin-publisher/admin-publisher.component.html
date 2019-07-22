@@ -41,14 +41,14 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="publisherForm" (ngSubmit)="submitPublisher()">
+        <form [formGroup]="addPublisherForm" (ngSubmit)="submitPublisher()">
           <div class="form-group">
             <label for="publisherName">Publisher</label>
             <input type="text" id="publisherName" class="form-control" formControlName="publisher"
               [(ngModel)]="publisher.PublisherName"
-              [ngClass]="{ 'is-invalid' : formSubmitted && formPublisher.publisher.invalid }" />
-            <div *ngIf="formPublisher.publisher.invalid" class="invalid-feedback">
-              <div *ngIf="formPublisher.publisher.errors.required">
+              [ngClass]="{ 'is-invalid' : formSubmitted && form.publisher.invalid }" />
+            <div *ngIf="form.publisher.invalid" class="invalid-feedback">
+              <div *ngIf="form.publisher.errors.required">
                 Publisher name is required
               </div>
             </div>
@@ -56,10 +56,9 @@
           <div class="form-group">
             <label for="publisherLocation">Location</label>
             <input type="text" id="publisherLocation" class="form-control" formControlName="location"
-              [(ngModel)]="publisher.Location"
-              [ngClass]="{ 'is-invalid' : formSubmitted && formPublisher.location.invalid }" />
-            <div *ngIf="formPublisher.location.invalid" class="invalid-feedback">
-              <div *ngIf="formPublisher.location.errors.required">
+              [(ngModel)]="publisher.Location" [ngClass]="{ 'is-invalid' : formSubmitted && form.location.invalid }" />
+            <div *ngIf="form.location.invalid" class="invalid-feedback">
+              <div *ngIf="form.location.errors.required">
                 Publisher location is required
               </div>
             </div>
@@ -90,13 +89,14 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="editShopForm" (ngSubmit)="updatePublisher(editPublisher)">
+        <form [formGroup]="editPublisherForm" (ngSubmit)="updatePublisher(editPublisher)">
           <div class="form-group">
             <label for="publisherName">Publisher</label>
-            <input type="text" id="publisherName" class="form-control" formControlName="shop" [(ngModel)]="editPublisher.ShopName"
-              [ngClass]="{ 'is-invalid' : formSubmitted && form.shop.invalid }" />
-            <div *ngIf="form.shop.invalid" class="invalid-feedback">
-              <div *ngIf="form.shop.errors.required">
+            <input type="text" id="publisherName" class="form-control" formControlName="publisher"
+              [(ngModel)]="editPublisher.PublisherName"
+              [ngClass]="{ 'is-invalid' : formSubmitted && editForm.publisher.invalid }" />
+            <div *ngIf="editForm.publisher.invalid" class="invalid-feedback">
+              <div *ngIf="editForm.publisher.errors.required">
                 Publisher name is required
               </div>
             </div>
@@ -104,9 +104,10 @@
           <div class="form-group">
             <label for="publisherLocation">Location</label>
             <input type="text" id="publisherLocation" class="form-control" formControlName="location"
-              [(ngModel)]="editPublisher.Location" [ngClass]="{ 'is-invalid' : formSubmitted && form.location.invalid }" />
-            <div *ngIf="form.location.invalid" class="invalid-feedback">
-              <div *ngIf="form.location.errors.required">
+              [(ngModel)]="editPublisher.Location"
+              [ngClass]="{ 'is-invalid' : formSubmitted && editForm.location.invalid }" />
+            <div *ngIf="editForm.location.invalid" class="invalid-feedback">
+              <div *ngIf="editForm.location.errors.required">
                 Publisher location is required
               </div>
             </div>
@@ -115,11 +116,36 @@
             <button class="btn btn-secondary mt-3" data-dismiss="modal">
               Close
             </button>
-            <button type="submit" class="btn btn-warning mt-3">
+            <button type="submit" class="btn btn-warning text-white mt-3">
               Update
             </button>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deletePublisherModal" tabindex="-1" role="dialog" aria-labelledby="deletePublisherModal"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deletePublisherModal">Delete Publisher</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete publisher <b><i style="color:#de1858">{{deletePublisher.PublisherName}}</i></b>?
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary mt-3" data-dismiss="modal">
+          Close
+        </button>
+        <button (click)="deleteExistingPublisher(deletePublisher)" class="btn btn-danger text-white mt-3">
+          Delete
+        </button>
       </div>
     </div>
   </div>

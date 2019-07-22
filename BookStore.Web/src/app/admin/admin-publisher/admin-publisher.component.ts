@@ -14,40 +14,40 @@ export class AdminPublisherComponent implements OnInit {
   public formSubmitted = false;
   public publisher = new Publisher();
   public publisherList: Publisher[];
-  public publisherForm: FormGroup;
-  public deletePublisher;
-  public editPublisher;
-
+  public addPublisherForm: FormGroup;
+  public editPublisherForm: FormGroup;
+  public deletePublisher = {};
+  public editPublisher = {};
 
   constructor(private fb: FormBuilder, private publisherService: PublisherService, private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.publisherForm = this.fb.group({
+    this.addPublisherForm = this.fb.group({
+      publisher: ['', Validators.required],
+      location: ['', Validators.required],
+    });
+    this.editPublisherForm = this.fb.group({
       publisher: ['', Validators.required],
       location: ['', Validators.required],
     });
     this.getAllPublishers();
   }
 
-  get formPublisher() {
-    return this.publisherForm.controls;
-  }
-
   getAllPublishers() {
-    this.publisherService.getAllPublishers().subscribe(data => {
-      this.publisherList = data;
+    this.publisherService.getAllPublishers().subscribe(publisherData => {
+      this.publisherList = publisherData;
     });
   }
 
   submitPublisher() {
     this.formSubmitted = true;
-    if (this.publisherForm.invalid) {
+    if (this.addPublisherForm.invalid) {
       return;
     }
 
     this.publisherService.postPublisher(this.publisher).subscribe(res => {
       if (res.status === 200 || res.statusText === 'OK') {
-        this.toastr.success(`Shop '${this.publisher.PublisherName}' successfully added!`, '', {
+        this.toastr.success(`Publisher '${this.publisher.PublisherName}' successfully added!`, '', {
           closeButton: true,
           progressBar: true,
           progressAnimation: 'decreasing',
@@ -57,13 +57,12 @@ export class AdminPublisherComponent implements OnInit {
         $('#publisherModal').modal('hide');
       }
     });
-    console.log(this.publisher);
   }
 
   // Passes selected publisher data and opens edit modal
   editModal(publisher) {
     this.editPublisher = publisher;
-    $('#editShopModal').modal('show');
+    $('#editPublisherModal').modal('show');
   }
 
   // Updates the selected publisher data
@@ -71,14 +70,14 @@ export class AdminPublisherComponent implements OnInit {
     this.formSubmitted = true;
     this.publisherService.updatePublisher(selectedPublisher).subscribe(res => {
       if (res.status === 200 || res.statusText === 'OK') {
-        this.toastr.success(`Publisher '${selectedPublisher.ShopName}' successfully updated!`, '', {
+        this.toastr.success(`Publisher '${selectedPublisher.PublisherName}' successfully updated!`, '', {
           closeButton: true,
           progressBar: true,
           progressAnimation: 'decreasing',
           timeOut: 4000
         });
         this.getAllPublishers();
-        $('#editShopModal').modal('hide');
+        $('#editPublisherModal').modal('hide');
       } else {
         this.toastr.error(`An error occured!`, '', {
           closeButton: true,
@@ -86,20 +85,20 @@ export class AdminPublisherComponent implements OnInit {
           progressAnimation: 'decreasing',
           timeOut: 4000
         });
-        $('#editShopModal').modal('hide');
+        $('#editPublisherModal').modal('hide');
       }
     });
   }
 
   // Passes selected publisher data and opens delete modal
-  deleteModal(shop) {
-    this.deletePublisher = shop;
+  deleteModal(publisher) {
+    this.deletePublisher = publisher;
     $('#deletePublisherModal').modal('show');
   }
 
   // Deletes the selected publisher data
   deleteExistingPublisher(selectedPublisher) {
-    this.publisherService.deletePublisher(selectedPublisher.ShopId).subscribe(res => {
+    this.publisherService.deletePublisher(selectedPublisher.PublisherId).subscribe(res => {
       if (res) {
         this.toastr.success(`Publisher '${selectedPublisher.PublisherName}' successfully deleted!`, '', {
           closeButton: true,
@@ -119,5 +118,13 @@ export class AdminPublisherComponent implements OnInit {
         $('#deletePublisherModal').modal('hide');
       }
     });
+  }
+
+  get form() {
+    return this.addPublisherForm.controls;
+  }
+
+  get editForm() {
+    return this.editPublisherForm.controls;
   }
 }
