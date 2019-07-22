@@ -54,7 +54,6 @@ export class AdminAuthorComponent implements OnInit {
   getAllAuthors() {
     this.authorService.getAllAuthors().subscribe(data => {
       this.authorList = data;
-      console.log(this.authorList);
     });
   }
 
