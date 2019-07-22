@@ -21,7 +21,7 @@ namespace BookStore.Business.Services
 
         public DtoCategory GetCategory(Guid id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new DtoCategory();
             }
@@ -44,19 +44,19 @@ namespace BookStore.Business.Services
         {
             var categories = base.GetAll();
 
-            if(categories == null || categories.Count() == 0)
+            if (categories == null || categories.Count() == 0)
             {
-                return new List<DtoCategory>(); 
+                return new List<DtoCategory>();
             }
 
             var allCategories = categories.Select(c => new DtoCategory()
             {
                 CategoryId = c.Id,
-                CategoryName = c.Name,
-                CreatedBy = c.CreatedBy,
-                CreatedDate = c.CreatedDate,
-                UpdatedBy = c.UpdatedBy,
-                UpdatedDate = c.UpdatedDate
+                    CategoryName = c.Name,
+                    CreatedBy = c.CreatedBy,
+                    CreatedDate = c.CreatedDate,
+                    UpdatedBy = c.UpdatedBy,
+                    UpdatedDate = c.UpdatedDate
             }).ToList();
 
             return allCategories;
@@ -64,7 +64,7 @@ namespace BookStore.Business.Services
 
         public object PostCategory(DtoCategory model)
         {
-            if(model == null)
+            if (model == null)
             {
                 return new DtoCategory();
             }
@@ -91,7 +91,7 @@ namespace BookStore.Business.Services
 
         public object UpdateCategory(DtoCategory model)
         {
-            if(model == null)
+            if (model == null)
             {
                 return new DtoCategory();
             }
@@ -115,14 +115,14 @@ namespace BookStore.Business.Services
             return model;
         }
 
-        public object GetRecentlyCategory()
+        public object GetRecentCategory()
         {
-            return this._context.Category.Take(5).OrderByDescending(c=> c.CreatedDate);
+            return this._context.Category.Take(5).OrderByDescending(c => c.CreatedDate).Select(c => new { c.Name, c.CreatedDate });
         }
 
         public bool DeleteCategory(Guid id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return false;
             }

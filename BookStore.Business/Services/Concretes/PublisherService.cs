@@ -1,10 +1,10 @@
-﻿using BookStore.Business.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using BookStore.Business.Generic;
 using BookStore.Dto;
 using BookStore.Entity.Context;
 using BookStore.Entity.Models;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace BookStore.Business.Services
 {
@@ -43,7 +43,7 @@ namespace BookStore.Business.Services
         {
             var publishers = this.GetAll();
 
-            if(publishers == null || publishers.Count() == 0)
+            if (publishers == null || publishers.Count() == 0)
             {
                 return new List<DtoPublisher>();
             }
@@ -51,12 +51,12 @@ namespace BookStore.Business.Services
             var allPublishers = publishers.Select(c => new DtoPublisher
             {
                 PublisherId = c.Id,
-                PublisherName = c.Name,
-                Location = c.Location,
-                CreatedBy = c.CreatedBy,
-                CreatedDate = c.CreatedDate,
-                UpdatedBy = c.UpdatedBy,
-                UpdatedDate = c.UpdatedDate
+                    PublisherName = c.Name,
+                    Location = c.Location,
+                    CreatedBy = c.CreatedBy,
+                    CreatedDate = c.CreatedDate,
+                    UpdatedBy = c.UpdatedBy,
+                    UpdatedDate = c.UpdatedDate
             }).ToList();
 
             return allPublishers;
@@ -64,7 +64,7 @@ namespace BookStore.Business.Services
 
         public object PostPublisher(DtoPublisher model)
         {
-            if(model == null)
+            if (model == null)
             {
                 return new DtoPublisher();
             }
@@ -93,7 +93,7 @@ namespace BookStore.Business.Services
 
         public object UpdatePublisher(DtoPublisher model)
         {
-            if(model == null)
+            if (model == null)
             {
                 return new DtoPublisher();
             }
@@ -118,14 +118,14 @@ namespace BookStore.Business.Services
             return model;
         }
 
-        public object GetRecentlyPublisher()
+        public object GetRecentPublisher()
         {
-            return this._context.Publisher.Take(5).OrderByDescending(c=> c.CreatedDate);
+            return this._context.Publisher.Take(5).OrderByDescending(c => c.CreatedDate).Select(c => new { c.Name, c.Location, c.CreatedDate });
         }
 
         public bool DeletePublisher(Guid id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return false;
             }

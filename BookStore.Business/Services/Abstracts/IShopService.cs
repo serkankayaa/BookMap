@@ -11,6 +11,6 @@ namespace BookStore.Business.Services
         object PostShop(DtoShop model);
         object UpdateShop(DtoShop model);
         bool DeleteShop(Guid id);
-        object GetRecentlyShop();
+        object GetRecentShop();
     }
 }

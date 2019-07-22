@@ -19,7 +19,7 @@ namespace BookStore.Business.Services
 
         public object PostShop(DtoShop model)
         {
-            if(model == null)
+            if (model == null)
             {
                 return new DtoShop();
             }
@@ -45,14 +45,14 @@ namespace BookStore.Business.Services
             return model;
         }
 
-        public object GetRecentlyShop()
+        public object GetRecentShop()
         {
-            return this._context.Shop.Take(5).OrderByDescending(c=> c.CreatedDate);
+            return this._context.Shop.Take(5).OrderByDescending(c => c.CreatedDate).Select(c => new { c.Name, c.Location, c.CreatedDate });
         }
 
         public bool DeleteShop(Guid id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return false;
             }
@@ -67,7 +67,7 @@ namespace BookStore.Business.Services
 
         public DtoShop GetShop(Guid id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new DtoShop();
             }
@@ -90,7 +90,7 @@ namespace BookStore.Business.Services
         {
             var shops = this.GetAll();
 
-            if(shops == null || shops.Count() == 0)
+            if (shops == null || shops.Count() == 0)
             {
                 return new List<DtoShop>();
             }
@@ -98,12 +98,12 @@ namespace BookStore.Business.Services
             var allShops = shops.Select(c => new DtoShop()
             {
                 ShopId = c.Id,
-                ShopName = c.Name,
-                Location = c.Location,
-                CreatedBy = c.CreatedBy,
-                CreatedDate = c.CreatedDate,
-                UpdatedBy = c.UpdatedBy,
-                UpdatedDate = c.UpdatedDate
+                    ShopName = c.Name,
+                    Location = c.Location,
+                    CreatedBy = c.CreatedBy,
+                    CreatedDate = c.CreatedDate,
+                    UpdatedBy = c.UpdatedBy,
+                    UpdatedDate = c.UpdatedDate
             }).ToList();
 
             return allShops;
@@ -111,7 +111,7 @@ namespace BookStore.Business.Services
 
         public object UpdateShop(DtoShop model)
         {
-            if(model == null)
+            if (model == null)
             {
                 return new DtoShop();
             }
