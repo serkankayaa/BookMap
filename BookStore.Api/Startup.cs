@@ -1,11 +1,14 @@
 ﻿using System;
-using System.Linq;
 using AutoMapper;
 using BookStore.Business;
+using BookStore.Business.Middleware;
 using BookStore.Business.Services;
+using BookStore.Business.Services.Abstracts;
+using BookStore.Business.Services.Concretes;
 using BookStore.Entity.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,6 +34,8 @@ namespace BookStoreMap
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
+
+            services.AddTransient<ILogService, LogService>();
 
             //CORS policy
             services.AddCors(setupAction =>
@@ -58,6 +63,7 @@ namespace BookStoreMap
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IDocumentService, DocumentService>();
             services.AddScoped<IUserService, UserService>();
+            // services.AddScoped<ILogService, LogService>();
 
             //Swagger Connection
             services.AddSwaggerGen(c =>
@@ -85,6 +91,7 @@ namespace BookStoreMap
                 app.UseHsts();
             }
 
+            app.UseMiddleware<ApiLoggingMiddleware>();
             app.UseCors("BookStorePolicy");
             app.UseStaticFiles();
             app.UseHttpsRedirection();
