@@ -32,6 +32,13 @@ namespace BookStore.Api.Controllers.Cms
             return _categoryService.GetCategory(id);
         }
 
+        [Route("/LastCategories")]
+        [HttpGet]
+        public object GetRecentlyCategory()
+        {
+            return _categoryService.GetRecentlyCategory();
+        }
+
         // POST: /Category/
         [HttpPost]
         public object PostCategory(DtoCategory model)

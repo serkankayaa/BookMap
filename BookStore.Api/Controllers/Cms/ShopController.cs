@@ -21,7 +21,6 @@ namespace BookStore.Api.Controllers.Cms
         [HttpGet]
         public List<DtoShop> GetAllShops()
         {
-
             return _shopService.GetShops();
         }
 
@@ -31,6 +30,13 @@ namespace BookStore.Api.Controllers.Cms
         public object GetShop(Guid id)
         {
             return _shopService.GetShop(id);
+        }
+
+        [Route("/LastShops")]
+        [HttpGet]
+        public object GetRecentlyShop()
+        {
+            return _shopService.GetRecentlyShop();
         }
 
         // POST: /Shop/
