@@ -100,8 +100,6 @@ export class BookComponent implements OnInit {
       this.allShops = shopData;
     });
   }
-<<<<<<< HEAD
-=======
 0
   postDocument(): void {
     // this.documentService.postDocument(this.formData).subscribe(event => {
@@ -113,7 +111,6 @@ export class BookComponent implements OnInit {
     //   }
     // });
   }
->>>>>>> 19bf9429d2ba8d0997118ecf6f019bbe5d79c757
 
   postBook(): void {
     this.bookService.postBook(this.bookModel).subscribe(response => {

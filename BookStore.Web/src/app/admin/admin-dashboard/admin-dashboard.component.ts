@@ -1,3 +1,5 @@
+import { DashboardCount } from './../../models/dashboardCount';
+import { DashboardService } from './../../services/dashboard.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
+  public dashboardData: DashboardCount;
 
-  constructor() { }
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
+    this.dashboardService.getDataCounts().subscribe(result => {
+      this.dashboardData = result[0];
+    });
   }
-
 }

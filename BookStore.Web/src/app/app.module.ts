@@ -1,3 +1,4 @@
+import { DashboardService } from './services/dashboard.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -32,7 +33,7 @@ import { DocumentService } from './services/document.service';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [AuthorService, PublisherService, ShopService, CategoryService, BookService, DocumentService],
+  providers: [AuthorService, PublisherService, ShopService, CategoryService, BookService, DocumentService, DashboardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
