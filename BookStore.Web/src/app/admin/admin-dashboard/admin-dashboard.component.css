@@ -59,14 +59,14 @@
 
 .dasboard-recorded-list {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
   margin: 30px;
 }
 
 .table-props {
-  width: 400px;
+  width: 350px;
   margin: 10px 10px 10px 30px;
 }
 
