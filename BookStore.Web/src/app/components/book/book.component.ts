@@ -101,16 +101,16 @@ export class BookComponent implements OnInit {
       this.allShops = shopData;
     });
   }
-
+0
   postDocument(): void {
-    this.documentService.postDocument(this.formData).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress) {
-      } else if (event.type === HttpEventType.Response) {
-        this.message = this.fileToUpload.name;
-        this.onUploadFinished.emit(event.body);
-        this.bookModel.ImageIdFk = event.body.toString();
-      }
-    });
+    // this.documentService.postDocument(this.formData).subscribe(event => {
+    //   if (event.type === HttpEventType.UploadProgress) {
+    //   } else if (event.type === HttpEventType.Response) {
+    //     this.message = this.fileToUpload.name;
+    //     this.onUploadFinished.emit(event.body);
+    //     this.bookModel.ImageIdFk = event.body.toString();
+    //   }
+    // });
   }
 
   postBook(): void {

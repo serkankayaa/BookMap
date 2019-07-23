@@ -10,9 +10,26 @@
   </div>
   <hr />
   <h2 class="text-center header-title">Publisher List</h2>
+  <table class="table table-striped table-dark table-props">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Location&nbsp;<i style="color:#de1858" class="fas fa-map-marker-alt"></i></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let publisher of publisherList">
+      <td>{{publisher.PublisherName}}</td>
+      <td>{{publisher.Location}}</td>
+      <td class="button-cell-prop"><button class="btn btn-primary edit-button-prop" (click)="editModal(publisher)"><i
+            class="fas fa-edit"></i></button>
+      </td>
+      <td class="button-cell-prop"><button class="btn btn-danger edit-button-prop" (click)="deleteModal(publisher)"><i
+            class="fas fa-trash-alt"></i></button></td>
+    </tbody>
+  </table>
 </div>
 
-<!-- Modal -->
+<!-- Publisher Add Modal -->
 <div class="modal fade" id="publisherModal" tabindex="-1" role="dialog" aria-labelledby="publisherModal"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -29,9 +46,9 @@
             <label for="publisherName">Publisher</label>
             <input type="text" id="publisherName" class="form-control" formControlName="publisher"
               [(ngModel)]="publisher.PublisherName"
-              [ngClass]="{ 'is-invalid' : formSubmitted && form.publisher.invalid }" />
-            <div *ngIf="form.publisher.invalid" class="invalid-feedback">
-              <div *ngIf="form.publisher.errors.required">
+              [ngClass]="{ 'is-invalid' : formSubmitted && formPublisher.publisher.invalid }" />
+            <div *ngIf="formPublisher.publisher.invalid" class="invalid-feedback">
+              <div *ngIf="formPublisher.publisher.errors.required">
                 Publisher name is required
               </div>
             </div>
@@ -39,9 +56,10 @@
           <div class="form-group">
             <label for="publisherLocation">Location</label>
             <input type="text" id="publisherLocation" class="form-control" formControlName="location"
-              [(ngModel)]="publisher.Location" [ngClass]="{ 'is-invalid' : formSubmitted && form.location.invalid }" />
-            <div *ngIf="form.location.invalid" class="invalid-feedback">
-              <div *ngIf="form.location.errors.required">
+              [(ngModel)]="publisher.Location"
+              [ngClass]="{ 'is-invalid' : formSubmitted && formPublisher.location.invalid }" />
+            <div *ngIf="formPublisher.location.invalid" class="invalid-feedback">
+              <div *ngIf="formPublisher.location.errors.required">
                 Publisher location is required
               </div>
             </div>
@@ -52,6 +70,53 @@
             </button>
             <button type="submit" class="btn btn-success mt-3">
               Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Publisher Modal -->
+<div class="modal fade" id="editPublisherModal" tabindex="-1" role="dialog" aria-labelledby="editPublisherModal"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editPublisherModal">Edit Publisher</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editShopForm" (ngSubmit)="updatePublisher(editPublisher)">
+          <div class="form-group">
+            <label for="publisherName">Publisher</label>
+            <input type="text" id="publisherName" class="form-control" formControlName="shop" [(ngModel)]="editPublisher.ShopName"
+              [ngClass]="{ 'is-invalid' : formSubmitted && form.shop.invalid }" />
+            <div *ngIf="form.shop.invalid" class="invalid-feedback">
+              <div *ngIf="form.shop.errors.required">
+                Publisher name is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="publisherLocation">Location</label>
+            <input type="text" id="publisherLocation" class="form-control" formControlName="location"
+              [(ngModel)]="editPublisher.Location" [ngClass]="{ 'is-invalid' : formSubmitted && form.location.invalid }" />
+            <div *ngIf="form.location.invalid" class="invalid-feedback">
+              <div *ngIf="form.location.errors.required">
+                Publisher location is required
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary mt-3" data-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-warning mt-3">
+              Update
             </button>
           </div>
         </form>

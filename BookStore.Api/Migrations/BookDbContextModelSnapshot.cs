@@ -284,9 +284,6 @@ namespace BookStore.Api.Migrations
                         .HasColumnName("NAME")
                         .HasMaxLength(250);
 
-                    b.Property<int>("StaffCount")
-                        .HasColumnName("STAFF_COUNT");
-
                     b.Property<string>("UpdatedBy")
                         .HasColumnName("UPDATED_BY")
                         .HasMaxLength(100);

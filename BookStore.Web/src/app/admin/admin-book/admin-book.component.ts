@@ -1,10 +1,15 @@
-import { Supplier } from './../../models/supplier';
+import { AuthorService } from './../../services/author.service';
+import { ShopService } from './../../services/shop.service';
+import { PublisherService } from './../../services/publisher.service';
+import { CategoryService } from './../../services/category.service';
 import { Category } from './../../models/category';
 import { Author } from './../../models/author';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Book } from '../../models/book';
 import { Publisher } from '../../models/publisher';
+import { UploadCover } from '../../helper/Validations';
+import { Shop } from '../../models/shop';
 declare var $: any;
 
 @Component({
@@ -15,13 +20,18 @@ declare var $: any;
 export class AdminBookComponent implements OnInit {
   public formSubmitted = false;
   public book: object = new Book();
-  public allAuthors: Author[];
-  public allCategories: Category[];
-  public allPublishers: Publisher[];
-  public allSuppliers: Supplier[];
+  public authorList: Author[];
+  public categoryList: Category[];
+  public publisherList: Publisher[];
+  public shopList: Shop[];
+  public uploadedCover;
   public bookForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private categoryService: CategoryService,
+    private publisherService: PublisherService,
+    private shopService: ShopService,
+    private authorService: AuthorService) { }
 
   get form() {
     return this.bookForm.controls;
@@ -35,15 +45,18 @@ export class AdminBookComponent implements OnInit {
       publisher: ['', Validators.required],
       category: ['', Validators.required],
       shop: ['', Validators.required],
-      image: ['', Validators.required]
-    });
+      bookImage: ['', Validators.required]
+    }, {
+        validator: UploadCover('bookImage')
+      });
+    this.getServiceData();
+    $('#bookModal').modal('show');
   }
 
 
   uploadCover(file) {
-    console.log(file);
-    const imageDetails = file.target.files[0];
-    console.log(imageDetails);
+    this.uploadedCover = file[0]
+    console.log(this.uploadedCover);
   }
 
   submitBook() {
@@ -53,5 +66,20 @@ export class AdminBookComponent implements OnInit {
     }
     console.log(this.bookForm);
     console.log(this.book);
+  }
+
+  getServiceData() {
+    this.categoryService.getAllCategories().subscribe(categoryData => {
+      this.categoryList = categoryData;
+    });
+    this.shopService.getAllShops().subscribe(shopData => {
+      this.shopList = shopData;
+    });
+    this.publisherService.getAllPublishers().subscribe(publisherData => {
+      this.publisherList = publisherData;
+    });
+    this.authorService.getAllAuthors().subscribe(authorData => {
+      this.authorList = authorData;
+    });
   }
 }

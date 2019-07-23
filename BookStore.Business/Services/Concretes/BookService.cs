@@ -183,6 +183,11 @@ namespace BookStore.Business
             this.Save();
 
             return model;
+        }
+
+        public object GetRecentlyBook()
+        {
+            return this._context.Book.Take(5).OrderByDescending(c=> c.CreatedDate);
         }        
     }
 }

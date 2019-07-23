@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { PublisherService } from '../../services/publisher.service';
 import { ToastrService } from 'ngx-toastr';
-import { SupplierService } from '../../services/supplier.service';
 import { Publisher } from '../../models/publisher';
-import { Supplier } from '../../models/supplier';
 
 declare var $: any;
 
@@ -17,22 +14,15 @@ declare var $: any;
 export class PublisherComponent implements OnInit {
   publisher = new Publisher();
   allPublishers: Publisher[];
-  allSuppliers: Supplier[];
   isEdit: boolean;
   publisherId: any;
   hasData = true;
 
   constructor(private publisherService: PublisherService,
-              private toastrService: ToastrService,
-              private supplierService: SupplierService) { }
+    private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.getAllPublishers();
-    this.getAllSuppliers();
-  }
-
-  getAllSuppliers(): void {
-    this.supplierService.getAllSuppliers().subscribe(data => this.allSuppliers = data);
   }
 
   refreshForm(): void {
@@ -87,7 +77,7 @@ export class PublisherComponent implements OnInit {
   }
 
   updatePublisher(): void {
-   this.publisherService.updatePublisher(this.publisher).subscribe(
+    this.publisherService.updatePublisher(this.publisher).subscribe(
       (res) => {
         if (res.body != null && res.ok && res.body !== false) {
           this.toastrService.success('Publisher edited successfully.');

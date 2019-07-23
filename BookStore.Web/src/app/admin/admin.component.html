@@ -9,29 +9,24 @@
           </div>
           <div class="admin-navbar-list pt-4">
             <a routerLink="/shop" class="admin-navbar-list-item"><i class="fas fa-store fa-2x mr-2"></i>Shops</a><br />
-            <a routerLink="/book" class="admin-navbar-list-item"><i class="fas fa-book fa-2x pr-2"></i>Books</a><br />
-            <a routerLink="/category" class="admin-navbar-list-item" id="itemCategory"><i
-                class="fas fa-list-ul fa-2x pr-2"></i>Categories</a><br />
             <a routerLink="/author" class="admin-navbar-list-item"><i
-                class="fas fa-users fa-2x pr-2 "></i>Authors</a><br />
+                class="fas fa-users fa-2x pr-2 "></i>Authors</a>
+            <a routerLink="/category" class="admin-navbar-list-item" id="itemCategory"><i
+                class="fas fa-list-ul fa-2x pr-3 pt-3"></i>Categories</a><br />
             <a routerLink="/publisher" class="admin-navbar-list-item" id="itemPublisher"><i
-                class="fas fa-list-ul fa-2x pr-2 "></i>Publishers</a><br />
+                class="fas fa-list-ul fa-2x pr-3"></i>Publishers</a><br />
+            <a routerLink="/book" class="admin-navbar-list-item"><i class="fas fa-book fa-2x pr-4"></i>Books</a><br />
+          </div>
+          <div class="admin-navbar-settings">
+            <hr class="navbar-horizontal-line" />
+            <div class="d-flex justify-content-start">
+              <a routerLink="/settings" class="admin-navbar-list-item"><i
+                  class="fas fa-cog"></i>&nbsp;Settings</a><br />
+            </div>
           </div>
         </div>
       </div>
       <div class="col-10 p-0">
-        <!-- TODO add Navbar-->
-        <!-- <nav class="navbar navbar-light bg-light justify-content-between">
-        <a routerLink="/dashboard" class="navbar-brand"><img class="navbar-brand-prop"
-            src="../../assets/img/book-logo.gif" /></a>
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            Search
-          </button>
-          <a href="#" class="ml-4">Log out<i class="fas fa-sign-out-alt ml-2 mr-5"></i></a>
-        </form>
-      </nav> -->
         <div>
           <router-outlet></router-outlet>
         </div>

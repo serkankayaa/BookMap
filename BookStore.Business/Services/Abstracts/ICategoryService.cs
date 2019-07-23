@@ -12,5 +12,6 @@ namespace BookStore.Business.Services
         object UpdateCategory(DtoCategory model);
         bool DeleteCategory(Guid id);
         object GetCategoryBooks(Guid id);
+        object GetRecentlyCategory();
     }
 }

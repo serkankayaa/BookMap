@@ -3,4 +3,6 @@ export class Author {
     AuthorName: string;
     BirthDate: Date;
     Biography: string;
+    ImageIdFk: string;
+    ImageName: string;
 }

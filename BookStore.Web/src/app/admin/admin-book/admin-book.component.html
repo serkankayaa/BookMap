@@ -44,11 +44,6 @@
     </div>
   </div>
 
-  <!-- Button trigger modal -->
-  <button style="opacity: 0;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-  </button>
-
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -110,9 +105,6 @@
                 <b><i>Publisher:</i></b>
               </div>
               <hr />
-              <div>
-                <b><i>Supplier:</i></b>
-              </div>
             </div>
           </div>
         </div>
@@ -163,7 +155,7 @@
             <label for="author">Author</label>
             <select class="form-control" id="author" formControlName="author" [(ngModel)]="book.AuthorIdFk"
               [ngClass]="{ 'is-invalid' : formSubmitted && form.author.invalid }">
-              <option *ngFor="let author of allAuthors" [ngValue]="author.AuthorId">
+              <option *ngFor="let author of authorList" [ngValue]="author.AuthorId">
                 {{author.AuthorName}}
               </option>
             </select>
@@ -177,8 +169,8 @@
             <label for="publisher">Publisher</label>
             <select class="form-control" id="publisher" formControlName="publisher" [(ngModel)]="book.PublisherIdFk"
               [ngClass]="{ 'is-invalid' : formSubmitted && form.publisher.invalid }">
-              <option *ngFor="let publisher of allPublishers" [ngValue]="publisher.PublisherId">
-                {{publisjer.PublisherName}}
+              <option *ngFor="let publisher of publisherList" [ngValue]="publisher.PublisherId">
+                {{publisher.PublisherName}}
               </option>
             </select>
             <div *ngIf="form.publisher.invalid" class="invalid-feedback">
@@ -191,7 +183,7 @@
             <label for="category">Category</label>
             <select class="form-control" id="category" formControlName="category" [(ngModel)]="book.CategoryIdFk"
               [ngClass]="{ 'is-invalid' : formSubmitted && form.category.invalid }">
-              <option *ngFor="let category of allCategories" [ngValue]="category.CategoryId">
+              <option *ngFor="let category of categoryList" [ngValue]="category.CategoryId">
                 {{category.CategoryName}}
               </option>
             </select>
@@ -205,7 +197,7 @@
             <label for="shop">Shop</label>
             <select class="form-control" id="shop" formControlName="shop" [(ngModel)]="book.ShopIdFk"
               [ngClass]="{ 'is-invalid' : formSubmitted && form.shop.invalid }">
-              <option *ngFor="let shop of allShops" [ngValue]="shop.ShopId">
+              <option *ngFor="let shop of shopList" [ngValue]="shop.ShopId">
                 {{shop.ShopName}}
               </option>
             </select>
@@ -215,12 +207,18 @@
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <input type="file" class="form-control" formControlName="image" (change)="uploadCover($event)"
-              placeholder="Upload Cover" style="display: none" #file />
-            <button type="button" class="btn upload-btn" (click)="file.click()"><i
-                class="fas fa-cloud-upload-alt"></i>&nbsp;Upload Cover</button>
-            <div *ngIf="formSubmitted && form.image.invalid" class="invalid-feedback">You must upload book cover</div>
+          <div class="form-group" [ngClass]="{ 'd-inline-flex' : !form.bookImage.errors.uploadCover }">
+            <input type="file" class="form-control" formControlName="bookImage" placeholder="Choose file"
+              (change)="uploadCover(file.files)" style="display:none;"
+              [ngClass]="{ 'is-invalid' : formSubmitted && form.bookImage.errors.uploadCover }" #file />
+            <button type="button" class="upload-btn" (click)="file.click()"><i
+                class="fas fa-cloud-upload-alt"></i>&nbsp;Upload Book Cover</button>
+            <div *ngIf="uploadedCover != null" class="image-name-prop">{{uploadedCover.name}}</div>
+            <div *ngIf="form.bookImage.invalid" class="invalid-feedback">
+              <div *ngIf="form.bookImage.errors.uploadCover">
+                 Book cover is required
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary mt-3" data-dismiss="modal">

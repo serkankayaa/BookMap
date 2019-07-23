@@ -37,8 +37,7 @@ namespace BookStore.Business.Services
             Shop shop = new Shop();
             shop.Name = model.ShopName;
             shop.Location = model.Location;
-            shop.StaffCount = model.StaffCount;
-            shop.CreatedBy = model.CreatedBy;
+            shop.CreatedBy = "Test:Safa";
             shop.CreatedDate = DateTime.Now;
 
             this.Add(shop);
@@ -47,6 +46,11 @@ namespace BookStore.Business.Services
             model.ShopId = shop.Id;
 
             return model;
+        }
+
+        public object GetRecentlyShop()
+        {
+            return this._context.Shop.Take(5).OrderByDescending(c=> c.CreatedDate);
         }
 
         public bool DeleteShop(Guid id)
@@ -84,7 +88,6 @@ namespace BookStore.Business.Services
             // model.UpdatedDate = shop.UpdatedDate;
 
             DtoShop model = _mapper.Map<Shop, DtoShop>(shop);
-
             return model;
         }
 
@@ -102,7 +105,6 @@ namespace BookStore.Business.Services
                 ShopId = c.Id,
                 ShopName = c.Name,
                 Location = c.Location,
-                StaffCount = c.StaffCount,
                 CreatedBy = c.CreatedBy,
                 CreatedDate = c.CreatedDate,
                 UpdatedBy = c.UpdatedBy,
@@ -130,7 +132,6 @@ namespace BookStore.Business.Services
             shop.Id = model.ShopId;
             shop.Name = model.ShopName;
             shop.Location = model.Location;
-            shop.StaffCount = model.StaffCount;
             shop.UpdatedBy = model.UpdatedBy;
             shop.UpdatedDate = DateTime.Now;
 

@@ -40,7 +40,7 @@ namespace BookStore.Api.Controllers
                 }
                 else
                 {
-                    webUrlforImage = _configuration.GetValue<string>("WebUrlImageForOrherOS");
+                    webUrlforImage = _configuration.GetValue<string>("WebUrlImageForOtherOS");
                 }
 
                 var destinationPath = Directory.GetParent(Directory.GetCurrentDirectory()).FullName + webUrlforImage;

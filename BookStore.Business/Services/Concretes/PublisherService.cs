@@ -85,7 +85,7 @@ namespace BookStore.Business.Services
             publisher.Id = model.PublisherId;
             publisher.Name = model.PublisherName;
             publisher.Location = model.Location;
-            publisher.CreatedBy = model.CreatedBy;
+            publisher.CreatedBy = "Test:Safa";
             publisher.CreatedDate = DateTime.Now;
 
             this.Add(publisher);
@@ -121,6 +121,11 @@ namespace BookStore.Business.Services
             this.Save();
 
             return model;
+        }
+
+        public object GetRecentlyPublisher()
+        {
+            return this._context.Publisher.Take(5).OrderByDescending(c=> c.CreatedDate);
         }
 
         public bool DeletePublisher(Guid id)

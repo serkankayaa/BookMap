@@ -8,15 +8,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
-
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
-
 import { AuthorService } from './services/author.service';
 import { CategoryService } from './services/category.service';
 import { PublisherService } from './services/publisher.service';
 import { ShopService } from './services/shop.service';
-import { SupplierService } from './services/supplier.service';
 import { BookService } from './services/book.service';
 import { DocumentService } from './services/document.service';
 
@@ -35,7 +32,7 @@ import { DocumentService } from './services/document.service';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [AuthorService, PublisherService, ShopService, CategoryService, SupplierService, BookService, DocumentService],
+  providers: [AuthorService, PublisherService, ShopService, CategoryService, BookService, DocumentService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -51,6 +51,18 @@
   transform: scale(1.2);
 }
 
+.navbar-horizontal-line {
+  border-top: 1px solid gray;
+
+}
+
+.admin-navbar-settings {
+  position: absolute;
+  bottom: 10%;
+  height: 200px;
+  width: stretch;
+}
+
 #itemCategory {
   padding-left: 30px;
 }
