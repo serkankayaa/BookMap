@@ -53,6 +53,8 @@ export class AdminPublisherComponent implements OnInit {
           progressAnimation: 'decreasing',
           timeOut: 4000
         });
+        this.publisher = new Publisher();
+        this.formSubmitted = false;
         this.getAllPublishers();
         $('#publisherModal').modal('hide');
       }

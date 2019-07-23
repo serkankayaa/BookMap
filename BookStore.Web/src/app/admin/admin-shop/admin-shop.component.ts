@@ -63,6 +63,8 @@ export class AdminShopComponent implements OnInit {
           progressAnimation: 'decreasing',
           timeOut: 4000
         });
+        this.shop = new Shop();
+        this.formSubmitted = false;
         this.getAllShops();
         $('#shopModal').modal('hide');
       }
@@ -87,7 +89,7 @@ export class AdminShopComponent implements OnInit {
       });
       return;
     }
-    
+
     this.shopService.updateShop(SelectedShop).subscribe(res => {
       if (res.status === 200 || res.statusText === 'OK') {
         this.toastr.success(`Shop '${SelectedShop.ShopName}' successfully updated!`, '', {
