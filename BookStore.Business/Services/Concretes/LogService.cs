@@ -22,7 +22,6 @@ namespace BookStore.Business.Services.Concretes
         public async Task<IEnumerable<Log>> Get()
         {
             var items = _context.Log.OrderByDescending(x => x.RequestTime).ToListAsync();
-
             return await items;
         }
 
@@ -47,5 +46,16 @@ namespace BookStore.Business.Services.Concretes
             throw new NotImplementedException();
         }
 
+        public async Task LogError(ErrorLog model)
+        {
+            _context.ErrorLog.Add(model);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<ErrorLog>> GetErrorLogs()
+        {
+            var items = _context.ErrorLog.OrderByDescending(x => x.ErrorTime).ToListAsync();
+            return await items;
+        }
     }
 }

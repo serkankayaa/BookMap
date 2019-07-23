@@ -9,5 +9,9 @@ namespace BookStore.Business.Services.Abstracts
     {
         Task Log(Log model);
         Task<IEnumerable<Log>> Get();
+
+        Task LogError(ErrorLog model);
+
+        Task<IEnumerable<ErrorLog>> GetErrorLogs();
     }
 }
