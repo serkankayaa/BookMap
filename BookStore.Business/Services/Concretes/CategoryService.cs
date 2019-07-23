@@ -31,28 +31,7 @@ namespace BookStore.Business.Services
 
             var categoryItem = this.GetById(id);
 
-            // DtoCategory category = new DtoCategory();
-
-<<<<<<< HEAD
-            category.CategoryId = categoryItem.Id;
-            category.CategoryName = categoryItem.Name;
-            category.CreatedBy = categoryItem.CreatedBy;
-            category.CreatedDate = categoryItem.CreatedDate;
-            category.UpdatedBy = categoryItem.UpdatedBy;
-            category.UpdatedDate = categoryItem.UpdatedDate;
-=======
-            // category.CategoryId = categoryItem.Id;
-            // category.CategoryName = categoryItem.Name;
-            // category.CategorySummary = categoryItem.Summary;
-            // category.IsMainCategory = categoryItem.IsMainCategory;
-            // category.CreatedBy = categoryItem.CreatedBy;
-            // category.CreatedDate = categoryItem.CreatedDate;
-            // category.UpdatedBy = categoryItem.UpdatedBy;
-            // category.UpdatedDate = categoryItem.UpdatedDate;
-
             DtoCategory category = _mapper.Map<Category, DtoCategory>(categoryItem);
->>>>>>> e3f4d95e03a3a87515661aaabd82443950295ca7
-
             return category;
         }
 

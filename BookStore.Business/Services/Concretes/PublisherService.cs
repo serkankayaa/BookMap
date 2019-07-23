@@ -5,13 +5,7 @@ using BookStore.Business.Generic;
 using BookStore.Dto;
 using BookStore.Entity.Context;
 using BookStore.Entity.Models;
-<<<<<<< HEAD
-=======
-using System;
-using System.Linq;
-using System.Collections.Generic;
 using AutoMapper;
->>>>>>> e3f4d95e03a3a87515661aaabd82443950295ca7
 
 namespace BookStore.Business.Services
 {
@@ -34,17 +28,7 @@ namespace BookStore.Business.Services
             {
                 return new DtoPublisher();
             }
-
-            // DtoPublisher publisher = new DtoPublisher();
-
-            // author.PublisherId = publisherItem.Id;
-            // author.PublisherName = publisherItem.Name;
-            // author.Location = publisherItem.Location;
-            // author.CreatedBy = publisherItem.CreatedBy;
-            // author.CreatedDate = publisherItem.CreatedDate;
-            // author.UpdatedBy = publisherItem.UpdatedBy;
-            // author.UpdatedDate = publisherItem.UpdatedDate;
-
+            
             DtoPublisher publisher = _mapper.Map<Publisher, DtoPublisher>(publisherItem);
 
             return publisher;
