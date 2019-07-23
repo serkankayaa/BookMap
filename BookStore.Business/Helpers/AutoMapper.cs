@@ -18,10 +18,6 @@ namespace BookStore.Api.node_modules.automapper
             {
                 opt.MapFrom(src => src.Name);
             })
-            .ForMember(destination => destination.CategorySummary, opt =>
-            {
-                opt.MapFrom(src => src.Summary);
-            })
             .ReverseMap();
 
             //Author<->DtoAuthor Mapping
