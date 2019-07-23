@@ -59,6 +59,8 @@ export class AdminCategoryComponent implements OnInit {
           progressAnimation: 'decreasing',
           timeOut: 4000
         });
+        this.category = new Category();
+        this.formSubmitted = false;
         this.getAllCategories();
         $('#categoryModal').modal('hide');
       }
@@ -83,7 +85,7 @@ export class AdminCategoryComponent implements OnInit {
       });
       return;
     }
-    
+
     this.categoryService.updateCategory(SelectedCategory).subscribe(res => {
       if (res.status === 200 || res.statusText === 'OK') {
         this.toastr.success(`Category '${SelectedCategory.CategoryName}' successfully updated!`, '', {
