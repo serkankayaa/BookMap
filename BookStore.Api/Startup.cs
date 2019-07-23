@@ -1,9 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using AutoMapper;
 using BookStore.Business;
+using BookStore.Business.Middleware;
 using BookStore.Business.Services;
+using BookStore.Business.Services.Abstracts;
+using BookStore.Business.Services.Concretes;
 using BookStore.Entity.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +34,8 @@ namespace BookStoreMap
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
+
+            services.AddTransient<ILogService, LogService>();
 
             //CORS policy
             services.AddCors(setupAction =>
@@ -64,9 +71,12 @@ namespace BookStoreMap
                 c.SwaggerDoc("CoreSwagger", new Info
                 {
                     Title = "BookMap Store Api",
-                        Version = "1.0.0"
+                    Version = "1.0.0"
                 });
             });
+
+            //AutoMapper Integration
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,6 +91,7 @@ namespace BookStoreMap
                 app.UseHsts();
             }
 
+            app.UseMiddleware<ApiLoggingMiddleware>();
             app.UseCors("BookStorePolicy");
             app.UseStaticFiles();
             app.UseHttpsRedirection();

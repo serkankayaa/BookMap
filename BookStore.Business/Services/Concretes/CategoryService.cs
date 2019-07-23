@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using BookStore.Business.Generic;
 using BookStore.Dto;
 using BookStore.Entity.Context;
@@ -12,11 +13,13 @@ namespace BookStore.Business.Services
     {
         private BookDbContext _context;
         public IAuthorService _authorService;
+        private IMapper _mapper;
 
-        public CategoryService(BookDbContext context, IAuthorService authorService) : base(context)
+        public CategoryService(BookDbContext context, IAuthorService authorService, IMapper mapper) : base(context)
         {
             _context = context;
             _authorService = authorService;
+            _mapper = mapper;
         }
 
         public DtoCategory GetCategory(Guid id)
@@ -28,14 +31,27 @@ namespace BookStore.Business.Services
 
             var categoryItem = this.GetById(id);
 
-            DtoCategory category = new DtoCategory();
+            // DtoCategory category = new DtoCategory();
 
+<<<<<<< HEAD
             category.CategoryId = categoryItem.Id;
             category.CategoryName = categoryItem.Name;
             category.CreatedBy = categoryItem.CreatedBy;
             category.CreatedDate = categoryItem.CreatedDate;
             category.UpdatedBy = categoryItem.UpdatedBy;
             category.UpdatedDate = categoryItem.UpdatedDate;
+=======
+            // category.CategoryId = categoryItem.Id;
+            // category.CategoryName = categoryItem.Name;
+            // category.CategorySummary = categoryItem.Summary;
+            // category.IsMainCategory = categoryItem.IsMainCategory;
+            // category.CreatedBy = categoryItem.CreatedBy;
+            // category.CreatedDate = categoryItem.CreatedDate;
+            // category.UpdatedBy = categoryItem.UpdatedBy;
+            // category.UpdatedDate = categoryItem.UpdatedDate;
+
+            DtoCategory category = _mapper.Map<Category, DtoCategory>(categoryItem);
+>>>>>>> e3f4d95e03a3a87515661aaabd82443950295ca7
 
             return category;
         }

@@ -190,6 +190,34 @@ namespace BookStore.Api.Migrations
                     b.ToTable("CATEGORY");
                 });
 
+            modelBuilder.Entity("BookStore.Entity.Models.Log", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Method")
+                        .IsRequired();
+
+                    b.Property<string>("Path")
+                        .IsRequired();
+
+                    b.Property<string>("QueryString");
+
+                    b.Property<string>("RequestBody");
+
+                    b.Property<DateTime>("RequestTime");
+
+                    b.Property<string>("ResponseBody");
+
+                    b.Property<long>("ResponseMillis");
+
+                    b.Property<int>("StatusCode");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LOG");
+                });
+
             modelBuilder.Entity("BookStore.Entity.Models.Publisher", b =>
                 {
                     b.Property<Guid>("Id")

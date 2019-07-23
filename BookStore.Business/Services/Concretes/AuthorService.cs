@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using BookStore.Business.Generic;
 using BookStore.Dto;
 using BookStore.Entity.Context;
@@ -11,16 +12,23 @@ namespace BookStore.Business.Services
     public class AuthorService : EFRepository<Author>, IAuthorService
     {
         private BookDbContext _context;
+        private IMapper _mapper;
 
+<<<<<<< HEAD
         public AuthorService(BookDbContext context) : base(context)
+=======
+        public AuthorService(BookDbContext context, IMapper mapper) : base(context)
+>>>>>>> e3f4d95e03a3a87515661aaabd82443950295ca7
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public DtoAuthor GetAuthor(Guid id)
         {
             var author = this.GetById(id);
 
+<<<<<<< HEAD
             DtoAuthor model = new DtoAuthor();
             model.AuthorId = author.Id;
             model.AuthorName = author.Name;
@@ -32,6 +40,22 @@ namespace BookStore.Business.Services
             model.CreatedDate = author.CreatedDate;
             model.UpdatedBy = author.UpdatedBy;
             model.UpdatedDate = author.UpdatedDate;
+=======
+            // DtoAuthor model = new DtoAuthor();
+
+            // model.AuthorId = author.Id;
+            // model.AuthorName = author.Name;
+            // model.BirthDate = author.BirthDate;
+            // model.Biography = author.Biography;
+            // model.ImageIdFk = author.DocumetIdFk;
+            // model.ImageName = author.Document.FileName;
+            // model.CreatedBy = author.CreatedBy;
+            // model.CreatedDate = author.CreatedDate;
+            // model.UpdatedBy = author.UpdatedBy;
+            // model.UpdatedDate = author.UpdatedDate;
+
+            DtoAuthor model = _mapper.Map<Author, DtoAuthor>(author);
+>>>>>>> e3f4d95e03a3a87515661aaabd82443950295ca7
 
             return model;
         }

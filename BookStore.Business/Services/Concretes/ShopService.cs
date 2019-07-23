@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using BookStore.Business.Generic;
 using BookStore.Dto;
 using BookStore.Entity.Context;
@@ -11,10 +12,12 @@ namespace BookStore.Business.Services
     public class ShopService : EFRepository<Shop>, IShopService
     {
         private BookDbContext _context;
+        private IMapper _mapper;
 
-        public ShopService(BookDbContext context) : base(context)
+        public ShopService(BookDbContext context, IMapper mapper) : base(context)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public object PostShop(DtoShop model)
@@ -74,15 +77,17 @@ namespace BookStore.Business.Services
 
             var shop = this.GetById(id);
 
-            DtoShop model = new DtoShop();
-            model.ShopName = shop.Name;
-            model.Location = shop.Location;
-            model.ShopId = shop.Id;
-            model.CreatedBy = shop.CreatedBy;
-            model.CreatedDate = shop.CreatedDate;
-            model.UpdatedBy = shop.UpdatedBy;
-            model.UpdatedDate = shop.UpdatedDate;
+            // DtoShop model = new DtoShop();
+            // model.ShopName = shop.Name;
+            // model.Location = shop.Location;
+            // model.StaffCount = shop.StaffCount;
+            // model.ShopId = shop.Id;
+            // model.CreatedBy = shop.CreatedBy;
+            // model.CreatedDate = shop.CreatedDate;
+            // model.UpdatedBy = shop.UpdatedBy;
+            // model.UpdatedDate = shop.UpdatedDate;
 
+            DtoShop model = _mapper.Map<Shop, DtoShop>(shop);
             return model;
         }
 
