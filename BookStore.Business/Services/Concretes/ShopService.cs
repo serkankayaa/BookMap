@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using BookStore.Business.Generic;
 using BookStore.Dto;
 using BookStore.Entity.Context;
@@ -11,15 +12,17 @@ namespace BookStore.Business.Services
     public class ShopService : EFRepository<Shop>, IShopService
     {
         private BookDbContext _context;
+        private IMapper _mapper;
 
-        public ShopService(BookDbContext context) : base(context)
+        public ShopService(BookDbContext context, IMapper mapper) : base(context)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public object PostShop(DtoShop model)
         {
-            if(model == null)
+            if (model == null)
             {
                 return new DtoShop();
             }
@@ -52,7 +55,7 @@ namespace BookStore.Business.Services
 
         public bool DeleteShop(Guid id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return false;
             }
@@ -67,22 +70,24 @@ namespace BookStore.Business.Services
 
         public DtoShop GetShop(Guid id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new DtoShop();
             }
 
             var shop = this.GetById(id);
 
-            DtoShop model = new DtoShop();
-            model.ShopName = shop.Name;
-            model.Location = shop.Location;
-            model.ShopId = shop.Id;
-            model.CreatedBy = shop.CreatedBy;
-            model.CreatedDate = shop.CreatedDate;
-            model.UpdatedBy = shop.UpdatedBy;
-            model.UpdatedDate = shop.UpdatedDate;
+            // DtoShop model = new DtoShop();
+            // model.ShopName = shop.Name;
+            // model.Location = shop.Location;
+            // model.StaffCount = shop.StaffCount;
+            // model.ShopId = shop.Id;
+            // model.CreatedBy = shop.CreatedBy;
+            // model.CreatedDate = shop.CreatedDate;
+            // model.UpdatedBy = shop.UpdatedBy;
+            // model.UpdatedDate = shop.UpdatedDate;
 
+            DtoShop model = _mapper.Map<Shop, DtoShop>(shop);
             return model;
         }
 
@@ -90,7 +95,7 @@ namespace BookStore.Business.Services
         {
             var shops = this.GetAll();
 
-            if(shops == null || shops.Count() == 0)
+            if (shops == null || shops.Count() == 0)
             {
                 return new List<DtoShop>();
             }
@@ -111,7 +116,7 @@ namespace BookStore.Business.Services
 
         public object UpdateShop(DtoShop model)
         {
-            if(model == null)
+            if (model == null)
             {
                 return new DtoShop();
             }

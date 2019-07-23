@@ -1,46 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using BookStore.Business.Generic;
 using BookStore.Dto;
 using BookStore.Entity.Context;
 using BookStore.Entity.Models;
 
-namespace BookStore.Business.Services 
+namespace BookStore.Business.Services
 {
-    public class AuthorService : EFRepository<Author>, IAuthorService 
+    public class AuthorService : EFRepository<Author>, IAuthorService
     {
         private BookDbContext _context;
+        private IMapper _mapper;
 
-        public AuthorService(BookDbContext context) : base(context) 
+        public AuthorService(BookDbContext context, IMapper mapper) : base(context)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public DtoAuthor GetAuthor(Guid id) 
+        public DtoAuthor GetAuthor(Guid id)
         {
             var author = this.GetById(id);
-            
-            DtoAuthor model = new DtoAuthor();
-            model.AuthorId = author.Id;
-            model.AuthorName = author.Name;
-            model.BirthDate = author.BirthDate;
-            model.Biography = author.Biography;
-            model.ImageIdFk = author.DocumetIdFk;
-            model.ImageName = author.Document.FileName;
-            model.CreatedBy = author.CreatedBy;
-            model.CreatedDate = author.CreatedDate;
-            model.UpdatedBy = author.UpdatedBy;
-            model.UpdatedDate = author.UpdatedDate;
+
+            // DtoAuthor model = new DtoAuthor();
+
+            // model.AuthorId = author.Id;
+            // model.AuthorName = author.Name;
+            // model.BirthDate = author.BirthDate;
+            // model.Biography = author.Biography;
+            // model.ImageIdFk = author.DocumetIdFk;
+            // model.ImageName = author.Document.FileName;
+            // model.CreatedBy = author.CreatedBy;
+            // model.CreatedDate = author.CreatedDate;
+            // model.UpdatedBy = author.UpdatedBy;
+            // model.UpdatedDate = author.UpdatedDate;
+
+            DtoAuthor model = _mapper.Map<Author, DtoAuthor>(author);
 
             return model;
         }
 
-        public List<DtoAuthor> GetAuthors() 
+        public List<DtoAuthor> GetAuthors()
         {
             var authors = this.GetAll();
 
-            var allAuthors = authors.Select(c => new DtoAuthor() {
+            var allAuthors = authors.Select(c => new DtoAuthor()
+            {
                 AuthorId = c.Id,
                 AuthorName = c.Name,
                 BirthDate = c.BirthDate,
@@ -56,11 +63,11 @@ namespace BookStore.Business.Services
             return allAuthors;
         }
 
-        public object PostAuthor(DtoAuthor model) 
+        public object PostAuthor(DtoAuthor model)
         {
             var checkAuthorName = _context.Author.Where(c => c.Name == model.AuthorName).Any();
 
-            if (checkAuthorName) 
+            if (checkAuthorName)
             {
                 return false;
             }
@@ -81,7 +88,7 @@ namespace BookStore.Business.Services
             return model;
         }
 
-        public object UpdateAuthor(DtoAuthor model) 
+        public object UpdateAuthor(DtoAuthor model)
         {
             Author author = this.GetById(model.AuthorId);
 
@@ -105,7 +112,7 @@ namespace BookStore.Business.Services
 
         public bool DeleteAuthor(Guid id) 
         {
-            if(id == null)
+            if (id == null)
             {
                 return false;
             }
@@ -117,20 +124,21 @@ namespace BookStore.Business.Services
 
             return true;
         }
-        
-        public bool DeleteAllAuthors() 
+
+        public bool DeleteAllAuthors()
         {
             var authors = this.GetAll();
 
-            if (authors.Count() == 0) 
+            if (authors.Count() == 0)
             {
                 return false;
             }
 
-            foreach (var author in authors) {
+            foreach (var author in authors)
+            {
                 this.Delete(author);
             }
-                
+
             this.Save();
 
             return true;

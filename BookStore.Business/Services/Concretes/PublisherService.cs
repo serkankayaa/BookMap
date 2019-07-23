@@ -5,16 +5,19 @@ using BookStore.Entity.Models;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using AutoMapper;
 
 namespace BookStore.Business.Services
 {
     public class PublisherService : EFRepository<Publisher>, IPublisherService
     {
         private BookDbContext _context;
+        private IMapper _mapper;
 
-        public PublisherService(BookDbContext context) : base(context)
+        public PublisherService(BookDbContext context, IMapper mapper) : base(context)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public DtoPublisher GetPublisher(Guid id)
@@ -26,24 +29,26 @@ namespace BookStore.Business.Services
                 return new DtoPublisher();
             }
 
-            DtoPublisher author = new DtoPublisher();
+            // DtoPublisher publisher = new DtoPublisher();
 
-            author.PublisherId = publisherItem.Id;
-            author.PublisherName = publisherItem.Name;
-            author.Location = publisherItem.Location;
-            author.CreatedBy = publisherItem.CreatedBy;
-            author.CreatedDate = publisherItem.CreatedDate;
-            author.UpdatedBy = publisherItem.UpdatedBy;
-            author.UpdatedDate = publisherItem.UpdatedDate;
+            // author.PublisherId = publisherItem.Id;
+            // author.PublisherName = publisherItem.Name;
+            // author.Location = publisherItem.Location;
+            // author.CreatedBy = publisherItem.CreatedBy;
+            // author.CreatedDate = publisherItem.CreatedDate;
+            // author.UpdatedBy = publisherItem.UpdatedBy;
+            // author.UpdatedDate = publisherItem.UpdatedDate;
 
-            return author;
+            DtoPublisher publisher = _mapper.Map<Publisher, DtoPublisher>(publisherItem);
+
+            return publisher;
         }
 
         public List<DtoPublisher> GetPublishers()
         {
             var publishers = this.GetAll();
 
-            if(publishers == null || publishers.Count() == 0)
+            if (publishers == null || publishers.Count() == 0)
             {
                 return new List<DtoPublisher>();
             }
@@ -64,7 +69,7 @@ namespace BookStore.Business.Services
 
         public object PostPublisher(DtoPublisher model)
         {
-            if(model == null)
+            if (model == null)
             {
                 return new DtoPublisher();
             }
@@ -93,7 +98,7 @@ namespace BookStore.Business.Services
 
         public object UpdatePublisher(DtoPublisher model)
         {
-            if(model == null)
+            if (model == null)
             {
                 return new DtoPublisher();
             }
@@ -125,7 +130,7 @@ namespace BookStore.Business.Services
 
         public bool DeletePublisher(Guid id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return false;
             }
