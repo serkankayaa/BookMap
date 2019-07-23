@@ -190,21 +190,6 @@ namespace BookStore.Api.Migrations
                     b.ToTable("CATEGORY");
                 });
 
-            modelBuilder.Entity("BookStore.Entity.Models.ErrorLog", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ErrorMessage")
-                        .IsRequired();
-
-                    b.Property<DateTime>("ErrorTime");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ERROR_LOG");
-                });
-
             modelBuilder.Entity("BookStore.Entity.Models.Log", b =>
                 {
                     b.Property<long>("Id")

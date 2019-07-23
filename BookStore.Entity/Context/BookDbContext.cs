@@ -27,6 +27,5 @@ namespace BookStore.Entity.Context
         public DbSet<UserLog> UserLog { get; set; }
         public DbSet<UserBook> UserBook { get; set; }
         public DbSet<Log> Log { get; set; }
-        public DbSet<ErrorLog> ErrorLog { get; set; }
     }
 }

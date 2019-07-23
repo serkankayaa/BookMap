@@ -1,14 +1,12 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using BookStore.Business.Services.Abstracts;
 using BookStore.Entity.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
-using Newtonsoft.Json;
 
 namespace BookStore.Business.Middleware
 {
@@ -63,17 +61,10 @@ namespace BookStore.Business.Middleware
                 }
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                await HandleExceptionAsync(httpContext, ex);
+                await _next(httpContext);
             }
-        }
-
-        private async Task HandleExceptionAsync(HttpContext context, Exception ex)
-        {
-            var result = JsonConvert.SerializeObject(new { error = ex.Message });
-
-            await SafeErrorLog(result);
         }
 
         private async Task<string> ReadRequestBody(HttpRequest request)
@@ -132,20 +123,6 @@ namespace BookStore.Business.Middleware
                 QueryString = queryString,
                 RequestBody = requestBody,
                 ResponseBody = responseBody
-            });
-        }
-        private async Task SafeErrorLog(string errorMessage)
-        {
-
-            if (errorMessage.Length > 100)
-            {
-                errorMessage = $"(Truncated to 100 chars) {errorMessage.Substring(0, 100)}";
-            }
-
-            await _apiLogService.LogError(new ErrorLog
-            {
-                ErrorTime = DateTime.UtcNow,
-                ErrorMessage = errorMessage
             });
         }
         private bool IsApiRequest(string value)
