@@ -91,13 +91,6 @@ namespace BookStore.Business.Services
                 return new DtoCategory();
             }
 
-            var checkCategory = _context.Category.Where(c => c.Name == model.CategoryName).Any();
-
-            if (checkCategory)
-            {
-                return false;
-            }
-
             Category category = this.GetById(model.CategoryId);
             category.Id = model.CategoryId;
             category.Name = model.CategoryName;
