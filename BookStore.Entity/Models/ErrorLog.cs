@@ -16,5 +16,7 @@ namespace BookStore.Entity.Models
         [Required]
         public string ErrorMessage { get; set; }
 
+        public string ErrorType { get; set; }
+
     }
 }

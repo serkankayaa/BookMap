@@ -200,6 +200,8 @@ namespace BookStore.Api.Migrations
 
                     b.Property<DateTime>("ErrorTime");
 
+                    b.Property<string>("ErrorType");
+
                     b.HasKey("Id");
 
                     b.ToTable("ERROR_LOG");

@@ -74,9 +74,9 @@ namespace BookStore.Business.Middleware
 
         private async Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
-            var result = JsonConvert.SerializeObject(new { error = ex });
+            var exType = ex.GetType().ToString();
 
-            await SafeErrorLog(result);
+            await SafeErrorLog(ex.Message, exType);
         }
 
         private async Task<string> ReadRequestBody(HttpRequest request)
@@ -137,7 +137,7 @@ namespace BookStore.Business.Middleware
                 ResponseBody = responseBody
             });
         }
-        private async Task SafeErrorLog(string errorMessage)
+        private async Task SafeErrorLog(string errorMessage, string errorType)
         {
 
             if (errorMessage.Length > 100)
@@ -148,7 +148,8 @@ namespace BookStore.Business.Middleware
             await _apiLogService.LogError(new ErrorLog
             {
                 ErrorTime = DateTime.UtcNow,
-                ErrorMessage = errorMessage
+                ErrorMessage = errorMessage,
+                ErrorType = errorType
             });
         }
         private bool IsApiRequest(string value)
