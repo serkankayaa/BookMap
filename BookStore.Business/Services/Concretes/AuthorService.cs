@@ -64,7 +64,7 @@ namespace BookStore.Business.Services
             author.Biography = model.Biography;
             author.BirthDate = model.BirthDate;
             author.DocumetIdFk = model.ImageIdFk;
-            author.CreatedBy = model.CreatedBy;
+            author.CreatedBy = "Test:Safa";
             author.CreatedDate = DateTime.Now;
 
             this.Add(author);

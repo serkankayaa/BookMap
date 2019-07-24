@@ -64,13 +64,6 @@ namespace BookStore.Business.Services
                 return new DtoCategory();
             }
 
-            var isCategoryExists = _context.Category.Where(c => c.Name == model.CategoryName).Any();
-
-            if (isCategoryExists)
-            {
-                return false;
-            }
-
             Category category = new Category();
             category.Name = model.CategoryName;
             category.CreatedBy = "Test: Safa";

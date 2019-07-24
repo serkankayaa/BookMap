@@ -27,13 +27,6 @@ namespace BookStore.Business.Services
                 return new DtoShop();
             }
 
-            var checkShop = _context.Shop.Where(c => c.Name == model.ShopName).Any();
-
-            if (checkShop)
-            {
-                return false;
-            }
-
             Shop shop = new Shop();
             shop.Name = model.ShopName;
             shop.Location = model.Location;

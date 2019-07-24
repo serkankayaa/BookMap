@@ -64,13 +64,6 @@ namespace BookStore.Business.Services
                 return new DtoPublisher();
             }
 
-            var checkPublisher = _context.Publisher.Where(c => c.Name == model.PublisherName).Any();
-
-            if (checkPublisher)
-            {
-                return false;
-            }
-
             Publisher publisher = new Publisher();
             publisher.Id = model.PublisherId;
             publisher.Name = model.PublisherName;
