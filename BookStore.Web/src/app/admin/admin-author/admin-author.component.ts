@@ -3,11 +3,10 @@ import { AuthorService } from './../../services/author.service';
 import { Author } from './../../models/author';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { NgbDateStruct, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbDateStruct, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { DateControl } from '../../helper/Validations';
 declare var $: any;
-
 
 @Component({
   selector: 'app-admin-author',
@@ -18,16 +17,19 @@ export class AdminAuthorComponent implements OnInit {
   public authorForm: FormGroup;
   public author = new Author();
   public authorList: Author[];
+  public deleteAuthor = {};
   public formData = new FormData();
-  public dateModel: NgbDateStruct;
+  public authorBirthDate: NgbDateStruct;
   public formSubmitted = false;
   public uploadedImage;
+  public imagePath = 'assets/documents/';
 
   constructor(private fb: FormBuilder,
     private authorService: AuthorService,
     private config: NgbDatepickerConfig,
     private toastr: ToastrService,
-    private documentService: DocumentService) {
+    private documentService: DocumentService,
+    private dateParse: NgbDateParserFormatter) {
 
     // Customize default values of datepickers
     config.minDate = { year: 1900, month: 1, day: 1 };
@@ -67,16 +69,17 @@ export class AdminAuthorComponent implements OnInit {
 
   submitAuthor() {
     this.formSubmitted = true;
-    console.log(this.author);
-    console.log(this.authorForm);
+    var dateTime = this.dateParse.format(this.authorBirthDate);
+    var lastDate = new Date(dateTime);
+    this.author.BirthDate = lastDate;
+
     if (this.authorForm.invalid) {
       return;
     }
+
     this.authorService.postAuthor(this.author).subscribe(res => {
-      console.log("authorService");
-      console.log(res);
       if (res.status === 200 || res.statusText === 'OK') {
-        this.toastr.success(`Shop '${this.author.AuthorName}' successfully added!`, '', {
+        this.toastr.success(`Author '${this.author.AuthorName}' successfully added!`, '', {
           closeButton: true,
           progressBar: true,
           progressAnimation: 'decreasing',
@@ -84,6 +87,36 @@ export class AdminAuthorComponent implements OnInit {
         });
         this.getAllAuthors();
         $('#authorModal').modal('hide');
+      }
+    });
+  }
+
+  // Passes selected author data and opens delete modal
+  deleteModal(author) {
+    this.deleteAuthor = { ...author };
+    $('#deleteAuthorModal').modal('show');
+  }
+
+  // Deletes the selected author data
+  deleteExistingAuthor(SelectedAuthor) {
+    this.authorService.deleteAuthor(SelectedAuthor.AuthorId).subscribe(res => {
+      if (res) {
+        this.toastr.success(`Author '${SelectedAuthor.AuthorName}' successfully deleted!`, '', {
+          closeButton: true,
+          progressBar: true,
+          progressAnimation: 'decreasing',
+          timeOut: 4000
+        });
+        this.getAllAuthors();
+        $('#deleteAuthorModal').modal('hide');
+      } else {
+        this.toastr.error(`An error occured!`, '', {
+          closeButton: true,
+          progressBar: true,
+          progressAnimation: 'decreasing',
+          timeOut: 4000
+        });
+        $('#deleteAuthorModal').modal('hide');
       }
     });
   }

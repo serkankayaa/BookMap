@@ -17,17 +17,19 @@
         <th scope="col">Author Birthdate</th>
         <th scope="col">Author Biography</th>
         <th scope="col">Author Image</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
       </tr>
     </thead>
     <tbody *ngFor="let author of authorList">
       <td>{{author.AuthorName}}</td>
-      <td>{{author.BirthDate}}</td>
+      <td>{{author.BirthDate | date}}</td>
       <td>{{author.Biography}}</td>
-      <td>{{author.ImageName}}</td>
-      <td class="button-cell-prop"><button class="btn btn-primary edit-button-prop" (click)="editModal(shop)"><i
+      <td><img class="author-avatar-prop" src="{{imagePath + author?.ImageName}}" alt=""></td>
+      <td class="button-cell-prop"><button class="btn btn-primary edit-button-prop" (click)="editModal(author)"><i
             class="fas fa-edit"></i></button>
       </td>
-      <td class="button-cell-prop"><button class="btn btn-danger edit-button-prop" (click)="deleteModal(shop)"><i
+      <td class="button-cell-prop"><button class="btn btn-danger edit-button-prop" (click)="deleteModal(author)"><i
             class="fas fa-trash-alt"></i></button></td>
     </tbody>
   </table>
@@ -59,7 +61,7 @@
             <label for="birthDate">Birthdate</label>
             <div class="input-group">
               <input class="form-control" id="birthDate" formControlName="birthDate" placeholder="yyyy-mm-dd" name="dp"
-                [(ngModel)]="author.BirthDate" ngbDatepicker #d="ngbDatepicker">
+                [(ngModel)]="authorBirthDate" ngbDatepicker #d="ngbDatepicker">
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"><i
                     class="far fa-calendar-alt"></i></button>
@@ -97,6 +99,32 @@
             </button>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Author Modal-->
+<div class="modal fade" id="deleteAuthorModal" tabindex="-1" role="dialog" aria-labelledby="deleteAuthorModal"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteAuthorModal">Delete Author</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete author <b><i style="color:#de1858">{{deleteAuthor.AuthorName}}</i></b>?
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary mt-3" data-dismiss="modal">
+          Close
+        </button>
+        <button (click)="deleteExistingAuthor(deleteAuthor)" class="btn btn-danger text-white mt-3">
+          Delete
+        </button>
       </div>
     </div>
   </div>
