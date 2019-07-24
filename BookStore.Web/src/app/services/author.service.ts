@@ -20,7 +20,7 @@ export class AuthorService {
     return this.allAuthors;
   }
 
-  //TODO: GetById
+  // TODO: GetById
 
   postAuthor(author: Author) {
     const postedAuthor = this.http.post(apiBaseUrl + '/Author', author, { headers: headerContent, observe: 'response' });
@@ -36,7 +36,7 @@ export class AuthorService {
 
   deleteAuthor(id: any) {
     const deletedAuthor = this.http.delete(apiBaseUrl + '/Author/' + id, { headers: headerContent, observe: 'body' });
-    
+
     return deletedAuthor;
   }
 }

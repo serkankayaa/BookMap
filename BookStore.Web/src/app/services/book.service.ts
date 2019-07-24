@@ -14,7 +14,7 @@ export class BookService {
 
   getAllBooks(): Observable<Book[]> {
     this.allBooks = this.http.get(apiBaseUrl + '/Book', { headers: headerContent, observe: 'response', });
-    
+
     return this.allBooks;
   }
 
@@ -22,5 +22,5 @@ export class BookService {
     return this.http.post<Book>(apiBaseUrl + '/Book', book, { headers: headerContent, observe: 'response', reportProgress: true });
   }
 
-  //TODO: PUT,DELETE
+  // TODO: PUT,DELETE
 }
