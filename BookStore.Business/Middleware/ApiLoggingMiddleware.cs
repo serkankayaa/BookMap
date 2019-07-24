@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using BookStore.Business.Services.Abstracts;
@@ -26,6 +25,7 @@ namespace BookStore.Business.Middleware
         {
             try
             {
+                _apiLogService = apiLogService;
                 var request = httpContext.Request;
 
                 if (!IsApiRequest(request.Path.Value))
@@ -49,7 +49,10 @@ namespace BookStore.Business.Middleware
                         responseBodyContent = await ReadResponseBody(response);
                         await responseBody.CopyToAsync(originalBodyStream);
 
-                        _apiLogService = apiLogService;
+                        if (response.StatusCode != StatusCodes.Status200OK & response.StatusCode != StatusCodes.Status201Created)
+                        {
+                            await HandleExceptionAsync(httpContext, new Exception("RequestNotValid"));
+                        }
 
                         await SafeLog(requestTime,
                             stopWatch.ElapsedMilliseconds,
@@ -71,7 +74,7 @@ namespace BookStore.Business.Middleware
 
         private async Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
-            var result = JsonConvert.SerializeObject(new { error = ex.Message });
+            var result = JsonConvert.SerializeObject(new { error = ex });
 
             await SafeErrorLog(result);
         }
@@ -109,17 +112,17 @@ namespace BookStore.Business.Middleware
 
             if (requestBody.Length > 100)
             {
-                requestBody = $"(Truncated to 100 chars) {requestBody.Substring(0, 100)}";
+                requestBody = requestBody.Substring(0, 100);
             }
 
             if (responseBody.Length > 100)
             {
-                responseBody = $"(Truncated to 100 chars) {responseBody.Substring(0, 100)}";
+                responseBody = responseBody.Substring(0, 100);
             }
 
             if (queryString.Length > 100)
             {
-                queryString = $"(Truncated to 100 chars) {queryString.Substring(0, 100)}";
+                queryString = queryString.Substring(0, 100);
             }
 
             await _apiLogService.Log(new Log
@@ -139,7 +142,7 @@ namespace BookStore.Business.Middleware
 
             if (errorMessage.Length > 100)
             {
-                errorMessage = $"(Truncated to 100 chars) {errorMessage.Substring(0, 100)}";
+                errorMessage = errorMessage.Substring(0, 100);
             }
 
             await _apiLogService.LogError(new ErrorLog
@@ -156,5 +159,6 @@ namespace BookStore.Business.Middleware
             }
             return true;
         }
+
     }
 }
