@@ -47,11 +47,11 @@ namespace BookStore.Business.Services
             var allCategories = categories.Select(c => new DtoCategory()
             {
                 CategoryId = c.Id,
-                    CategoryName = c.Name,
-                    CreatedBy = c.CreatedBy,
-                    CreatedDate = c.CreatedDate,
-                    UpdatedBy = c.UpdatedBy,
-                    UpdatedDate = c.UpdatedDate
+                CategoryName = c.Name,
+                CreatedBy = c.CreatedBy,
+                CreatedDate = c.CreatedDate,
+                UpdatedBy = c.UpdatedBy,
+                UpdatedDate = c.UpdatedDate
             }).ToList();
 
             return allCategories;

@@ -8,7 +8,7 @@ namespace BookStore.Business.Services
     public class DocumentService : EFRepository<Document>, IDocumentService
     {
         private BookDbContext _context;
-        
+
         public DocumentService(BookDbContext context) : base(context)
         {
             _context = context;
@@ -21,7 +21,7 @@ namespace BookStore.Business.Services
             document.ContentType = contentType;
             document.FileName = dbFile;
             document.FullPath = childPath;
-            document.CreatedBy = "Test: Safa"; //TODO: Kaydeden kişinin bilgisi gelecek.
+            document.CreatedBy = "Test: Safa"; //TODO: Kaydeden ki?inin bilgisi gelecek.
             document.CreatedDate = DateTime.Now;
 
             _context.Document.Add(document);

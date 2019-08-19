@@ -24,9 +24,19 @@ namespace BookStore.Business
         {
             var bookItem = this.GetById(id);
 
-            var book = (from b in _context.Book join a in _context.Author on b.AuthorIdFk equals a.Id into auTemp from bookAuthor in auTemp.DefaultIfEmpty() join p in _context.Publisher on b.PublisherIdFk equals p.Id into pbTemp from bookPublisher in pbTemp.DefaultIfEmpty() join c in _context.Category on b.CategoryIdFk equals c.Id into ctTemp from bookCategory in ctTemp.DefaultIfEmpty() join s in _context.Shop on b.ShopIdFk equals s.Id into spTemp from bookShop in spTemp.DefaultIfEmpty() select new DtoBook()
-            {
-                BookId = bookItem.Id,
+            var book = (
+                from b in _context.Book
+                join a in _context.Author on b.AuthorIdFk equals a.Id into auTemp
+                from bookAuthor in auTemp.DefaultIfEmpty()
+                join p in _context.Publisher on b.PublisherIdFk equals p.Id into pbTemp
+                from bookPublisher in pbTemp.DefaultIfEmpty()
+                join c in _context.Category on b.CategoryIdFk equals c.Id into ctTemp
+                from bookCategory in ctTemp.DefaultIfEmpty()
+                join s in _context.Shop on b.ShopIdFk equals s.Id into spTemp
+                from bookShop in spTemp.DefaultIfEmpty()
+                select new DtoBook()
+                {
+                    BookId = bookItem.Id,
                     BookName = bookItem.Name,
                     Summary = bookItem.Summary,
                     AuthorIdFk = bookItem.AuthorIdFk,
@@ -43,7 +53,7 @@ namespace BookStore.Business
                     CreatedDate = bookItem.CreatedDate,
                     UpdatedBy = bookItem.UpdatedBy,
                     UpdatedDate = bookItem.UpdatedDate
-            }).FirstOrDefault();
+                }).FirstOrDefault();
 
             return book;
         }
@@ -60,22 +70,22 @@ namespace BookStore.Business
             var allBooks = books.Select(c => new DtoBook()
             {
                 BookId = c.Id,
-                    BookName = c.Name,
-                    Summary = c.Summary,
-                    AuthorIdFk = c.AuthorIdFk,
-                    AuthorName = c.Author.Name,
-                    PublisherIdFk = c.PublisherIdFk,
-                    PublisherName = c.Publisher.Name,
-                    CategoryIdFk = c.CategoryIdFk,
-                    CategoryName = c.Category.Name,
-                    ShopIdFk = c.ShopIdFk,
-                    ShopName = c.Shop.Name,
-                    ImageIdFk = c.DocumetIdFk,
-                    ImageName = c.Document.FileName,
-                    CreatedBy = c.CreatedBy,
-                    CreatedDate = c.CreatedDate,
-                    UpdatedBy = c.UpdatedBy,
-                    UpdatedDate = c.UpdatedDate
+                BookName = c.Name,
+                Summary = c.Summary,
+                AuthorIdFk = c.AuthorIdFk,
+                AuthorName = c.Author.Name,
+                PublisherIdFk = c.PublisherIdFk,
+                PublisherName = c.Publisher.Name,
+                CategoryIdFk = c.CategoryIdFk,
+                CategoryName = c.Category.Name,
+                ShopIdFk = c.ShopIdFk,
+                ShopName = c.Shop.Name,
+                ImageIdFk = c.DocumetIdFk,
+                ImageName = c.Document.FileName,
+                CreatedBy = c.CreatedBy,
+                CreatedDate = c.CreatedDate,
+                UpdatedBy = c.UpdatedBy,
+                UpdatedDate = c.UpdatedDate
             }).ToList();
 
             return allBooks;
@@ -135,16 +145,20 @@ namespace BookStore.Business
         public object GetBooksByAuthor(Guid id)
         {
             var author = _authorService.GetAuthor(id);
-            var authorBooks = (from a in _context.Author join b in _context.Book on a.Id equals b.AuthorIdFk into bookAuthor from r in bookAuthor.DefaultIfEmpty() where r.AuthorIdFk == author.AuthorId select new DtoBookAuthor
-            {
-                AuthorIdFk = a.Id,
-                    BookId = r.Id,
-                    BookName = r.Name,
-                    BookSummary = r.Summary,
-                    Biography = a.Biography,
-                    AuthorName = a.Name,
-                    BirthDate = a.BirthDate,
-            }).ToList();
+            var authorBooks = (from a in _context.Author
+                               join b in _context.Book on a.Id equals b.AuthorIdFk into bookAuthor
+                               from r in bookAuthor.DefaultIfEmpty()
+                               where r.AuthorIdFk == author.AuthorId
+                               select new DtoBookAuthor
+                               {
+                                   AuthorIdFk = a.Id,
+                                   BookId = r.Id,
+                                   BookName = r.Name,
+                                   BookSummary = r.Summary,
+                                   Biography = a.Biography,
+                                   AuthorName = a.Name,
+                                   BirthDate = a.BirthDate,
+                               }).ToList();
 
             return authorBooks;
         }

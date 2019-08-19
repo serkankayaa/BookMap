@@ -71,4 +71,5 @@ namespace BookStore.Business.Helpers
         public static string GetCode() => Regex.Replace(Convert.ToBase64String(Guid.NewGuid().ToByteArray()),
             "[/+=]", "").ToLower(new CultureInfo("en-US", false));
     }
+
 }
