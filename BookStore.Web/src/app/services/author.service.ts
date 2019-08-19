@@ -20,7 +20,11 @@ export class AuthorService {
     return this.allAuthors;
   }
 
-  // TODO: GetById
+  getAuthor(id: any): Observable<any> {
+    const author = this.http.get(apiBaseUrl + '/Author/' + id, { headers: headerContent, observe: 'body' });
+
+    return author;
+  }
 
   postAuthor(author: Author) {
     const postedAuthor = this.http.post(apiBaseUrl + '/Author', author, { headers: headerContent, observe: 'response' });
