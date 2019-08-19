@@ -14,13 +14,29 @@ export class BookService {
 
   getAllBooks(): Observable<Book[]> {
     this.allBooks = this.http.get(apiBaseUrl + '/Book', { headers: headerContent, observe: 'response', });
-    
+
     return this.allBooks;
+  }
+
+  getBook(id: any): Observable<any> {
+    const book = this.http.get(apiBaseUrl + '/Book/' + id, { headers: headerContent, observe: 'body' });
+
+    return book;
   }
 
   postBook(book: Book) {
     return this.http.post<Book>(apiBaseUrl + '/Book', book, { headers: headerContent, observe: 'response', reportProgress: true });
   }
 
-  //TODO: PUT,DELETE
+  updateBook(book: Book) {
+    const updatedBook = this.http.put(apiBaseUrl + '/Book', book, { headers: headerContent, observe: 'response' });
+
+    return updatedBook;
+  }
+
+  deleteBook(id: any) {
+    const deletedBook = this.http.delete(apiBaseUrl + '/Book/' + id, { headers: headerContent, observe: 'body' });
+
+    return deletedBook;
+  }
 }

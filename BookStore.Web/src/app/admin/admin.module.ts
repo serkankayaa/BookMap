@@ -14,7 +14,14 @@ import { AdminSettingsComponent } from './admin-settings/admin-settings.componen
 
 
 @NgModule({
-  declarations: [AdminShopComponent, AdminDashboardComponent, AdminBookComponent, AdminAuthorComponent, AdminPublisherComponent, AdminCategoryComponent, AdminSettingsComponent],
+  declarations: [
+    AdminShopComponent,
+    AdminDashboardComponent,
+    AdminBookComponent,
+    AdminAuthorComponent,
+    AdminPublisherComponent,
+    AdminCategoryComponent,
+    AdminSettingsComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
